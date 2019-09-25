@@ -55,7 +55,7 @@ export class App extends Component {
                       style={{
                         padding: '20px 0 0',
                         flexShrink: '0',
-                        background: '##F2F3EE',
+                        background: '#F2F3EE',
                       }}>
                       <AppRouter url={url} />
                     </Content>
