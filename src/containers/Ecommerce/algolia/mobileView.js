@@ -27,17 +27,31 @@ class Shelf extends Component {
     const { isLoading } = this.state;
     
     console.log(products);
-
-    return (
-      <React.Fragment>
-        {isLoading }
-        <div className="shelf-container">
-          {/* <ShelfHeader productsLength={products.length} /> */}
-            <ProductList products={products} />   
-        </div>
-      </React.Fragment>
-    );
-  
+    if(products === undefined){
+      return (
+    
+        <React.Fragment>
+          {isLoading }
+          {/* <div className="shelf-container">
+            <ShelfHeader productsLength={products.length} />
+              <ProductList products={products} />   
+          </div> */}
+        </React.Fragment>
+      );
+    
+    }else{
+      return (
+    
+        <React.Fragment>
+          {isLoading }
+          <div className="shelf-container">
+            {/* <ShelfHeader productsLength={products.length} /> */}
+              <ProductList products={products} />   
+          </div>
+        </React.Fragment>
+      );
+    }
+    
   }
 }
 

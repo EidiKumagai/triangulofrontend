@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import './style.css'
+import './style.css';
 import TopbarCartWrapper from '../../../components/cart/singleCartModal.style';
 import './instantSearch.css';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ProductList from './ProductList';
+import {useState} from 'react';
+// import Modal from 'react-bootstrap/Modal';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 const { fetchorders } = ecommerceAction;
 
@@ -13,21 +14,27 @@ const { fetchorders } = ecommerceAction;
 
 
 
+
 class ListOrders extends Component {
-
-
+  
   state = {
-    isLoading: false
+    isLoading: false,
+    show: false
   };  
+  
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+ 
   componentDidMount() {
     this.props.fetchorders();
   }
 
-  orderDetails(){
-
-  }
-
-
+  
   render() {
 
     const { isLoading } = this.state;
@@ -38,6 +45,8 @@ class ListOrders extends Component {
 
     }else{
       return orders.map(order => {
+
+        
         return (
           <TopbarCartWrapper className="isoCartItems">
           <div className="isoItemImage">
@@ -54,6 +63,7 @@ class ListOrders extends Component {
                 {order.price}
               </span>
             </p>
+
             <p className="isoItemPriceQuantity">
               <span>Criado em:  </span>
               <span>
@@ -62,33 +72,12 @@ class ListOrders extends Component {
             </p>
           </div>
           <a>Detalhes</a>
+                   
+            
         </TopbarCartWrapper>
         );
       });
     }
-    
-    
-    // if (products === undefined){
-    //   return (
-    //     <React.Fragment>
-    //       {isLoading }
-    //       <div className="shelf-container">
-    //         {/* <ShelfHeader productsLength={products.length} /> */}
-    //           {/* <ProductList products={products} />    */}
-    //       </div>
-    //     </React.Fragment>
-    //   );    
-    // }else{
-    //   return (
-    //     <React.Fragment>
-    //       {isLoading }
-    //       <div className="shelf-container">
-    //         {/* <ShelfHeader productsLength={products.length} /> */}
-    //            <ProductList products={products} /> 
-    //       </div>
-    //     </React.Fragment>
-    //   );  
-    // }
     return (
       <React.Fragment>
         {isLoading }
@@ -96,11 +85,13 @@ class ListOrders extends Component {
           {/* <ShelfHeader productsLength={products.length} /> */}
              {/* {orders} */}
         </div>
+
+        
       </React.Fragment>
     );  
-  
   }
 }
+
 
 const mapStateToProps = state => ({
   orders: state.Ecommerce.orders
