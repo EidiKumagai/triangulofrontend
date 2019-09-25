@@ -50,12 +50,12 @@ const Buttons = ComponentName => styled(ComponentName)`
     }
 
     &.ant-btn-primary {
-      background-color: ${palette('primary', 0)};
-      border-color: ${palette('primary', 0)};
+      background-color: #606D42 
+      border-color: #606D42 
 
       &:hover {
-        background-color: ${palette('primary', 10)};
-        border-color: ${palette('primary', 10)};
+        background-color: #606D42 
+        border-color: #606D42 
         color: #fff;
       }
     }
@@ -82,7 +82,9 @@ const Buttons = ComponentName => styled(ComponentName)`
     }
 
     &.ant-btn-primary {
-      color: #ffffff;
+      border-color: #606D42 ;
+      background-color: #606D42 ;
+      color: #FFFFFF ;
     }
 
     &.ant-btn-dashed {
@@ -278,10 +280,10 @@ const ButtonsGroup = ComponentName => styled(ComponentName)`
       }
 
       &.ant-btn-primary {
-        border-color: ${palette('primary', 0)};
+        border-color: #606D42 ;
 
         &:hover {
-          border-color: ${palette('primary', 10)};
+          border-color: #606D42 ;
         }
       }
     }
