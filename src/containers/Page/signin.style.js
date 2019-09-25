@@ -57,6 +57,7 @@ const SignInStyleWrapper = styled.div`
 
       a {
         font-size: 24px;
+        font-family: 'Open Sans', sans-serif;
         font-weight: 300;
         line-height: 1;
         text-transform: uppercase;

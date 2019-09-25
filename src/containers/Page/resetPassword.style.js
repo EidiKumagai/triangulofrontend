@@ -57,6 +57,7 @@ const ResetPasswordStyleWrapper = styled.div`
       a {
         font-size: 24px;
         font-weight: 300;
+        font-family: 'Open Sans', sans-serif;
         line-height: 1;
         text-transform: uppercase;
         color: ${palette('secondary', 2)};
