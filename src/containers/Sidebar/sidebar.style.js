@@ -56,6 +56,7 @@ const SidebarWrapper = styled.div`
           a {
             font-size: 27px;
             font-weight: 500;
+            font-family: 'Open Sans', sans-serif;
             letter-spacing: 0;
           }
         }
