@@ -1,51 +1,102 @@
 import React, { Component } from 'react';
-import './style.css'
-
+import './style.css';
+import TopbarCartWrapper from '../../../components/cart/singleCartModal.style';
 import './instantSearch.css';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ProductList from './ProductList';
+import {useState} from 'react';
+// import Modal from 'react-bootstrap/Modal';
 import ecommerceAction from '../../../redux/ecommerce/actions';
-const { fetchProducts } = ecommerceAction;
+const { fetchorders } = ecommerceAction;
 
 
-class Shelf extends Component {
+
+
+
+
+class ListOrders extends Component {
   
-
   state = {
-    isLoading: false
+    isLoading: false,
+    show: false
   };  
+  
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+ 
   componentDidMount() {
-    this.props.fetchProducts();
+    this.props.fetchorders();
   }
 
-
+  
   render() {
- 
-    const { products } = this.props;
-    const { isLoading } = this.state;
-    
-    console.log(products);
 
+    const { isLoading } = this.state;
+
+    console.log(orders);
+    const { orders } = this.props;
+    if (orders === undefined) {
+
+    }else{
+      return orders.map(order => {
+
+        
+        return (
+          <TopbarCartWrapper className="isoCartItems">
+          <div className="isoItemImage">
+          </div>
+          <div className="isoCartDetails">
+            <h3>
+              <a href="#">
+                {order.title}
+              </a>
+            </h3>
+            <p className="isoItemPriceQuantity">
+              <span>Preço Total $</span>
+              <span>
+                {order.price}
+              </span>
+            </p>
+
+            <p className="isoItemPriceQuantity">
+              <span>Criado em:  </span>
+              <span>
+                {order.created_at}
+              </span>
+            </p>
+          </div>
+          <a>Detalhes</a>      
+            
+        </TopbarCartWrapper>
+        );
+      });
+    }
     return (
       <React.Fragment>
         {isLoading }
         <div className="shelf-container">
           {/* <ShelfHeader productsLength={products.length} /> */}
-            <ProductList products={products} />   
+             {/* {orders} */}
         </div>
+
+        
       </React.Fragment>
-    );
-  
+    );  
   }
 }
 
+
 const mapStateToProps = state => ({
-  products: state.Ecommerce.products
+  orders: state.Ecommerce.orders
 });
 
 export default connect(
   mapStateToProps,
-  { fetchProducts }
-)(Shelf);
+  { fetchorders }
+)(ListOrders);
