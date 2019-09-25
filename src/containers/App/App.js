@@ -53,7 +53,7 @@ export class App extends Component {
                     <Content
                       className="isomorphicContent"
                       style={{
-                        padding: '20px 0 0',
+                        padding: '70px 0 0',
                         flexShrink: '0',
                         background: '#F2F3EE',
                       }}>
