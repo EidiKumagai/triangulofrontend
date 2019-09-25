@@ -6,7 +6,7 @@ import WithDirection from '../../config/withDirection';
 const SidebarWrapper = styled.div`
   .isomorphicSidebar {
     z-index: 1000;
-    background: ${palette('secondary', 0)};
+    background: #DEE0D5;
     width: 280px;
     flex: 0 0 280px;
 
@@ -26,7 +26,7 @@ const SidebarWrapper = styled.div`
 
     .isoLogoWrapper {
       height: 70px;
-      background: rgba(0, 0, 0, 0.3);
+      background: #D7D9CB;
       margin: 0;
       padding: 0 10px;
       text-align: center;
@@ -80,6 +80,7 @@ const SidebarWrapper = styled.div`
         align-items: center;
         padding: 0 24px;
         margin: 0;
+        color: #FFFFFF;
       }
 
       .isoMenuHolder {
@@ -88,7 +89,7 @@ const SidebarWrapper = styled.div`
 
         i {
           font-size: 19px;
-          color: inherit;
+          color: #888888;
           margin: ${props =>
             props['data-rtl'] === 'rtl' ? '0 0 0 30px' : '0 30px 0 0'};
           width: 18px;
@@ -99,19 +100,19 @@ const SidebarWrapper = styled.div`
       .anticon {
         font-size: 18px;
         margin-right: 30px;
-        color: inherit;
+        color: #888888;
         ${transition()};
       }
 
       .nav-text {
         font-size: 14px;
-        color: inherit;
+        color: #888888;
         font-weight: 400;
         ${transition()};
       }
 
       .ant-menu-item-selected {
-        background-color: rgba(0, 0, 0, 0.4) !important;
+        background-color: #606D42 !important;
         .anticon {
           color: #fff;
         }
@@ -136,7 +137,7 @@ const SidebarWrapper = styled.div`
     }
 
     .ant-menu-dark .ant-menu-inline.ant-menu-sub {
-      background: ${palette('secondary', 5)};
+      background: #DEE0D5
     }
 
     .ant-menu-submenu-inline,
