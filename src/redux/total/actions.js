@@ -18,7 +18,7 @@ export const updateCart = cartProducts => dispatch => {
   let totalPrice = cartProducts.reduce((sum, p) => {
     var conv;
     conv = util(p.price);
-    conv.toFixed(2)
+    conv.toFixed(2);
     sum += conv * p.qtd;
     return sum;
   }, 0);

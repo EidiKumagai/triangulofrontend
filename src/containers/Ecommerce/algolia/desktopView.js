@@ -16,8 +16,10 @@ class Shelf extends Component {
   
 
   state = {
-    isLoading: false
-  };  
+    isLoading: false,
+    isadd:false,
+  };
+
   componentDidMount() {
     this.props.fetchProducts();
   }

@@ -111,7 +111,7 @@ class SignIn extends Component {
                   <IntlMessages id="page.signInGooglePlus" />
                 </Button> */}
 
-                {Auth0.isValid &&
+                {/* {Auth0.isValid &&
                   <Button
                     onClick={() => {
                       Auth0.login(this.handleLogin);
@@ -121,7 +121,7 @@ class SignIn extends Component {
                     <IntlMessages id="page.signInAuth0" />
                   </Button>}
 
-                {Firebase.isValid && <FirebaseLogin login={this.handleLogin} />}
+                {Firebase.isValid && <FirebaseLogin login={this.handleLogin} />} */}
               </div>
               <div className="isoCenterComponent isoHelperWrapper">
                 <Link to="/forgotpassword" className="isoForgotPass">

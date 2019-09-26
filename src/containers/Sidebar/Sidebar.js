@@ -178,11 +178,11 @@ class Sidebar extends Component {
                     <IntlMessages id="sidebar.checkout" />
                   </Link>
                 </Menu.Item>
-                <Menu.Item style={submenuStyle} key="card">
+                {/* <Menu.Item style={submenuStyle} key="card">
                   <Link style={submenuColor} to={`${url}/card`}>
                     <IntlMessages id="sidebar.cards" />
                   </Link>
-                </Menu.Item>
+                </Menu.Item> */}
               </SubMenu>
 
               {/* <SubMenu
@@ -567,18 +567,16 @@ class Sidebar extends Component {
                 </Menu.Item>
               </SubMenu>   */}
 
-              <SubMenu
-                key="pages"
-                title={
-                  <span className="isoMenuHolder" style={submenuColor}>
-                    <i className="ion-document" />
-                    <span className="nav-text">
-                      <IntlMessages id="sidebar.pages" />
-                    </span>
-                  </span>
-                }
-              >
-                <Menu.Item style={submenuStyle} key="404">
+              
+                {/* <span className="isoMenuHolder" style={submenuColor}>
+                //     <i className="ion-document" />
+                //     <span className="nav-text">
+                //       <IntlMessages id="sidebar.pages" />
+                //     </span>
+                //   </span>
+                // }
+               */}
+                {/* <Menu.Item style={submenuStyle} key="404">
                   <Link style={submenuColor} to={'/404'}>
                     <IntlMessages id="sidebar.404" />
                   </Link>
@@ -602,7 +600,7 @@ class Sidebar extends Component {
                   <Link style={submenuColor} to={'/forgotpassword'}>
                     <IntlMessages id="sidebar.forgotPw" />
                   </Link>
-                </Menu.Item>
+                </Menu.Item> */}
                 {/* <Menu.Item style={submenuStyle} key="resetpassword">
                   <Link style={submenuColor} to={'/resetpassword'}>
                     <IntlMessages id="sidebar.resetPw" />
@@ -618,7 +616,7 @@ class Sidebar extends Component {
                     <IntlMessages id="sidebar.comingSoon" />
                   </Link>
                 </Menu.Item>*/}
-              </SubMenu>
+              
               {/* <SubMenu
                 key="sub1"
                 title={

@@ -1,23 +1,24 @@
-.shelf-container {
+
+.pedidos .shelf-container {
   display: flex;
-  margin: 100px;
+  margin: 80px;
   flex-wrap: wrap;
   width: 20%;
   min-height: 600px;
 }
 
-body .shelf-container {
+body .pedidos .shelf-container {
   width: 80%;
 }
-body .shelf-container .shelf-item {
+/* body .shelf-container .shelf-item {
   width: 10%;
   margin: 20px;
-}
-.shelf-container-header {
+} */
+.pedidos .shelf-container-header {
   width: 100%;
   margin-bottom: 10px;
 }
-.shelf-container-header .products-found {
+.pedidos .shelf-container-header .products-found {
   float: left;
   margin: 10px;
   margin-top: 8px;

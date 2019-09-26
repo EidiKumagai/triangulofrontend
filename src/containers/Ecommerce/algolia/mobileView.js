@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './style.css'
-
 import './instantSearch.css';
 
 import PropTypes from 'prop-types';
@@ -45,6 +44,14 @@ class Shelf extends Component {
         <React.Fragment>
           {isLoading }
           <div className="shelf-container">
+          <div role="search" class="ais-SearchBox__wrapper">
+
+          {/* <SearchBox translations={{ placeholder: 'Search here' }} /> */}
+            <input type="search" placeholder="Search here" 
+            autocomplete="off" autocorrect="off" autocapitalize="off" 
+            spellcheck="false" required="" maxlength="512" class="ais-SearchBox__input"
+             value=""></input>
+             </div>
             {/* <ShelfHeader productsLength={products.length} /> */}
               <ProductList products={products} />   
           </div>

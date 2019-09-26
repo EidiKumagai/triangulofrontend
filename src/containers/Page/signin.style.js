@@ -41,7 +41,8 @@ const SignInStyleWrapper = styled.div`
     flex-direction: column;
     padding: 70px 50px;
     position: relative;
-    background-color: #ffffff;
+    background-color: #dee0d5;
+
 
     @media only screen and (max-width: 767px) {
       width: 100%;

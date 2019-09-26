@@ -7,6 +7,8 @@ import Thumb from './thumb';
 //import { addProduct } from '../../../../services/cart/actions';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import {addProduct} from '../../../redux/cart/actions'
+import { Button } from 'antd/lib/radio';
+import { notification } from 'antd';
 
 const Product = ({ product, addProduct }) => {
   product.qtd = 1;
@@ -14,7 +16,6 @@ const Product = ({ product, addProduct }) => {
   //let formattedPrice = formatPrice(product.price, 'USD');
   console.log(product);
   let productInstallment;
-
   if (!!product.installments) {
     const installmentPrice = product.price / product.qtd;
 
@@ -30,7 +31,8 @@ const Product = ({ product, addProduct }) => {
   }
 
   return (
-    <div onClick={() => addProduct(product)}>
+    <React.Fragment>
+      <div >
       <div class="shelf-item">
         <Thumb class="shelf-item__thumb" alt={product.name} />
       <div className="shelf-item__price">
@@ -43,9 +45,13 @@ const Product = ({ product, addProduct }) => {
         <div className="shelf-item__title">
           <p class="shelf-item__title__text">{product.name}</p>
         </div>
-        <div class="shelf-item__buy-btn">Adicionar</div>
+        <div onClick={() => addProduct(product)}  class="shelf-item__buy-btn">Adicionar</div>
       </div>
     </div>
+
+    </React.Fragment>
+    
+
   );
 };
 

@@ -49,7 +49,7 @@ class ListOrders extends Component {
         
         return (
           <TopbarCartWrapper className="isoCartItems">
-          <div className="isoItemImage">
+          <div className="isoItemImage pedidos">
           </div>
           <div className="isoCartDetails">
             <h3>

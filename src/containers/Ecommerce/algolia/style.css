@@ -1,6 +1,7 @@
 .shelf-container {
   display: flex;
-  margin: 100px;
+  /* margin: 100px; */
+  margin: 15px;
   flex-wrap: wrap;
   width: 20%;
   min-height: 50px;
@@ -8,9 +9,10 @@
 
 body .shelf-container {
   width: 80%;
+  margin: 20px 10% 0;
 }
 body .shelf-container .shelf-item {
-  width: 200px;
+  width: 280px;
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 255, 255);
@@ -129,4 +131,15 @@ body .shelf-container .shelf-item {
   margin-top: 20px;
   cursor: pointer;
   transition: background-color 0.2s;
+}
+
+.ais-SearchBox__wrapper > input{
+  box-shadow: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(233, 233, 233);
+  border-image: initial;
+  border-radius: 5px;
+  padding: 15px 36px 15px 46px;
+  margin: 15px 0;
 }

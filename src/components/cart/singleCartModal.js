@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import InputNumber from '../uielements/InputNumber';
+import PropTypes from 'prop-types';
 import { notification } from '../index';
 import TopbarCartWrapper from './singleCartModal.style';
 import topbarAddtoCart from '../topbar/topbarAddtoCart';
 import {connect} from 'react-redux';
-import {loadCart, removeProduct} from '../../redux/cart/actions';
-import ecommerceAction from '../../redux/ecommerce/actions';
+import {loadCart, removeProduct, changeProductQuantity} from '../../redux/cart/actions';
+// import ecommerceAction from '../../redux/ecommerce/actions';
 
-const { changeProductQuantity } = ecommerceAction;
+// const { changeProductQuantity } = ecommerceAction;
 
 class Carrinho extends Component {
   // onChange = value => {
@@ -18,6 +20,12 @@ class Carrinho extends Component {
   //     notification('error', 'Please give valid number');
   //   }
   // };
+
+  static propTypes = {
+    product: PropTypes.object.isRequired,
+    removeProduct: PropTypes.func.isRequired
+  };
+  
 
   cancelQuantity(id) {
     const { produtos } = this.props;
@@ -39,6 +47,18 @@ class Carrinho extends Component {
       updateCart(cartProducts);
     }
   };
+  onChange = value => {
+    const { produtos} =  this.props;
+    produtos.map(p => {
+      if (!isNaN(value)) {
+        if (value !== p.qtd) {
+          this.props.changeProductQuantity(p.id, value);
+        }
+      } else {
+        notification('error', 'Please give valid number');
+      }
+    });
+  };
   
   toFloat(num){
     var pointNum = parseFloat(num);
@@ -50,6 +70,9 @@ class Carrinho extends Component {
     let aux;
     const { produtos,removeProduct } = this.props;
     return produtos.map(product => {
+      <div
+          onClick={() => removeProduct(product)}
+      />
       aux = this.toFloat(product.price);
       totalPrice += product.qtd * product.price ;
       return (
@@ -68,14 +91,23 @@ class Carrinho extends Component {
               {product.price}
             </span>
             <span className="itemMultiplier">X</span>
-            <span className="isoItemQuantity">
-              {product.qtd}
-            </span>
+              <td className="isoItemQuantity">
+                <InputNumber
+                  min={1}
+                  max={1000}
+                  value={product.qtd}
+                  step={1}
+                  onChange={this.onChange}
+                />
+              </td>
+            {/* <span className="isoItemQuantity">
+              {}
+            </span> */}
           </p>
         </div>
-        {/* <a className="isoItemRemove" onClick={() => removeProduct(product)}>
+        <a className="isoItemRemove" onClick={() => removeProduct(product)}>
           <i className="ion-android-close" />
-        </a> */}
+        </a>
       </TopbarCartWrapper>
       );
     });
@@ -90,7 +122,7 @@ function mapStateToProps(state) {
   };
 }
 export default connect(mapStateToProps, {
-  changeProductQuantity,
-  loadCart
+  loadCart,
+  changeProductQuantity
 })(Carrinho);
 

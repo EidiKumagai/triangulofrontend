@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import IntlMessages from '../utility/intlMessages';
@@ -9,6 +10,7 @@ import {loadCart, removeProduct} from '../../redux/cart/actions'
 import { updateCart } from '../../redux/total/actions' 
 import TopbarDropdownWrapper from './topbarDropdown.style';
 import CartProduct from '../cart/singleCartModal'
+import { notification } from '..';
 
 const { changeViewTopbarCart, changeProductQuantity } = ecommerceAction;
 let totalPrice;
@@ -37,6 +39,21 @@ class TopbarAddtoCart extends Component {
     if (nextProps.productToRemove !== this.props.productToRemove) {
       this.removeProduct(nextProps.productToRemove);
     }
+  }
+  changeQuantity(objectID, quantity) {
+    const { cartProducts } = this.props;
+    const newProductQuantity = [];
+    cartProducts.forEach(product => {
+      if (product.id !== objectID) {
+        newProductQuantity.push(product);
+      } else {
+        newProductQuantity.push({
+          objectID,
+          quantity
+        });
+      }
+    });
+    this.props.changeProductQuantity(newProductQuantity);
   }
 
    addProduct = product => {
@@ -88,8 +105,16 @@ class TopbarAddtoCart extends Component {
         </div>
       );
     }
+    const products = cartProducts.map(p => {
+      return (
+        <SingleCart product={p} removeProduct={removeProduct} key={p.id} 
+        changeQuantity={this.changeQuantity}/>
+      );
+    });
     return(
-      <SingleCart/>
+      <div>
+        {products}
+      </div>
     )
       
   
@@ -132,7 +157,7 @@ class TopbarAddtoCart extends Component {
     } = this.props;
 
     
-
+    
     const content = (
       <TopbarDropdownWrapper className="topbarAddtoCart">
         <div className="isoDropdownHeader">
@@ -155,7 +180,7 @@ class TopbarAddtoCart extends Component {
             )}
           </div> */}
         <div className="isoDropdownFooterLinks">
-          <Link to={`${url}/cart`} onClick={this.hide}>
+          <Link to={`${url}/checkout`} onClick={this.hide}>
             <IntlMessages id="topbar.viewCart" />
           </Link>
 
@@ -183,7 +208,8 @@ class TopbarAddtoCart extends Component {
             {cartProducts.length === 0 ? (
               ''
             ) : (
-              <span>{cartProducts.length}</span>
+              <span>{cartTotal.productQuantity}</span>
+
             )}
           </div>
         </Popover>

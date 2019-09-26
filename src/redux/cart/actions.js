@@ -1,4 +1,4 @@
-import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT } from './actionTypes';
+import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT, CHANGE_QUANTITY } from './actionTypes';
 
 export const loadCart = produtos => ({
   type: LOAD_CART,
@@ -13,4 +13,9 @@ export const addProduct = product => ({
 export const removeProduct = product => ({
   type: REMOVE_PRODUCT,
   payload: product
+});
+
+export const changeProductQuantity =  productQuantity => ({
+    type: CHANGE_QUANTITY,
+    payload: productQuantity
 });
