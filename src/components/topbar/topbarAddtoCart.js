@@ -105,19 +105,12 @@ class TopbarAddtoCart extends Component {
         </div>
       );
     }
-    const products = cartProducts.map(p => {
       return (
-        <SingleCart product={p} removeProduct={removeProduct} key={p.id} 
-        changeQuantity={this.changeQuantity}/>
+        // <SingleCart product={p} removeProduct={removeProduct} key={p.id} 
+        // changeQuantity={this.changeQuantity}/>
+        <SingleCart  removeProduct={removeProduct}/>
       );
-    });
-    return(
-      <div>
-        {products}
-      </div>
-    )
-      
-  
+    
     
   }
   changeQuantity(id, qtd) {
@@ -185,8 +178,8 @@ class TopbarAddtoCart extends Component {
           </Link>
 
           <h3>
-            <IntlMessages id="topbar.totalPrice" />:{' '}
-            <span>{cartTotal.totalPrice}</span>
+            <IntlMessages id="topbar.totalPrice" />:{'$ '}
+            <span>{cartTotal.totalPrice.toFixed(2)}</span>
           </h3>
         </div>
       </TopbarDropdownWrapper>

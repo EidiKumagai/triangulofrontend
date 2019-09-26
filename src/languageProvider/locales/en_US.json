@@ -629,9 +629,9 @@
   "themeSwitcher.settings": "Settings",
   "sidebar.selectbox": "Select",
   "sidebar.frappeChart": "Frappe Charts",
-  "topbar.help": "Ajuda",
-  "topbar.logout": "Sair",
+  "topbar.help": "Help",
+  "topbar.logout": "Logout",
   "topbar.viewAll": "View All",
-  "topbar.viewCart": "Ver Carrinho",
-  "topbar.totalPrice": "Preço Total"
+  "topbar.viewCart": "View Cart",
+  "topbar.totalPrice": "Total Price"
 }

@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ProductList from './ProductList';
 import ecommerceAction from '../../../redux/ecommerce/actions';
+import { notification } from '../../../components';
 const { fetchProducts } = ecommerceAction;
 
 
@@ -27,9 +28,9 @@ class Shelf extends Component {
 
   render() {
  
-    const { products } = this.props;
+    const { products, cartTotal, isadd, isrem } = this.props;
     const { isLoading } = this.state;
-    
+    console.log(this.props)
     if (products === undefined){
       return (
         <React.Fragment>
@@ -41,6 +42,11 @@ class Shelf extends Component {
         </React.Fragment>
       );    
     }else{
+      if (isadd == true){
+        notification("success", "Product added on the cart");
+      }
+
+
       return (
         <React.Fragment>
           {isLoading }
@@ -57,7 +63,10 @@ class Shelf extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.Ecommerce.products
+  isadd:state.cart.isadd,
+  isrem:state.cart.isrem,
+  products: state.Ecommerce.products,
+  cartTotal: state.Total.data,
 });
 
 export default connect(

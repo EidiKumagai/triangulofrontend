@@ -8,11 +8,13 @@ import Thumb from './thumb';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import {addProduct} from '../../../redux/cart/actions'
 import { Button } from 'antd/lib/radio';
-import { notification } from 'antd';
+import { notification } from '../../../components/index';
+
 
 const Product = ({ product, addProduct }) => {
   product.qtd = 1;
   var bool =  true;
+
   //let formattedPrice = formatPrice(product.price, 'USD');
   console.log(product);
   let productInstallment;
@@ -45,7 +47,7 @@ const Product = ({ product, addProduct }) => {
         <div className="shelf-item__title">
           <p class="shelf-item__title__text">{product.name}</p>
         </div>
-        <div onClick={() => addProduct(product)}  class="shelf-item__buy-btn">Adicionar</div>
+        <div onClick={() => addProduct(product)}   class="shelf-item__buy-btn">Adicionar</div>
       </div>
     </div>
 

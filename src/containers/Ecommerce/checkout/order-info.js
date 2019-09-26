@@ -84,7 +84,7 @@ class OrderInfo extends Component {
           <div className="isoOrderTableFooter">
             <span>Total</span>
             <span>
-              ${cartTotal.totalPrice}
+              ${cartTotal.totalPrice.toFixed(2)}
             </span>
           </div>
           {/* <input type="submit" onClick={ () =>this.fazerpedido()}></input> */}
