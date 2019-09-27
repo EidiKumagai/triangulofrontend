@@ -66,6 +66,7 @@ class Carrinho extends Component {
   }
 
   render() {
+    var quantity;
     let totalPrice;
     let aux;
     const { produtos,removeProduct } = this.props;
@@ -73,6 +74,7 @@ class Carrinho extends Component {
       <div
           onClick={() => removeProduct(product)}
       />
+      quantity = 1;
       aux = this.toFloat(product.price);
       totalPrice += product.qtd * product.price ;
       return (
@@ -95,7 +97,7 @@ class Carrinho extends Component {
                 <InputNumber
                   min={1}
                   max={1000}
-                  value={product.qtd}
+                  value={quantity}
                   step={1}
                   onChange={this.onChange}
                 />

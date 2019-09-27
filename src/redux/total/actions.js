@@ -1,10 +1,17 @@
-import { UPDATE_CART } from './actionTypes';
+import { UPDATE_CART, CHANGE_QUANTITY } from './actionTypes';
 
 function util(prod){
   var aux1, aux2;
   aux1 = prod.toString().replace(",",".");
   aux2 = parseFloat(aux1);
   return aux2
+}
+
+export const changeProductQuantity = productQuantity => {
+  return {
+    type: CHANGE_QUANTITY,
+    productQuantity
+  };
 }
 
 

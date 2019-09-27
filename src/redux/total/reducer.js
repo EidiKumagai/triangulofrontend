@@ -1,4 +1,4 @@
-import { UPDATE_CART } from './actionTypes';
+import { UPDATE_CART, CHANGE_QUANTITY } from './actionTypes';
 
 const initialState = {
   data: {
@@ -17,6 +17,11 @@ export default function(state = initialState, action) {
         ...state,
         data: action.payload
       };
+    case CHANGE_QUANTITY:
+        return{
+         ...state,
+         productQuantity: action.productQuantity 
+        };
     default:
       return state;
   }

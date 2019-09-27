@@ -7,12 +7,15 @@ import Popover from '../uielements/popover';
 import SingleCart from '../cart/singleCartModal';
 import ecommerceAction from '../../redux/ecommerce/actions';
 import {loadCart, removeProduct} from '../../redux/cart/actions'
-import { updateCart } from '../../redux/total/actions' 
+import { updateCart, changeProductQuantity } from '../../redux/total/actions' 
 import TopbarDropdownWrapper from './topbarDropdown.style';
 import CartProduct from '../cart/singleCartModal'
 import { notification } from '..';
+ 
 
-const { changeViewTopbarCart, changeProductQuantity } = ecommerceAction;
+const { changeViewTopbarCart } = ecommerceAction;
+
+
 let totalPrice;
 class TopbarAddtoCart extends Component {
   constructor(props) {
@@ -40,16 +43,16 @@ class TopbarAddtoCart extends Component {
       this.removeProduct(nextProps.productToRemove);
     }
   }
-  changeQuantity(objectID, quantity) {
+  changeQuantity(id, qtd) {
     const { cartProducts } = this.props;
     const newProductQuantity = [];
     cartProducts.forEach(product => {
-      if (product.id !== objectID) {
+      if (product.id !== id) {
         newProductQuantity.push(product);
       } else {
         newProductQuantity.push({
-          objectID,
-          quantity
+          id,
+          qtd
         });
       }
     });
@@ -108,15 +111,16 @@ class TopbarAddtoCart extends Component {
       return (
         // <SingleCart product={p} removeProduct={removeProduct} key={p.id} 
         // changeQuantity={this.changeQuantity}/>
-        <SingleCart  removeProduct={removeProduct}/>
+        <SingleCart  removeProduct={removeProduct}
+        changeQuantity={this.changeQuantity}/>
       );
     
     
   }
   changeQuantity(id, qtd) {
-    const { cartProducts } = this.props;
+    const { cartTotal } = this.props;
     const newProductQuantity = [];
-    cartProducts.forEach(product => {
+    cartTotal.forEach(product => {
       if (product.id !== id) {
         newProductQuantity.push(product);
       } else {

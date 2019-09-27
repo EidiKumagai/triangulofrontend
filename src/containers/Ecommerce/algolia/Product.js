@@ -6,12 +6,12 @@ import Thumb from './thumb';
 //import { formatPrice } from '../../../../services/util';
 //import { addProduct } from '../../../../services/cart/actions';
 import ecommerceAction from '../../../redux/ecommerce/actions';
-import {addProduct} from '../../../redux/cart/actions'
+import {addProduct, changeState} from '../../../redux/cart/actions'
 import { Button } from 'antd/lib/radio';
 import { notification } from '../../../components/index';
 
 
-const Product = ({ product, addProduct }) => {
+const Product = ({ product, addProduct, changeState }) => {
   product.qtd = 1;
   var bool =  true;
 
@@ -34,7 +34,7 @@ const Product = ({ product, addProduct }) => {
 
   return (
     <React.Fragment>
-      <div >
+      <div onClick={() => addProduct(product)} >
       <div class="shelf-item">
         <Thumb class="shelf-item__thumb" alt={product.name} />
       <div className="shelf-item__price">
@@ -47,7 +47,7 @@ const Product = ({ product, addProduct }) => {
         <div className="shelf-item__title">
           <p class="shelf-item__title__text">{product.name}</p>
         </div>
-        <div onClick={() => addProduct(product)}   class="shelf-item__buy-btn">Adicionar</div>
+        <div  class="shelf-item__buy-btn">Adicionar</div>
       </div>
     </div>
 
@@ -64,5 +64,5 @@ const Product = ({ product, addProduct }) => {
 
 export default connect(
   null,
-  {addProduct}
+  {addProduct,changeState}
 )(Product);

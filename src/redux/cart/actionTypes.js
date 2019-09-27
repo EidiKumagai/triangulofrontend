@@ -3,4 +3,5 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const UPDATE_CART = 'UPDATE_CART';
 export const CHANGE_QUANTITY = 'CHANGE_QUANTITY';
+export const CHANGE_STATE = 'CHANGE_STATE';
 
