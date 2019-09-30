@@ -34,7 +34,7 @@ export default function(state = initialState, action) {
       case CHANGE_QUANTITY:
       return {
         ...state,
-        productQuantity: action.productQuantity 
+        productQuantity: action.payload 
       };
     default:
       return state;

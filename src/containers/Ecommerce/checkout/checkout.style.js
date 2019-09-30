@@ -185,7 +185,7 @@ const WDOrderTable = styled.div`
         font-size: 15px;
         font-weight: 500;
         color: ${palette('text', 0)};
-        line-height: 1.2;
+        line-height: 1.0;
       }
     }
 

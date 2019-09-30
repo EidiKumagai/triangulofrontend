@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Button from '../../../components/uielements/button';
+import { removeProduct} from '../../../redux/cart/actions'
 import SingleOrderInfo from './single-order';
 import { OrderTable } from './checkout.style';
 import ecommerceAction from '../../../redux/ecommerce/actions';
@@ -21,6 +22,25 @@ class OrderInfo extends Component {
     this.renderProducts = this.renderProducts.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.newProduct !== this.props.newProduct) {
+      this.addProduct(nextProps.newProduct);
+    }
+
+    if (nextProps.productToRemove !== this.props.productToRemove) {
+      this.removeProduct(nextProps.productToRemove);
+    }
+  }
+
+  removeProduct = product => {
+    const { products, updateCart } = this.props;
+
+    const index = products.findIndex(p => p.id === product.id);
+    if (index >= 0) {
+      products.splice(index, 1);
+      updateCart(products);
+    }
+  };
 
   fazerpedido() {
     const { products, cartTotal } = this.props;
@@ -52,7 +72,7 @@ class OrderInfo extends Component {
 
   
   renderProducts() {
-    const { productQuantity, products } = this.props;
+    const { productQuantity, products, removeProduct } = this.props;
     return products.map(product => {  
       return (
         <div className="isoSingleOrderInfo">
@@ -62,6 +82,9 @@ class OrderInfo extends Component {
           <span className="isoQuantity">{product.qtd}</span>
         </p>
         <span className="totalPrice">${product.price}</span>
+        <a className="isoItemRemove" onClick={() => removeProduct(product)}>
+          <i className="ion-android-close" />
+        </a>
       </div>
       );
     });
@@ -75,7 +98,7 @@ class OrderInfo extends Component {
         <div className="isoOrderTable">
           <div className="isoOrderTableHead">
             <span className="tableHead">Produtos</span>
-            <span className="tableHead">Total</span>
+            {/* <span className="tableHead">Total</span> */}
           </div>
 
           <div className="isoOrderTableBody">
@@ -106,4 +129,4 @@ function mapStateToProps(state) {
     orders: state.Ecommerce.orders
   };
 }
-export default connect(mapStateToProps, {createPost })(OrderInfo);
+export default connect(mapStateToProps, {createPost, removeProduct })(OrderInfo);

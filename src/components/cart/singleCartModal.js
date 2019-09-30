@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import InputNumber from '../uielements/InputNumber';
+import InputNumber from '../uielements/InputNumber'; 
 import PropTypes from 'prop-types';
 import { notification } from '../index';
 import TopbarCartWrapper from './singleCartModal.style';
 import topbarAddtoCart from '../topbar/topbarAddtoCart';
 import {connect} from 'react-redux';
-import {loadCart, removeProduct, changeProductQuantity} from '../../redux/cart/actions';
+import { updateCart, changeProductQuantity } from '../../redux/total/actions' 
+import {loadCart, removeProduct} from '../../redux/cart/actions';
 // import ecommerceAction from '../../redux/ecommerce/actions';
 
 // const { changeProductQuantity } = ecommerceAction;
@@ -20,12 +21,32 @@ class Carrinho extends Component {
   //     notification('error', 'Please give valid number');
   //   }
   // };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.newProduct !== this.props.newProduct) {
+      this.changeQuantity(nextProps.newProduct.id,nextProps.newProduct.qtd);
+    }
+  }
 
   static propTypes = {
     product: PropTypes.object.isRequired,
     removeProduct: PropTypes.func.isRequired
   };
   
+  changeQuantity(id, qtd) {
+    const { produtos } = this.props;
+    const newProductQuantity = [];
+    produtos.forEach(product => {
+      if (product.id !== id) {
+        newProductQuantity.push(product);
+      } else {
+        newProductQuantity.push({
+          id,
+          qtd
+        });
+      }
+    });
+    this.props.changeProductQuantity(newProductQuantity);
+  }
 
   cancelQuantity(id) {
     const { produtos } = this.props;
@@ -47,12 +68,32 @@ class Carrinho extends Component {
       updateCart(cartProducts);
     }
   };
+
   onChange = value => {
-    const { produtos} =  this.props;
+    let productAlreadyInCart = false;
+    const { produtos, updateCart } =  this.props;
     produtos.map(p => {
       if (!isNaN(value)) {
         if (value !== p.qtd) {
-          this.props.changeProductQuantity(p.id, value);
+          produtos.forEach(cp => {
+            if (cp.id === p.id) {
+              cp.qtd = value;
+              p.qyd = value;
+              // if(value > p.qtd){
+              //   value += p.qtd;
+              // }
+              // if(value < p.qtd){
+              //   value -=p.qtd
+              // }
+              productAlreadyInCart = true;
+            }
+          });
+      
+          if (!productAlreadyInCart) {
+            produtos.push(p);
+            this.changeQuantity(p.id,p.qtd);
+          }
+          updateCart(produtos);
         }
       } else {
         notification('error', 'Please give valid number');
@@ -74,7 +115,7 @@ class Carrinho extends Component {
       <div
           onClick={() => removeProduct(product)}
       />
-      quantity = 1;
+      quantity = 0;
       aux = this.toFloat(product.price);
       totalPrice += product.qtd * product.price ;
       return (
@@ -97,7 +138,7 @@ class Carrinho extends Component {
                 <InputNumber
                   min={1}
                   max={1000}
-                  value={quantity}
+                  value={product.qtd}
                   step={1}
                   onChange={this.onChange}
                 />
@@ -119,12 +160,12 @@ class Carrinho extends Component {
 
 function mapStateToProps(state) {
   return {
-    ...state.Ecommerce,
     ...state.cart
   };
 }
 export default connect(mapStateToProps, {
   loadCart,
-  changeProductQuantity
+  changeProductQuantity,
+  updateCart
 })(Carrinho);
 

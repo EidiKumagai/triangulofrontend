@@ -34,6 +34,7 @@ class TopbarAddtoCart extends Component {
   handleVisibleChange() {
     this.props.changeViewTopbarCart(!this.props.viewTopbarCart);
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.newProduct !== this.props.newProduct) {
       this.addProduct(nextProps.newProduct);
@@ -95,7 +96,7 @@ class TopbarAddtoCart extends Component {
   renderProducts() {
     
     let aux;
-    const { cartProducts, produtos, removeProduct } = this.props;
+    const { cartProducts, produtos, removeProduct, productQuantity } = this.props;
     console.log(cartProducts)
 
     totalPrice = 0;
@@ -108,12 +109,17 @@ class TopbarAddtoCart extends Component {
         </div>
       );
     }
-      return (
-        // <SingleCart product={p} removeProduct={removeProduct} key={p.id} 
-        // changeQuantity={this.changeQuantity}/>
-        <SingleCart  removeProduct={removeProduct}
-        changeQuantity={this.changeQuantity}/>
-      );
+
+    return(
+      <SingleCart removeProduct={removeProduct}/>
+    )
+    // return produtos.map(product => {
+    //   return (
+    //     <SingleCart removeProduct={removeProduct}
+    //     changeQuantity={product.id,product.qtd}/>
+    //   );
+    // });
+    
     
     
   }
@@ -153,8 +159,6 @@ class TopbarAddtoCart extends Component {
       cartTotal
     } = this.props;
 
-    
-    
     const content = (
       <TopbarDropdownWrapper className="topbarAddtoCart">
         <div className="isoDropdownHeader">
@@ -164,6 +168,7 @@ class TopbarAddtoCart extends Component {
         </div>
         <div className="isoDropdownBody isoCartItemsWrapper">
           {this.renderProducts()}
+          {this.changeQuantity}
         </div>
 
         {/* <div className="float-cart__shelf-container">
@@ -205,7 +210,7 @@ class TopbarAddtoCart extends Component {
             {cartProducts.length === 0 ? (
               ''
             ) : (
-              <span>{cartTotal.productQuantity}</span>
+              <span>{cartProducts.length}</span>
 
             )}
           </div>
