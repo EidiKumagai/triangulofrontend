@@ -21,6 +21,24 @@ class Carrinho extends Component {
   //     notification('error', 'Please give valid number');
   //   }
   // };
+ 
+     constructor(props){
+       super(props);
+       this.state={
+        valor:1
+      };
+     
+      this.handleChange =  this.handleChange.bind(this);
+
+     }
+
+    
+     
+
+    handleChange = (e) => {
+      this.setState({valor: e.target.value});
+    }
+ 
   componentWillReceiveProps(nextProps) {
     if (nextProps.newProduct !== this.props.newProduct) {
       this.changeQuantity(nextProps.newProduct.id,nextProps.newProduct.qtd);
@@ -59,6 +77,7 @@ class Carrinho extends Component {
     this.props.changeProductQuantity(newProductQuantity);
   }
 
+
   removeProduct = product => {
     const { cartProducts, updateCart } = this.props;
 
@@ -69,53 +88,56 @@ class Carrinho extends Component {
     }
   };
 
-  onChange = value => {
-    let productAlreadyInCart = false;
-    const { produtos, updateCart } =  this.props;
-    produtos.map(p => {
-      if (!isNaN(value)) {
-        if (value !== p.qtd) {
-          produtos.forEach(cp => {
-            if (cp.id === p.id) {
-              cp.qtd = value;
-              p.qyd = value;
-              // if(value > p.qtd){
-              //   value += p.qtd;
-              // }
-              // if(value < p.qtd){
-              //   value -=p.qtd
-              // }
-              productAlreadyInCart = true;
-            }
-          });
+
+
+  // onChange = value => {
+  //   this.sendProduct();
+  //   let productAlreadyInCart = false;
+  //     // const { produtos, updateCart } =  this.props;
+  //     // if (!isNaN(value)) {
+  //     //     if (value !== product.qtd) {
+  //     //       produtos.forEach(cp => {
+  //     //         if (cp.id === product.id) {
+  //     //         cp.qtd = value;
+  //     //         product.qtd = value;
+  //     //         productAlreadyInCart = true;
+  //     //         }
+  //     //       });
+  //     //       if (!productAlreadyInCart) {
+  //     //         produtos.push(product);
+  //     //         this.changeQuantity(product.id,product.qtd);
+  //     //       }
+  //     //       updateCart(produtos);
+  //     //       } 
+  //     // }
       
-          if (!productAlreadyInCart) {
-            produtos.push(p);
-            this.changeQuantity(p.id,p.qtd);
-          }
-          updateCart(produtos);
-        }
-      } else {
-        notification('error', 'Please give valid number');
-      }
-    });
-  };
+  //     // else
+  //     // {
+  //     //     notification('error', 'Please give valid number');
+  //     // }
+    
+  // }
   
+      
+ 
+
   toFloat(num){
     var pointNum = parseFloat(num);
     return pointNum
   }
 
   render() {
-    var quantity;
     let totalPrice;
     let aux;
+   let quantity;
     const { produtos,removeProduct } = this.props;
+    console.log(this.state);
+
     return produtos.map(product => {
       <div
           onClick={() => removeProduct(product)}
       />
-      quantity = 0;
+     quantity = product.qtd;
       aux = this.toFloat(product.price);
       totalPrice += product.qtd * product.price ;
       return (
@@ -135,17 +157,11 @@ class Carrinho extends Component {
             </span>
             <span className="itemMultiplier">X</span>
               <td className="isoItemQuantity">
-                <InputNumber
-                  min={1}
-                  max={1000}
-                  value={product.qtd}
-                  step={1}
-                  onChange={this.onChange}
-                />
+                {/* <input type="number" onChange={this.handleChange } value={this.state.valor }   ></input> */}
               </td>
-            {/* <span className="isoItemQuantity">
-              {}
-            </span> */}
+              <span className="isoItemQuantity">
+              {quantity}
+              </span>
           </p>
         </div>
         <a className="isoItemRemove" onClick={() => removeProduct(product)}>

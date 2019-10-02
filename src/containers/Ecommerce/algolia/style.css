@@ -9,7 +9,7 @@
 
 body .shelf-container {
   width: 80%;
-  margin: 20px 10% 0;
+  margin: 32px 13% 0;
 }
 body .shelf-container .shelf-item {
   width: 280px;
@@ -52,7 +52,7 @@ body .shelf-container .shelf-item {
   display:flex;
   width: 50%;
   position: relative;
-  text-align: center;
+  text-align: -webkit-center;
   box-sizing: border-box;
   padding: 10px;
   margin-bottom: 30px;

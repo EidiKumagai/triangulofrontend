@@ -7,8 +7,6 @@ import Button from '../../components/uielements/button';
 import authAction from '../../redux/auth/actions';
 import Auth0 from '../../helpers/auth0';
 import { login } from './auth';
-import Firebase from '../../helpers/firebase';
-import FirebaseLogin from '../../components/firebase';
 import IntlMessages from '../../components/utility/intlMessages';
 import SignInStyleWrapper from './signin.style';
 import api from './api';

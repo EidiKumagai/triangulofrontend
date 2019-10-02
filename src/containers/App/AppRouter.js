@@ -28,16 +28,16 @@ class AppRouter extends React.Component {
           path={`${url}/calendar`}
           component={asyncComponent(() => import('../Calendar/Calendar'))}
         />
-        <Route
+        {/* <Route
           exact
           path={`${url}/googlemap`}
           component={asyncComponent(() => import('../Map/GoogleMap/googleMap'))}
-        />
-        <Route
+        /> */}
+        {/* <Route
           exact
           path={`${url}/leafletmap`}
           component={asyncComponent(() => import('../Map/Leaflet/leaflet'))}
-        />
+        /> */}
         <Route
           exact
           path={`${url}/table_fb`}

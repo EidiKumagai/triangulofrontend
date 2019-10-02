@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './style.css'
-
+import './style.css';
+import {SearchBox} from 'react-instantsearch/dom';
 import './instantSearch.css';
-
+import FilterResults from 'react-filter-search';
+import './search.scss';
 import PropTypes from 'prop-types';
 import { changeState } from '../../../redux/cart/actions'
 import { connect } from 'react-redux';
@@ -16,12 +17,16 @@ const { fetchProducts } = ecommerceAction;
 
 
 class Shelf extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+      isadd: false,
+      value: '',
+      data:[]
+    };
+  }
 
-  state = {
-    isLoading: false,
-    isadd: false
-
-  };
 
   setvar(estado) {
     estado = true
@@ -30,20 +35,30 @@ class Shelf extends Component {
 
   }
   componentDidMount() {
+    
     this.props.fetchProducts();
   }
-  render() {
 
+  handleChange = event => {
+    const { value } = event.target;
+    this.setState({ value });
+    console.log(value);
+  };
+
+  render() {
+    const { data, value } = this.state;
     let aux = false;
     // aux = this.setvar(aux);
     const { products, cartTotal, isrem, isadd } = this.props;
+     
+     console.log(data);
     const { isLoading } = this.state;
     //const { isadd } = this.state;
     console.log(this.props)
     if (products === undefined) {
       return (
         <React.Fragment>
-
+          
           {isLoading}
           <div className="shelf-container">
             {/* <ShelfHeader productsLength={products.length} /> */}
@@ -61,13 +76,29 @@ class Shelf extends Component {
 
 
 
-
       return (
         <React.Fragment>
+      
+        <input type="text" value={value} onChange={this.handleChange}
+        placeholder="type name here" />
+
+       
           {isLoading}
           <div className="shelf-container">
-            {/* <ShelfHeader productsLength={products.length} /> */}
-            <ProductList products={products} />
+          <FilterResults 
+          value={value}
+          data={products}
+          renderResults={results => (
+            <div>
+              {results.map(el => (
+                <div>
+                  <ProductList products={results} />
+                </div>
+              ))}
+            </div>
+          )}
+        />
+            
           </div>
         </React.Fragment>
       );

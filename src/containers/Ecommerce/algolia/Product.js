@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
+import InputNumber from '../../../components/uielements/InputNumber';
 import Thumb from './thumb';
 //import { formatPrice } from '../../../../services/util';
 //import { addProduct } from '../../../../services/cart/actions';
@@ -14,6 +14,8 @@ import { notification } from '../../../components/index';
 const Product = ({ product, addProduct, changeState }) => {
   product.qtd = 1;
   var bool =  true;
+
+  
 
   //let formattedPrice = formatPrice(product.price, 'USD');
   console.log(product);
@@ -34,7 +36,7 @@ const Product = ({ product, addProduct, changeState }) => {
 
   return (
     <React.Fragment>
-      <div onClick={() => addProduct(product)} >
+      <div>
       <div class="shelf-item">
         <Thumb class="shelf-item__thumb" alt={product.name} />
       <div className="shelf-item__price">
@@ -47,7 +49,31 @@ const Product = ({ product, addProduct, changeState }) => {
         <div className="shelf-item__title">
           <p class="shelf-item__title__text">{product.name}</p>
         </div>
-        <div  class="shelf-item__buy-btn">Adicionar</div>
+        <div className="shelf-item__title">
+          <p class="shelf-item__title__text">Vendor: {product.vendor}</p>
+        </div>
+        <div className="shelf-item__title">
+          <p class="shelf-item__title__text">Stock Quantity: {product.quantity}</p>
+        </div>
+        <div  onClick={() => addProduct(product)} class="shelf-item__buy-btn">Adicionar</div>
+
+        <div>
+        <p>Quantity: </p>
+        <br></br>  
+        <td className="isoItemQuantity">
+         
+         <InputNumber
+           min={1}
+           max={1000}
+           value={product.qtd}
+           step={1}
+           onChange={this.onChange}
+         />
+       </td>
+        <br></br>
+        <br></br>
+        </div> 
+        
       </div>
     </div>
 
@@ -62,7 +88,13 @@ const Product = ({ product, addProduct, changeState }) => {
 //   addProduct: PropTypes.func.isRequired
 // };
 
+const mapStateToProps = state => ({
+  ...state.Cart,
+  products: state.Ecommerce.products,
+  cartTotal: state.Total.data,
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   {addProduct,changeState}
 )(Product);
