@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './style.css';
-import {SearchBox} from 'react-instantsearch/dom';
+import '../../../components/algolia/algoliaComponent.style'
 import './instantSearch.css';
 import FilterResults from 'react-filter-search';
-import './search.scss';
+import './search.css';
 import PropTypes from 'prop-types';
 import { changeState } from '../../../redux/cart/actions'
 import { connect } from 'react-redux';
+import Product from './Product';
 import ProductList from './ProductList';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { notification } from '../../../components';
@@ -16,7 +17,7 @@ const { fetchProducts } = ecommerceAction;
 
 
 
-class Shelf extends Component {
+class Shelf extends Component { 
   constructor(props) {
     super(props);
     this.state = {
@@ -27,10 +28,7 @@ class Shelf extends Component {
     };
   }
 
-
-  setvar(estado) {
-    estado = true
-  }
+  
   componentWillMount() {
 
   }
@@ -42,12 +40,17 @@ class Shelf extends Component {
   handleChange = event => {
     const { value } = event.target;
     this.setState({ value });
-    console.log(value);
   };
+
+  setrows(rows){
+    this.rowscount =  rows
+  }
+
 
   render() {
     const { data, value } = this.state;
     let aux = false;
+    let rowscount;
     // aux = this.setvar(aux);
     const { products, cartTotal, isrem, isadd } = this.props;
      
@@ -73,14 +76,22 @@ class Shelf extends Component {
       }
 
       this.props.changeState();
-
+        
+      
 
 
       return (
         <React.Fragment>
-      
-        <input type="text" value={value} onChange={this.handleChange}
-        placeholder="type name here" />
+          <div class="page">
+            <label class="field a-field a-field_a1">
+              <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search by Category" required/>
+                <span class="a-field__label-wrap">
+                <span class="a-field__label">Search here</span>
+          </span>
+        </label>
+        </div>
+        {/* <input class="Input-text" type="text" value={value} onChange={this.handleChange}
+        placeholder="type name here" /> */}
 
        
           {isLoading}
@@ -92,13 +103,17 @@ class Shelf extends Component {
             <div>
               {results.map(el => (
                 <div>
-                  <ProductList products={results} />
+                 
+                  <Product product={el} key={el.id} />
+                  
                 </div>
+                
               ))}
             </div>
-          )}
-        />
             
+          )}
+          
+        />  
           </div>
         </React.Fragment>
       );

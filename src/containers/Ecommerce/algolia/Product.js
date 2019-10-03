@@ -53,6 +53,9 @@ const Product = ({ product, addProduct, changeState }) => {
           <p class="shelf-item__title__text">Vendor: {product.vendor}</p>
         </div>
         <div className="shelf-item__title">
+          <p class="shelf-item__title__text">Category: {product.category}</p>
+        </div>
+        <div className="shelf-item__title">
           <p class="shelf-item__title__text">Stock Quantity: {product.quantity}</p>
         </div>
         <div  onClick={() => addProduct(product)} class="shelf-item__buy-btn">Adicionar</div>
