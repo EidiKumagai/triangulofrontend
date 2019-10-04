@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from '../../containers/Page/api';
 import {productsAPI} from './api'
 const orderapi = "https://apitriangulo.herokuapp.com";
 
@@ -48,7 +49,7 @@ const ecommerceActions = {
   },
 
   fetchadress : (callback) => dispatch => {
-    return axios
+    return api
       .get(`${orderapi}/address/2`)
       .then(res => {
   

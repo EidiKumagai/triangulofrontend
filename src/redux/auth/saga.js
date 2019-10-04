@@ -11,7 +11,7 @@ export function* loginRequest() {
       if(api){
         yield put({
           type: actions.LOGIN_SUCCESS,
-          token: 'triangulo',
+          token: 'secret token',
           profile: 'Profile'
         });
         

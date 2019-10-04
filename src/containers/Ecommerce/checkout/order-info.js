@@ -29,8 +29,9 @@ class OrderInfo extends Component {
   }
 
   componentDidMount(){
+    
     this.props.fetchadress();
-
+    
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.newProduct !== this.props.newProduct) {
@@ -127,8 +128,8 @@ class OrderInfo extends Component {
       
     });
     
-    var token  = localStorage.getItem('triangulo');
-    console.log(token);
+   
+    //console.log(token);
     //const defaultOption = options[1];
     
     
