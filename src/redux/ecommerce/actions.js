@@ -2,7 +2,9 @@ import axios from "axios";
 import {productsAPI} from './api'
 const orderapi = "https://apitriangulo.herokuapp.com";
 
+
 const ecommerceActions = {
+  FETCH_ADRESS:"FETCH_ADRESS",
   ADD_POST:"ADD_POST",
   POST_ORDER:"POST_ORDER",
   FETCH_ORDERS:'FETCH_ORDERS',
@@ -45,7 +47,32 @@ const ecommerceActions = {
     };
   },
 
+  fetchadress : (callback) => dispatch => {
+    return axios
+      .get(`${orderapi}/address/2`)
+      .then(res => {
   
+        
+        let data = res.data;
+        
+        if (!!callback) {
+          callback();
+        }
+  
+        return dispatch({
+          type: ecommerceActions.FETCH_ADRESS,
+          data
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch orders. Try again later.');
+      });
+  },
+
+
+
+
+
   fetchorders : (callback) => dispatch => {
     return axios
       .get(`${orderapi}/order`)

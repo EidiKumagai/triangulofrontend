@@ -18,7 +18,8 @@ const initState = new Map({
   view: 'gridView',
   viewTopbarCart: true,
   products: [],
-  orders: []
+  orders: [],
+  adress:[]
 });
 
 
@@ -37,6 +38,11 @@ export default function ecommerceReducer(state = initState, action) {
         ...state,
         orders: action.data
       };
+      case actions.FETCH_ADRESS:
+        return {
+          ...state,
+          adress: action.data
+        };
       
       case actions.LOAD_CART:
         return {

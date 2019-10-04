@@ -7,6 +7,12 @@ import SingleOrderInfo from './single-order';
 import { OrderTable } from './checkout.style';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { error } from 'util';
+import { Form, TextArea } from 'semantic-ui-react';
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
+const { fetchadress } = ecommerceAction;
+
+
 
 const { createPost } = ecommerceAction;
 
@@ -22,6 +28,10 @@ class OrderInfo extends Component {
     this.renderProducts = this.renderProducts.bind(this);
   }
 
+  componentDidMount(){
+    this.props.fetchadress();
+
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.newProduct !== this.props.newProduct) {
       this.addProduct(nextProps.newProduct);
@@ -92,12 +102,43 @@ class OrderInfo extends Component {
 
   render() 
   {
-    const {cartTotal} =  this.props;
+    const {cartTotal, adress} =  this.props;
+    const TextAreaExampleTextArea = () => (
+      <Form>
+        <TextArea placeholder='Tell us more' />
+      </Form>
+    )
+    
+    if(adress === undefined){
+      return(
+        <div>loading</div>
+      )
+    }
+    const obj ={
+      value:'',
+      label:''
+    }
+    let array = [];
+    const list = adress.map(end => {
+      let obj = new Object();
+      obj.value = end.id;
+      obj.label =  end.addressname
+      array.push(obj);
+      
+    });
+    
+    var token  = localStorage.getItem('triangulo');
+    console.log(token);
+    //const defaultOption = options[1];
+    
+    
+   
+   
     return (
       <OrderTable className="isoOrderInfo">
         <div className="isoOrderTable">
           <div className="isoOrderTableHead">
-            <span className="tableHead">Produtos</span>
+            <span className="tableHead">Products</span>
             {/* <span className="tableHead">Total</span> */}
           </div>
 
@@ -113,11 +154,28 @@ class OrderInfo extends Component {
           {/* <input type="submit" onClick={ () =>this.fazerpedido()}></input> */}
           {/* <span onClick={() =>this.fazerpedido()}>Fazer pedido</span> */}
           <Button onClick={() => this.fazerpedido()} type="primary" className="isoOrderBtn">
-            Comprar
+            Finish Order
           </Button>
         </div>
+        <br></br>
+        <div>
+        <b><h4>Address: </h4></b>
+          <Dropdown options={array} onChange={this._onSelect}  placeholder="Select an option" />
+       </div>
+        
+        <br></br>
+       
+        <div>
+        <b><h4>Obeservation: </h4></b>
+          <form class="ui form"><textarea placeholder="Tell us more" rows="3"></textarea></form>
+        </div>
+        
       </OrderTable>
     );
+    
+    
+
+    
   }
 }
 
@@ -126,7 +184,8 @@ function mapStateToProps(state) {
     ...state.Ecommerce,
     products: state.cart.produtos,
     cartTotal: state.Total.data,
-    orders: state.Ecommerce.orders
+    orders: state.Ecommerce.orders,
+    adress: state.Ecommerce.adress
   };
 }
-export default connect(mapStateToProps, {createPost, removeProduct })(OrderInfo);
+export default connect(mapStateToProps, {createPost, removeProduct,fetchadress })(OrderInfo);

@@ -17,8 +17,8 @@ import api from './api';
 class SignIn extends Component {
   state = {
     redirectToReferrer: false,
-    email: "primeirouser@gmail.com",
-    password: "123456"
+    email: "admilsen@corasistemas.com",
+    password: "senhacriada"
   };
   componentWillReceiveProps(nextProps) {
     if (

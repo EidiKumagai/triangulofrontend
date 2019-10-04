@@ -6,6 +6,7 @@ import Thumb from './thumb';
 //import { formatPrice } from '../../../../services/util';
 //import { addProduct } from '../../../../services/cart/actions';
 import ecommerceAction from '../../../redux/ecommerce/actions';
+import { SortBy } from 'react-instantsearch/dom';
 import {addProduct, changeState} from '../../../redux/cart/actions'
 import { Button } from 'antd/lib/radio';
 import { notification } from '../../../components/index';
@@ -55,6 +56,8 @@ const Product = ({ product, addProduct, changeState }) => {
         <div className="shelf-item__title">
           <p class="shelf-item__title__text">Category: {product.category}</p>
         </div>
+
+        
         <div className="shelf-item__title">
           <p class="shelf-item__title__text">Stock Quantity: {product.quantity}</p>
         </div>
@@ -62,7 +65,8 @@ const Product = ({ product, addProduct, changeState }) => {
 
         <div>
         <p>Quantity: </p>
-        <br></br>  
+        <br></br>
+
         <td className="isoItemQuantity">
          
          <InputNumber

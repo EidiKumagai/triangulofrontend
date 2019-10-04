@@ -12,7 +12,7 @@ class CartPage extends React.Component {
         <LayoutWrapper className="isoCheckoutPage">
           <Box>
             <div className="isoBillingAddressWrapper">
-              <h3 className="isoSectionTitle">Detalhes Faturamento</h3>
+              <h3 className="isoSectionTitle">Billing Details</h3>
               <div className="isoBillingSection">
                 
                 <OrderInfo />

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './style.css';
 import TopbarCartWrapper from '../../../components/cart/singleCartModal.style';
 import './instantSearch.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ProductList from './ProductList';
-import {useState} from 'react';
+// import ProductList from './ProductList';
+// import {useState} from 'react';
 // import Modal from 'react-bootstrap/Modal';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 const { fetchorders } = ecommerceAction;
@@ -36,7 +36,7 @@ class ListOrders extends Component {
 
   
   render() {
-
+    
     const { isLoading } = this.state;
 
     console.log(orders);
@@ -48,8 +48,9 @@ class ListOrders extends Component {
 
         
         return (
-          <TopbarCartWrapper className="isoCartItems">
-          <div className="isoItemImage">
+          
+              <TopbarCartWrapper className="isoCartItems">
+          <div className="isoItemImage pedidos">
           </div>
           <div className="isoCartDetails">
             <h3>
@@ -71,10 +72,13 @@ class ListOrders extends Component {
               </span>
             </p>
           </div>
-          <a>Detalhes</a>
-                   
-            
+          <a>Detalhes</a>      
+   
+
+          
         </TopbarCartWrapper>
+
+          
         );
       });
     }

@@ -9,9 +9,10 @@ import Auth0 from './helpers/auth0';
 import { isAuthenticated } from "./containers/Page/auth";
 
 const RestrictedRoute = ({ component: Component, ...rest }) => (
+  
   <Route
     {...rest}
-    render={props => isAuthenticated() 
+    render={props => isAuthenticated()  
       ? <Component {...props} />
       : <Redirect
           to={{
@@ -89,7 +90,8 @@ const PublicRoutes = ({ history}) => {
   );
 };
 
+export default connect(null,{ isAuthenticated })(PublicRoutes);
 // export default connect(state => ({
 //   Login: state.Auth.get('triangulo') !== null,
 // }))(PublicRoutes);
-export default PublicRoutes
+//export default PublicRoutes
