@@ -17,8 +17,8 @@ import api from './api';
 class SignIn extends Component {
   state = {
     redirectToReferrer: false,
-    email: "admilsen@corasistemas.com",
-    password: "senhacriada"
+    email: 'admilsen@corasistemas.com',
+    password: '123456'
   };
   componentWillReceiveProps(nextProps) {
     if (
@@ -52,6 +52,9 @@ class SignIn extends Component {
                login(response.data.token);
                this.props.history.push("/dashboard");
            } catch (err) {
+              return(
+                alert("Login or Password wrongs, Try Again")
+              );
                this.setState({
                    error:
                        "Houve um problema com o login, verifique suas credenciais. T.T"

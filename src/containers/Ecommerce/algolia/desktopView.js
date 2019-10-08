@@ -104,8 +104,8 @@ class Shelf extends Component {
               {results.map(el => (
                 <div>
                  
-                  <Product product={el} key={el.id} />
-                  
+                  <Product changeQuantity={el.id,el.qtd} product={el} key={el.id}  />
+                 
                 </div>
                 
               ))}

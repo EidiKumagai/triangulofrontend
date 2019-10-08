@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import Spinner from 'react-spinner-material';
 import { connect } from 'react-redux';
+import api from '../../../containers/Page/api';
+
 import axios from 'axios';
 import Button from '../../../components/uielements/button';
 import { removeProduct} from '../../../redux/cart/actions'
@@ -63,11 +66,11 @@ class OrderInfo extends Component {
       var myString = JSON.stringify(myJSON);
       let title = " order" 
     
-      axios.post(`https://apitriangulo.herokuapp.com/order`,{ 
+      api.post(`https://apitriangulo.herokuapp.com/order`,{ 
         title: title,
         price: cartTotal.totalPrice,
         products:products.map(product => {
-          product.id
+          return product.id
         }) 
       })
         .then(res => {
@@ -112,7 +115,9 @@ class OrderInfo extends Component {
     
     if(adress === undefined){
       return(
-        <div>loading</div>
+        <div>
+        <Spinner size={120} spinnerColor={"#606D42"} spinnerWidth={2} visible={true} />
+        </div>
       )
     }
     const obj ={

@@ -50,7 +50,7 @@ const ecommerceActions = {
 
   fetchadress : (callback) => dispatch => {
     return api
-      .get(`${orderapi}/address/2`)
+      .get(`${orderapi}/address/1`)
       .then(res => {
   
         
@@ -75,8 +75,8 @@ const ecommerceActions = {
 
 
   fetchorders : (callback) => dispatch => {
-    return axios
-      .get(`${orderapi}/order`)
+    return api
+      .get(`${orderapi}/showorders`)
       .then(res => {
   
         
@@ -96,7 +96,7 @@ const ecommerceActions = {
       });
   },
   fetchProducts : (filters, sortBy, callback) => dispatch => {
-    return axios
+    return api
       .get(productsAPI)
       .then(res => {
         let  rows  = res.data;

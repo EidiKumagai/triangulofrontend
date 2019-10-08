@@ -10,13 +10,22 @@ import { SortBy } from 'react-instantsearch/dom';
 import {addProduct, changeState} from '../../../redux/cart/actions'
 import { Button } from 'antd/lib/radio';
 import { notification } from '../../../components/index';
+const { changeProductQuantity } = ecommerceAction;
+
+
+
 
 
 const Product = ({ product, addProduct, changeState }) => {
-  product.qtd = 1;
+  
+  let aux;
+  aux = 1;
   var bool =  true;
 
-  
+
+  const ochange = numero =>{
+    product.qtd = numero
+  }
 
   //let formattedPrice = formatPrice(product.price, 'USD');
   console.log(product);
@@ -74,7 +83,7 @@ const Product = ({ product, addProduct, changeState }) => {
            max={1000}
            value={product.qtd}
            step={1}
-           onChange={this.onChange}
+           onChange={ochange}
          />
        </td>
         <br></br>
@@ -97,11 +106,11 @@ const Product = ({ product, addProduct, changeState }) => {
 
 const mapStateToProps = state => ({
   ...state.Cart,
-  products: state.Ecommerce.products,
-  cartTotal: state.Total.data,
+  ...state.Ecommerce,
+  products: state.Ecommerce.products
 });
 
 export default connect(
   mapStateToProps,
-  {addProduct,changeState}
+  {addProduct,changeState,changeProductQuantity}
 )(Product);
