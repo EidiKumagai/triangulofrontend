@@ -15,11 +15,22 @@ import api from './api';
 //const { login } = login;
 
 class SignIn extends Component {
-  state = {
-    redirectToReferrer: false,
-    email: 'admilsen@corasistemas.com',
-    password: '123456'
-  };
+
+  constructor() {
+    console.log('Constructor Login.....');
+    super();
+    this.state = {
+      redirectToReferrer: false,
+      model: {
+        email: '',
+        password: ''
+      }
+    };
+    console.log(this.state.model.email);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  
   componentWillReceiveProps(nextProps) {
     if (
       this.props.isLoggedIn !== nextProps.isLoggedIn &&
@@ -29,10 +40,18 @@ class SignIn extends Component {
     }
   }
 
-  handleChange = event => {
-    this.setState({
-      [event.target.email]: event.target.value
-    });
+  // handleChange = event => {
+  //   this.setState({
+  //     email: event.target.value
+  //   });
+  // }
+
+  handleChange(event) {  
+    let nModel = this.state.model;
+    nModel[event.target.name] = event.target.value;
+    this.setState(() => ({
+        model: nModel
+    }))
   }
 
   // handleLogin = () => {
@@ -43,7 +62,7 @@ class SignIn extends Component {
   
   handleSubmit = async e  => {
     e.preventDefault();
-       const { email, password } = this.state;
+       const { email, password } = this.state.model;
        if (!email || !password) {
            this.setState({ error: "Preencha e-mail e senha para continuar!" });
        } else {
@@ -81,13 +100,23 @@ class SignIn extends Component {
 
             <div className="isoSignInForm">
               <div className="isoInputWrapper">
-                <Input value={this.state.email}
-          onChange={this.handleChange} size="large" placeholder="Username" />
+                <Input 
+                  value={this.state.model.email}
+                  name="email"
+                  onChange={this.handleChange} 
+                  size="large" 
+                  placeholder="Username" 
+                />
               </div>
-
               <div className="isoInputWrapper">
-                <Input value={this.state.password}
-          onChange={this.handleChange} size="large" type="password" placeholder="Password" />
+                <Input 
+                  value={this.state.model.password}
+                  onChange={this.handleChange} 
+                  name="password"
+                  size="large" 
+                  type="password" 
+                  placeholder="Password" 
+                />
               
               </div>
 
@@ -128,9 +157,9 @@ class SignIn extends Component {
                 <Link to="/forgotpassword" className="isoForgotPass">
                   <IntlMessages id="page.signInForgotPass" />
                 </Link>
-                <Link to="/signup">
+                {/* <Link to="/signup">
                   <IntlMessages id="page.signInCreateAccount" />
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
