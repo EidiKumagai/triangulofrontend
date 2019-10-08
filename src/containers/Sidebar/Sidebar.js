@@ -14,7 +14,7 @@ import Logo from '../../components/utility/logo';
 import { rtl } from '../../config/withDirection';
 
 const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+// const MenuItemGroup = Menu.ItemGroup;
 const { Sider } = Layout;
 
 const {

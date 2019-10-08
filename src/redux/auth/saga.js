@@ -4,7 +4,7 @@ import { clearToken } from '../../helpers/utility';
 import actions from './actions';
 import api from '../../containers/Page/api'
 
-const fakeApiCall = true; // auth0 or express JWT
+//const fakeApiCall = true; // auth0 or express JWT
 
 export function* loginRequest() {
   yield takeEvery('LOGIN_REQUEST', function*() {

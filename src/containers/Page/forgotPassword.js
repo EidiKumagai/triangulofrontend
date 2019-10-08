@@ -4,8 +4,31 @@ import Input from '../../components/uielements/input';
 import Button from '../../components/uielements/button';
 import IntlMessages from '../../components/utility/intlMessages';
 import ForgotPasswordStyleWrapper from './forgotPassword.style';
+import api from '../Page/api';
+
 
 class ForgotPassword extends React.Component {
+  constructor(props){
+    super(props)
+    this.state={
+      email:''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  
+  
+  handleChange = event => {
+    this.setState({email: event.target.value});
+  }
+
+  handleSubmit(){
+    api.post("http://api-triangulo.herokuapp.com/users/forgotPassword").then(res =>{
+        
+    });
+
+  }
+
+
   render() {
     return (
       <ForgotPasswordStyleWrapper className="isoForgotPassPage">
@@ -28,7 +51,7 @@ class ForgotPassword extends React.Component {
 
             <div className="isoForgotPassForm">
               <div className="isoInputWrapper">
-                <Input size="large" placeholder="Email" />
+                <Input value={this.state.email}  onChange={this.handleChange} size="large" placeholder="Email"/>
               </div>
 
               <div className="isoInputWrapper">

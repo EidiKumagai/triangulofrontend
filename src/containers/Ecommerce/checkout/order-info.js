@@ -3,10 +3,10 @@ import Spinner from 'react-spinner-material';
 import { connect } from 'react-redux';
 import api from '../../../containers/Page/api';
 
-import axios from 'axios';
+// import axios from 'axios';
 import Button from '../../../components/uielements/button';
 import { removeProduct} from '../../../redux/cart/actions'
-import SingleOrderInfo from './single-order';
+// import SingleOrderInfo from './single-order';
 import { OrderTable } from './checkout.style';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { error } from 'util';
@@ -58,12 +58,12 @@ class OrderInfo extends Component {
 
   fazerpedido() {
     const { products, cartTotal } = this.props;
-      var myJSON = {
-        title: "Order",
-        price: cartTotal.totalPrice,
-        products: []
-      }
-      var myString = JSON.stringify(myJSON);
+      // var myJSON = {
+      //   title: "Order",
+      //   price: cartTotal.totalPrice,
+      //   products: []
+      // }
+      // var myString = JSON.stringify(myJSON);
       let title = " order" 
     
       api.post(`https://apitriangulo.herokuapp.com/order`,{ 
@@ -86,7 +86,7 @@ class OrderInfo extends Component {
 
   
   renderProducts() {
-    const { productQuantity, products, removeProduct } = this.props;
+    const { products, removeProduct } = this.props;
     return products.map(product => {  
       return (
         <div className="isoSingleOrderInfo">
@@ -107,11 +107,11 @@ class OrderInfo extends Component {
   render() 
   {
     const {cartTotal, adress} =  this.props;
-    const TextAreaExampleTextArea = () => (
-      <Form>
-        <TextArea placeholder='Tell us more' />
-      </Form>
-    )
+    // const TextAreaExampleTextArea = () => (
+    //   <Form>
+    //     <TextArea placeholder='Tell us more' />
+    //   </Form>
+    // )
     
     if(adress === undefined){
       return(
@@ -120,10 +120,10 @@ class OrderInfo extends Component {
         </div>
       )
     }
-    const obj ={
-      value:'',
-      label:''
-    }
+    // const obj ={
+    //   value:'',
+    //   label:''
+    // }
     let array = [];
     const list = adress.map(end => {
       let obj = new Object();

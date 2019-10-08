@@ -9,14 +9,14 @@ import ecommerceAction from '../../redux/ecommerce/actions';
 import {loadCart, removeProduct} from '../../redux/cart/actions'
 import { updateCart, changeProductQuantity } from '../../redux/total/actions' 
 import TopbarDropdownWrapper from './topbarDropdown.style';
-import CartProduct from '../cart/singleCartModal'
-import { notification } from '..';
+// import CartProduct from '../cart/singleCartModal'
+// import { notification } from '..';
  
 
 const { changeViewTopbarCart } = ecommerceAction;
 
 
-let totalPrice;
+ let totalPrice;
 class TopbarAddtoCart extends Component {
   constructor(props) {
     super(props);
@@ -44,21 +44,7 @@ class TopbarAddtoCart extends Component {
       this.removeProduct(nextProps.productToRemove);
     }
   }
-  changeQuantity(id, qtd) {
-    const { cartProducts } = this.props;
-    const newProductQuantity = [];
-    cartProducts.forEach(product => {
-      if (product.id !== id) {
-        newProductQuantity.push(product);
-      } else {
-        newProductQuantity.push({
-          id,
-          qtd
-        });
-      }
-    });
-    this.props.changeProductQuantity(newProductQuantity);
-  }
+  
 
    addProduct = product => {
     const { cartProducts, updateCart } = this.props;
@@ -95,8 +81,8 @@ class TopbarAddtoCart extends Component {
   }
   renderProducts() {
     
-    let aux;
-    const { cartProducts, produtos, removeProduct, productQuantity } = this.props;
+    // let aux;
+    const { cartProducts, removeProduct } = this.props;
     console.log(cartProducts)
 
     totalPrice = 0;
@@ -152,7 +138,6 @@ class TopbarAddtoCart extends Component {
   render() {
     const {
       url,
-      productQuantity,
       viewTopbarCart,
       customizedTheme,
       cartProducts,

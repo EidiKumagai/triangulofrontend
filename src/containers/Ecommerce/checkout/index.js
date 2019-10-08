@@ -1,7 +1,7 @@
 import React from 'react';
 import LayoutWrapper from '../../../components/utility/layoutWrapper';
 import Box from '../../../components/utility/box';
-import BillingForm from './billing-form';
+// import BillingForm from './billing-form';
 import OrderInfo from './order-info';
 import { CheckoutContents } from './checkout.style';
 

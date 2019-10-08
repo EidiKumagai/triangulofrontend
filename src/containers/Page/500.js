@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Image from '../../image/rob.png';
+// import Image from '../../image/rob.png';
 import IntlMessages from '../../components/utility/intlMessages';
 import FiveZeroZeroStyleWrapper from './500.style';
 

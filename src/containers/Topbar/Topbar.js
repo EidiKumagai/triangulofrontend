@@ -4,8 +4,6 @@ import { Layout } from 'antd';
 import appActions from '../../redux/app/actions';
 import TopbarWrapper from './topbar.style';
 import {
-  TopbarNotification,
-  TopbarMessage,
   TopbarSearch,
   TopbarUser,
   TopbarAddtoCart,

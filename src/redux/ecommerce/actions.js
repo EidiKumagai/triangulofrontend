@@ -1,7 +1,7 @@
 import axios from "axios";
 import api from '../../containers/Page/api';
 import {productsAPI} from './api'
-const orderapi = "https://apitriangulo.herokuapp.com";
+const orderapi = "https://api-triangulo.herokuapp.com";
 
 
 const ecommerceActions = {

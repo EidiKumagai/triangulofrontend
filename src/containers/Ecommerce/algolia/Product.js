@@ -1,15 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import InputNumber from '../../../components/uielements/InputNumber';
 import Thumb from './thumb';
 //import { formatPrice } from '../../../../services/util';
 //import { addProduct } from '../../../../services/cart/actions';
 import ecommerceAction from '../../../redux/ecommerce/actions';
-import { SortBy } from 'react-instantsearch/dom';
+// import { SortBy } from 'react-instantsearch/dom';
 import {addProduct, changeState} from '../../../redux/cart/actions'
-import { Button } from 'antd/lib/radio';
-import { notification } from '../../../components/index';
+// import { Button } from 'antd/lib/radio';
+// import { notification } from '../../../components/index';
 const { changeProductQuantity } = ecommerceAction;
 
 

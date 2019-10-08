@@ -4,7 +4,7 @@ import TopbarCartWrapper from '../../../components/cart/singleCartModal.style';
 import './instantSearch.css';
 import Spinner from 'react-spinner-material';
 import Button from '../../../components/uielements/button';
-import axios from "axios";
+// import axios from "axios";
 import api from '../../../containers/Page/api';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -12,9 +12,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 // import ProductList from './ProductList';
 // import {useState} from 'react';
 // import Modal from 'react-bootstrap/Modal';
-import { OrderTable } from '../checkout/checkout.style';
+// import { OrderTable } from '../checkout/checkout.style';
 import WithDirection from '../../../config/withDirection';
-import ModalStyle, { ModalContent } from './modal.style';
+import ModalStyle from './modal.style';
 import Modals from '../../../components/feedback/modal';
 import IntlMessages from '../../../components/utility/intlMessages';
 import ecommerceAction from '../../../redux/ecommerce/actions';
@@ -102,7 +102,7 @@ class ListOrders extends Component {
   
   render() {
     const marginStyle = { marginRight: '5px', marginBottom: '5px' };
-    const { isLoading } = this.state;
+    // const { isLoading } = this.state;
 
     console.log(orders);
     const { orders } = this.props;

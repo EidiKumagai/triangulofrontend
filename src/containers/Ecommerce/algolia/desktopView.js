@@ -4,11 +4,11 @@ import '../../../components/algolia/algoliaComponent.style'
 import './instantSearch.css';
 import FilterResults from 'react-filter-search';
 import './search.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { changeState } from '../../../redux/cart/actions'
 import { connect } from 'react-redux';
 import Product from './Product';
-import ProductList from './ProductList';
+// import ProductList from './ProductList';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { notification } from '../../../components';
 const { fetchProducts } = ecommerceAction;
@@ -50,9 +50,8 @@ class Shelf extends Component {
   render() {
     const { data, value } = this.state;
     let aux = false;
-    let rowscount;
     // aux = this.setvar(aux);
-    const { products, cartTotal, isrem, isadd } = this.props;
+    const { products, isadd } = this.props;
      
      console.log(data);
     const { isLoading } = this.state;

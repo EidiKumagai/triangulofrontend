@@ -4,14 +4,13 @@ import { connect } from 'react-redux';
 import Input from '../../../components/uielements/input';
 import Button from '../../../components/uielements/button';
 import ecommerceActions from '../../../redux/ecommerce/actions';
-import CartProduct from '../../../components/cart/singleCartModal'
+// import CartProduct from '../../../components/cart/singleCartModal'
 import SingleCart from '../../../components/cart/singleCart';
 import ProductsTable from './cartTable.style';
 import { rtl } from '../../../config/withDirection';
 
 const { changeProductQuantity } = ecommerceActions;
-
-let totalPrice = 0;
+let totalPrice;
 class CartTable extends Component {
   constructor(props) {
     super(props);
@@ -24,9 +23,10 @@ class CartTable extends Component {
     return pointNum
   }
   renderItems() {
-    let aux;
-    const { productQuantity, products, removeProduct } = this.props;
-    totalPrice = 0;
+    
+
+    const {  products,  } = this.props;
+     totalPrice = 0;
 
     if (!products || products.length === 0) {
       return <tr className="isoNoItemMsg">No item found</tr>;
@@ -62,7 +62,8 @@ class CartTable extends Component {
     this.props.changeProductQuantity(newProductQuantity);
   }
   render() {
-    const { style, cartTotal,removeProduct, products } = this.props;
+    
+    const { style, cartTotal } = this.props;
     const classname = style != null ? style : '';
 
     

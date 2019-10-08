@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from "./auth";
 //verificar qual a porta para o apiQuickbooks
 const api = axios.create({
-   baseURL:"https://apitriangulo.herokuapp.com"
+   baseURL:"https://api-triangulo.herokuapp.com"
 });
 api.interceptors.request.use(async config => {
    const token = getToken();

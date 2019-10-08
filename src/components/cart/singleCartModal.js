@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import InputNumber from '../uielements/InputNumber'; 
+// import InputNumber from '../uielements/InputNumber'; 
 import PropTypes from 'prop-types';
-import { notification } from '../index';
+// import { notification } from '../index';
 import TopbarCartWrapper from './singleCartModal.style';
-import topbarAddtoCart from '../topbar/topbarAddtoCart';
+// import topbarAddtoCart from '../topbar/topbarAddtoCart';
 import {connect} from 'react-redux';
 import { updateCart, changeProductQuantity } from '../../redux/total/actions' 
-import {loadCart, removeProduct} from '../../redux/cart/actions';
+import {loadCart} from '../../redux/cart/actions';
 // import ecommerceAction from '../../redux/ecommerce/actions';
 
 // const { changeProductQuantity } = ecommerceAction;
@@ -127,8 +127,8 @@ class Carrinho extends Component {
   }
 
   render() {
-    let totalPrice;
-    let aux;
+  let totalPrice;
+  let aux;
    let quantity;
     const { produtos,removeProduct } = this.props;
     console.log(this.state);

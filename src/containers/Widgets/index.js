@@ -8,7 +8,7 @@ import VCardWidget from './vCard/vCard-widget';
 import SocialWidget from './social-widget/social-widget';
 import SocialProfile from './social-widget/social-profile-icon';
 import userpic from '../../image/user1.png';
-import { TableViews, tableinfos, dataList } from '../Tables/antTables';
+import {  dataList } from '../Tables/antTables';
 import * as rechartConfigs from '../Charts/recharts/config';
 import { StackedAreaChart } from '../Charts/recharts/charts/';
 import { GoogleChart } from '../Charts/googleChart/';
