@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { notification } from '../index';
+// // import { notification } from '../index';
 import TopbarCartWrapper from './singleCartModal.style';
-import topbarAddtoCart from '../topbar/topbarAddtoCart';
+// import topbarAddtoCart from '../topbar/topbarAddtoCart';
 import {connect} from 'react-redux';
 import {loadCart} from '../../redux/cart/actions';
 import ecommerceAction from '../../redux/ecommerce/actions';
@@ -36,12 +36,12 @@ class Carrinho extends Component {
   }
 
   render() {
-    let totalPrice;
-    let aux;
+    // let totalPrice;
+    // let aux;
     const { produtos } = this.props;
     return produtos.map(product => {
-      aux = this.toFloat(product.price);
-      totalPrice += product.qtd * product.price ;
+      // aux = this.toFloat(product.price);
+      // totalPrice += product.qtd * product.price ;
       return (
         <TopbarCartWrapper className="isoCartItems">
         <div className="isoItemImage">

@@ -14,6 +14,7 @@ const { toggleCollapsed } = appActions;
 
 class Topbar extends Component {
   render() {
+    let nome =  localStorage.getItem("nome");
     const { toggleCollapsed, url, customizedTheme, locale } = this.props;
     const collapsed = this.props.collapsed && !this.props.openDrawer;
     const styling = {
@@ -40,10 +41,13 @@ class Topbar extends Component {
           </div>
 
           <ul className="isoRight">
-            <li className="isoSearch">
-              <TopbarSearch locale={locale} />
+            <li >
+              {nome}
             </li>
-
+            {/* <li className="isoSearch">
+              <TopbarSearch locale={locale} />
+            </li> */}
+                
 
             <li
               onClick={() => this.setState({ selectedItem: 'addToCart' })}

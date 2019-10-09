@@ -68,16 +68,16 @@ class SignIn extends Component {
        } else {
            try {
                const response = await api.post("/sessions", { email, password });
-               login(response.data.token);
+               login(response.data.token.token,response.data.username);
                this.props.history.push("/dashboard");
            } catch (err) {
               return(
                 alert("Login or Password wrongs, Try Again")
               );
-               this.setState({
-                   error:
-                       "Houve um problema com o login, verifique suas credenciais. T.T"
-               });
+              //  this.setState({
+              //      error:
+              //          "Houve um problema com o login, verifique suas credenciais. T.T"
+              //  });
            }
        }
   }

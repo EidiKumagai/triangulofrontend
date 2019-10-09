@@ -10,7 +10,7 @@ import { removeProduct} from '../../../redux/cart/actions'
 import { OrderTable } from './checkout.style';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { error } from 'util';
-import { Form, TextArea } from 'semantic-ui-react';
+// import { Form, TextArea } from 'semantic-ui-react';
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 const { fetchadress } = ecommerceAction;
@@ -19,7 +19,7 @@ const { fetchadress } = ecommerceAction;
 
 const { createPost } = ecommerceAction;
 
-let totalPrice;
+
 
 
 
@@ -28,11 +28,19 @@ class OrderInfo extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state={
+      obs:'',
+      address:{},
+      info:{}
+    }
+
     this.renderProducts = this.renderProducts.bind(this);
+    this.handleChange =  this.handleChange.bind(this);
   }
 
   componentDidMount(){
-    
+    this.getUserInfo();
     this.props.fetchadress();
     
   }
@@ -44,6 +52,16 @@ class OrderInfo extends Component {
     if (nextProps.productToRemove !== this.props.productToRemove) {
       this.removeProduct(nextProps.productToRemove);
     }
+  }
+
+  handleChange(event){
+    this.setState({obs: event.target.value});
+    console.log(this.state.obs);
+  }
+
+  submitAdd = value => {
+    this.setState({address: value});
+    console.log(this.state.address);
   }
 
   removeProduct = product => {
@@ -66,7 +84,7 @@ class OrderInfo extends Component {
       // var myString = JSON.stringify(myJSON);
       let title = " order" 
     
-      api.post(`https://apitriangulo.herokuapp.com/order`,{ 
+      api.post(`https://api-triangulo.herokuapp.com/order`,{ 
         title: title,
         price: cartTotal.totalPrice,
         products:products.map(product => {
@@ -84,14 +102,44 @@ class OrderInfo extends Component {
         })
   }
 
+  getUserInfo(){
+    api.get("https://api-triangulo.herokuapp.com/users/1").then(res =>{  
+      this.setState({info: res.data});
+    });
+    
+  }
+
+  renderUsers(){
+    const { info } = this.state
+
+    return (
+      <div className="isoSingleOrderInfo" >
+      <p>
+        <span>Name: {info.username}</span> <br></br>
+
+        <br></br>
+        <span>Company: {info.companyname}</span> <br></br>
+        
+        <br></br>
+        <span>Email: {info.email}</span> <br></br>
+        
+        <br></br>
+        <span>Job Title: {info.jobtitle}</span> <br></br>
+      </p>
+      </div>
+    )
+  }
+
+  
   
   renderProducts() {
+    
     const { products, removeProduct } = this.props;
     return products.map(product => {  
       return (
         <div className="isoSingleOrderInfo">
         <p>
-          <span>{product.name}</span>
+          <span>{product.name}</span> 
           <span>x</span>
           <span className="isoQuantity">{product.qtd}</span>
         </p>
@@ -124,6 +172,7 @@ class OrderInfo extends Component {
     //   value:'',
     //   label:''
     // }
+    let data;
     let array = [];
     const list = adress.map(end => {
       let obj = new Object();
@@ -142,6 +191,20 @@ class OrderInfo extends Component {
    
     return (
       <OrderTable className="isoOrderInfo">
+        <div className="isoOrderTable" >
+            <div className="isoOrderTableHead">
+              <span className="tableHead">User Information</span>
+              {/* <span className="tableHead">Total</span> */}
+            </div>
+
+            <div className="isoOrderTableBody">
+              {this.renderUsers()}
+            </div>
+        </div>
+
+        <br></br>
+        <br></br>
+        
         <div className="isoOrderTable">
           <div className="isoOrderTableHead">
             <span className="tableHead">Products</span>
@@ -159,22 +222,27 @@ class OrderInfo extends Component {
           </div>
           {/* <input type="submit" onClick={ () =>this.fazerpedido()}></input> */}
           {/* <span onClick={() =>this.fazerpedido()}>Fazer pedido</span> */}
-          <Button onClick={() => this.fazerpedido()} type="primary" className="isoOrderBtn">
-            Finish Order
-          </Button>
+
         </div>
         <br></br>
         <div>
-        <b><h4>Address: </h4></b>
-          <Dropdown options={array} onChange={this._onSelect}  placeholder="Select an option" />
+        <b>Address: </b>
+          <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" />
        </div>
+       <br></br>
+       <div className="isoOrderTable">
+        <b>Obeservation: </b>
+          <form class="ui form" ><textarea onChange={this.handleChange} placeholder="Tell us more" rows="3"></textarea></form>
+      </div>
         
         <br></br>
-       
-        <div>
-        <b><h4>Obeservation: </h4></b>
-          <form class="ui form"><textarea placeholder="Tell us more" rows="3"></textarea></form>
-        </div>
+
+        <div className="isoOrderTable">
+       <Button onClick={() => this.fazerpedido()} type="primary" className="isoOrderBtn">
+            Finish Order
+          </Button>
+       </div>
+        
         
       </OrderTable>
     );

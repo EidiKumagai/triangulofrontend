@@ -18,9 +18,9 @@ const { changeProductQuantity } = ecommerceAction;
 
 const Product = ({ product, addProduct, changeState }) => {
   
-  let aux;
-  aux = 1;
-  var bool =  true;
+  // let aux;
+  // aux = 1;
+  // var bool =  true;
 
 
   const ochange = numero =>{

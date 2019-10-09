@@ -1,9 +1,9 @@
 import { Map } from 'immutable';
-import axios from "axios";
+// import axios from "axios";
 import { getToken } from '../../helpers/utility';
 //import { getToken } from '../../containers/Page/auth';
 import actions from './actions';
-import config from '../../config';
+// import config from '../../config';
 
 // const api = axios.create({
 //   baseURL:"https://apitriangulo.herokuapp.com/sessions"

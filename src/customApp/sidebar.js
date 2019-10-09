@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Menu from '../components/uielements/menu';
-import IntlMessages from '../components/utility/intlMessages';
+// import React from 'react';
+// import { Link } from 'react-router-dom';
+// import Menu from '../components/uielements/menu';
+// import IntlMessages from '../components/utility/intlMessages';
 
 export default function(url, submenuColor) {
   const sidebars = [];

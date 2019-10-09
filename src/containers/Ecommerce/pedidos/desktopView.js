@@ -104,7 +104,7 @@ class ListOrders extends Component {
     const marginStyle = { marginRight: '5px', marginBottom: '5px' };
     // const { isLoading } = this.state;
 
-    console.log(orders);
+  
     const { orders } = this.props;
     if (orders === undefined) {
       return(

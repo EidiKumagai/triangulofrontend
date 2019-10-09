@@ -127,8 +127,8 @@ class Carrinho extends Component {
   }
 
   render() {
-  let totalPrice;
-  let aux;
+  // let totalPrice;
+  // let aux;
    let quantity;
     const { produtos,removeProduct } = this.props;
     console.log(this.state);
@@ -138,8 +138,8 @@ class Carrinho extends Component {
           onClick={() => removeProduct(product)}
       />
      quantity = product.qtd;
-      aux = this.toFloat(product.price);
-      totalPrice += product.qtd * product.price ;
+      // aux = this.toFloat(product.price);
+      // totalPrice += product.qtd * product.price ;
       return (
         <TopbarCartWrapper className="isoCartItems">
         <div className="isoItemImage">

@@ -24,7 +24,7 @@ class ResetPassword extends React.Component {
   validateResetForm() {
     
       return (
-        this.state.novasenha == this.state.confirmesenha
+        this.state.novasenha === this.state.confirmesenha
       )
       
     

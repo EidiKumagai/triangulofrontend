@@ -30,10 +30,10 @@ export const updateCart = cartProducts => dispatch => {
     return sum;
   }, 0);
 
-  let installments = cartProducts.reduce((greater, p) => {
-    greater = p.installments > greater ? p.installments : greater;
-    return greater;
-  }, 0);
+  // let installments = cartProducts.reduce((greater, p) => {
+  //   greater = p.installments > greater ? p.installments : greater;
+  //   return greater;
+  // }, 0);
 
   let cartTotal = {
     productQuantity,

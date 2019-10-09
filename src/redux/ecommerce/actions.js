@@ -33,7 +33,7 @@ const ecommerceActions = {
 
    createPostSuccess :  (data) => {
     return {
-      type: ecommerceActions. ADD_POST,
+      type: ecommerceActions.ADD_POST,
       payload: {
         body: data.body
       }
@@ -97,7 +97,7 @@ const ecommerceActions = {
   },
   fetchProducts : (filters, sortBy, callback) => dispatch => {
     return api
-      .get(`${orderapi}/product`)
+      .get(`${orderapi}/productrule`)
       .then(res => {
         let  rows  = res.data;
         if (!!filters && filters.length > 0) {

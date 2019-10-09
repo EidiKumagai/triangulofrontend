@@ -49,7 +49,7 @@ class Shelf extends Component {
 
   render() {
     const { data, value } = this.state;
-    let aux = false;
+    // let aux = false;
     // let rowscount;
     // aux = this.setvar(aux);
     const { products, isadd } = this.props;
@@ -70,8 +70,8 @@ class Shelf extends Component {
         </React.Fragment>
       );
     } else {
-      if (isadd == true) {
-        aux = false
+      if (isadd === true) {
+
         notification("success", "Product added on the cart");
       }
 
