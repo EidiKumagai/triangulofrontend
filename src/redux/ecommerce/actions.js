@@ -1,6 +1,6 @@
 import axios from "axios";
 import api from '../../containers/Page/api';
-import {productsAPI} from './api'
+// import {productsAPI} from './api'
 const orderapi = "https://api-triangulo.herokuapp.com";
 
 
@@ -97,7 +97,7 @@ const ecommerceActions = {
   },
   fetchProducts : (filters, sortBy, callback) => dispatch => {
     return api
-      .get(productsAPI)
+      .get(`${orderapi}/product`)
       .then(res => {
         let  rows  = res.data;
         if (!!filters && filters.length > 0) {

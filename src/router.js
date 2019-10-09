@@ -62,7 +62,7 @@ const PublicRoutes = ({ history}) => {
         />
         <Route
           exact
-          path={'/resetpassword'}
+          path={'/resetpassword/:token/:email'}
           component={asyncComponent(() =>
             import('./containers/Page/resetPassword'))}
         />

@@ -22,9 +22,11 @@ class ForgotPassword extends React.Component {
   }
 
   handleSubmit(){
-    api.post("http://api-triangulo.herokuapp.com/users/forgotPassword").then(res =>{
-        
-    });
+    const {email} = this.state;
+    
+      api.post("http://api-triangulo.herokuapp.com/users/forgotPassword",{ email }).then(res =>{
+        console.log(res);
+    });  
 
   }
 
@@ -55,7 +57,7 @@ class ForgotPassword extends React.Component {
               </div>
 
               <div className="isoInputWrapper">
-                <Button type="primary">
+                <Button type="primary" onClick={() => this.handleSubmit()} >
                   <IntlMessages id="page.sendRequest" />
                 </Button>
               </div>
