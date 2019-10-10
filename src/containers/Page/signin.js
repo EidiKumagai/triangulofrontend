@@ -61,6 +61,7 @@ class SignIn extends Component {
   // };
   
   handleSubmit = async e  => {
+    let erro;
     e.preventDefault();
        const { email, password } = this.state.model;
        if (!email || !password) {
@@ -70,9 +71,14 @@ class SignIn extends Component {
                const response = await api.post("/sessions", { email, password });
                login(response.data.token.token,response.data.username);
                this.props.history.push("/dashboard");
-           } catch (err) {
+           } catch (error) {
+              if(error.response){
+                return alert("Your credentials is not right, try again")
+              }
               return(
-                alert("Login or Password wrongs, Try Again")
+                alert("You don't have permission, talk to your Supervisor")
+                
+
               );
               //  this.setState({
               //      error:

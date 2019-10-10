@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Spinner from 'react-spinner-material';
 import { connect } from 'react-redux';
 import api from '../../../containers/Page/api';
-
+//import { Dropdown } from 'semantic-ui-react'
 // import axios from 'axios';
 import Button from '../../../components/uielements/button';
 import { removeProduct} from '../../../redux/cart/actions'
@@ -32,7 +32,9 @@ class OrderInfo extends Component {
     this.state={
       obs:'',
       address:{},
-      info:{}
+      info:{},
+      frete:{},
+      resultado:0
     }
 
     this.renderProducts = this.renderProducts.bind(this);
@@ -42,9 +44,11 @@ class OrderInfo extends Component {
   componentDidMount(){
     this.getUserInfo();
     this.props.fetchadress();
+    this.getFreitch();
     
   }
   componentWillReceiveProps(nextProps) {
+    
     if (nextProps.newProduct !== this.props.newProduct) {
       this.addProduct(nextProps.newProduct);
     }
@@ -74,22 +78,28 @@ class OrderInfo extends Component {
     }
   };
 
-  fazerpedido() {
+  fazerpedido(resultado) {
     const { products, cartTotal } = this.props;
-      // var myJSON = {
-      //   title: "Order",
-      //   price: cartTotal.totalPrice,
-      //   products: []
-      // }
-      // var myString = JSON.stringify(myJSON);
+    const { address, obs, frete } = this.state  
+      var bool = parseFloat(resultado).toFixed(2);
+      let array = [];
+      
+      products.map( product => {
+        return array.push(product.id)
+      });
+
+  
+      
+      
+      array.push(frete.id);
       let title = " order" 
-    
+      console.log(array);
       api.post(`https://api-triangulo.herokuapp.com/order`,{ 
-        title: title,
-        price: cartTotal.totalPrice,
-        products:products.map(product => {
-          return product.id
-        }) 
+        address: address.label,
+        price: bool,
+        products:array,
+        obs: obs
+
       })
         .then(res => {
           if(res === error){
@@ -105,8 +115,13 @@ class OrderInfo extends Component {
   getUserInfo(){
     api.get("https://api-triangulo.herokuapp.com/users/1").then(res =>{  
       this.setState({info: res.data});
+    }); 
+  }
+
+  getFreitch(){
+    api.get("https://api-triangulo.herokuapp.com/freight").then(res => {
+      this.setState({frete: res.data});
     });
-    
   }
 
   renderUsers(){
@@ -126,6 +141,19 @@ class OrderInfo extends Component {
         <br></br>
         <span>Job Title: {info.jobtitle}</span> <br></br>
       </p>
+      </div>
+    )
+  }
+
+  renderFrete(){
+    const { frete } = this.state
+
+    return(
+
+      <div className="isoSingleOrderInfo" >
+        <p>
+          <span>Price: {frete.price}</span>
+        </p>
       </div>
     )
   }
@@ -155,23 +183,48 @@ class OrderInfo extends Component {
   render() 
   {
     const {cartTotal, adress} =  this.props;
-    // const TextAreaExampleTextArea = () => (
-    //   <Form>
-    //     <TextArea placeholder='Tell us more' />
-    //   </Form>
-    // )
+    const { frete } =  this.state;
     
-    if(adress === undefined){
+    
+    
+    if(adress === undefined || frete === undefined ){
       return(
         <div>
         <Spinner size={120} spinnerColor={"#606D42"} spinnerWidth={2} visible={true} />
         </div>
       )
     }
-    // const obj ={
-    //   value:'',
-    //   label:''
-    // }
+
+    var resultado;
+    let frete1 = frete.price;
+    var a = Number(frete1).toFixed(2);
+    //var a = parseFloat(frete1);
+    let precoComFrete = cartTotal.totalPrice;
+    //var b = parseFloat(precoComFrete);
+    var b = Number(precoComFrete).toFixed(2);
+
+    var bool1 = parseFloat(a);
+    var bool2 = parseFloat(b);
+    
+    bool1.toFixed(2);
+    bool2.toFixed(2);
+ 
+    if(resultado === undefined){
+      resultado = '';
+    }
+    
+    
+    resultado += bool1 + bool2;
+    var bool3 = parseFloat(resultado).toFixed(2);
+   
+    
+   
+    
+    
+    
+   
+    
+
     let data;
     let array = [];
     const list = adress.map(end => {
@@ -205,6 +258,7 @@ class OrderInfo extends Component {
         <br></br>
         <br></br>
         
+        
         <div className="isoOrderTable">
           <div className="isoOrderTableHead">
             <span className="tableHead">Products</span>
@@ -220,10 +274,28 @@ class OrderInfo extends Component {
               ${cartTotal.totalPrice.toFixed(2)}
             </span>
           </div>
-          {/* <input type="submit" onClick={ () =>this.fazerpedido()}></input> */}
-          {/* <span onClick={() =>this.fazerpedido()}>Fazer pedido</span> */}
-
         </div>
+
+
+        <div className="isoOrderTable">
+          <div className="isoOrderTableHead">
+            <span className="tableHead">Freitch</span>
+            {/* <span className="tableHead">Total</span> */}
+          </div>
+
+          <div className="isoOrderTableBody">
+            {this.renderFrete()}
+          </div>
+          <div className="isoOrderTableFooter">
+            <span>Total with Freitch</span>
+             <span>
+              ${bool3}
+            </span> 
+          </div>
+        </div>
+
+
+
         <br></br>
         <div>
         <b>Address: </b>
@@ -238,7 +310,7 @@ class OrderInfo extends Component {
         <br></br>
 
         <div className="isoOrderTable">
-       <Button onClick={() => this.fazerpedido()} type="primary" className="isoOrderBtn">
+       <Button onClick={() => this.fazerpedido(bool3)} type="primary" className="isoOrderBtn">
             Finish Order
           </Button>
        </div>

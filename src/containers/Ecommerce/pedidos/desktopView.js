@@ -37,7 +37,7 @@ class ListOrders extends Component {
   success = (order)=> {
     const id = order.id;
     let list;
-    api.get("https://apitriangulo.herokuapp.com/order/"+id).then(res =>{
+    api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
      list = res.data;
 
      const produtos = list.products.map(product => {
