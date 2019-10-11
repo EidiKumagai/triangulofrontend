@@ -4,6 +4,7 @@ import TopbarCartWrapper from '../../../components/cart/singleCartModal.style';
 import './instantSearch.css';
 import Spinner from 'react-spinner-material';
 import Button from '../../../components/uielements/button';
+import Card from 'react-bootstrap/Card'
 // import axios from "axios";
 import api from '../../../containers/Page/api';
 // import PropTypes from 'prop-types';
@@ -35,28 +36,21 @@ class ListOrders extends Component {
   }; 
   
   success = (order)=> {
+    let produtos;
     const id = order.id;
     let list;
+    let arrayModal = [];
+   
+    
     api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
      list = res.data;
-
-     const produtos = list.products.map(product => {
+      
+     produtos = list.products.map(product => {
       return (
-        // <OrderTable className="isoOrderInfo" >
-        //   <div className="isoOrderTable">
-        //   <span className="tableHead">Products: </span>
-        //   <br></br>
-        //   <p>Name: {product.name}</p>
-        //   <br></br>
-        //   <p>Vendor: {product.vendor}</p>
-        //   <br></br>
-        //   <p>Product Quantity: {product.quantity}</p>
-        //   <br></br>
-        //   </div>
-          
-        // </OrderTable>
-
-        <table class="table">
+        <div>
+        
+        <div>
+            <table class="table">
           <thead>
             <tr>
               <th scope="col">Product</th>
@@ -71,17 +65,45 @@ class ListOrders extends Component {
               <td>${product.price}</td>
             </tr>
           </tbody>
-          </table>
-        
+        </table> 
+        </div>
+
+        </div>
       )
+       
     });
+
+    const aux = (
+      <div class="card border-dark mb-3" style={{maxWidth:'18rem'}}>
+          <div class="card-header">Order Details</div>
+          <div class="card-body text-dark">
+            <h5 class="card-title">Price Total: $ {res.data.price}</h5>
+            <p class="card-text">Address: {res.data.address}</p>
+            <p class="card-text">Observation: {res.data.obs}</p>
+          </div>
+      </div>
+
+    );
+    arrayModal.push(aux);
+    arrayModal.push(produtos);
+    
+
     Modals.success({
       title: list.title,
-      content:produtos,
+      content:arrayModal.map(componentes =>{
+          return componentes
+      }),
       okText: 'OK',
       cancelText: 'Cancel',
     });
+    
+    
     });
+
+ 
+    
+
+
   }
 
   

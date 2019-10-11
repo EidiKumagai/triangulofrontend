@@ -1,13 +1,16 @@
 import React from 'react';
+import { notification } from '../../components/';
 import { Link } from 'react-router-dom';
 import Input from '../../components/uielements/input';
 import Button from '../../components/uielements/button';
 import IntlMessages from '../../components/utility/intlMessages';
 import ForgotPasswordStyleWrapper from './forgotPassword.style';
+
 import api from '../Page/api';
 
 
 class ForgotPassword extends React.Component {
+
   constructor(props){
     super(props)
     this.state={
@@ -23,10 +26,15 @@ class ForgotPassword extends React.Component {
 
   handleSubmit(){
     const {email} = this.state;
-    
-      api.post("http://api-triangulo.herokuapp.com/users/forgotPassword",{ email }).then(res =>{
-        console.log(res);
-    });  
+      try {
+        api.post("http://api-triangulo.herokuapp.com/users/forgotPassword",{ email }).then(res =>{
+          console.log(res)
+          notification("success", "Check your email to change your password");
+        });  
+      } catch (error) {
+        notification("error", "Check your email to change your password");
+      }
+        
 
   }
 

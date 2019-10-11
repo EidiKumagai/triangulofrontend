@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Spinner from 'react-spinner-material';
 import { connect } from 'react-redux';
 import api from '../../../containers/Page/api';
+import Dropdown from 'react-bootstrap/Dropdown'
+import Select from "react-dropdown-select";
+import history from '../../Page/history';
 //import { Dropdown } from 'semantic-ui-react'
 // import axios from 'axios';
 import Button from '../../../components/uielements/button';
@@ -11,7 +14,7 @@ import { OrderTable } from './checkout.style';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { error } from 'util';
 // import { Form, TextArea } from 'semantic-ui-react';
-import Dropdown from 'react-dropdown'
+//import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 const { fetchadress } = ecommerceAction;
 
@@ -63,9 +66,11 @@ class OrderInfo extends Component {
     console.log(this.state.obs);
   }
 
-  submitAdd = value => {
+  submitAdd = (value) => {
+    // const {adress} = this.props;
+    // this.setState({address: adress});
     this.setState({address: value});
-    console.log(this.state.address);
+    
   }
 
   removeProduct = product => {
@@ -88,16 +93,19 @@ class OrderInfo extends Component {
         return array.push(product.id)
       });
 
-  
-      
+      let nomeadd = address[0].label;
+      //console.log(this.state);
       
       array.push(frete.id);
       let title = " order" 
+      
       console.log(array);
-      api.post(`https://api-triangulo.herokuapp.com/order`,{ 
-        address: address.label,
+      try {
+        api.post(`https://api-triangulo.herokuapp.com/order`,{ 
+        address: nomeadd,
         price: bool,
-        products:array,
+        products: array 
+        ,
         obs: obs
 
       })
@@ -106,10 +114,17 @@ class OrderInfo extends Component {
             alert("Something wrong, please try again");
           }else{
             alert("Order Successfully");
+            history.replace('/dashboard/pedidos');
+            document.location.reload(true);
           }
           console.log(res);
           console.log(res.data);
         })
+        
+      } catch (error) {
+        alert(error.response);
+      }
+      
   }
 
   getUserInfo(){
@@ -225,7 +240,6 @@ class OrderInfo extends Component {
    
     
 
-    let data;
     let array = [];
     const list = adress.map(end => {
       let obj = new Object();
@@ -279,7 +293,7 @@ class OrderInfo extends Component {
 
         <div className="isoOrderTable">
           <div className="isoOrderTableHead">
-            <span className="tableHead">Freitch</span>
+            <span className="tableHead">Freight</span>
             {/* <span className="tableHead">Total</span> */}
           </div>
 
@@ -287,7 +301,7 @@ class OrderInfo extends Component {
             {this.renderFrete()}
           </div>
           <div className="isoOrderTableFooter">
-            <span>Total with Freitch</span>
+            <span>Total with Freight</span>
              <span>
               ${bool3}
             </span> 
@@ -298,8 +312,9 @@ class OrderInfo extends Component {
 
         <br></br>
         <div>
-        <b>Address: </b>
-          <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" />
+        {/* <b>Address: </b>
+          <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" /> */}
+          <Select options={array} onChange={(values) =>this.submitAdd(values)} />
        </div>
        <br></br>
        <div className="isoOrderTable">

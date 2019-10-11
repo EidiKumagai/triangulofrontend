@@ -526,7 +526,7 @@
   "page.forgetPassSubTitle": "Forgot your password ?",
   "page.forgetPassDescription":
     "Enter with your email, then we send a link",
-  "page.sendRequest": "Enviar",
+  "page.sendRequest": "Send",
   "page.resetPassTitle": "TRIÂNGULO",
   "page.resetPassSubTitle": "Reset Password",
   "page.resetPassDescription": "Enter new password and confirm it.",

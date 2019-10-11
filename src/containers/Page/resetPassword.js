@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../../components/uielements/input';
+import { notification } from '../../components/';
 import Button from '../../components/uielements/button';
 import IntlMessages from '../../components/utility/intlMessages';
 import ResetPasswordStyleWrapper from './resetPassword.style';
@@ -45,6 +46,7 @@ class ResetPassword extends React.Component {
       { 
         newPassword: novasenha
       }).then(res =>{
+        notification("success", "Change password success");
         console.log(res)
      });
   }
