@@ -13,7 +13,7 @@ class AppRouter extends React.Component {
           path={`${url}/`}
           component={asyncComponent(() => import('../Widgets/index.js'))}
         />
-        <Route
+        {/* <Route
           exact
           path={`${url}/inbox`}
           component={asyncComponent(() => import('../Mail'))}
@@ -27,7 +27,7 @@ class AppRouter extends React.Component {
           exact
           path={`${url}/calendar`}
           component={asyncComponent(() => import('../Calendar/Calendar'))}
-        />
+        /> */}
         {/* <Route
           exact
           path={`${url}/googlemap`}
@@ -38,7 +38,7 @@ class AppRouter extends React.Component {
           path={`${url}/leafletmap`}
           component={asyncComponent(() => import('../Map/Leaflet/leaflet'))}
         /> */}
-        <Route
+        {/* <Route
           exact
           path={`${url}/table_fb`}
           component={asyncComponent(() => import('../Tables/fbTables/'))}
@@ -52,7 +52,7 @@ class AppRouter extends React.Component {
           exact
           path={`${url}/allFormComponent`}
           component={asyncComponent(() => import('../Forms/allComponents/'))}
-        />
+        /> */}
         <Route
           exact
           path={`${url}/InputField`}
@@ -125,7 +125,7 @@ class AppRouter extends React.Component {
           path={`${url}/gridLayout`}
           component={asyncComponent(() => import('../Box/GridLayout'))}
         />
-        <Route
+        {/* <Route
           exact
           path={`${url}/notes`}
           component={asyncComponent(() => import('../Notes'))}
@@ -139,7 +139,7 @@ class AppRouter extends React.Component {
           exact
           path={`${url}/contacts`}
           component={asyncComponent(() => import('../Contacts'))}
-        />
+        /> */}
         <Route
           exact
           path={`${url}/alert`}
@@ -160,7 +160,7 @@ class AppRouter extends React.Component {
           path={`${url}/notification`}
           component={asyncComponent(() => import('../Feedback/Notification'))}
         />
-        <Route
+        {/* <Route
           exact
           path={`${url}/progress`}
           component={asyncComponent(() => import('../Feedback/Progress'))}
@@ -191,7 +191,7 @@ class AppRouter extends React.Component {
           component={asyncComponent(() =>
             import('../Uielements/Breadcrumb/breadcrumb')
           )}
-        />
+        /> */}
         <Route
           exact
           path={`${url}/backToTop`}
@@ -204,7 +204,7 @@ class AppRouter extends React.Component {
             import('../Uielements/Dropdown/dropdown')
           )}
         />
-        <Route
+        {/* <Route
           exact
           path={`${url}/op_badge`}
           component={asyncComponent(() => import('../Uielements/Badge'))}
@@ -278,7 +278,7 @@ class AppRouter extends React.Component {
           exact
           path={`${url}/ReactChart2`}
           component={asyncComponent(() => import('../Charts/reactChart2'))}
-        />
+        /> */}
         <Route
           exact
           path={`${url}/pagination`}
@@ -286,7 +286,7 @@ class AppRouter extends React.Component {
             import('../Uielements/Pagination/pagination')
           )}
         />
-        <Route
+        {/* <Route
           exact
           path={`${url}/reactTrend`}
           component={asyncComponent(() => import('../Charts/reactTrend'))}
@@ -295,7 +295,7 @@ class AppRouter extends React.Component {
           exact
           path={`${url}/invoice`}
           component={asyncComponent(() => import('../Page/invoice/invoice'))}
-        />
+        /> */}
         <Route
           exact
           path={`${url}/card`}
@@ -324,7 +324,7 @@ class AppRouter extends React.Component {
             import('../Ecommerce/algolia/instantSearch')
           )}
         />
-        <Route
+        {/* <Route
           exact
           path={`${url}/reactDates`}
           component={asyncComponent(() =>
@@ -345,17 +345,17 @@ class AppRouter extends React.Component {
           exact
           path={`${url}/dropzone`}
           component={asyncComponent(() => import('../AdvancedUI/dropzone'))}
-        />
-        <Route
+        /> */}
+        {/* <Route
           exact
           path={`${url}/youtubeSearch`}
           component={asyncComponent(() => import('../YoutubeSearch'))}
-        />
-        <Route
+        /> */}
+        {/* <Route
           exact
           path={`${url}/frappeChart`}
           component={asyncComponent(() => import('../Charts/frappeChart'))}
-        />
+        /> */}
         
         {getDevRouters(url)}
       </Switch>
