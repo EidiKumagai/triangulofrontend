@@ -1,7 +1,7 @@
 import Auth from './auth/reducer';
 import App from './app/reducer';
 
-import Calendar from './calendar/reducer';
+
 import Box from './box/reducer';
 import Notes from './notes/reducer';
 import Todos from './todos/reducer';
@@ -21,7 +21,6 @@ export default {
   cart,
   ThemeSwitcher,
   LanguageSwitcher,
-  Calendar,
   Box,
   Notes,
   Todos,
