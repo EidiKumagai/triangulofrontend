@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import './style.css';
 import TopbarCartWrapper from '../../../components/cart/singleCartModal.style';
 import './instantSearch.css';
+import Spinner from 'react-spinner-material';
 import Button from '../../../components/uielements/button';
-import axios from "axios";
+import Card from 'react-bootstrap/Card'
+// import axios from "axios";
+import api from '../../../containers/Page/api';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Moment from 'react-moment';
 import 'bootstrap/dist/css/bootstrap.css';
 // import ProductList from './ProductList';
 // import {useState} from 'react';
 // import Modal from 'react-bootstrap/Modal';
 // import { OrderTable } from '../checkout/checkout.style';
 import WithDirection from '../../../config/withDirection';
-import ModalStyle, { ModalContent } from './modal.style';
+import ModalStyle from './modal.style';
 import Modals from '../../../components/feedback/modal';
 import IntlMessages from '../../../components/utility/intlMessages';
 import ecommerceAction from '../../../redux/ecommerce/actions';
@@ -33,28 +37,21 @@ class ListOrders extends Component {
   }; 
   
   success = (order)=> {
+    let produtos;
     const id = order.id;
     let list;
-    axios.get("https://apitriangulo.herokuapp.com/order/"+id).then(res =>{
+    let arrayModal = [];
+   
+    
+    api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
      list = res.data;
-
-     const produtos = list.products.map(product => {
+      
+     produtos = list.products.map(product => {
       return (
-        // <OrderTable className="isoOrderInfo" >
-        //   <div className="isoOrderTable">
-        //   <span className="tableHead">Products: </span>
-        //   <br></br>
-        //   <p>Name: {product.name}</p>
-        //   <br></br>
-        //   <p>Vendor: {product.vendor}</p>
-        //   <br></br>
-        //   <p>Product Quantity: {product.quantity}</p>
-        //   <br></br>
-        //   </div>
-          
-        // </OrderTable>
-
-        <table class="table">
+        <div>
+        
+        <div>
+            <table class="table">
           <thead>
             <tr>
               <th scope="col">Product</th>
@@ -69,17 +66,45 @@ class ListOrders extends Component {
               <td>${product.price}</td>
             </tr>
           </tbody>
-          </table>
-        
+        </table> 
+        </div>
+
+        </div>
       )
+       
     });
+
+    const aux = (
+      <div class="card border-dark mb-3" style={{maxWidth:'18rem'}}>
+          <div class="card-header">Order Details</div>
+          <div class="card-body text-dark">
+            <h5 class="card-title">Price Total: $ {res.data.price}</h5>
+            <p class="card-text">Address: {res.data.address}</p>
+            <p class="card-text">Observation: {res.data.obs}</p>
+          </div>
+      </div>
+
+    );
+    arrayModal.push(aux);
+    arrayModal.push(produtos);
+    
+
     Modals.success({
       title: list.title,
-      content:produtos,
+      content:arrayModal.map(componentes =>{
+          return componentes
+      }),
       okText: 'OK',
       cancelText: 'Cancel',
     });
+    
+    
     });
+
+ 
+    
+
+
   }
 
   
@@ -100,13 +125,17 @@ class ListOrders extends Component {
   
   render() {
     const marginStyle = { marginRight: '5px', marginBottom: '5px' };
-    const { isLoading } = this.state;
+    // const { isLoading } = this.state;
 
-    console.log(orders);
+  
     const { orders } = this.props;
     if (orders === undefined) {
-
-    }else{
+      return(
+        
+        <Spinner size={120} spinnerColor={"#606D42"} spinnerWidth={2} visible={true} />
+        
+      )
+    }
       return orders.map(order => {
 
         
@@ -118,20 +147,24 @@ class ListOrders extends Component {
           <div className="isoCartDetails">
             <h3>
               <a href="#">
-                {order.title}
+                {order.id}
+              </a>
+              <a>
+                P.O
               </a>
             </h3>
             <p className="isoItemPriceQuantity">
-              <span>Preço Total $</span>
+              <span>Price Total $</span>
               <span>
                 {order.price}
               </span>
             </p>
 
             <p className="isoItemPriceQuantity">
-              <span>Criado em:  </span>
+              <span>Created at:  </span>
               <span>
-                {order.created_at}
+                <Moment format="YYYY/MM/DD" >{order.created_at}</Moment>
+                
               </span>
             </p>
           </div>
@@ -148,18 +181,18 @@ class ListOrders extends Component {
           
         );
       });
-    }
-    return (
-      <React.Fragment>
-        {isLoading }
-        <div className="shelf-container">
-          {/* <ShelfHeader productsLength={products.length} /> */}
-             {/* {orders} */}
-        </div>
+    
+    // return (
+    //   <React.Fragment>
+    //     {isLoading }
+    //     <div className="shelf-container">
+    //       {/* <ShelfHeader productsLength={products.length} /> */}
+    //          {/* {orders} */}
+    //     </div>
 
         
-      </React.Fragment>
-    );  
+    //   </React.Fragment>
+    // );  
   }
 }
 

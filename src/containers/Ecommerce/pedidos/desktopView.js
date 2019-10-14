@@ -9,6 +9,7 @@ import Card from 'react-bootstrap/Card'
 import api from '../../../containers/Page/api';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Moment from 'react-moment';
 import 'bootstrap/dist/css/bootstrap.css';
 // import ProductList from './ProductList';
 // import {useState} from 'react';
@@ -150,16 +151,17 @@ class ListOrders extends Component {
               </a>
             </h3>
             <p className="isoItemPriceQuantity">
-              <span>Preço Total $</span>
+              <span>Price Total $</span>
               <span>
                 {order.price}
               </span>
             </p>
 
             <p className="isoItemPriceQuantity">
-              <span>Criado em:  </span>
+              <span>Created at:  </span>
               <span>
-                {order.created_at}
+                <Moment format="YYYY/MM/DD" >{order.created_at}</Moment>
+                
               </span>
             </p>
           </div>

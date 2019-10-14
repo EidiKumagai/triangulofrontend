@@ -20,6 +20,8 @@ tableDataList.size = 5;
 
 export default class IsoWidgets extends Component {
   render() {
+    let nome =  localStorage.getItem("nome");
+
     const { rowStyle, colStyle } = basicStyle;
     const wisgetPageStyle = {
       display: 'flex',
@@ -45,15 +47,15 @@ export default class IsoWidgets extends Component {
         
         <Row style={rowStyle} gutter={0} justify="start">
 
-          <Col md={12} sm={24} xs={24} style={colStyle}>
+          {/* <Col md={12} sm={24} xs={24} style={colStyle}>
             <IsoWidgetsWrapper>
               <IsoWidgetBox height={455}>
                 <StackedAreaChart {...stackConfig} />
               </IsoWidgetBox>
             </IsoWidgetsWrapper>
-          </Col>
+          </Col> */}
 
-          <Col md={12} sm={24} xs={24} style={colStyle}>
+          {/* <Col md={12} sm={24} xs={24} style={colStyle}>
             <IsoWidgetsWrapper>
               <IsoWidgetBox height={470}>
                 <GoogleChart
@@ -70,30 +72,30 @@ export default class IsoWidgets extends Component {
                 <GoogleChart {...googleChartConfigs.Histogram} />
               </IsoWidgetBox>
             </IsoWidgetsWrapper>
-          </Col>
+          </Col> */}
 
         </Row>
 
         
         <Row style={rowStyle} gutter={0} justify="start">
 
-        <Col md={8} sm={24} xs={24} style={colStyle}>
+        {/* <Col md={8} sm={24} xs={24} style={colStyle}>
             <IsoWidgetsWrapper>
               <IsoWidgetBox height={450}>
-                {/* Google Bar Chart */}
+                 Google Bar Chart 
                 <GoogleChart {...googleChartConfigs.ComboChart} />
               </IsoWidgetBox>
             </IsoWidgetsWrapper>
-          </Col>
+          </Col> */}
 
-          <Col md={8} sm={24} xs={24} style={colStyle}>
+          {/* <Col md={8} sm={24} xs={24} style={colStyle}>
             <IsoWidgetsWrapper>
               
               <IsoWidgetBox height={450}>
                 <GoogleChart {...googleChartConfigs.TrendLines} />
               </IsoWidgetBox>
             </IsoWidgetsWrapper>
-          </Col>
+          </Col> */}
         <Col md={8} sm={12} xs={24} style={colStyle}>
             <IsoWidgetsWrapper>
               {/* VCard Widget */}
@@ -101,7 +103,7 @@ export default class IsoWidgets extends Component {
                 style={{ height: '450px' }}
                 src={userpic}
                 alt="Jhon"
-                name={<IntlMessages id="widget.vcardwidget.name" />}
+                name={nome}
                 title={<IntlMessages id="widget.vcardwidget.title" />}
                 description={
                   <IntlMessages id="widget.vcardwidget.description" />

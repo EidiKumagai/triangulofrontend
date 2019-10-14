@@ -5,6 +5,9 @@ import api from '../../../containers/Page/api';
 import Dropdown from 'react-bootstrap/Dropdown'
 import Select from "react-dropdown-select";
 import history from '../../Page/history';
+import ModalStyle from './modal.style';
+import WithDirection from '../../../config/withDirection';
+import Modals from '../../../components/feedback/modal';
 //import { Dropdown } from 'semantic-ui-react'
 // import axios from 'axios';
 import Button from '../../../components/uielements/button';
@@ -16,6 +19,9 @@ import { error } from 'util';
 // import { Form, TextArea } from 'semantic-ui-react';
 //import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
+
+const isoModal = ModalStyle(Modals);
+const Modal = WithDirection(isoModal);
 const { fetchadress } = ecommerceAction;
 
 
@@ -84,8 +90,105 @@ class OrderInfo extends Component {
   };
 
   fazerpedido(resultado) {
-    const { products, cartTotal } = this.props;
-    const { address, obs, frete } = this.state  
+    
+    const {cartTotal, products} = this.props;
+
+    const { address, obs, frete } = this.state 
+    
+    
+    var result;
+    let frete1 = frete.price;
+    var a = Number(frete1).toFixed(2);
+    //var a = parseFloat(frete1);
+    let precoComFrete = cartTotal.totalPrice;
+    //var b = parseFloat(precoComFrete);
+    var b = Number(precoComFrete).toFixed(2);
+
+    var bool1 = parseFloat(a);
+    var bool2 = parseFloat(b);
+    
+    bool1.toFixed(2);
+    bool2.toFixed(2);
+ 
+    
+    
+    result += bool1 + bool2;
+    var bool3 = parseFloat(resultado).toFixed(2);
+   
+    
+    const oderdetails = (
+      products.map(product =>{
+        return(
+          <div >
+            <OrderTable >
+
+              <div className="isoOrderTable" >
+                  <div className="isoOrderTableHead">
+                    <span className="tableHead">User Information</span>
+                    {/* <span className="tableHead">Total</span> */}
+                  </div>
+
+                  <div className="isoOrderTableBody">
+                    {this.renderUsers()}
+                  </div>
+              </div>
+
+              <div className="isoOrderTable">
+                <div className="isoOrderTableHead">
+                  <span className="tableHead">Products</span>
+                  {/* <span className="tableHead">Total</span> */}
+                </div>
+
+                <div className="isoOrderTableBody">
+                  <div className="isoSingleOrderInfo">
+                    <p>
+                      <span>{product.name}</span> 
+                      <span></span>
+                      <span className="isoQuantity">{product.qtd}</span>
+                    </p>
+                    <span className="totalPrice">${product.price}</span>
+                    {/* <a className="isoItemRemove" onClick={() => removeProduct(product)}>
+                      <i className="ion-android-close" />
+                    </a> */}
+                  </div>
+                </div>
+                <div className="isoOrderTableFooter">
+                  <span>Total</span>
+                  <span>
+                    ${cartTotal.totalPrice.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+
+
+
+
+              <div className="isoOrderTable">
+                <div className="isoOrderTableHead">
+                  <span className="tableHead">Freight</span>
+                  <span className="tableHead">Total</span> 
+                </div>
+
+                <div className="isoOrderTableBody">
+                  {this.renderFrete()}
+                </div>
+                <div className="isoOrderTableFooter">
+                  <span>Total with Freight</span>
+                  <span>
+                    ${bool3}
+                  </span> 
+                </div>
+              </div>
+
+
+              </OrderTable>
+          </div>
+        )
+      })
+    );
+
+    
+   
       var bool = parseFloat(resultado).toFixed(2);
       let array = [];
       
@@ -113,9 +216,19 @@ class OrderInfo extends Component {
           if(res === error){
             alert("Something wrong, please try again");
           }else{
-            alert("Order Successfully");
-            history.replace('/dashboard/pedidos');
-            document.location.reload(true);
+            Modals.success({
+              title: 'Order Success',
+              content:oderdetails,
+              okText: 'OK',
+              cancelText: 'Cancel',
+              onOk(){
+                history.replace('/dashboard/pedidos');
+                document.location.reload(true);
+              }
+            });
+            // alert("Order Successfully");
+            // 
+            // 
           }
           console.log(res);
           console.log(res.data);
