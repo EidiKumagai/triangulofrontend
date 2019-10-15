@@ -134,12 +134,12 @@ class AppRouter extends React.Component {
           exact
           path={`${url}/todo`}
           component={asyncComponent(() => import('../Todo'))}
-        />
+        />*/}
         <Route
           exact
           path={`${url}/contacts`}
-          component={asyncComponent(() => import('../Contacts'))}
-        /> */}
+          component={asyncComponent(() => import('../AboutUs/index'))}
+        /> 
         <Route
           exact
           path={`${url}/alert`}

@@ -14,7 +14,7 @@ import Logo from '../../components/utility/logo';
 import { rtl } from '../../config/withDirection';
 
 const SubMenu = Menu.SubMenu;
-// const MenuItemGroup = Menu.ItemGroup;
+//const MenuItemGroup = Menu.ItemGroup;
 const { Sider } = Layout;
 
 const {
@@ -168,11 +168,11 @@ class Sidebar extends Component {
                     <IntlMessages id="sidebar.pedidos" />
                   </Link>
                 </Menu.Item>
-                <Menu.Item style={submenuStyle} key="cart">
+                {/* <Menu.Item style={submenuStyle} key="cart">
                   <Link style={submenuColor} to={`${url}/cart`}>
                     <IntlMessages id="sidebar.cart" />
                   </Link>
-                </Menu.Item>
+                </Menu.Item> */}
                 <Menu.Item style={submenuStyle} key="checkout">
                   <Link style={submenuColor} to={`${url}/checkout`}>
                     <IntlMessages id="sidebar.checkout" />
@@ -252,10 +252,10 @@ class Sidebar extends Component {
                 </Link>
               </Menu.Item> */}
 
-              {/* <Menu.Item key="contacts">
+               <Menu.Item key="contacts">
                 <Link to={`${url}/contacts`}>
                   <span className="isoMenuHolder" style={submenuColor}>
-                    <i className="ion-android-person-add" />
+                    <i className="ion-information" />
                     <span className="nav-text">
                       <IntlMessages id="sidebar.contacts" />
                     </span>
@@ -263,7 +263,7 @@ class Sidebar extends Component {
                 </Link>
               </Menu.Item>
 
-              <Menu.Item key="shuffle">
+              {/* <Menu.Item key="shuffle">
                 <Link to={`${url}/shuffle`}>
                   <span className="isoMenuHolder" style={submenuColor}>
                     <i className="ion-grid" />
@@ -272,7 +272,7 @@ class Sidebar extends Component {
                     </span>
                   </span>
                 </Link>
-              </Menu.Item> */}
+              </Menu.Item>  */}
 
               {/* <SubMenu
                 key="charts"

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Input from '../../components/uielements/input';
 import Checkbox from '../../components/uielements/checkbox';
 import Button from '../../components/uielements/button';
+import { notification } from '../../components';
 // import authAction from '../../redux/auth/actions';
 // import Auth0 from '../../helpers/auth0';
 import { login } from './auth';
@@ -73,10 +74,11 @@ class SignIn extends Component {
                this.props.history.push("/dashboard");
            } catch (error) {
               if(error.response){
-                return alert("Your credentials is not right, try again")
+                return notification("error", "Your credentials is not right, try again");
+  
               }
               return(
-                alert("You don't have permission, talk to your Supervisor")
+                notification("error", "You don't have permission, talk to your Supervisor")
                 
 
               );

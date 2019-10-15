@@ -430,10 +430,10 @@ class OrderInfo extends Component {
           <Select options={array} onChange={(values) =>this.submitAdd(values)} />
        </div>
        <br></br>
-       <div className="isoOrderTable">
+       {/* <div className="isoOrderTable">
         <b>Obeservation: </b>
           <form class="ui form" ><textarea onChange={this.handleChange} placeholder="Tell us more" rows="3"></textarea></form>
-      </div>
+      </div> */}
         
         <br></br>
 

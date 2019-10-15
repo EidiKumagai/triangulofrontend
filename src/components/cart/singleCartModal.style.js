@@ -84,7 +84,7 @@ const TopbarCartWrapper = styled.div`
     position: absolute;
     right: ${props => (props['data-rtl'] === 'rtl' ? 'inherit' : '15px')};
     left: ${props => (props['data-rtl'] === 'rtl' ? '15px' : 'inherit')};
-    font-size: 13px;
+    font-size: 25px;
     font-weight: 500;
     color: ${palette('text', 0)} !important;
     opacity: 0;
