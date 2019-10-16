@@ -84,7 +84,7 @@ class Shelf extends Component {
         <React.Fragment>
           <div class="page">
             <label class="field a-field a-field_a1">
-              <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search by Category" required/>
+              <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search by name" required/>
                 <span class="a-field__label-wrap">
                 <span class="a-field__label">Search here</span>
           </span>

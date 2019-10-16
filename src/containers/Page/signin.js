@@ -129,9 +129,9 @@ class SignIn extends Component {
               </div>
 
               <div className="isoInputWrapper isoLeftRightComponent">
-                <Checkbox disabled={!this.state.value}>
+                {/* <Checkbox disabled={!this.state.value}>
                   <IntlMessages id="page.signInRememberMe" />
-                </Checkbox>
+                </Checkbox> */}
                 <Button  type="primary" onClick={this.handleSubmit}>
                   <IntlMessages id="page.signInButton" />
                 </Button>

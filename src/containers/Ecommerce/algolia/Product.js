@@ -8,6 +8,7 @@ import Thumb from './thumb';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 // import { SortBy } from 'react-instantsearch/dom';
 import {addProduct, changeState} from '../../../redux/cart/actions'
+import { font } from 'styled-theme/dist';
 // import { Button } from 'antd/lib/radio';
 // import { notification } from '../../../components/index';
 const { changeProductQuantity } = ecommerceAction;
@@ -57,15 +58,14 @@ const Product = ({ product, addProduct, changeState }) => {
         </div>
         </div>
         <div className="shelf-item__title">
-          <p class="shelf-item__title__text">{product.name}</p>
+          <b><font color='#606D42'><p class="shelf-item__title__text" > {product.name}</p></font></b>
+        </div>
+        <div className="shelf-item__title">       
+        <b><p class="shelf-item__title__text">Cod Product: {product.listid}</p></b>
         </div>
         <div className="shelf-item__title">
-          <p class="shelf-item__title__text">Vendor: {product.vendor}</p>
+          <p class="shelf-item__title__text">Desc: {product.description}</p>
         </div>
-        <div className="shelf-item__title">
-          <p class="shelf-item__title__text">Category: {product.category}</p>
-        </div>
-
         
         <div className="shelf-item__title">
           <p class="shelf-item__title__text">Stock Quantity: {product.quantity}</p>

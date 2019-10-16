@@ -12,13 +12,14 @@ body .shelf-container {
   margin: 32px 13% 0;
 }
 body .shelf-container .shelf-item {
-  width: 280px;
+  width: 317px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 255, 255);
   position: relative;
   padding: 0px;
-  margin: 0px 20px 20px 0px;
+  margin: 0px 20px 32px -9px;
   border-width: 1px;
   border-style: solid;
   border-color: rgb(233, 233, 233);
@@ -78,8 +79,8 @@ body .shelf-container .shelf-item {
 
 .shelf-container .shelf-item .shelf-item__title {
   position: relative;
-  padding: 0 20px;
-  height: 80px;
+  padding: 0 0px;
+  height: 45px;
 
 }
 .shelf-container .shelf-item .shelf-item__title .shelf-item__title__text {
@@ -87,21 +88,21 @@ body .shelf-container .shelf-item {
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 0 20px;
+  padding: 0 44px;
   height: 80px;
 }
 .shelf-container .shelf-item .shelf-item__title::before {
   content: '';
   width: 20px;
   height: 2px;
-  background-color: #eabf00;
+  /* background-color: #eabf00; */
   position: absolute;
   bottom: 0;
   left: 50%;
   margin-left: -10px;
 }
 .shelf-container .shelf-item__price {
-  font-size: 10px;
+  font-size: 14px;
     font-weight: 200;
     color: rgb(255, 255, 255);
     line-height: 1;
@@ -123,11 +124,11 @@ body .shelf-container .shelf-item {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 43px;
   background-color: #606D42;
   color: rgb(245, 245, 245);
-  padding: 15px 0;
-  margin: 20px;
+  padding: 13px 0;
+  margin: 13px;
   margin-top: 20px;
   cursor: pointer;
   transition: background-color 0.2s;

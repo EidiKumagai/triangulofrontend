@@ -10,7 +10,7 @@ import api from '../../../containers/Page/api';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
-//import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 // import ProductList from './ProductList';
 // import {useState} from 'react';
 // import Modal from 'react-bootstrap/Modal';

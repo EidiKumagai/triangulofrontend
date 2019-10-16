@@ -29,7 +29,7 @@ class TopbarUser extends Component {
   render() {
     const content = (
       <TopbarDropdownWrapper className="isoUserDropdown">
-        <a className="isoDropdownLink">
+        {/* <a className="isoDropdownLink">
           <IntlMessages id="themeSwitcher.settings" />
         </a>
         <a className="isoDropdownLink">
@@ -37,7 +37,7 @@ class TopbarUser extends Component {
         </a>
         <a className="isoDropdownLink">
           <IntlMessages id="topbar.help" />
-        </a>
+        </a> */}
         <a className="isoDropdownLink" onClick={this.props.logout}>
           <IntlMessages id="topbar.logout" />
         </a>
