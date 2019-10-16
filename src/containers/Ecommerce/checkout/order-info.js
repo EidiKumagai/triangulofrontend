@@ -89,6 +89,10 @@ class OrderInfo extends Component {
     }
   };
 
+  retornarObj(array){
+     
+  }
+
   fazerpedido(resultado) {
     
     const {cartTotal, products} = this.props;
@@ -193,24 +197,26 @@ class OrderInfo extends Component {
       let array = [];
       
       products.map( product => {
-        return array.push(product.id)
+        return array.push(product)
       });
 
       let nomeadd = address[0].label;
       //console.log(this.state);
       
-      array.push(frete.id);
+      array.push(frete);
+
+      var myjson = JSON.stringify(array);
       let title = " order" 
       
       console.log(array);
       try {
+        
         api.post(`https://api-triangulo.herokuapp.com/order`,{ 
         address: nomeadd,
         price: bool,
-        products: array 
-        ,
-        obs: obs
-
+        itens:
+          myjson
+  
       })
         .then(res => {
           if(res === error){

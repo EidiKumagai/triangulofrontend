@@ -14,7 +14,7 @@ import { font } from 'styled-theme/dist';
 const { changeProductQuantity } = ecommerceAction;
 
 
-
+ 
 
 
 const Product = ({ product, addProduct, changeState }) => {
@@ -22,7 +22,10 @@ const Product = ({ product, addProduct, changeState }) => {
   // let aux;
   // aux = 1;
   // var bool =  true;
-
+  const func = () => {
+    product.quantity
+    product.unitofmeasure    
+  }
 
   const ochange = numero =>{
     product.qtd = numero
@@ -57,22 +60,27 @@ const Product = ({ product, addProduct, changeState }) => {
           <span>{product.price.substr(product.price.length - 3, 3)}</span>
         </div>
         </div>
-        <div className="shelf-item__title">
-          <b><font color='#606D42'><p class="shelf-item__title__text" > {product.name}</p></font></b>
-        </div>
         <div className="shelf-item__title">       
-        <b><p class="shelf-item__title__text">Cod Product: {product.listid}</p></b>
+        <b><p class="shelf-item__title__text"> {product.listid}</p></b>
         </div>
+
+        {/* <div className="shelf-item__title">
+          <b><font color='#606D42'><p class="shelf-item__title__text" > {product.name}</p></font></b>
+        </div> */}
+        
         <div className="shelf-item__title">
-          <p class="shelf-item__title__text">Desc: {product.description}</p>
+          <p class="shelf-item__title__text">{product.description}</p>
         </div>
+        {/* <div className="shelf-item__title">
+          <p class="shelf-item__title__text">Unit of Measure: {product.unitofmeasure}</p>
+        </div> */}
         
         <div className="shelf-item__title">
           <p class="shelf-item__title__text">Stock Quantity: {product.quantity}</p>
         </div>
         <div  onClick={() => addProduct(product)} class="shelf-item__buy-btn">Adicionar</div>
 
-        <div>
+        <div >
         <p>Quantity: </p>
         <br></br>
 
@@ -88,8 +96,25 @@ const Product = ({ product, addProduct, changeState }) => {
        </td>
         <br></br>
         <br></br>
-        </div> 
-        
+        </div>
+
+        <div>
+        <p>Unit of Measure: </p>
+        <br></br>
+
+        <td className="isoItemQuantity">
+         
+         <InputNumber
+           min={1}
+           max={1000}
+           value={product.qtd}
+           step={1}
+           onChange={ochange}
+         />
+       </td>
+        <br></br>
+        <br></br>
+        </div>  
       </div>
     </div>
 

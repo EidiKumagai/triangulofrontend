@@ -46,7 +46,7 @@ class ListOrders extends Component {
     api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
      list = res.data;
       
-     produtos = list.products.map(product => {
+     produtos = list.itens.map(product => {
       return (
         <div>
         

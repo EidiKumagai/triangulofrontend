@@ -12,14 +12,14 @@ body .shelf-container {
   margin: 32px 13% 0;
 }
 body .shelf-container .shelf-item {
-  width: 317px;
+  width: 323px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 255, 255);
   position: relative;
   padding: 0px;
-  margin: 0px 20px 32px -9px;
+  margin: 0px 1px 38px -28px;
   border-width: 1px;
   border-style: solid;
   border-color: rgb(233, 233, 233);
