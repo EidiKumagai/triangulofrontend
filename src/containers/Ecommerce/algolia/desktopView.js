@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import InputNumber from '../../../components/uielements/InputNumber';
+import Thumb from './thumb';
 import './style.css';
 import '../../../components/algolia/algoliaComponent.style'
 import './instantSearch.css';
@@ -7,7 +9,8 @@ import './search.css';
 // import PropTypes from 'prop-types';
 import { changeState } from '../../../redux/cart/actions'
 import { connect } from 'react-redux';
-import Product from './Product';
+//import Product from './Product';
+import {addProduct} from '../../../redux/cart/actions'
 // import ProductList from './ProductList';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { notification } from '../../../components';
@@ -22,19 +25,80 @@ class Shelf extends Component {
     super(props);
     this.state = {
       isLoading: false,
+      product:{id:'',qtd:''},
+      quantity:'',
+      measure:'',
       isadd: false,
       value: '',
       data:[]
     };
+    this.changeValue = this.changeValue.bind(this);
+    this.getProd =  this.changeValue.bind(this);
   }
 
   
-  componentWillMount() {
+
+  
+  changeValue = (event, product) => {
+ 
+        console.log(product);
+        //var result1 = event * product.unitofmeasure;
+        var resultado = event * product.unitofmeasure;
+        
+        this.setState({quantity: event});
+    
+        this.setState({measure: resultado});
+        console.log(this.state.quantity);
 
   }
+
+  changeValueMeasure = (event,product) => {
+    //console.log(value);
+        var result2 = event / product.unitofmeasure;
+        //this.setState({quantity:});
+        this.setState({measure: event});
+        this.setState({quantity: result2.toFixed()});
+        console.log(this.state.measure); 
+  }
+  
+  // componentWillMount() {
+  //   this.setState({quantity: 1});
+  // }
+
+
   componentDidMount() {
     
     this.props.fetchProducts();
+
+  }
+  
+  resetQuantity(product,qtd){
+    const {products} = this.props;
+
+    products.map(produto => {
+      if(produto.id === product.id){
+          product.qtd = qtd
+      }else{
+        produto.qtd = 1;
+      }
+    });
+    
+  }
+ 
+   getProd (number,product) {
+    const {products} =  this.props;
+    var aux;
+    products.map(produtos => {
+      if(produtos.id === product.id){
+        return number
+      }else{
+        number = 60;
+        aux = number;
+        return aux;
+      }
+    });
+
+     
   }
 
   handleChange = event => {
@@ -48,15 +112,17 @@ class Shelf extends Component {
 
 
   render() {
+    let triangulo =  this.state.quantity;
+    const {addProduct} = this.props;
     const { data, value } = this.state;
     // let aux = false;
     // aux = this.setvar(aux);
     const { products, isadd } = this.props;
      
-     console.log(data);
+     //console.log(data);
     const { isLoading } = this.state;
     //const { isadd } = this.state;
-    console.log(this.props)
+    //console.log(this.props)
     if (products === undefined) {
       return (
         <React.Fragment>
@@ -76,11 +142,12 @@ class Shelf extends Component {
 
       this.props.changeState();
         
-      
+ 
 
-
+     // console.log(this.props);
       return (
         <React.Fragment>
+          
           <div class="page">
             <label class="field a-field a-field_a1">
               <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search by Category" required/>
@@ -100,10 +167,82 @@ class Shelf extends Component {
           data={products}
           renderResults={results => (
             <div>
-              {results.map(el => (
+              {results.map(product => (
+                
                 <div>
-                 
-                  <Product changeQuantity={el.id,el.qtd} product={el} key={el.id}  />
+                
+                 <div>
+                        <div class="shelf-item">
+                          <Thumb class="shelf-item__thumb" alt={product.name} />
+                        <div className="shelf-item__price">
+                          <div className="val">
+                            <small>$</small> 
+                            <b>{product.price.substr(0, product.price.length - 3)}</b>
+                            <span>{product.price.substr(product.price.length - 3, 3)}</span>
+                          </div>
+                          </div>
+                          <div className="shelf-item__title">       
+                          <b><p class="shelf-item__title__text"> {product.name}</p></b>
+                          </div>
+
+                          {/* <div className="shelf-item__title">
+                            <b><font color='#606D42'><p class="shelf-item__title__text" > {product.name}</p></font></b>
+                          </div> */}
+                          
+                          <div className="shelf-item__title">
+                            <p class="shelf-item__title__text">{product.description}</p>
+                          </div>
+                          {/* <div className="shelf-item__title">
+                            <p class="shelf-item__title__text">{product.unitofmeasure} </p>
+                          </div> */}
+
+                          
+                          <div className="shelf-item__title">
+                            <p class="shelf-item__title__text">Quantity: {product.quantity} Carton / {product.quantity * product.unitofmeasure} SQF </p>
+                          </div>
+                        <div  onClick={()=>{ product.qtd = this.state.quantity ;addProduct(product); }} class="shelf-item__buy-btn">Adicionar</div>
+
+                          <div >
+                          <p>Quantity: </p>
+                          <br></br>
+
+                          <td className="isoItemQuantity">
+                          
+                          <InputNumber
+                            type="number"
+                            min={1}
+                            max={1000}
+                            value={this.state.quantity}
+                            step={1}
+                            onChange={(event) => {this.changeValue(event,product);}}
+                            
+                          />
+                        </td>
+                          <br></br>
+                          <br></br>
+                          </div>
+
+                          <div>
+                          <p>Square Feet: </p>
+                          <br></br>
+
+                          <td className="isoItemQuantity">
+                          
+                          <InputNumber
+                          type="number"
+                            min={1}
+                            max={1000}
+                            value={this.state.measure}
+                            step={1}
+                            onChange={(e) => {this.changeValueMeasure(e,product)}}
+                            
+                          />
+                        </td>
+                          <br></br>
+                          <br></br>
+                          </div>  
+                        </div>
+                      </div>
                  
                 </div>
                 
@@ -132,5 +271,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchProducts, changeState }
+  { fetchProducts, changeState, addProduct }
 )(Shelf);
