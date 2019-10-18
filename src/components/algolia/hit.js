@@ -5,7 +5,7 @@ import Rate from '../uielements/rate';
 import Button from '../uielements/button.js';
 import ecommerceActions from '../../redux/ecommerce/actions';
 import { GridListViewWrapper } from './algoliaComponent.style';
-
+//oi
 const { addToCart, changeViewTopbarCart } = ecommerceActions;
 
 class Hit extends Component {
