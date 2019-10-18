@@ -7,6 +7,16 @@
   min-height: 50px;
 }
 
+ .CampoQuantidade{
+  width: 14px;
+  margin-left: -180px;
+  display: -webkit-box;
+}
+ .CampoQuantidade .QuantidadeFilho{
+  width: 83px;
+  margin: 20%;
+}
+
 body .shelf-container {
   width: 80%;
   margin: 32px 13% 0;
@@ -95,7 +105,7 @@ body .shelf-container .shelf-item {
   content: '';
   width: 20px;
   height: 2px;
-  /* background-color: #eabf00; */
+   /* background-color: #eabf00;  */
   position: absolute;
   bottom: 0;
   left: 50%;

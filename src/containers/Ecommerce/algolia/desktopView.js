@@ -40,24 +40,50 @@ class Shelf extends Component {
 
   
   changeValue = (event, product) => {
- 
+        const {products} = this.props;
         console.log(product);
         //var result1 = event * product.unitofmeasure;
         var resultado = event * product.unitofmeasure;
         
         this.setState({quantity: event});
-    
+        
         this.setState({measure: resultado});
         console.log(this.state.quantity);
+      
+      products.map(produto => {
+        if(product.id == produto.id){
+          return(
+    
+            product.qtd = event,product.measure = resultado
+          )
 
+        }else{
+          
+        }
+      });
+        
   }
 
   changeValueMeasure = (event,product) => {
     //console.log(value);
+    const {products} = this.props;
         var result2 = event / product.unitofmeasure;
         //this.setState({quantity:});
         this.setState({measure: event});
         this.setState({quantity: result2.toFixed()});
+
+        products.map(produto => {
+          if(product.id == produto.id){
+            return(
+              product.measure = event, product.qtd = result2.toFixed()
+              
+            )
+  
+          }else{
+            
+          }
+        });
+       
         console.log(this.state.measure); 
   }
   
@@ -198,48 +224,52 @@ class Shelf extends Component {
 
                           
                           <div className="shelf-item__title">
-                            <p class="shelf-item__title__text">Quantity: {product.quantity} Carton / {product.quantity * product.unitofmeasure} SQF </p>
+                            <p class="shelf-item__title__text">Stock: {product.quantity} Carton / {product.quantity * product.unitofmeasure} SQF </p>
                           </div>
-                        <div  onClick={()=>{ product.qtd = this.state.quantity ;addProduct(product); }} class="shelf-item__buy-btn">Adicionar</div>
+                        <div  onClick={()=>{ addProduct(product); }} class="shelf-item__buy-btn">Adicionar</div>
 
-                          <div >
-                          <p>Quantity: </p>
-                          <br></br>
+                          <div className="CampoQuantidade">
+                            <div className="QuantidadeFilho">
+                                  <p>Quantity: </p>
+                                <br></br>
 
-                          <td className="isoItemQuantity">
+                                <td className="isoItemQuantity">
+                                
+                                <InputNumber
+                                  type="number"
+                                  min={1}
+                                  max={1000}
+                                  value={product.qtd}
+                                  step={1}
+                                  onChange={(event) => {this.changeValue(event,product);}}
+                                  
+                                />
+                              </td>
+                                <br></br>
+                                <br></br>
+                            </div>
+
+                            <div className="QuantidadeFilho">
+                                  <p>Square Feet: </p>
+                                <br></br>
+
+                                <td className="isoItemQuantity">
+                                
+                                <InputNumber
+                                type="number"
+                                  min={1}
+                                  max={1000}
+                                  value={product.measure}
+                                  step={1}
+                                  onChange={(e) => {this.changeValueMeasure(e,product)}}
+                                  
+                                />
+                              </td>
+                                <br></br>
+                                <br></br>
+                            </div>
                           
-                          <InputNumber
-                            type="number"
-                            min={1}
-                            max={1000}
-                            value={this.state.quantity}
-                            step={1}
-                            onChange={(event) => {this.changeValue(event,product);}}
-                            
-                          />
-                        </td>
-                          <br></br>
-                          <br></br>
-                          </div>
-
-                          <div>
-                          <p>Square Feet: </p>
-                          <br></br>
-
-                          <td className="isoItemQuantity">
-                          
-                          <InputNumber
-                          type="number"
-                            min={1}
-                            max={1000}
-                            value={this.state.measure}
-                            step={1}
-                            onChange={(e) => {this.changeValueMeasure(e,product)}}
-                            
-                          />
-                        </td>
-                          <br></br>
-                          <br></br>
+                         
                           </div>  
                         </div>
                       </div>
