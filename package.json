@@ -97,6 +97,11 @@
     "styled-theme": "^0.3.3",
     "uppy": "0.18.0"
   },
+
+  "engines": {
+    "node": "10.16.0"
+  },
+
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.26.0",
@@ -148,7 +153,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "node scripts/start.js",
     "test": "node scripts/test.js --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill"
   },
   "jest": {
