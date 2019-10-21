@@ -147,7 +147,7 @@
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "^2.0.9",
     "promise": "8.0.1",
-    "react-dev-utils": "6.0.0-next.3e165448",
+    "react-dev-utils": "9.1.0",
     "redux-mock-store": "^1.2.3",
     "script-ext-html-webpack-plugin": "^1.8.3",
     "style-loader": "^0.19.1",
