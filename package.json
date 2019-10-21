@@ -161,7 +161,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/start.js",
+    "build": "webpack --mode production node scripts/start.js",
     "test": "node scripts/test.js --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill"
   },
   "jest": {
