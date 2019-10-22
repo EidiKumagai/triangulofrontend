@@ -37,7 +37,7 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
 }
 
 // Note: defined here because it will be used more than once.
-const cssFilename = 'static/css/[name].[hash:8].css';
+const cssFilename = 'static/css/[name].[hash].css';
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -154,7 +154,7 @@ module.exports = {
         ],
         loader: require.resolve('file-loader'),
         options: {
-          name: 'static/media/[name].[hash:8].[ext]',
+          name: 'static/media/[name].[hash].[ext]',
         },
       },
       // "url" loader works just like "file" loader but it also embeds
@@ -164,7 +164,7 @@ module.exports = {
         loader: require.resolve('url-loader'),
         options: {
           limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]',
+          name: 'static/media/[name].[hash].[ext]',
         },
       },
       // Process JS with Babel.
