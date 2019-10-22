@@ -104,7 +104,6 @@
     "styled-theme": "^0.3.3",
     "tls": "^0.0.1",
     "uppy": "0.18.0",
-    "webpack": "4.2.0",
     "webpack-dev-server": "^3.8.2"
   },
   "engines": {
