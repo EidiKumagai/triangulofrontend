@@ -43,7 +43,7 @@ class Shelf extends Component {
         const {products} = this.props;
         console.log(product);
         //var result1 = event * product.unitofmeasure;
-        var resultado = event * product.unitofmeasure;
+        var resultado = event * product.valueuntiofmeasure;
         
         this.setState({quantity: event});
         
@@ -67,7 +67,7 @@ class Shelf extends Component {
   changeValueMeasure = (event,product) => {
     //console.log(value);
     const {products} = this.props;
-        var result2 = event / product.unitofmeasure;
+        var result2 = event / product.valueuntiofmeasure;
         //this.setState({quantity:});
         this.setState({measure: event});
         this.setState({quantity: result2.toFixed()});
@@ -224,7 +224,7 @@ class Shelf extends Component {
 
                           
                           <div className="shelf-item__title">
-                            <p class="shelf-item__title__text">Stock: {product.quantity} Carton / {product.quantity * product.unitofmeasure} SQF </p>
+                            <p class="shelf-item__title__text">Stock: {product.quantity} {product.unitofmeasuredefault} / {product.quantity * product.valueuntiofmeasure} {product.unitofmeasure} </p>
                           </div>
                         <div  onClick={()=>{ addProduct(product); }} class="shelf-item__buy-btn">Adicionar</div>
 

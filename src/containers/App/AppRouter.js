@@ -11,7 +11,8 @@ class AppRouter extends React.Component {
         <Route
           exact
           path={`${url}/`}
-          component={asyncComponent(() => import('../Widgets/index.js'))}
+          //component={asyncComponent(() => import('../Widgets/index.js'))}
+          component={asyncComponent(() => import('../Ecommerce/algolia/instantSearch'))}
         />
         {/* <Route
           exact
