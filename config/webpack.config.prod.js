@@ -49,7 +49,7 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
   : {};
 
 const extractLess = new ExtractTextPlugin({
-  filename: '[name].[contenthash:8].css',
+  filename: '[name].[md5:contenthash:hex:20].css',
   disable: process.env.NODE_ENV === 'development',
 });
 
