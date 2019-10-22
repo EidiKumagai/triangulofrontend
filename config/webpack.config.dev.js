@@ -1,6 +1,7 @@
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
@@ -247,6 +248,9 @@ module.exports = {
       // ** STOP ** Are you adding a new loader?
       // Remember to add the new extension(s) to the "file" loader exclusion list.
     ]
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
   },
   plugins: [
     // Makes some environment variables available in index.html.
