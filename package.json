@@ -104,6 +104,7 @@
     "styled-components": "^2.2.1",
     "styled-theme": "^0.3.3",
     "tls": "^0.0.1",
+    "react-dev-utils": "^9.1.0",
     "uppy": "0.18.0",
     "webpack": "^4.41.2",
     "webpack-dev-server": "^3.8.2"
