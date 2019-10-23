@@ -262,7 +262,7 @@ module.exports = {
       inject: true,
       template: paths.appHtml
     }),
-    new InterpolateHtmlPlugin(env.raw),
+    new InterpolateHtmlPlugin(HtmlWebpackPlugin,env.raw),
     // Generates an `index.html` file with the <script> injected.
     
     // Add module names to factory functions so they appear in browser profiler.
