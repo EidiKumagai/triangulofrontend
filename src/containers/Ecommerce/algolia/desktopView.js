@@ -41,9 +41,12 @@ class Shelf extends Component {
   
   changeValue = (event, product) => {
         const {products} = this.props;
-        console.log(product);
+        
         //var result1 = event * product.unitofmeasure;
-        var resultado = event * product.valueuntiofmeasure;
+        if(product.valueuntiofmeasure == "undefined"){
+          product.qtd = event;
+        }else{
+          var resultado = event * product.valueuntiofmeasure;
         
         this.setState({quantity: event});
         
@@ -60,13 +63,18 @@ class Shelf extends Component {
         }else{
           
         }
-      });
+        });
+        }
+        
         
   }
 
   changeValueMeasure = (event,product) => {
     //console.log(value);
-    const {products} = this.props;
+    if(product.valueuntiofmeasure == "undefined"){
+      product.qtd = event;
+    }else{
+      const {products} = this.props;
         var result2 = event / product.valueuntiofmeasure;
         //this.setState({quantity:});
         this.setState({measure: event});
@@ -84,7 +92,9 @@ class Shelf extends Component {
           }
         });
        
-        console.log(this.state.measure); 
+        console.log(this.state.measure);
+    }
+     
   }
   
   // componentWillMount() {
@@ -222,9 +232,14 @@ class Shelf extends Component {
                             <p class="shelf-item__title__text">{product.unitofmeasure} </p>
                           </div> */}
 
-                          
+                          {/* product.quantity * product.valueuntiofmeasure */}
                           <div className="shelf-item__title">
-                            <p class="shelf-item__title__text">Stock: {product.quantity} {product.unitofmeasuredefault} / {product.quantity * product.valueuntiofmeasure} {product.unitofmeasure} </p>
+                            <p class="shelf-item__title__text">Stock: {product.quantity} {product.unitofmeasuredefault}    
+                          
+                            { product.valueuntiofmeasure == "undefined"  ? <p></p> :  <p>/   {product.quantity * product.valueuntiofmeasure} {product.unitofmeasure}</p>}  
+                            {/* {product.unitofmeasure === undefined ? <div>vdd</div> : <div>falso</div>} */}
+                            
+                            </p>
                           </div>
                         <div  onClick={()=>{ addProduct(product); }} class="shelf-item__buy-btn">Adicionar</div>
 
@@ -249,26 +264,36 @@ class Shelf extends Component {
                                 <br></br>
                             </div>
 
-                            <div className="QuantidadeFilho">
-                                  <p>Square Feet: </p>
-                                <br></br>
+                            {product.valueuntiofmeasure == "undefined" ? 
+                            (<div className="QuantidadeSemFilho">
 
-                                <td className="isoItemQuantity">
-                                
-                                <InputNumber
-                                type="number"
-                                  min={1}
-                                  max={1000}
-                                  value={product.measure}
-                                  step={1}
-                                  onChange={(e) => {this.changeValueMeasure(e,product)}}
-                                  
-                                />
-                              </td>
-                                <br></br>
-                                <br></br>
-                            </div>
+
+                            </div>)
+                            
+                            :
+                            
+                            (<div className="QuantidadeFilho">
+                            <p>Square Feet: </p>
+                          <br></br>
+
+                          <td className="isoItemQuantity">
                           
+                          <InputNumber
+                          type="number"
+                            min={1}
+                            max={1000}
+                            value={product.measure}
+                            step={1}
+                            onChange={(e) => {this.changeValueMeasure(e,product)}}
+                            
+                          />
+                        </td>
+                          <br></br>
+                          <br></br>
+                      </div>)
+
+                            }
+
                          
                           </div>  
                         </div>

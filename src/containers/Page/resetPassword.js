@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Input from '../../components/uielements/input';
 import { notification } from '../../components/';
+import passwordValidator from 'password-validator';
+//import zxcvbn from 'zxcvbn';
 import Button from '../../components/uielements/button';
 import IntlMessages from '../../components/utility/intlMessages';
 import ResetPasswordStyleWrapper from './resetPassword.style';
@@ -13,8 +15,12 @@ class ResetPassword extends React.Component {
 
     this.state = {
       novasenha: '',
+      valueButton:'',
       confirmesenha: '',
-      error:'Confirm passwd is not equal with new passwd'
+      isEqual:'',
+      error:'Confirm passwd is not equal with new passwd',
+      passwdStrong:'',
+      validatePass:''
     }
     
     this.handleChange = this.handleChange.bind(this);
@@ -22,17 +28,37 @@ class ResetPassword extends React.Component {
     this.handleSubmmit = this.handleSubmmit.bind(this);
   }
 
-  validateResetForm() {
-    
-      return (
-        this.state.novasenha === this.state.confirmesenha
-      )
-      
-    
-  }
 
   handleChange(event){
+   
+    if(this.state.novasenha == ''){
+      this.setState({novasenha: ''});  
+    }
     this.setState({novasenha: event.target.value});
+    var schema = new passwordValidator();
+    schema
+      .is().min(5)                                    // Minimum length 8
+      .is().max(100)                                  // Maximum length 100
+      .has().uppercase()                              // Must have uppercase letters
+      .has().lowercase()                              // Must have lowercase letters
+      .has().digits()                                 // Must have digits
+      .has().not().spaces()                           // Should not have spaces
+      .is().not().oneOf(['Passw0rd', 'Password123']); // Blacklist these values
+
+    var aux = schema.validate(this.state.novasenha);
+    if(aux == true){
+      this.setState({passwdStrong: 'Your Password is Good'});
+      this.setState({validatePass: true});
+     
+    }else{
+      if(aux == false){
+        this.setState({passwdStrong: 'Your password must be Strong'});
+        //this.setState({novasenha: ''});
+        this.setState({validatePass: false});
+      }
+    }
+    
+    
     console.log(this.state.novasenha);
   }
   handleConfirm(event){
@@ -42,18 +68,24 @@ class ResetPassword extends React.Component {
   handleSubmmit(){
     const {novasenha} = this.state;
     const { match } = this.props;
-     api.put(`/users/forgotPassword/${match.params.token}/${match.params.email}`,
+    if(this.state.novasenha === this.state.confirmesenha && this.state.validatePass === true ){
+      api.put(`/users/forgotPassword/${match.params.token}/${match.params.email}`,
       { 
         newPassword: novasenha
       }).then(res =>{
         notification("success", "Change password success");
         console.log(res)
      });
+    }else{
+      notification("error","Password is not Equal or your Password is not Strong");
+    }
+
+     
   }
 
   render() {
+      
 
-    
     
 
     return (
@@ -72,6 +104,10 @@ class ResetPassword extends React.Component {
               </h3>
               <p>
                 <IntlMessages id="page.resetPassDescription" />
+                <br></br>
+                <br></br>
+                <IntlMessages id="page.resetPassObs" />
+                
               </p>
             </div>
 
@@ -84,6 +120,10 @@ class ResetPassword extends React.Component {
                   placeholder="New Password"
                 />
               </div>
+              
+              
+              <p style={{color: 'gray'}}>{this.state.passwdStrong}</p>
+              
 
               <div className="isoInputWrapper">
                 <Input value={this.state.confirmesenha}
@@ -93,6 +133,8 @@ class ResetPassword extends React.Component {
                   placeholder="Confirm Password"
                 />
               </div>
+              
+              <p>{this.state.msgPassEqual}</p>
 
               <div className="isoInputWrapper">
                 <Button onClick={this.handleSubmmit} type="primary">
