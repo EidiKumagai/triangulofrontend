@@ -79,6 +79,9 @@ class OrderInfo extends Component {
     this.setState({address: value});
     
   }
+  
+
+  
 
   removeProduct = product => {
     const { products, updateCart } = this.props;
@@ -167,21 +170,7 @@ class OrderInfo extends Component {
                   </div> */}
                   
                  
-                    <table class="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Product</th>
-
-                                  <th scope="col">Price</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>{product.name}</td>
-                                  <td>${product.price}</td>
-                                </tr>
-                              </tbody>
-                            </table> 
+                    {/* {this.renderProdtoCheck()} */}
                 </div>
                 <div className="isoOrderTableFooter">
                 <span>Total</span>
@@ -333,6 +322,29 @@ class OrderInfo extends Component {
         </p>
       </div>
     )
+  }
+
+  renderProdtoCheck(){
+    const {products} = this.props;
+
+
+    return products.map(prod => {
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{prod.name}</td>
+          <td>${prod.price}</td>
+        </tr>
+      </tbody>
+    </table> 
+    });
   }
 
   

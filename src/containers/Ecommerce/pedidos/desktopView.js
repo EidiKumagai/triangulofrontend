@@ -20,7 +20,7 @@ import ModalStyle from './modal.style';
 import Modals from '../../../components/feedback/modal';
 import IntlMessages from '../../../components/utility/intlMessages';
 import ecommerceAction from '../../../redux/ecommerce/actions';
-
+import './style.css'
 const { fetchorders } = ecommerceAction;
 const isoModal = ModalStyle(Modals);
 const Modal = WithDirection(isoModal);
