@@ -7,6 +7,7 @@ import passwordValidator from 'password-validator';
 import Button from '../../components/uielements/button';
 import IntlMessages from '../../components/utility/intlMessages';
 import ResetPasswordStyleWrapper from './resetPassword.style';
+import history from './history';
 import api from '../Page/api';
 
 class ResetPassword extends React.Component {
@@ -74,6 +75,7 @@ class ResetPassword extends React.Component {
         newPassword: novasenha
       }).then(res =>{
         notification("success", "Change password success");
+        history.replace('/');
         console.log(res)
      });
     }else{

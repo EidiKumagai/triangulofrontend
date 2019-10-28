@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style.css';
+//import './style1.css';
 import TopbarCartWrapper from '../../../components/cart/singleCartModal.style';
 import './instantSearch.css';
 import Spinner from 'react-spinner-material';

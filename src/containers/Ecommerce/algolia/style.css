@@ -1,4 +1,4 @@
-.shelf-container {
+ .shelf-container {
   display: flex;
   /* margin: 100px; */
   margin: 15px;
@@ -17,17 +17,17 @@
   margin: 20%;
 }
 
-.CampoQuantidade .QuantidadeSemFilho{
+ .CampoQuantidade .QuantidadeSemFilho{
   width: 83px;
   margin: 20%;
 }
 
 
-body .shelf-container {
+ body .shelf-container {
   width: 80%;
   margin: 32px 13% 0;
 }
-body .shelf-container .shelf-item {
+ body  .shelf-container .shelf-item {
   width: 323px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   display: flex;

@@ -16,6 +16,7 @@ import themes from '../../config/themes';
 import AppHolder from './commonStyle';
 import './global.css';
 
+
 const { Content, Footer } = Layout;
 const { logout } = authAction;
 const { toggleAll } = appActions;

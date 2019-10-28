@@ -430,7 +430,9 @@ class OrderInfo extends Component {
 
 
         <br></br>
-        <div>
+      
+        <div className="isoOrderTable">
+        <span className="tableHead">Address</span>
         {/* <b>Address: </b>
           <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" /> */}
           <Select options={array} onChange={(values) =>this.submitAdd(values)} />
