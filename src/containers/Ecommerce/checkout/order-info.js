@@ -10,6 +10,7 @@ import WithDirection from '../../../config/withDirection';
 import Modals from '../../../components/feedback/modal';
 //import { Dropdown } from 'semantic-ui-react'
 // import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.css';
 import Button from '../../../components/uielements/button';
 import { removeProduct} from '../../../redux/cart/actions'
 // import SingleOrderInfo from './single-order';
@@ -119,22 +120,31 @@ class OrderInfo extends Component {
     result += bool1 + bool2;
     var bool3 = parseFloat(resultado).toFixed(2);
    
-    
+    let nomeadd = address[0].label;
     const oderdetails = (
       products.map(product =>{
         return(
           <div >
-            <OrderTable >
+      
 
               <div className="isoOrderTable" >
-                  <div className="isoOrderTableHead">
+
+              <div class="card border-success mb-3" style={{maxWidth:'18rem'}}>
+                <div class="card-header">Order Details</div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">User information </h5>
+                        <p class="card-text">{this.renderUsers()}</p>
+                    
+                    </div>
+                </div>
+                  {/* <div className="isoOrderTableHead">
                     <span className="tableHead">User Information</span>
-                    {/* <span className="tableHead">Total</span> */}
+                     <span className="tableHead">Total</span> 
                   </div>
 
                   <div className="isoOrderTableBody">
                     {this.renderUsers()}
-                  </div>
+                  </div> */}
               </div>
 
               <div className="isoOrderTable">
@@ -144,23 +154,44 @@ class OrderInfo extends Component {
                 </div>
 
                 <div className="isoOrderTableBody">
-                  <div className="isoSingleOrderInfo">
+                  {/* <div className="isoSingleOrderInfo">
                     <p>
                       <span>{product.name}</span> 
                       <span></span>
                       <span className="isoQuantity">{product.qtd}</span>
                     </p>
                     <span className="totalPrice">${product.price}</span>
-                    {/* <a className="isoItemRemove" onClick={() => removeProduct(product)}>
+                   <a className="isoItemRemove" onClick={() => removeProduct(product)}>
                       <i className="ion-android-close" />
-                    </a> */}
-                  </div>
+                    </a>  
+                  </div> */}
+                  
+                 
+                    <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Product</th>
+
+                                  <th scope="col">Price</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>{product.name}</td>
+                                  <td>${product.price}</td>
+                                </tr>
+                              </tbody>
+                            </table> 
                 </div>
                 <div className="isoOrderTableFooter">
-                  <span>Total</span>
-                  <span>
-                    ${cartTotal.totalPrice.toFixed(2)}
-                  </span>
+                <span>Total</span>
+                  <div class="alert alert-secondary" role="alert">
+                  ${cartTotal.totalPrice.toFixed(2)}
+                  </div>
+                </div>
+                <span>Address</span>
+                <div class="alert alert-secondary" role="alert">
+                  {nomeadd}
                 </div>
               </div>
 
@@ -168,24 +199,36 @@ class OrderInfo extends Component {
 
 
               <div className="isoOrderTable">
+              <span className="tableHead">Freight</span>
+              <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Freight</th>
+
+                                  <th scope="col">Price</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Freight</td>
+                                  <td>${this.renderFrete()}</td>
+                                </tr>
+                              </tbody>
+                            </table> 
                 <div className="isoOrderTableHead">
-                  <span className="tableHead">Freight</span>
+                  
                   <span className="tableHead">Total</span> 
                 </div>
 
-                <div className="isoOrderTableBody">
-                  {this.renderFrete()}
-                </div>
                 <div className="isoOrderTableFooter">
                   <span>Total with Freight</span>
-                  <span>
-                    ${bool3}
-                  </span> 
+                  <div class="alert alert-secondary" role="alert">
+                  ${bool3}
+                </div> 
                 </div>
               </div>
 
 
-              </OrderTable>
           </div>
         )
       })
@@ -200,7 +243,7 @@ class OrderInfo extends Component {
         return array.push(product)
       });
 
-      let nomeadd = address[0].label;
+      
       //console.log(this.state);
       
       array.push(frete);
@@ -286,7 +329,7 @@ class OrderInfo extends Component {
 
       <div className="isoSingleOrderInfo" >
         <p>
-          <span>Price: {frete.price}</span>
+          <span>{frete.price}</span>
         </p>
       </div>
     )
