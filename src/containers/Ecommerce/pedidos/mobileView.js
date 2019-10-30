@@ -10,7 +10,7 @@ import api from '../../../containers/Page/api';
 // import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
-//import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 // import ProductList from './ProductList';
 // import {useState} from 'react';
 // import Modal from 'react-bootstrap/Modal';
@@ -20,7 +20,7 @@ import ModalStyle from './modal.style';
 import Modals from '../../../components/feedback/modal';
 import IntlMessages from '../../../components/utility/intlMessages';
 import ecommerceAction from '../../../redux/ecommerce/actions';
-
+//import './style.css'
 const { fetchorders } = ecommerceAction;
 const isoModal = ModalStyle(Modals);
 const Modal = WithDirection(isoModal);
@@ -37,43 +37,95 @@ class ListOrders extends Component {
   }; 
   
   success = (order)=> {
+    let obj = {
+      nome:'',
+      preco:''
+    }
     let produtos;
     const id = order.id;
     let list;
     let arrayModal = [];
-   
+    let arrayProd = [];
+    let nome,price;
     
     api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
-     list = res.data;
+     list = res.data.itens;
+     var mydata = JSON.parse(list);
+    // console.log(mydata[0].name);
+
+     for (let index = 0; index < mydata.length; index++) {
+       const product = mydata[index];
+       if(mydata[index].name == undefined && mydata[index].price == undefined){
+        nome = "TESTE";
+        price = "TESTE"
+       }else{
+         
+       }
+       nome = mydata[index].name;
+       price = mydata[index].price;
       
-     produtos = list.products.map(product => {
-      return (
-        <div>
-        
-        <div>
-            <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Product</th>
-              <th scope="col">Vendor</th>
-              <th scope="col">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{product.name}</td>
-              <td>{product.vendor}</td>
-              <td>${product.price}</td>
-            </tr>
-          </tbody>
-        </table> 
-        </div>
-
-        </div>
-      )
        
-    });
+       
 
+     
+        obj =  new Object;
+        obj.nome = nome;
+        obj.preco = price;
+        arrayProd.push(obj);
+       
+    
+        
+     }
+    
+  console.log(arrayProd);
+
+  produtos  = arrayProd.map(pro => {
+    return (
+      
+      
+      <tbody>
+        {pro.nome === undefined && pro.preco === undefined ?
+        <tr>
+          <th></th>  
+          <th></th>
+        </tr> 
+        : 
+        <tr>
+          <th>{pro.nome}</th>
+          
+          <th>${pro.preco}</th>
+        </tr>
+        }
+        
+        
+          
+        
+      </tbody>
+    )
+   });
+
+  var tabelaProd = (<div>
+      
+    <div>
+        <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+     {produtos}
+    </table> 
+    </div>
+
+    </div>
+    );
+
+     
+
+    
+    
+     
     const aux = (
       <div class="card border-dark mb-3" style={{maxWidth:'18rem'}}>
           <div class="card-header">Order Details</div>
@@ -86,13 +138,13 @@ class ListOrders extends Component {
 
     );
     arrayModal.push(aux);
-    arrayModal.push(produtos);
+    arrayModal.push(tabelaProd);
     
 
     Modals.success({
       title: list.title,
-      content:arrayModal.map(componentes =>{
-          return componentes
+      content: arrayModal.map(content => {
+        return content
       }),
       okText: 'OK',
       cancelText: 'Cancel',
@@ -147,10 +199,7 @@ class ListOrders extends Component {
           <div className="isoCartDetails">
             <h3>
               <a href="#">
-                {order.id}
-              </a>
-              <a>
-                P.O
+                {order.title}
               </a>
             </h3>
             <p className="isoItemPriceQuantity">

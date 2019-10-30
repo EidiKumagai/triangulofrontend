@@ -15,6 +15,7 @@ class ResetPassword extends React.Component {
     super(props)
 
     this.state = {
+      value:'',
       novasenha: '',
       valueButton:'',
       confirmesenha: '',
@@ -123,8 +124,8 @@ class ResetPassword extends React.Component {
                 />
               </div>
               
+              {this.state.passwdStrong ==  "Your Password is Good" ?<p style={{color: 'green'}}>{this.state.passwdStrong}</p>: <p style={{color: 'red'}}>{this.state.passwdStrong}</p>  }
               
-              <p style={{color: 'gray'}}>{this.state.passwdStrong}</p>
               
 
               <div className="isoInputWrapper">
@@ -137,12 +138,15 @@ class ResetPassword extends React.Component {
               </div>
               
               <p>{this.state.msgPassEqual}</p>
-
-              <div className="isoInputWrapper">
+              { this.state.novasenha === this.state.confirmesenha && this.state.validatePass === true ? <div className="isoInputWrapper">
                 <Button onClick={this.handleSubmmit} type="primary">
                   <IntlMessages id="page.resetPassSave" />
                 </Button>
-              </div>
+              </div> : <div className="isoInputWrapper">
+                <Button disabled={!this.state.value} onClick={this.handleSubmmit} type="primary">
+                  <IntlMessages id="page.resetPassSave" />
+                </Button>
+              </div>  }
             </div>
           </div>
         </div>

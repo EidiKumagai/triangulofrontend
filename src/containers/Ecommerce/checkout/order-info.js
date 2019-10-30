@@ -105,7 +105,8 @@ class OrderInfo extends Component {
     
     
     var result;
-    let frete1 = frete.price;
+    // let frete1 = frete.price;
+    let frete1 = 100;
     var a = Number(frete1).toFixed(2);
     //var a = parseFloat(frete1);
     let precoComFrete = cartTotal.totalPrice;
@@ -118,15 +119,17 @@ class OrderInfo extends Component {
     bool1.toFixed(2);
     bool2.toFixed(2);
  
-    
+    var Prods = products.map(product => {
+      
+    });
     
     result += bool1 + bool2;
     var bool3 = parseFloat(resultado).toFixed(2);
    
     let nomeadd = address[0].label;
-    const oderdetails = (
-      products.map(product =>{
-        return(
+    const oderdetails = 
+     
+         (
           <div >
       
 
@@ -170,7 +173,7 @@ class OrderInfo extends Component {
                   </div> */}
                   
                  
-                    {/* {this.renderProdtoCheck()} */}
+                 {this.renderProdtoCheck()} 
                 </div>
                 <div className="isoOrderTableFooter">
                 <span>Total</span>
@@ -219,8 +222,8 @@ class OrderInfo extends Component {
 
 
           </div>
-        )
-      })
+        
+      
     );
 
     
@@ -327,8 +330,16 @@ class OrderInfo extends Component {
   renderProdtoCheck(){
     const {products} = this.props;
 
+    var prod = products.map( p => {
+     return (<tbody>
+      <tr>
+        <td>{p.name}</td>
+        <td>${p.price}</td>
+      </tr>
+    </tbody>) 
+    });
 
-    return products.map(prod => {
+    return(
       <table class="table">
       <thead>
         <tr>
@@ -337,14 +348,10 @@ class OrderInfo extends Component {
           <th scope="col">Price</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>{prod.name}</td>
-          <td>${prod.price}</td>
-        </tr>
-      </tbody>
-    </table> 
-    });
+      {prod}
+    </table>
+    ) 
+    
   }
 
   
@@ -385,7 +392,7 @@ class OrderInfo extends Component {
     }
 
     var resultado;
-    let frete1 = frete.price;
+    let frete1 = 100;
     var a = Number(frete1).toFixed(2);
     //var a = parseFloat(frete1);
     let precoComFrete = cartTotal.totalPrice;
@@ -472,7 +479,11 @@ class OrderInfo extends Component {
           </div>
 
           <div className="isoOrderTableBody">
-            {this.renderFrete()}
+          <div className="isoSingleOrderInfo" >
+            <p>
+              <span>Price: ${frete1}</span>
+            </p>
+          </div>
           </div>
           <div className="isoOrderTableFooter">
             <span>Total with Freight</span>

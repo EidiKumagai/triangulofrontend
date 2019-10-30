@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import InputNumber from '../../../components/uielements/InputNumber';
 import Thumb from './thumb';
 import './style.css';
-import '../../../components/algolia/algoliaComponent.style'
+//import '../../../components/algolia/algoliaComponent.style'
 import './instantSearch.css';
 import FilterResults from 'react-filter-search';
 import './search.css';
@@ -245,7 +245,7 @@ class Shelf extends Component {
 
                           <div className="CampoQuantidade">
                             <div className="QuantidadeFilho">
-                                  <p>Quantity: </p>
+                                  <p className="letra">Quantity: </p>
                                 <br></br>
 
                                 <td className="isoItemQuantity">
@@ -256,6 +256,7 @@ class Shelf extends Component {
                                   max={1000}
                                   value={product.qtd}
                                   step={1}
+
                                   onChange={(event) => {this.changeValue(event,product);}}
                                   
                                 />
@@ -273,12 +274,13 @@ class Shelf extends Component {
                             :
                             
                             (<div className="QuantidadeFilho">
-                            <p>Square Feet: </p>
+                            <p className="letra">Square Feet: </p>
                           <br></br>
 
                           <td className="isoItemQuantity">
                           
                           <InputNumber
+                          disabled={!this.state.value}
                           type="number"
                             min={1}
                             max={1000}
