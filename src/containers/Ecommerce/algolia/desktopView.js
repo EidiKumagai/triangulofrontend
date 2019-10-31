@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import InputNumber from '../../../components/uielements/InputNumber';
 import Thumb from './thumb';
+import './stylePagination.css'
+//import Pagination from 'react-bootstrap/Pagination'
 import './style.css';
+
 //import '../../../components/algolia/algoliaComponent.style'
 import './instantSearch.css';
 import FilterResults from 'react-filter-search';
@@ -14,7 +17,9 @@ import {addProduct} from '../../../redux/cart/actions'
 // import ProductList from './ProductList';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { notification } from '../../../components';
+
 const { fetchProducts } = ecommerceAction;
+
 
 
 
@@ -23,19 +28,28 @@ const { fetchProducts } = ecommerceAction;
 class Shelf extends Component { 
   constructor(props) {
     super(props);
+
     this.state = {
       isLoading: false,
       product:{id:'',qtd:''},
       quantity:'',
       measure:'',
       isadd: false,
-      value: '',
-      data:[]
+      value: false,
+      data:[],
+      currentPage: 1,
+      disabled: false
     };
     this.changeValue = this.changeValue.bind(this);
     this.getProd =  this.changeValue.bind(this);
+
   }
 
+  handlePageChange = page => {
+    this.setState({
+      currentPage: page
+    });
+  };
   
 
   
@@ -148,6 +162,7 @@ class Shelf extends Component {
 
 
   render() {
+
     let triangulo =  this.state.quantity;
     const {addProduct} = this.props;
     const { data, value } = this.state;
@@ -157,6 +172,18 @@ class Shelf extends Component {
      
      //console.log(data);
     const { isLoading } = this.state;
+
+    const { currentPage } = this.state;
+
+    const limit = 2;
+    const pageCount = 3;
+    var total;
+    if(products === undefined){
+      
+    }else{
+      total = products.length * limit;
+    }
+    
     //const { isadd } = this.state;
     //console.log(this.props)
     if (products === undefined) {
@@ -183,7 +210,7 @@ class Shelf extends Component {
      // console.log(this.props);
       return (
         <React.Fragment>
-          
+                   
           <div class="page">
             <label class="field a-field a-field_a1">
               <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search by Category" required/>
@@ -241,13 +268,17 @@ class Shelf extends Component {
                             
                             </p>
                           </div>
-                        <div  onClick={()=>{ addProduct(product); }} class="shelf-item__buy-btn">Adicionar</div>
+                          {product.qtd == null ? <div onClick={() => notification('error','Input Quantity is blank, fill the input to add')} class="shelf-item__buy-btn">Adicionar</div> 
+                          :  
+                          <div onClick={()=>{ addProduct(product)}} class="shelf-item__buy-btn">Adicionar</div>
+                          }
+                        
 
                           <div className="CampoQuantidade">
                             <div className="QuantidadeFilho">
                                   <p className="letra">Quantity: </p>
                                 <br></br>
-
+                                <p hidden>{product.qtd = ''}</p>
                                 <td className="isoItemQuantity">
                                 
                                 <InputNumber
@@ -309,11 +340,11 @@ class Shelf extends Component {
           )}
           
         />  
+          
           </div>
         </React.Fragment>
       );
     }
-
 
   }
 }

@@ -41,7 +41,7 @@ class OrderInfo extends Component {
 
     this.state={
       obs:'',
-      address:{},
+      address:{address:"Ship to 1"},
       info:{},
       frete:{},
       resultado:0
@@ -126,7 +126,8 @@ class OrderInfo extends Component {
     result += bool1 + bool2;
     var bool3 = parseFloat(resultado).toFixed(2);
    
-    let nomeadd = address[0].label;
+    // let nomeadd = address[0].label;
+    let nomeadd = address.address;
     const oderdetails = 
      
          (
@@ -301,13 +302,13 @@ class OrderInfo extends Component {
       <p>
         <span>Name: {info.username}</span> <br></br>
 
-        <br></br>
+        
         <span>Company: {info.companyname}</span> <br></br>
         
-        <br></br>
+        
         <span>Email: {info.email}</span> <br></br>
         
-        <br></br>
+        
         <span>Job Title: {info.jobtitle}</span> <br></br>
       </p>
       </div>
@@ -450,8 +451,8 @@ class OrderInfo extends Component {
             </div>
         </div>
 
-        <br></br>
-        <br></br>
+        
+       
         
         
         <div className="isoOrderTable">
@@ -495,7 +496,7 @@ class OrderInfo extends Component {
 
 
 
-        <br></br>
+   
       
         <div className="isoOrderTable">
         <span className="tableHead">Address</span>

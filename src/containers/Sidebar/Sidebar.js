@@ -147,6 +147,14 @@ class Sidebar extends Component {
                 </Link>
               </Menu.Item> */}
 
+               
+                {/* <Menu.Item style={submenuStyle} key="cart">
+                  <Link style={submenuColor} to={`${url}/cart`}>
+                    <IntlMessages id="sidebar.cart" />
+                  </Link>
+                </Menu.Item> */}
+
+{/* 
               <SubMenu
                 key="ecommerce"
                 title={
@@ -168,22 +176,22 @@ class Sidebar extends Component {
                     <IntlMessages id="sidebar.pedidos" />
                   </Link>
                 </Menu.Item>
-                {/* <Menu.Item style={submenuStyle} key="cart">
+                 <Menu.Item style={submenuStyle} key="cart">
                   <Link style={submenuColor} to={`${url}/cart`}>
                     <IntlMessages id="sidebar.cart" />
                   </Link>
-                </Menu.Item> */}
+                </Menu.Item> 
                 <Menu.Item style={submenuStyle} key="checkout">
                   <Link style={submenuColor} to={`${url}/checkout`}>
                     <IntlMessages id="sidebar.checkout" />
                   </Link>
                 </Menu.Item>
-                {/* <Menu.Item style={submenuStyle} key="card">
+                 <Menu.Item style={submenuStyle} key="card">
                   <Link style={submenuColor} to={`${url}/card`}>
                     <IntlMessages id="sidebar.cards" />
                   </Link>
-                </Menu.Item> */}
-              </SubMenu>
+                </Menu.Item> 
+              </SubMenu> */}
 
               {/* <SubMenu
                 key="map"
@@ -251,6 +259,40 @@ class Sidebar extends Component {
                   </span>
                 </Link>
               </Menu.Item> */}
+              <Menu.Item key="products">
+                <Link to={`${url}/shop`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-bag" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.shop" />
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
+              
+              <Menu.Item key="orders">
+                <Link to={`${url}/pedidos`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-bag" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.pedidos" />
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
+
+
+              <Menu.Item key="checkout">
+                <Link to={`${url}/checkout`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-bag" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.checkout" />
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
+              
 
                <Menu.Item key="contacts">
                 <Link to={`${url}/contacts`}>

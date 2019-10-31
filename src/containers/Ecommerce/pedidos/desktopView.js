@@ -188,7 +188,7 @@ class ListOrders extends Component {
         
       )
     }
-      return orders.map(order => {
+      return orders.reverse().map(order => {
 
         
         return (
