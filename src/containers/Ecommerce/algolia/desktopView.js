@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component }  from 'react';
 import InputNumber from '../../../components/uielements/InputNumber';
 import Thumb from './thumb';
 import './stylePagination.css'
@@ -17,6 +17,7 @@ import {addProduct} from '../../../redux/cart/actions'
 // import ProductList from './ProductList';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { notification } from '../../../components';
+import { enabled } from 'ansi-colors';
 
 const { fetchProducts } = ecommerceAction;
 
@@ -35,7 +36,7 @@ class Shelf extends Component {
       quantity:'',
       measure:'',
       isadd: false,
-      value: false,
+      value: '',
       data:[],
       currentPage: 1,
       disabled: false
@@ -160,16 +161,20 @@ class Shelf extends Component {
     this.rowscount =  rows
   }
 
+  
+
 
   render() {
 
+
+  
     let triangulo =  this.state.quantity;
     const {addProduct} = this.props;
     const { data, value } = this.state;
     // let aux = false;
     // aux = this.setvar(aux);
     const { products, isadd } = this.props;
-     
+    console.log(products);
      //console.log(data);
     const { isLoading } = this.state;
 
@@ -278,7 +283,7 @@ class Shelf extends Component {
                             <div className="QuantidadeFilho">
                                   <p className="letra">Quantity: </p>
                                 <br></br>
-                                <p hidden>{product.qtd = ''}</p>
+                                
                                 <td className="isoItemQuantity">
                                 
                                 <InputNumber
@@ -311,7 +316,7 @@ class Shelf extends Component {
                           <td className="isoItemQuantity">
                           
                           <InputNumber
-                          disabled={!this.state.value}
+                          disabled={true}
                           type="number"
                             min={1}
                             max={1000}

@@ -39,14 +39,15 @@ class ListOrders extends Component {
   success = (order)=> {
     let obj = {
       nome:'',
-      preco:''
+      preco:'',
+      qtd:''
     }
     let produtos;
     const id = order.id;
     let list;
     let arrayModal = [];
     let arrayProd = [];
-    let nome,price;
+    let nome,price, qtd;
     
     api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
      list = res.data.itens;
@@ -63,7 +64,7 @@ class ListOrders extends Component {
        }
        nome = mydata[index].name;
        price = mydata[index].price;
-      
+      qtd =mydata[index].qtd;
        
        
 
@@ -71,6 +72,7 @@ class ListOrders extends Component {
         obj =  new Object;
         obj.nome = nome;
         obj.preco = price;
+        obj.qtd = qtd
         arrayProd.push(obj);
        
     
@@ -92,7 +94,7 @@ class ListOrders extends Component {
         : 
         <tr>
           <th>{pro.nome}</th>
-          
+          {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
           <th>${pro.preco}</th>
         </tr>
         }
@@ -111,6 +113,7 @@ class ListOrders extends Component {
       <thead>
         <tr>
           <th scope="col">Product</th>
+          <th scope="col">Quantity</th>
           <th scope="col">Price</th>
         </tr>
       </thead>
@@ -188,7 +191,7 @@ class ListOrders extends Component {
         
       )
     }
-      return orders.map(order => {
+      return orders.reverse().map(order => {
 
         
         return (

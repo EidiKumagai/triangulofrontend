@@ -8,6 +8,7 @@ import history from '../../Page/history';
 import ModalStyle from './modal.style';
 import WithDirection from '../../../config/withDirection';
 import Modals from '../../../components/feedback/modal';
+import Input from '../../../components/uielements/input';
 //import { Dropdown } from 'semantic-ui-react'
 // import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -41,12 +42,13 @@ class OrderInfo extends Component {
 
     this.state={
       obs:'',
-      address:{address:"Ship to 1"},
+      address:{address:'',city:'',country:''},
       info:{},
       frete:{},
-      resultado:0
+      resultado:0,
+      po:''
     }
-
+    this.handlePO = this.handlePO.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
     this.handleChange =  this.handleChange.bind(this);
   }
@@ -54,7 +56,7 @@ class OrderInfo extends Component {
   componentDidMount(){
     this.getUserInfo();
     this.props.fetchadress();
-    this.getFreitch();
+    this.getFreitch(); 
     
   }
   componentWillReceiveProps(nextProps) {
@@ -76,7 +78,7 @@ class OrderInfo extends Component {
   submitAdd = (value) => {
     // const {adress} = this.props;
     // this.setState({address: adress});
-    this.setState({address: value});
+    this.setState({address:{addressName:value[0].label ,address: value[0].address, city:value[0].city ,country:value[0].country}});
     
   }
   
@@ -93,20 +95,24 @@ class OrderInfo extends Component {
     }
   };
 
-  retornarObj(array){
-     
+  handlePO(event){
+    this.setState({po: event.target.value});
+    console.log(this.state.po);
   }
+
+ 
 
   fazerpedido(resultado) {
     
+
     const {cartTotal, products} = this.props;
 
-    const { address, obs, frete } = this.state 
+    const { address, obs, frete, po } = this.state 
     
     
     var result;
     // let frete1 = frete.price;
-    let frete1 = 100;
+    let frete1 = frete[0].price;
     var a = Number(frete1).toFixed(2);
     //var a = parseFloat(frete1);
     let precoComFrete = cartTotal.totalPrice;
@@ -127,7 +133,7 @@ class OrderInfo extends Component {
     var bool3 = parseFloat(resultado).toFixed(2);
    
     // let nomeadd = address[0].label;
-    let nomeadd = address.address;
+    let nomeadd = address.addressName;
     const oderdetails = 
      
          (
@@ -239,7 +245,7 @@ class OrderInfo extends Component {
       
       //console.log(this.state);
       
-      array.push(frete);
+      array.push(frete[0]);
 
       var myjson = JSON.stringify(array);
       let title = " order" 
@@ -251,7 +257,8 @@ class OrderInfo extends Component {
         address: nomeadd,
         price: bool,
         itens:
-          myjson
+          myjson,
+        po:po
   
       })
         .then(res => {
@@ -296,6 +303,7 @@ class OrderInfo extends Component {
 
   renderUsers(){
     const { info } = this.state
+    console.log(info);
 
     return (
       <div className="isoSingleOrderInfo" >
@@ -316,16 +324,21 @@ class OrderInfo extends Component {
   }
 
   renderFrete(){
-    const { frete } = this.state
+   
+    const { frete } = this.state;
+    if(frete[0] === undefined){
 
-    return(
+    }else{
+      return(
 
-      <div className="isoSingleOrderInfo" >
-        <p>
-          <span>{frete.price}</span>
-        </p>
-      </div>
-    )
+        <div className="isoSingleOrderInfo" >
+          <p>
+            <span>Price: $ {frete[0].price}</span>
+          </p>
+        </div>
+      )
+    }
+    
   }
 
   renderProdtoCheck(){
@@ -335,6 +348,7 @@ class OrderInfo extends Component {
      return (<tbody>
       <tr>
         <td>{p.name}</td>
+        <td>{p.qtd}</td>
         <td>${p.price}</td>
       </tr>
     </tbody>) 
@@ -345,7 +359,7 @@ class OrderInfo extends Component {
       <thead>
         <tr>
           <th scope="col">Product</th>
-
+          <th scope="col">Quantity</th>
           <th scope="col">Price</th>
         </tr>
       </thead>
@@ -381,10 +395,12 @@ class OrderInfo extends Component {
   {
     const {cartTotal, adress} =  this.props;
     const { frete } =  this.state;
+
     
     
+    console.log(frete);
     
-    if(adress === undefined || frete === undefined ){
+    if(adress === undefined || frete[0] === undefined ){
       return(
         <div>
         <Spinner size={120} spinnerColor={"#606D42"} spinnerWidth={2} visible={true} />
@@ -393,7 +409,8 @@ class OrderInfo extends Component {
     }
 
     var resultado;
-    let frete1 = 100;
+    
+    let frete1 = frete[0].price;
     var a = Number(frete1).toFixed(2);
     //var a = parseFloat(frete1);
     let precoComFrete = cartTotal.totalPrice;
@@ -426,6 +443,9 @@ class OrderInfo extends Component {
     const list = adress.map(end => {
       let obj = new Object();
       obj.value = end.id;
+      obj.address = end.address
+      obj.city = end.city
+      obj.country = end.country
       obj.label =  end.addressname
       array.push(obj);
       
@@ -437,9 +457,13 @@ class OrderInfo extends Component {
     
     
    
+  const defaultOption = array[0];
    
     return (
+      
+      
       <OrderTable className="isoOrderInfo">
+      
         <div className="isoOrderTable" >
             <div className="isoOrderTableHead">
               <span className="tableHead">User Information</span>
@@ -451,9 +475,19 @@ class OrderInfo extends Component {
             </div>
         </div>
 
+
+        <div className="isoOrderTable" >
+              <div className="isoOrderTableHead">
+                <span className="tableHead">P.O</span>
+              
+              </div>
+
+            <div className="isoOrderTableBody">
+            <Input value={this.state.po} onChange={this.handlePO} placeholder="Basic usage" />
+            </div>
+        </div>  
         
-       
-        
+        <br></br>
         
         <div className="isoOrderTable">
           <div className="isoOrderTableHead">
@@ -482,7 +516,7 @@ class OrderInfo extends Component {
           <div className="isoOrderTableBody">
           <div className="isoSingleOrderInfo" >
             <p>
-              <span>Price: ${frete1}</span>
+              <span>{this.renderFrete()}</span>
             </p>
           </div>
           </div>
@@ -499,12 +533,39 @@ class OrderInfo extends Component {
    
       
         <div className="isoOrderTable">
-        <span className="tableHead">Address</span>
+        <b><span className="tableHead">Address</span></b>
         {/* <b>Address: </b>
           <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" /> */}
-          <Select options={array} onChange={(values) =>this.submitAdd(values)} />
+          <Select  options={array}  onChange={(values) => this.submitAdd(values)} />
        </div>
+       <div className="isoOrderTable">
        <br></br>
+
+       
+       <b><span className="tableHead">Description of Address: </span></b>
+
+       <div className="isoOrderTableBody">
+       <div className="isoSingleOrderInfo" >
+      <p>
+        <span>Address name: {this.state.address.address}</span> <br></br>
+
+        
+        <span>City: {this.state.address.city}</span> <br></br>
+        
+        
+        <span>Country: {this.state.address.country}</span> <br></br>
+        
+        
+      </p>        
+      </div>
+       
+      </div>
+
+         
+
+       </div>
+
+       
        {/* <div className="isoOrderTable">
         <b>Obeservation: </b>
           <form class="ui form" ><textarea onChange={this.handleChange} placeholder="Tell us more" rows="3"></textarea></form>

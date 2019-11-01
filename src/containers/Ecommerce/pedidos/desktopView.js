@@ -39,14 +39,15 @@ class ListOrders extends Component {
   success = (order)=> {
     let obj = {
       nome:'',
-      preco:''
+      preco:'',
+      qtd:''
     }
     let produtos;
     const id = order.id;
     let list;
     let arrayModal = [];
     let arrayProd = [];
-    let nome,price;
+    let nome,price, qtd;
     
     api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
      list = res.data.itens;
@@ -63,7 +64,7 @@ class ListOrders extends Component {
        }
        nome = mydata[index].name;
        price = mydata[index].price;
-      
+      qtd =mydata[index].qtd;
        
        
 
@@ -71,6 +72,7 @@ class ListOrders extends Component {
         obj =  new Object;
         obj.nome = nome;
         obj.preco = price;
+        obj.qtd = qtd
         arrayProd.push(obj);
        
     
@@ -92,7 +94,7 @@ class ListOrders extends Component {
         : 
         <tr>
           <th>{pro.nome}</th>
-          
+          {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
           <th>${pro.preco}</th>
         </tr>
         }
@@ -111,6 +113,7 @@ class ListOrders extends Component {
       <thead>
         <tr>
           <th scope="col">Product</th>
+          <th scope="col">Quantity</th>
           <th scope="col">Price</th>
         </tr>
       </thead>
@@ -176,6 +179,8 @@ class ListOrders extends Component {
   
   
   render() {
+
+    
     const marginStyle = { marginRight: '5px', marginBottom: '5px' };
     // const { isLoading } = this.state;
 
@@ -198,10 +203,19 @@ class ListOrders extends Component {
           </div>
           <div className="isoCartDetails">
             <h3>
-              <a href="#">
-                {order.title}
-              </a>
+              {order.po == null ? <a href="#">
+                {}
+              </a>: <a href="#">
+                PO: {order.po}
+              </a> }
+              
             </h3>
+            <p className="isoItemPriceQuantity">
+              <span>Obs(Status):  </span>
+              <span>
+              {order.obs}
+              </span>
+            </p>
             <p className="isoItemPriceQuantity">
               <span>Price Total $</span>
               <span>
