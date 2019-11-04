@@ -251,9 +251,14 @@ class OrderInfo extends Component {
       var myjson = JSON.stringify(array);
       let title = " order" 
       
+      console.log(products);
       console.log(array);
-      try {
-        
+      
+        if(po == '' || products.length == 0){
+          notification('error','Something is wrong, try again');
+          notification('info','Maybe you forgot to fill some fields, like Address, P.O or your cart is empty');
+        }else{
+
         api.post(`https://api-triangulo.herokuapp.com/order`,{ 
         address: nomeadd,
         price: bool,
@@ -286,15 +291,12 @@ class OrderInfo extends Component {
         .catch(function (error) {
           notification('error','Something is wrong, try again');
           notification('info','Maybe you forgot to fill some fields, like Address, P.O');
-          console.log(error)
+          console.log(po);
+          console.log(error);
           
         })
-        
-      } catch (error) {
-        console.log("deu erro")
-        notification('error','Something is wrong, try again');
-      }
       
+      }
   }
 
   getUserInfo(){
