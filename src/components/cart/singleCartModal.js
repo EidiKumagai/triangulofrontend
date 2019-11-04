@@ -147,7 +147,7 @@ class Carrinho extends Component {
         <div className="isoCartDetails">
           <h3>
             <a href="#">
-              {product.listid}
+              {product.name}
             </a>
           </h3>
           <p className="isoItemPriceQuantity">

@@ -58,7 +58,7 @@ class ForgotPassword extends React.Component {
               </h3>
               <p>
                 <IntlMessages id="page.forgetPassDescription" />
-                <IntlMessages id="page.forgetPassDescription" />
+                
               </p>
             </div>
 
