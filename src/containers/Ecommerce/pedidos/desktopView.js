@@ -51,7 +51,7 @@ class ListOrders extends Component {
     
     api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
      list = res.data.itens;
-     var mydata = JSON.parse(list);
+     var mydata = list;
     // console.log(mydata[0].name);
 
      for (let index = 0; index < mydata.length; index++) {
