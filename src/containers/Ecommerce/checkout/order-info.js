@@ -21,6 +21,7 @@ import { error } from 'util';
 // import { Form, TextArea } from 'semantic-ui-react';
 //import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
+import { notification } from '../../../components';
 
 const isoModal = ModalStyle(Modals);
 const Modal = WithDirection(isoModal);
@@ -282,9 +283,16 @@ class OrderInfo extends Component {
           console.log(res);
           console.log(res.data);
         })
+        .catch(function (error) {
+          notification('error','Something is wrong, try again');
+          notification('info','Maybe you forgot to fill some fields, like Address, P.O');
+          console.log(error)
+          
+        })
         
       } catch (error) {
-        alert(error.response);
+        console.log("deu erro")
+        notification('error','Something is wrong, try again');
       }
       
   }
@@ -317,7 +325,6 @@ class OrderInfo extends Component {
         <span>Email: {info.email}</span> <br></br>
         
         
-        <span>Job Title: {info.jobtitle}</span> <br></br>
       </p>
       </div>
     )
