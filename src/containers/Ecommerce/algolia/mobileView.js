@@ -273,11 +273,11 @@ class Shelf extends Component {
                             
                             </p>
                           </div>
-                          {product.qtd == null ? <div onClick={() => notification('error','Input Quantity is blank, fill the input to add')} class="shelf-item__buy-btn">Adicionar</div> 
+                          {/* {product.qtd == null ? <div onClick={() => notification('error','Input Quantity is blank, fill the input to add')} class="shelf-item__buy-btn">Adicionar</div> 
                           :  
                           <div onClick={()=>{ addProduct(product)}} class="shelf-item__buy-btn">Adicionar</div>
-                          }
-                        
+                          } */}
+                        <div onClick={()=>{ product.qtd  == null ? notification('error','Input Quantity is blank, fill the input to add') : addProduct(product) }} class="shelf-item__buy-btn">Adicionar</div>
 
                           <div className="CampoQuantidade">
                             <div className="QuantidadeFilho">
