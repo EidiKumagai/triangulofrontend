@@ -210,7 +210,7 @@ class OrderInfo extends Component {
                               <tbody>
                                 <tr>
                                   <td>Freight</td>
-                                  <td>${this.renderFrete()}</td>
+                                  <td>{this.renderFrete()}</td>
                                 </tr>
                               </tbody>
                             </table> 
@@ -257,7 +257,7 @@ class OrderInfo extends Component {
         address: nomeadd,
         price: bool,
         itens:
-          myjson,
+          array,
         po:po
   
       })
@@ -571,7 +571,7 @@ class OrderInfo extends Component {
           <form class="ui form" ><textarea onChange={this.handleChange} placeholder="Tell us more" rows="3"></textarea></form>
       </div> */}
         
-        <br></br>
+        
 
         <div className="isoOrderTable">
        <Button onClick={() => this.fazerpedido(bool3)} type="primary" className="isoOrderBtn">
