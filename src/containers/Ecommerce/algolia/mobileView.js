@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component }  from 'react';
 import InputNumber from '../../../components/uielements/InputNumber';
 import Thumb from './thumb';
+import './stylePagination.css'
+//import Pagination from 'react-bootstrap/Pagination'
 import './style.css';
+
 //import '../../../components/algolia/algoliaComponent.style'
 import './instantSearch.css';
 import FilterResults from 'react-filter-search';
@@ -14,7 +17,10 @@ import {addProduct} from '../../../redux/cart/actions'
 // import ProductList from './ProductList';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { notification } from '../../../components';
+import { enabled } from 'ansi-colors';
+
 const { fetchProducts } = ecommerceAction;
+
 
 
 
@@ -23,6 +29,7 @@ const { fetchProducts } = ecommerceAction;
 class Shelf extends Component { 
   constructor(props) {
     super(props);
+
     this.state = {
       isLoading: false,
       product:{id:'',qtd:''},
@@ -30,12 +37,20 @@ class Shelf extends Component {
       measure:'',
       isadd: false,
       value: '',
-      data:[]
+      data:[],
+      currentPage: 1,
+      disabled: false
     };
     this.changeValue = this.changeValue.bind(this);
     this.getProd =  this.changeValue.bind(this);
+
   }
 
+  handlePageChange = page => {
+    this.setState({
+      currentPage: page
+    });
+  };
   
 
   
@@ -146,17 +161,34 @@ class Shelf extends Component {
     this.rowscount =  rows
   }
 
+  
+
 
   render() {
+
+
+  
     let triangulo =  this.state.quantity;
     const {addProduct} = this.props;
     const { data, value } = this.state;
     // let aux = false;
     // aux = this.setvar(aux);
     const { products, isadd } = this.props;
-     
+    console.log(products);
      //console.log(data);
     const { isLoading } = this.state;
+
+    const { currentPage } = this.state;
+
+    const limit = 2;
+    const pageCount = 3;
+    var total;
+    if(products === undefined){
+      
+    }else{
+      total = products.length * limit;
+    }
+    
     //const { isadd } = this.state;
     //console.log(this.props)
     if (products === undefined) {
@@ -183,7 +215,7 @@ class Shelf extends Component {
      // console.log(this.props);
       return (
         <React.Fragment>
-          
+                   
           <div class="page">
             <label class="field a-field a-field_a1">
               <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search by Category" required/>
@@ -241,13 +273,17 @@ class Shelf extends Component {
                             
                             </p>
                           </div>
-                        <div  onClick={()=>{ addProduct(product); }} class="shelf-item__buy-btn">Adicionar</div>
+                          {product.qtd == null ? <div onClick={() => notification('error','Input Quantity is blank, fill the input to add')} class="shelf-item__buy-btn">Adicionar</div> 
+                          :  
+                          <div onClick={()=>{ addProduct(product)}} class="shelf-item__buy-btn">Adicionar</div>
+                          }
+                        
 
                           <div className="CampoQuantidade">
                             <div className="QuantidadeFilho">
                                   <p className="letra">Quantity: </p>
                                 <br></br>
-
+                                
                                 <td className="isoItemQuantity">
                                 
                                 <InputNumber
@@ -256,6 +292,7 @@ class Shelf extends Component {
                                   max={1000}
                                   value={product.qtd}
                                   step={1}
+
                                   onChange={(event) => {this.changeValue(event,product);}}
                                   
                                 />
@@ -279,6 +316,7 @@ class Shelf extends Component {
                           <td className="isoItemQuantity">
                           
                           <InputNumber
+                          disabled={true}
                           type="number"
                             min={1}
                             max={1000}
@@ -307,11 +345,11 @@ class Shelf extends Component {
           )}
           
         />  
+          
           </div>
         </React.Fragment>
       );
     }
-
 
   }
 }

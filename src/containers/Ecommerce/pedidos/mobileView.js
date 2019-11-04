@@ -179,6 +179,8 @@ class ListOrders extends Component {
   
   
   render() {
+
+    
     const marginStyle = { marginRight: '5px', marginBottom: '5px' };
     // const { isLoading } = this.state;
 
@@ -201,10 +203,19 @@ class ListOrders extends Component {
           </div>
           <div className="isoCartDetails">
             <h3>
-              <a href="#">
-                {order.title}
-              </a>
+              {order.po == null ? <a href="#">
+                {}
+              </a>: <a href="#">
+                PO: {order.po}
+              </a> }
+              
             </h3>
+            <p className="isoItemPriceQuantity">
+              <span>Obs(Status):  </span>
+              <span>
+              {order.obs}
+              </span>
+            </p>
             <p className="isoItemPriceQuantity">
               <span>Price Total $</span>
               <span>
