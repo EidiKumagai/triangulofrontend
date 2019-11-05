@@ -14,10 +14,12 @@ import Input from '../../../components/uielements/input';
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from '../../../components/uielements/button';
 import { removeProduct} from '../../../redux/cart/actions'
+import './auxcheck.css'
 // import SingleOrderInfo from './single-order';
 import { OrderTable } from './checkout.style';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { error } from 'util';
+import '../cart/cartTable.style';
 // import { Form, TextArea } from 'semantic-ui-react';
 //import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
@@ -381,15 +383,18 @@ class OrderInfo extends Component {
   
   
   renderProducts() {
-    
     const { products, removeProduct } = this.props;
+    
     return products.map(product => {  
+      var sf = (product.qtd * product.valueuntiofmeasure);
+      var aux =  "/  " + sf + "  " + product.unitofmeasure;
       return (
         <div className="isoSingleOrderInfo">
         <p>
-          <span>{product.name}</span> 
+          <span>{product.name} - {product.description}  </span> 
           <span>x</span>
-          <span className="isoQuantity">{product.qtd}</span>
+          {/* {product.unitofmeasuredefault} {product.valueuntiofmeasure === undefined ? " ": "/" + product.quantity * product.valueuntiofmeasure +" "+ product.unitofmeasure} */}
+          <span className="isoQuantity">Quantity: {product.qtd} {product.unitofmeasuredefault} {aux}  </span>
         </p>
         <span className="totalPrice">${product.price}</span>
         <a className="isoItemRemove" onClick={() => removeProduct(product)}>

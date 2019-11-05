@@ -1,0 +1,14 @@
+.isoItemRemove {
+    width: 27px;
+    font-size: 27px;
+    margin: -8px;
+    flex-shrink: 0;
+    margin-left: 15px;
+
+}
+.totalPrice{
+    font-size: 60px;
+    font-weight: 500;
+    color: #979797;
+    line-height: 1.5;
+}

@@ -229,7 +229,7 @@ const WDOrderTable = styled.div`
         }
 
         .totalPrice {
-          font-size: 13px;
+          font-size: 17px;
           font-weight: 500;
           color: ${palette('text', 2)};
           line-height: 1.5;
