@@ -62,17 +62,18 @@ class Shelf extends Component {
           product.qtd = event;
         }else{
           var resultado = event * product.valueuntiofmeasure;
+          
         
         this.setState({quantity: event});
         
         this.setState({measure: resultado});
         console.log(this.state.quantity);
-      
+        console.log(resultado);
       products.map(produto => {
         if(product.id == produto.id){
           return(
     
-            product.qtd = event,product.measure = resultado
+            product.qtd = event , product.measure = resultado.toFixed(2)
           )
 
         }else{
@@ -86,29 +87,29 @@ class Shelf extends Component {
 
   changeValueMeasure = (event,product) => {
     //console.log(value);
-    if(product.valueuntiofmeasure == "undefined"){
-      product.qtd = event;
-    }else{
-      const {products} = this.props;
-        var result2 = event / product.valueuntiofmeasure;
-        //this.setState({quantity:});
-        this.setState({measure: event});
-        this.setState({quantity: result2.toFixed()});
+    // if(product.valueuntiofmeasure == "undefined"){
+    //   product.qtd = event;
+    // }else{
+    //   const {products} = this.props;
+    //     var result2 = event / product.valueuntiofmeasure;
+    //     this.setState({quantity:});
+    //     this.setState({measure: event});
+    //     this.setState({quantity: result2.toFixed()});
 
-        products.map(produto => {
-          if(product.id == produto.id){
-            return(
-              product.measure = event, product.qtd = result2.toFixed()
+    //     products.map(produto => {
+    //       if(product.id == produto.id){
+    //         return(
+    //           product.measure = event, product.qtd = result2.toFixed()
               
-            )
+    //         )
   
-          }else{
+    //       }else{
             
-          }
-        });
+    //       }
+    //     });
        
-        console.log(this.state.measure);
-    }
+    //     console.log(this.state.measure);
+    // }
      
   }
   
@@ -268,7 +269,7 @@ class Shelf extends Component {
                           <div className="shelf-item__title">
                             <p class="shelf-item__title__text">Stock: {product.quantity} {product.unitofmeasuredefault}    
                           
-                            { product.valueuntiofmeasure == "undefined"  ? <p></p> :  <p>/   {product.quantity * product.valueuntiofmeasure} {product.unitofmeasure}</p>}  
+                            { product.valueuntiofmeasure == "undefined"  ? <p></p> :  <i>/   {product.quantity * product.valueuntiofmeasure} {product.unitofmeasure}</i>}  
                             {/* {product.unitofmeasure === undefined ? <div>vdd</div> : <div>falso</div>} */}
                             
                             </p>
@@ -289,7 +290,7 @@ class Shelf extends Component {
                                 <InputNumber
                                   type="number"
                                   min={1}
-                                  max={1000}
+                                  // max={10000}
                                   value={product.qtd}
                                   step={1}
 
@@ -319,7 +320,7 @@ class Shelf extends Component {
                           disabled={true}
                           type="number"
                             min={1}
-                            max={1000}
+                            // max={1000}
                             value={product.measure}
                             step={1}
                             onChange={(e) => {this.changeValueMeasure(e,product)}}
