@@ -50,7 +50,7 @@ class ListOrders extends Component {
     let list;
     let arrayModal = [];
     let arrayProd = [];
-    let nome,price, qtd, desc, measure,unitofmeasuredefault;
+    let nome,price, qtd, desc, measure,unitofmeasuredefault, mesure2;
     
 
 
@@ -78,6 +78,7 @@ class ListOrders extends Component {
       qtd =mydata[index].qtd;
       measure =mydata[index].valueuntiofmeasure;
       unitofmeasuredefault =mydata[index].unitofmeasuredefault;
+      mesure2 = mydata[index].unitofmeasure;
        
 
      
@@ -88,6 +89,7 @@ class ListOrders extends Component {
         obj.desc = desc;
         obj.measure = measure;
         obj.unitofmeasuredefault = unitofmeasuredefault;
+        obj.unitofmeasure = mesure2;
         arrayProd.push(obj);
        
     
@@ -95,110 +97,106 @@ class ListOrders extends Component {
      }
     
   console.log(arrayProd);
-
-  // produtos  = arrayProd.map(pro => {
-  //   return (
-      
-      
-  //     <tbody>
-  //       {pro.nome === undefined && pro.preco === undefined ?
-  //       <tr>
-  //         <th></th>
-  //         <th></th> 
-  //       </tr> 
-  //       : 
-  //       <tr>
-  //         <th>{pro.nome +" - "+ pro.desc}</th>
-  //         {/* {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
-  //         <th>${pro.preco}</th> */}
-  //       </tr>
-  //       }
-        
-        
-          
-        
-  //     </tbody>
-  //   )
-  //  });
-
-
-var tabela = arrayProd.map(pro => {
-  var resultUnitPriceX = pro.preco * pro.qtd ;
-  var tabelaProd = 
-    (<div>
-    
-      <div>
-          <table class="pedidos">
-        <thead>
-          <tr>
-            <th scope="col">Product</th>
-          </tr>
-        </thead>
-        {pro.nome === undefined ?
-          <tr>
-            <th></th>
-            <th></th> 
-          </tr> 
-          : 
-          <tr>
-            <th>{ pro.desc === undefined ? pro.nome +" - " + "X" : pro.nome +" - " + pro.desc }</th>
-            {/* {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
-            <th>${pro.preco}</th>  */}
-          </tr>
-          }
-        <tbody>
-          
-          
-        </tbody>
-      </table> 
-      </div>
+ 
+  produtos  = arrayProd.map(pro => {
+    var sf = (pro.qtd * pro.measure);
   
-      </div>)
-
-
-var measure = pro.qtd * pro.measure ;
-  var tabelaDesProd = (<div>
-    
-    <div>
-        <table class="pedidos2">
-      <thead>
-        <tr>
-          <th scope="col">Quantity</th>
-          <th scope="col">Unit Price</th>
-          <th scope="col">Total Price</th>
-        </tr>
-      </thead>
+    var aux =  "/" + sf + "" + pro.unitofmeasure;  
+    console.log(pro.desc);
+    var result = pro.preco * pro.qtd;
+    return (
+      
       
       <tbody>
-        
-        {pro.qtd === undefined && pro.preco === undefined ?
+        {pro.nome === undefined && pro.preco === undefined  ?
         <tr>
           <th></th>
           <th></th> 
         </tr> 
         : 
         <tr>
-          {/* { product.valueuntiofmeasure == "undefined"  ? <p></p> :  <p>/   {product.quantity * product.valueuntiofmeasure} {product.unitofmeasure}</p>}  */}
-          {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd} {pro.unitofmeasuredefault} </th> }
-          {/* {pro.measure == "undefined" || pro.qtd === undefined ? <th>X</th> : <th>{measure.toFixed()}</th> } */}
-          <th>${pro.preco === undefined ? "X" : pro.preco}</th>
-          <th>${ pro.qtd === undefined ? pro.preco : resultUnitPriceX.toFixed(2)}</th> 
+          {pro.desc === undefined ? <th>{pro.nome +" - "+ "X"}</th>:<th>{pro.nome +" - "+ pro.desc}</th> }
+          {/* {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
+          <th>${pro.preco}</th> */}
         </tr>
+        
         }
+         <tr>
+          {pro.qtd === undefined || pro.unitofmeasuredefault === undefined ||  pro.measure === undefined || pro.unitofmeasure === undefined ? <th>X</th> : <th>{pro.qtd} {pro.unitofmeasuredefault} {pro.measure === "undefined" ? " " : aux } </th>}
+          <th>${pro.preco} </th>
+          {pro.qtd === undefined ? <th>X</th>: <th>${pro.preco * pro.qtd} </th> }
+          {/* {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
+          <th>${pro.preco}</th> */}
+        </tr>
+        
+       
       </tbody>
-    </table> 
-    </div>
-
-    </div>);
+    )
+   });
 
 
-return(
-  <div>
-  {tabelaProd}
-  {tabelaDesProd}
-  </div>
-)
-});
+
+//var resultUnitPriceX = pro.preco * pro.qtd ;
+  var tabelaProd = 
+    (<div>
+    
+      <div>
+        <b><p>Product</p></b>
+          <table class="pedidos">
+          <thead>
+          <tr>
+            <th scope="col">Quantity</th>
+            <th scope="col">Unit Price</th>
+            <th scope="col">Total Price</th>
+          </tr>
+         </thead>
+
+        
+          {produtos}
+        
+      </table> 
+      </div>
+  
+      </div>)
+
+
+//var measure = pro.qtd * pro.measure ;
+  // var tabelaDesProd = (<div>
+    
+  //   <div>
+  //       <table class="pedidos2">
+  //     <thead>
+  //       <tr>
+  //         <th scope="col">Quantity</th>
+  //         <th scope="col">Unit Price</th>
+  //         <th scope="col">Total Price</th>
+  //       </tr>
+  //     </thead>
+      
+  //     <tbody>
+        
+  //       {pro.qtd === undefined && pro.preco === undefined ?
+  //       <tr>
+  //         <th></th>
+  //         <th></th> 
+  //       </tr> 
+  //       : 
+  //       <tr>
+  //         {/* { product.valueuntiofmeasure == "undefined"  ? <p></p> :  <p>/   {product.quantity * product.valueuntiofmeasure} {product.unitofmeasure}</p>}  */}
+  //         {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd} {pro.unitofmeasuredefault} </th> }
+  //         {/* {pro.measure == "undefined" || pro.qtd === undefined ? <th>X</th> : <th>{measure.toFixed()}</th> } */}
+  //         <th>${pro.preco === undefined ? "X" : pro.preco}</th>
+  //         <th>${ pro.qtd === undefined ? pro.preco : resultUnitPriceX.toFixed(2)}</th> 
+  //       </tr>
+  //       }
+  //     </tbody>
+  //   </table> 
+  //   </div>
+
+  //   </div>);
+
+
+
 
 var string = resdataaddres;
 var newchar = '_';
@@ -222,7 +220,7 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
 
     );
     arrayModal.push(aux);
-    arrayModal.push(tabela);
+    arrayModal.push(tabelaProd);
 
     
 
