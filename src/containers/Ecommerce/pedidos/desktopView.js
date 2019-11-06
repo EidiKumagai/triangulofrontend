@@ -164,7 +164,7 @@ class ListOrders extends Component {
     (<div>
     
       <div>
-        <b><p>Product</p></b>
+        <b><p className="p">Product</p></b>
           <table class="pedidos">
           <thead>
           <tr>

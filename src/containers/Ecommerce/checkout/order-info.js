@@ -392,9 +392,8 @@ class OrderInfo extends Component {
         <div className="isoSingleOrderInfo">
         <p>
           <span>{product.name} - {product.description}  </span> 
-          <span>x</span>
           {/* {product.unitofmeasuredefault} {product.valueuntiofmeasure === undefined ? " ": "/" + product.quantity * product.valueuntiofmeasure +" "+ product.unitofmeasure} */}
-          <span className="isoQuantity">Quantity: {product.qtd} {product.unitofmeasuredefault} {aux}  </span>
+          <span >Quantity: {product.qtd} {product.unitofmeasuredefault} {aux}  </span>
         </p>
         <span className="totalPrice">${product.price}</span>
         <a className="isoItemRemove" onClick={() => removeProduct(product)}>
