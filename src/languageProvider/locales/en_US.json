@@ -1,4 +1,10 @@
 {
+  "sidebar.Category": "Categories",
+  "sidebar.all": "All",
+  "sidebar.categ1": "Categoria 1",
+  "sidebar.categ2": "Categoria 2",
+  "sidebar.categ3": "Categoria 3",
+  "sidebar.categ4": "Categoria 4",
   "sidebar.email": "Email",
   "sidebar.ecommerce": "Sales",
   "sidebar.pedidos": "Orders",

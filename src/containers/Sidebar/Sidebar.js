@@ -8,7 +8,7 @@ import Menu from '../../components/uielements/menu';
 import IntlMessages from '../../components/utility/intlMessages';
 import getDevSidebar from '../../customApp/sidebar';
 import SidebarWrapper from './sidebar.style';
-
+import { logout } from '../../containers/Page/auth';
 import appActions from '../../redux/app/actions';
 import Logo from '../../components/utility/logo';
 import { rtl } from '../../config/withDirection';
@@ -259,6 +259,42 @@ class Sidebar extends Component {
                   </span>
                 </Link>
               </Menu.Item> */}
+
+              
+              
+              <SubMenu 
+                key="map"
+                title={
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-bag" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.Category" />
+                    </span>
+                  </span>
+                } 
+              >
+              <Menu.Item style={submenuStyle} key="all">
+                  <Link style={submenuColor} to={`${url}/shop`}>
+                    <IntlMessages id="sidebar.categ1" />
+                  </Link>
+              </Menu.Item>
+
+              <Menu.Item style={submenuStyle} key="categ2">
+                  <Link style={submenuColor} to={`${url}/shop`}>
+                    <IntlMessages id="sidebar.categ2" />
+                  </Link>
+              </Menu.Item>
+              <Menu.Item style={submenuStyle} key="categ3">
+                  <Link style={submenuColor} to={`${url}/shop`}>
+                    <IntlMessages id="sidebar.categ3" />
+                  </Link>
+              </Menu.Item>
+              <Menu.Item style={submenuStyle} key="categ4">
+                  <Link style={submenuColor} to={`${url}/shop`}>
+                    <IntlMessages id="sidebar.categ4" />
+                  </Link>
+              </Menu.Item>
+              </SubMenu>
               <Menu.Item key="products">
                 <Link to={`${url}/shop`}>
                   <span className="isoMenuHolder" style={submenuColor}>
@@ -300,6 +336,17 @@ class Sidebar extends Component {
                     <i className="ion-information" />
                     <span className="nav-text">
                       <IntlMessages id="sidebar.contacts" />
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="logout">
+                <Link onClick={this.props.logout} to={`${url}/`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-arrow-left-a" />
+                    <span className="nav-text">
+                      <IntlMessages id="topbar.logout" />
                     </span>
                   </span>
                 </Link>
@@ -708,5 +755,5 @@ export default connect(
     app: state.App.toJS(),
     customizedTheme: state.ThemeSwitcher.toJS().sidebarTheme
   }),
-  { toggleOpenDrawer, changeOpenKeys, changeCurrent, toggleCollapsed }
+  { toggleOpenDrawer, changeOpenKeys, changeCurrent, toggleCollapsed, logout }
 )(Sidebar);
