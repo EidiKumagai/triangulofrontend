@@ -122,6 +122,7 @@ class ListOrders extends Component {
  
   produtos  = arrayProd.map(pro => {
     var sf = (pro.qtd * pro.measure);
+    sf.toFixed(2);
   
     var aux =  "/" + sf + "" + pro.unitofmeasure;  
     console.log(pro.desc);

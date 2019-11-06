@@ -2,9 +2,9 @@ export default {
   //apiUrl: 'http://joeylin.net/api/',
 };
 const siteConfig = {
-  siteName: 'TRIÂNGULO',
+  siteName: 'Terra Verde Supply Corp.',
   siteIcon: 'ion-ios-arrow-forward',
-  footerText: 'TRIÂNGULO ®',
+  footerText: 'Terra Verde Supply Corp. ®',
 };
 
 const themeConfig = {

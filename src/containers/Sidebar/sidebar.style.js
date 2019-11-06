@@ -35,13 +35,13 @@ const SidebarWrapper = styled.div`
 
       h3 {
         a {
-          font-size: 21px;
-          font-weight: 300;
-          line-height: 70px;
-          letter-spacing: 3px;
+          font-size: 13px;
+          font-weight: 500;
+          line-height: 73px;
+          letter-spacing: 1px;
           font-family: 'Open Sans', sans-serif;
           text-transform: uppercase;
-          color: ${palette('grayscale', 6)};
+          color: #F2F3EE;
           display: block;
           text-decoration: none;
         }
