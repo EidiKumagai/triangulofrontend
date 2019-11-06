@@ -19,7 +19,8 @@ const initState = new Map({
   viewTopbarCart: true,
   products: [],
   orders: [],
-  adress:[]
+  adress:[],
+  cat:[]
 });
 
 
@@ -32,6 +33,11 @@ export default function ecommerceReducer(state = initState, action) {
       return {
         ...state,
         products: action.rows
+      };
+      case actions.FETCH_CAT:
+      return {
+        ...state,
+        cat: action.data
       };
       case actions.FETCH_ORDERS:
       return {

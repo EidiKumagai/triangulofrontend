@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../../containers/Page/api';
 import { connect } from 'react-redux';
 import clone from 'clone';
 import { Link } from 'react-router-dom';
@@ -12,6 +13,9 @@ import { logout } from '../../containers/Page/auth';
 import appActions from '../../redux/app/actions';
 import Logo from '../../components/utility/logo';
 import { rtl } from '../../config/withDirection';
+import ecommerceAction from '../../redux/ecommerce/actions';
+//import './style.css'
+const { fetchcat } = ecommerceAction;
 
 const SubMenu = Menu.SubMenu;
 //const MenuItemGroup = Menu.ItemGroup;
@@ -34,6 +38,7 @@ class Sidebar extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.onOpenChange = this.onOpenChange.bind(this);
+    this.renderCateg = this.renderCateg.bind(this);
   }
   handleClick(e) {
     this.props.changeCurrent([e.key]);
@@ -80,9 +85,55 @@ class Sidebar extends Component {
     );
   }
 
+
+  renderCateg(){
+   
+    var cat;
+    var arrayCateg = [];
+    api.get("https://api-triangulo.herokuapp.com/category").then(response =>{
+      const url = stripTrailingSlash(this.props.url);
+      const { customizedTheme } = this.props;
+      const submenuStyle = {
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        color: customizedTheme.textColor
+      };
+      const submenuColor = {
+        color: customizedTheme.textColor
+      };
+    var categ = response.data;
+    var obj = {
+      nome:''
+    }
+    for (let index = 0; index < categ.length; index++) {
+      obj = new Object;
+      obj.nome = categ[index]
+      arrayCateg.push(obj); 
+    }
+    
+    return arrayCateg.map(c => {
+      return (
+        <Menu.Item style={submenuStyle} key="categ2">
+          <Link style={submenuColor} to={`${url}/shop`}>
+            <p>{c.category}</p>
+          </Link>
+        </Menu.Item>
+      )
+    });
+
+    });
+
+  }
+
+  componentDidMount() {
+    this.props.fetchcat();
+  }
+
   render() {
     // const { url, app, toggleOpenDrawer, bgcolor } = this.props;
-    const { app, toggleOpenDrawer, customizedTheme } = this.props;
+    
+    
+    const { app, toggleOpenDrawer, customizedTheme, cat } = this.props;
+    console.log(cat);
     const url = stripTrailingSlash(this.props.url);
     const collapsed = clone(app.collapsed) && !clone(app.openDrawer);
     const { openDrawer } = app;
@@ -110,6 +161,22 @@ class Sidebar extends Component {
     const submenuColor = {
       color: customizedTheme.textColor
     };
+  
+  if(cat === undefined){
+
+  }else{
+    var categoria = cat.map( c => {
+      return(
+        <Menu.Item style={submenuStyle} key={c.listid_category}>
+          <Link style={submenuColor} to={`${url}/shop`}>
+            {c.category}
+          </Link>
+        </Menu.Item>
+      )
+    })
+  }
+  
+    
     return (
       <SidebarWrapper>
         <Sider
@@ -278,8 +345,9 @@ class Sidebar extends Component {
                     <IntlMessages id="sidebar.all" />
                   </Link>
               </Menu.Item>
-
-              <Menu.Item style={submenuStyle} key="categ2">
+               {categoria}   
+              
+              {/* <Menu.Item style={submenuStyle} key="categ2">
                   <Link style={submenuColor} to={`${url}/shop`}>
                     <IntlMessages id="sidebar.categ2" />
                   </Link>
@@ -293,7 +361,7 @@ class Sidebar extends Component {
                   <Link style={submenuColor} to={`${url}/shop`}>
                     <IntlMessages id="sidebar.categ4" />
                   </Link>
-              </Menu.Item>
+              </Menu.Item> */}
               </SubMenu>
               {/* <Menu.Item key="products">
                 <Link to={`${url}/shop`}>
@@ -750,10 +818,14 @@ class Sidebar extends Component {
   }
 }
 
+
+
+
 export default connect(
   state => ({
     app: state.App.toJS(),
-    customizedTheme: state.ThemeSwitcher.toJS().sidebarTheme
+    customizedTheme: state.ThemeSwitcher.toJS().sidebarTheme,
+    cat: state.Ecommerce.cat
   }),
-  { toggleOpenDrawer, changeOpenKeys, changeCurrent, toggleCollapsed, logout }
+  { toggleOpenDrawer, changeOpenKeys, changeCurrent, toggleCollapsed, logout, fetchcat }
 )(Sidebar);

@@ -78,7 +78,7 @@ class ListOrders extends Component {
 
 
     var resdataaddres, endereco;
-    
+  
     
     api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
       resdataaddres =  res.data.address 
@@ -220,7 +220,7 @@ class ListOrders extends Component {
 
 
 
-
+  
 var string = resdataaddres;
 var newchar = '_';
 

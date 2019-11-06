@@ -6,6 +6,7 @@ const orderapi = "https://api-triangulo.herokuapp.com";
 
 const ecommerceActions = {
   FETCH_ADRESS:"FETCH_ADRESS",
+  FETCH_CAT:"FETCH_CAT",
   ADD_POST:"ADD_POST",
   POST_ORDER:"POST_ORDER",
   FETCH_ORDERS:'FETCH_ORDERS',
@@ -47,6 +48,34 @@ const ecommerceActions = {
       view
     };
   },
+
+  fetchcat : (callback) => dispatch => {
+    return api
+      .get(`${orderapi}/category`)
+      .then(res => {
+  
+        
+        let data = res.data;
+        
+        if (!!callback) {
+          callback();
+        }
+  
+        return dispatch({
+          type: ecommerceActions.FETCH_CAT,
+          data
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch orders. Try again later.');
+      });
+  },
+
+
+
+
+
+
 
   fetchadress : (callback) => dispatch => {
     return api
