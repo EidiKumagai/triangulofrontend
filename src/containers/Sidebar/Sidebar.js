@@ -268,14 +268,14 @@ class Sidebar extends Component {
                   <span className="isoMenuHolder" style={submenuColor}>
                     <i className="ion-bag" />
                     <span className="nav-text">
-                      <IntlMessages id="sidebar.Category" />
+                      <IntlMessages id="sidebar.shop" />
                     </span>
                   </span>
                 } 
               >
               <Menu.Item style={submenuStyle} key="all">
                   <Link style={submenuColor} to={`${url}/shop`}>
-                    <IntlMessages id="sidebar.categ1" />
+                    <IntlMessages id="sidebar.all" />
                   </Link>
               </Menu.Item>
 
@@ -295,7 +295,7 @@ class Sidebar extends Component {
                   </Link>
               </Menu.Item>
               </SubMenu>
-              <Menu.Item key="products">
+              {/* <Menu.Item key="products">
                 <Link to={`${url}/shop`}>
                   <span className="isoMenuHolder" style={submenuColor}>
                     <i className="ion-bag" />
@@ -304,7 +304,7 @@ class Sidebar extends Component {
                     </span>
                   </span>
                 </Link>
-              </Menu.Item>
+              </Menu.Item> */}
               
               <Menu.Item key="orders">
                 <Link to={`${url}/pedidos`}>
