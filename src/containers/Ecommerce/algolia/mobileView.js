@@ -4,7 +4,7 @@ import Thumb from './thumb';
 import './stylePagination.css'
 //import Pagination from 'react-bootstrap/Pagination'
 import './style.css';
-
+import api from '../../../containers/Page/api';
 //import '../../../components/algolia/algoliaComponent.style'
 import './instantSearch.css';
 import FilterResults from 'react-filter-search';
@@ -18,10 +18,8 @@ import {addProduct} from '../../../redux/cart/actions'
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { notification } from '../../../components';
 import { enabled } from 'ansi-colors';
-
+import history from '../../Page/history';
 const { fetchProducts } = ecommerceAction;
-
-
 
 
 
@@ -31,6 +29,7 @@ class Shelf extends Component {
     super(props);
 
     this.state = {
+      products:'',
       isLoading: false,
       product:{id:'',qtd:''},
       quantity:'',
@@ -116,7 +115,7 @@ class Shelf extends Component {
   // componentWillMount() {
   //   this.setState({quantity: 1});
   // }
-
+  
 
   componentDidMount() {
     
@@ -166,17 +165,14 @@ class Shelf extends Component {
 
 
   render() {
-
-
-  
+    
+    
     let triangulo =  this.state.quantity;
     const {addProduct} = this.props;
     const { data, value } = this.state;
     // let aux = false;
     // aux = this.setvar(aux);
     const { products, isadd } = this.props;
-    console.log(products);
-     //console.log(data);
     const { isLoading } = this.state;
 
     const { currentPage } = this.state;
@@ -212,14 +208,14 @@ class Shelf extends Component {
       this.props.changeState();
         
  
-
+      var result;
      // console.log(this.props);
       return (
         <React.Fragment>
                    
           <div class="page">
             <label class="field a-field a-field_a1">
-              <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search by Category" required/>
+              <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search a product" required/>
                 <span class="a-field__label-wrap">
                 <span class="a-field__label">Search here</span>
           </span>
@@ -239,7 +235,7 @@ class Shelf extends Component {
               {results.map(product => (
                 
                 <div>
-                
+                <p hidden> {result = product.quantity * product.valueuntiofmeasure}</p>
                  <div>
                         <div class="shelf-item">
                           <Thumb class="shelf-item__thumb" alt={product.name} />
@@ -259,7 +255,7 @@ class Shelf extends Component {
                           </div> */}
                           
                           <div className="shelf-item__title">
-                            <p class="shelf-item__title__text">{product.description}</p>
+                            <p class="shelf-item__title__text">{product.category}</p>
                           </div>
                           {/* <div className="shelf-item__title">
                             <p class="shelf-item__title__text">{product.unitofmeasure} </p>
@@ -267,9 +263,9 @@ class Shelf extends Component {
 
                           {/* product.quantity * product.valueuntiofmeasure */}
                           <div className="shelf-item__title">
-                            <p class="shelf-item__title__text">Stock: {product.quantity} {product.unitofmeasuredefault}    
+                            <p class="shelf-item__title__text">Stock: {Math.sign(product.quantity) == -1 ? 0 : product.quantity } {product.unitofmeasuredefault}    
                           
-                            { product.valueuntiofmeasure == "undefined"  ? <p></p> :  <i>/   {product.quantity * product.valueuntiofmeasure} {product.unitofmeasure}</i>}  
+                            { product.valueuntiofmeasure == "undefined"  ? <p></p> :  <i>/   {Math.sign(product.quantity) == -1 ? 0 : result.toFixed(2) } {product.unitofmeasure}</i>}  
                             {/* {product.unitofmeasure === undefined ? <div>vdd</div> : <div>falso</div>} */}
                             
                             </p>

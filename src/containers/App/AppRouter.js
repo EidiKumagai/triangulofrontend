@@ -1,13 +1,70 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import asyncComponent from '../../helpers/AsyncFunc';
 import getDevRouters from '../../customApp/router';
-
+import ecommerceAction from '../../redux/ecommerce/actions';
+import api from '../../containers/Page/api';
+//import './style.css'
+const { fetchcat } = ecommerceAction;
 class AppRouter extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      objCat: {} 
+    };
+    this.fetchCategory = this.fetchCategory.bind(this);
+  }
+
+  componentDidMount(){
+    this.fetchCategory();
+  }
+
+  fetchCategory(){
+
+    api.get('https://api-triangulo.herokuapp.com/category')
+     .then((response) => {
+       console.log(response);
+       this.setState({objCat: response.data})
+     })
+    .catch((error)=>{
+       console.log(error);
+    });
+    
+  }
+
   render() {
     const { url } = this.props;
+    
+    // this.fetchCategory();
+
+    
+    var obj = this.state.objCat;
+    console.log(obj);
+    var list = [];
+    for (let index = 0; index < obj.length; index++) {
+      var element = obj[index];
+      list.push(element);
+    }
+    
+   
+      var Categ = list.map( c => {
+        return(
+          <Route
+            exact
+            path={`${url}/shop/${c.id}`}
+            component={asyncComponent(() => import('../Ecommerce/algolia/instantSearch'))}
+          />
+        )
+      });
+    
+
     return (
+      
       <Switch>
+        
         <Route
           exact
           path={`${url}/`}
@@ -138,7 +195,7 @@ class AppRouter extends React.Component {
         />*/}
         <Route
           exact
-          path={`${url}/contacts`}
+          path={`${url}/contacts`}urls
           component={asyncComponent(() => import('../AboutUs/index'))}
         /> 
         <Route
@@ -325,6 +382,8 @@ class AppRouter extends React.Component {
             import('../Ecommerce/algolia/instantSearch')
           )}
         />
+        
+        {Categ}
         {/* <Route
           exact
           path={`${url}/reactDates`}
@@ -365,3 +424,5 @@ class AppRouter extends React.Component {
 }
 
 export default AppRouter;
+
+

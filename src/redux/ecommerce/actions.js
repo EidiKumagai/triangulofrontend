@@ -125,8 +125,13 @@ const ecommerceActions = {
       });
   },
   fetchProducts : (filters, sortBy, callback) => dispatch => {
-    return api
-      .get(`${orderapi}/productrule`)
+    var url = window.location.href;
+    var aux = url.split("http://localhost:3000/dashboard/shop/");
+    
+
+    if(url == "http://localhost:3000/dashboard/shop"  ){
+      return api
+      .get(`${orderapi}/productrule/0`)
       .then(res => {
         let  rows  = res.data;
         if (!!filters && filters.length > 0) {
@@ -147,6 +152,33 @@ const ecommerceActions = {
       .catch(err => {
         console.log('Could not fetch products. Try again later.');
       });
+    }else{
+      return api
+      .get(`${orderapi}/productrule/${aux[1]}`)
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
+  
+        if (!!callback) {
+          callback();
+        }
+  
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }
+    
+  
+    
   },
   changeViewTopbarCart: viewTopbarCart => {
     return {

@@ -9,7 +9,7 @@ import authAction from '../../redux/auth/actions';
 import appActions from '../../redux/app/actions';
 import Sidebar from '../Sidebar/Sidebar';
 import Topbar from '../Topbar/Topbar';
-import AppRouter from './AppRouter';
+import AppRouter    from './AppRouter';
 import { siteConfig } from '../../config.js';
 import { AppLocale } from '../../dashApp';
 import themes from '../../config/themes';

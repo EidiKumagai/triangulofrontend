@@ -393,7 +393,7 @@ class OrderInfo extends Component {
         <p>
           <span>{product.name} - {product.description}  </span> 
           {/* {product.unitofmeasuredefault} {product.valueuntiofmeasure === undefined ? " ": "/" + product.quantity * product.valueuntiofmeasure +" "+ product.unitofmeasure} */}
-          <span >Quantity: {product.qtd} {product.unitofmeasuredefault} {aux}  </span>
+          <span >Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }  </span>
         </p>
         <span className="totalPrice">${product.price}</span>
         <a className="isoItemRemove" onClick={() => removeProduct(product)}>

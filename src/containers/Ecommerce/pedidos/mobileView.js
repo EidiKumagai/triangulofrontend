@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import { Row, Col } from 'antd';
+import basicStyle from '../../../config/basicStyle';
+import Box from '../../../components/utility/box';
+import LayoutWrapper from '../../../components/utility/layoutWrapper';
+import ContentHolder from '../../../components/utility/contentHolder';
 //import './style1.css';
 import TopbarCartWrapper from '../../../components/cart/singleCartModal.style';
 import './instantSearch.css';
@@ -36,7 +41,24 @@ class ListOrders extends Component {
   state = {
     isLoading: false,
     show: false,
-    nameaddres:''
+    nameaddres:'',
+    loading: false,
+    visible: false,
+    content: {}
+  };
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+  handleOk = () => {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false, visible: false });
+    }, 2000);
+  };
+  handleCancel = () => {
+    this.setState({ visible: false });
   }; 
   
   success = (order)=> {
@@ -56,7 +78,7 @@ class ListOrders extends Component {
 
 
     var resdataaddres, endereco;
-    
+  
     
     api.get("https://api-triangulo.herokuapp.com/order/"+id).then(res =>{
       resdataaddres =  res.data.address 
@@ -100,6 +122,7 @@ class ListOrders extends Component {
  
   produtos  = arrayProd.map(pro => {
     var sf = (pro.qtd * pro.measure);
+    sf.toFixed(2);
   
     var aux =  "/" + sf + "" + pro.unitofmeasure;  
     console.log(pro.desc);
@@ -124,7 +147,7 @@ class ListOrders extends Component {
          <tr>
           {pro.qtd === undefined || pro.unitofmeasuredefault === undefined ||  pro.measure === undefined || pro.unitofmeasure === undefined ? <th>X</th> : <th>{pro.qtd} {pro.unitofmeasuredefault} {pro.measure === "undefined" ? " " : aux } </th>}
           <th>${pro.preco} </th>
-          {pro.qtd === undefined ? <th>X</th>: <th>${pro.preco * pro.qtd} </th> }
+          {pro.qtd === undefined ? <th>X</th>: <th>${result.toFixed(2)} </th> }
           {/* {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
           <th>${pro.preco}</th> */}
         </tr>
@@ -197,7 +220,7 @@ class ListOrders extends Component {
 
 
 
-
+  
 var string = resdataaddres;
 var newchar = '_';
 
@@ -222,7 +245,7 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
     arrayModal.push(aux);
     arrayModal.push(tabelaProd);
 
-    
+    //this.setState({content: arrayModal});
 
     Modals.success({
       title: list.title,
@@ -244,13 +267,6 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
   }
 
   
-  showModal = () => {
-    this.setState({ show: true });
-  };
-
-  hideModal = () => {
-    this.setState({ show: false });
-  };
  
   componentDidMount() {
     this.props.fetchorders();
@@ -260,12 +276,19 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
   
   
   render() {
-
-    
+    const { rowStyle, colStyle, gutter } = basicStyle;
     const marginStyle = { marginRight: '5px', marginBottom: '5px' };
-    // const { isLoading } = this.state;
+    
 
-  
+    // const { isLoading } = this.state;
+    
+
+
+
+
+    var content = this.state.content;
+
+
     const { orders } = this.props;
     if (orders === undefined) {
       return(
@@ -313,13 +336,33 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
             </p>
           </div>
 
-          <Button onClick={() => this.success(order)} style={marginStyle}>
+          <Button onClick={() =>{ this.success(order)}} style={marginStyle}>
                   {<IntlMessages id="feedback.alert.successTitle" />}
           </Button>
-          
-   
 
-          
+          {/* <Modal
+            visible={this.state.visible}
+            title="Title"
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+            footer={[
+              <Button key="back" size="large" onClick={this.handleCancel}>
+                Return
+              </Button>,
+              <Button
+                key="submit"
+                type="primary"
+                size="large"
+                loading={this.state.loading}
+                onClick={this.handleOk}
+              >
+                Submit
+              </Button>,
+            ]}
+          >
+            {content}
+          </Modal> */}
+     
         </TopbarCartWrapper>
 
           
