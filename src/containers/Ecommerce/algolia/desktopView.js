@@ -255,7 +255,7 @@ class Shelf extends Component {
                           </div> */}
                           
                           <div className="shelf-item__title">
-                            <p class="shelf-item__title__text">{product.category}</p>
+                            <p class="shelf-item__title__text">{product.description}</p>
                           </div>
                           {/* <div className="shelf-item__title">
                             <p class="shelf-item__title__text">{product.unitofmeasure} </p>
