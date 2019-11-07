@@ -119,7 +119,7 @@ class Sidebar extends Component {
       backgroundColor: customizedTheme.backgroundColor
     };
     const submenuStyle = {
-      backgroundColor: 'rgba(0,0,0,0.3)',
+      backgroundColor: '#F2F3EE',
       color: customizedTheme.textColor
     };
     const submenuColor = {
