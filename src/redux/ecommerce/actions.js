@@ -126,10 +126,11 @@ const ecommerceActions = {
   },
   fetchProducts : (filters, sortBy, callback) => dispatch => {
     var url = window.location.href;
+    
     var aux = url.split("https://triangulo-front-end.herokuapp.com/dashboard/shop/");
     
 
-    if(url == "https://triangulo-front-end.herokuapp.com/dashboard/shop"  ){
+    if(url == "https://triangulo-front-end.herokuapp.com/dashboard/shop" || "https://triangulo-front-end.herokuapp.com/dashboard" ){
       return api
       .get(`${orderapi}/productrule/0 `)
       .then(res => {
