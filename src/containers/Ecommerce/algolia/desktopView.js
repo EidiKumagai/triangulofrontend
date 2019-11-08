@@ -275,8 +275,7 @@ class Shelf extends Component {
                           :  
                           <div onClick={()=>{ addProduct(product)}} class="shelf-item__buy-btn">Adicionar</div>
                           } */}
-                        <div onClick={()=>{ product.qtd  == null ? notification('error','Input Quantity is blank, fill the input to add') : addProduct(product) }} class="shelf-item__buy-btn">Adicionar</div>
-
+                        
                           <div className="CampoQuantidade">
                             <div className="QuantidadeFilho">
                                   <p className="letra">Quantity: </p>
@@ -296,7 +295,7 @@ class Shelf extends Component {
                                 />
                               </td>
                                 <br></br>
-                                <br></br>
+
                             </div>
 
                             {product.valueuntiofmeasure == "undefined" ? 
@@ -331,7 +330,8 @@ class Shelf extends Component {
                             }
 
                          
-                          </div>  
+                          </div>
+                          <div onClick={()=>{ product.qtd  == null ? notification('error','Input Quantity is blank, fill the input to add') : addProduct(product) }} class="shelf-item__buy-btn">Add to Cart</div>  
                         </div>
                       </div>
                  

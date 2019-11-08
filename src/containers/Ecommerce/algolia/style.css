@@ -21,9 +21,10 @@ html .body{
 
 
  .CampoQuantidade{
-  width: 8px;
+  width: 10px;
   margin-left: -244px ;
   display: -webkit-box;
+  height: 112px;
 }
   .p {
     margin-top: 0;
@@ -173,9 +174,10 @@ body .shelf-container {
   border-radius: 43px;
   background-color: #606D42;
   color: rgb(245, 245, 245);
-  padding: 13px 0;
+  padding: 21px 0;
   margin: 13px;
-  margin-top: 20px;
+  margin-top: 19px;
+  margin-left: 35px;
   cursor: pointer;
   transition: background-color 0.2s;
 }

@@ -212,15 +212,18 @@ class Shelf extends Component {
      // console.log(this.props);
       return (
         <React.Fragment>
+          
                    
-          <div class="page">
-            <label class="field a-field a-field_a1">
+          <div style={{marginLeft: '84px',marginTop: '24px'}}>
+          <label class="field a-field a-field_a1">
               <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search a product" required/>
                 <span class="a-field__label-wrap">
                 <span class="a-field__label">Search here</span>
-          </span>
-        </label>
-        </div>
+            </span>
+            </label>
+          </div>
+            
+        
         {/* <input class="Input-text" type="text" value={value} onChange={this.handleChange}
         placeholder="type name here" /> */}
 
@@ -274,8 +277,7 @@ class Shelf extends Component {
                           :  
                           <div onClick={()=>{ addProduct(product)}} class="shelf-item__buy-btn">Adicionar</div>
                           } */}
-                        <div onClick={()=>{ product.qtd  == null ? notification('error','Input Quantity is blank, fill the input to add') : addProduct(product) }} class="shelf-item__buy-btn">Adicionar</div>
-
+                        
                           <div className="CampoQuantidade">
                             <div className="QuantidadeFilho">
                                   <p className="letra">Quantity: </p>
@@ -295,7 +297,7 @@ class Shelf extends Component {
                                 />
                               </td>
                                 <br></br>
-                                <br></br>
+
                             </div>
 
                             {product.valueuntiofmeasure == "undefined" ? 
@@ -330,7 +332,8 @@ class Shelf extends Component {
                             }
 
                          
-                          </div>  
+                          </div>
+                          <div onClick={()=>{ product.qtd  == null ? notification('error','Input Quantity is blank, fill the input to add') : addProduct(product) }} class="shelf-item__buy-btn">Add to Cart</div>  
                         </div>
                       </div>
                  
@@ -344,6 +347,7 @@ class Shelf extends Component {
         />  
           
           </div>
+          
         </React.Fragment>
       );
     }
