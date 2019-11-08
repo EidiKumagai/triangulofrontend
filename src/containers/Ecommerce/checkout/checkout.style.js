@@ -60,6 +60,11 @@ const WDCheckoutContents = styled.div`
   }
 `;
 
+// @media only screen and (max-width: 767px) {
+//   flex-direction: column;
+// }
+
+
 const WDBillingFormWrapper = styled.div`
   width: 60%;
   padding: ${props =>
@@ -190,13 +195,13 @@ const WDOrderTable = styled.div`
     }
 
     .isoOrderTableBody {
-      width: 100%;
+      width: 98%;
       display: flex;
       flex-direction: column;
       margin-bottom: 10px;
 
       .isoSingleOrderInfo {
-        width: 100%;
+        width: 98%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -229,10 +234,11 @@ const WDOrderTable = styled.div`
         }
 
         .totalPrice {
-          font-size: 17px;
+          font-size: 13px;
           font-weight: 500;
           color: ${palette('text', 2)};
           line-height: 1.5;
+          padding: 17px;
         }
       }
     }

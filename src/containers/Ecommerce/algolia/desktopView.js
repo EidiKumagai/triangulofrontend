@@ -212,6 +212,7 @@ class Shelf extends Component {
      // console.log(this.props);
       return (
         <React.Fragment>
+          
                    
           <div class="page">
             <label class="field a-field a-field_a1">
@@ -220,7 +221,7 @@ class Shelf extends Component {
                 <span class="a-field__label">Search here</span>
           </span>
         </label>
-        </div>
+        
         {/* <input class="Input-text" type="text" value={value} onChange={this.handleChange}
         placeholder="type name here" /> */}
 
@@ -343,6 +344,7 @@ class Shelf extends Component {
           
         />  
           
+          </div>
           </div>
         </React.Fragment>
       );

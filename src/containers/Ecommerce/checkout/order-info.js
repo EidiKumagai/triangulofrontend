@@ -9,6 +9,8 @@ import ModalStyle from './modal.style';
 import WithDirection from '../../../config/withDirection';
 import Modals from '../../../components/feedback/modal';
 import Input from '../../../components/uielements/input';
+import Card from '../../Uielements/Card/card.style';
+import './prodModal.css';
 //import { Dropdown } from 'semantic-ui-react'
 // import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -183,7 +185,13 @@ class OrderInfo extends Component {
                   </div> */}
                   
                  
-                 {this.renderProdtoCheck()} 
+                  <Card
+                  title={"Products"}
+                  bordered={false}
+                  style={{ width: '100%' }}
+                  >
+                  {this.renderProdtoCheck()}
+                </Card> 
                 </div>
                 <div className="isoOrderTableFooter">
                 <span>Total</span>
@@ -252,9 +260,20 @@ class OrderInfo extends Component {
 
       var myjson = JSON.stringify(array);
       let title = " order" 
-      
+      let addressfake = "ship to 1";
+
       console.log(products);
       console.log(array);
+      // Modals.success({
+      //   title: 'Order Success',
+      //   content:oderdetails,
+      //   okText: 'OK',
+      //   cancelText: 'Cancel',
+      //   onOk(){
+      //     history.replace('/dashboard/pedidos');
+      //     document.location.reload(true);
+      //   }
+      // });
       
         if(po == '' || products.length == 0){
           notification('error','Something is wrong, try again');
@@ -262,7 +281,7 @@ class OrderInfo extends Component {
         }else{
 
         api.post(`https://api-triangulo.herokuapp.com/order`,{ 
-        address: nomeadd,
+        address: addressfake,
         price: bool,
         itens:
           array,
@@ -355,27 +374,40 @@ class OrderInfo extends Component {
   renderProdtoCheck(){
     const {products} = this.props;
 
-    var prod = products.map( p => {
-     return (<tbody>
-      <tr>
-        <td>{p.name}</td>
-        <td>{p.qtd}</td>
-        <td>${p.price}</td>
-      </tr>
-    </tbody>) 
+    var prod = products.map( product => {
+     
+      var sf = (product.qtd * product.valueuntiofmeasure);
+      var aux =  "/  " + sf + "  " + product.unitofmeasure;
+      var priceXqtd = product.price * product.qtd;
+  
+    //  return (<tbody>
+    //   <tr>
+    //     <td>{p.name + "-" + p.description}</td>
+    //     <td>{p.qtd} {p.unitofmeasuredefault} { p.unitofmeasure === "undefined" ? "": aux }</td>
+    //     <td>${p.price} Price total: ${priceXqtd.toFixed(2)}</td>
+    //   </tr>
+    // </tbody>) 
+
+    return(
+      //style={{marginRight: spacing + 'em'}}
+      <div className="prodModal" >
+      <p className="pModal">{product.name + "-" + product.description}</p>
+      <p className="pModal">Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }</p>
+      <p className="pModal">Unit Price: ${product.price}</p>
+      <p className="pModal">Price total: ${priceXqtd.toFixed(2)}</p>
+
+      </div>
+      
+      )
     });
 
     return(
-      <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Product</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Price</th>
-        </tr>
-      </thead>
+    <React.Fragment>
       {prod}
-    </table>
+    </React.Fragment>
+       
+      
+    
     ) 
     
   }
@@ -388,14 +420,19 @@ class OrderInfo extends Component {
     return products.map(product => {  
       var sf = (product.qtd * product.valueuntiofmeasure);
       var aux =  "/  " + sf + "  " + product.unitofmeasure;
+      var priceXqtd = product.price * product.qtd;
       return (
         <div className="isoSingleOrderInfo">
         <p>
-          <span>{product.name} - {product.description}  </span> 
+          
+          <span>{product.name} - {product.description}  </span>
+          
+           
           {/* {product.unitofmeasuredefault} {product.valueuntiofmeasure === undefined ? " ": "/" + product.quantity * product.valueuntiofmeasure +" "+ product.unitofmeasure} */}
           <span >Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }  </span>
         </p>
-        <span className="totalPrice">${product.price}</span>
+        
+        <span className="totalPrice">Unit price: ${product.price} Price total: ${priceXqtd.toFixed(2)}</span>
         <a className="isoItemRemove" onClick={() => removeProduct(product)}>
           <i className="ion-android-close" />
         </a>
@@ -560,14 +597,8 @@ class OrderInfo extends Component {
        <div className="isoOrderTableBody">
        <div className="isoSingleOrderInfo" >
       <p>
-        <span>Address name: {this.state.address.address}</span> <br></br>
-
-        
-        <span>City: {this.state.address.city}</span> <br></br>
-        
-        
-        <span>Country: {this.state.address.country}</span> <br></br>
-        
+        <span>Address: {this.state.address.address}</span> <br></br>
+    
         
       </p>        
       </div>

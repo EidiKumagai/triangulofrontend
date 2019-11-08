@@ -138,6 +138,9 @@ class Carrinho extends Component {
           onClick={() => removeProduct(product)}
       />
      quantity = product.qtd;
+
+     var sf = (product.qtd * product.valueuntiofmeasure);
+    var aux =  "/  " + sf + "  " + product.unitofmeasure;
       // aux = this.toFloat(product.price);
       // totalPrice += product.qtd * product.price ;
       return (
@@ -147,7 +150,7 @@ class Carrinho extends Component {
         <div className="isoCartDetails">
           <h3>
             <a href="#">
-              {product.name}
+              {product.name + "-" + product.description}
             </a>
           </h3>
           <p className="isoItemPriceQuantity">
@@ -162,6 +165,11 @@ class Carrinho extends Component {
               <span className="isoItemQuantity">
               {quantity}
               </span>
+          </p><p className="isoItemPriceQuantity">
+            <span>Quantity:   </span>
+            <span>
+          {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }  
+            </span>
           </p>
         </div>
         <a className="isoItemRemove" onClick={() => removeProduct(product)}>
