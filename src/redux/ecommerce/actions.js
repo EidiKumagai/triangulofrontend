@@ -129,7 +129,7 @@ const ecommerceActions = {
     
     var aux = url.split("https://triangulo-front-end.herokuapp.com/dashboard/shop/");
     
-    if(url == "https://triangulo-front-end.herokuapp.com/dashboard"){
+    if(url == "https://triangulo-front-end.herokuapp.com/dashboard" || url == "https://triangulo-front-end.herokuapp.com/dashboard"){
       return api
       .get(`${orderapi}/productrule/0 `)
       .then(res => {
