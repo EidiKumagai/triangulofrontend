@@ -129,7 +129,9 @@ const ecommerceActions = {
     
     var aux = url.split("https://triangulo-front-end.herokuapp.com/dashboard/shop/");
     
-    if(url == "https://triangulo-front-end.herokuapp.com/dashboard" || url == "https://triangulo-front-end.herokuapp.com/dashboard"){
+    if(url == "https://triangulo-front-end.herokuapp.com/dashboard" || url == "https://triangulo-front-end.herokuapp.com/dashboard"
+    && url == "http://triangulo-front-end.herokuapp.com/dashboard" || url == "http://triangulo-front-end.herokuapp.com/dashboard"
+    ){
       return api
       .get(`${orderapi}/productrule/0 `)
       .then(res => {
@@ -153,7 +155,7 @@ const ecommerceActions = {
         console.log('Could not fetch products. Try again later.');
       });
     }
-    if(url == "https://triangulo-front-end.herokuapp.com/dashboard/shop"  ){
+    if(url == "https://triangulo-front-end.herokuapp.com/dashboard/shop" && url == "http://triangulo-front-end.herokuapp.com/dashboard/shop"  ){
       
       return api
       .get(`${orderapi}/productrule/0 `)
