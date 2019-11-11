@@ -303,7 +303,7 @@ class OrderInfo extends Component {
       //   }
       // });
       
-        if(po == '' || products.length == 0){
+        if(po == ''){
           notification('error','Something is wrong, try again');
           notification('info','Maybe you forgot to fill some fields, like Address, P.O or your cart is empty');
         }else{
