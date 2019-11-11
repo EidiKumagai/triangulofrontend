@@ -128,7 +128,7 @@ const ecommerceActions = {
     var url = window.location.href;
     
     var aux = url.split("https://triangulo-front-end.herokuapp.com/dashboard/shop/");
-    var aux2 = url.split("https://triangulo-front-end.herokuapp.com/dashboard/shop/");
+    var aux2 = url.split("http://triangulo-front-end.herokuapp.com/dashboard/shop/");
     
     if(url == "http://triangulo-front-end.herokuapp.com/dashboard" || url == "http://triangulo-front-end.herokuapp.com/dashboard"){
       return api
