@@ -647,7 +647,7 @@ class OrderInfo extends Component {
    
       
         <div className="isoOrderTable">
-        <b><span className="tableHead">Address</span></b>
+        {/* <b><span className="tableHead">Address</span></b> */}
          <b>Address: </b>
           <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" /> 
           <br></br>
