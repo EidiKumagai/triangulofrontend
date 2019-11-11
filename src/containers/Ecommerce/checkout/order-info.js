@@ -338,6 +338,7 @@ class OrderInfo extends Component {
           console.log(res.data);
         })
         .catch(function (error) {
+          console.log("erro orderm")
           notification('error','Something is wrong, try again');
           notification('info','Maybe you forgot to fill some fields, like Address, P.O');
           console.log(po);
