@@ -45,7 +45,7 @@ class OrderInfo extends Component {
 
   constructor(props) {
     super(props);
-
+    const { adress } = this.props;
     this.state={
       value:'',
       obs:'',
@@ -64,16 +64,23 @@ class OrderInfo extends Component {
     let array = [];
     var aux;
     this.getUserInfo();
-    this.props.fetchadress();
+   
+    
     this.getFreitch();
     
     
     
   }
-
   componentWillMount(){
-    console.log(this.props);
+    this.props.fetchadress();
+    const { adress } = this.props;
+    if(adress === undefined){
+
+    }else{
+      this.setState({value:adress[0].addressname });
+    }
   }
+
   componentWillReceiveProps(nextProps) {
     
     if (nextProps.newProduct !== this.props.newProduct) {
@@ -545,7 +552,8 @@ class OrderInfo extends Component {
     
     
    
-  const defaultOption = array[0];
+  const defaultOption = array[0].addressname;
+      console.log(defaultOption);
    
     return (
       
@@ -626,7 +634,7 @@ class OrderInfo extends Component {
           <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" /> */}
           <br></br>
 
-           <RadioGroup onChange={this.onChange} value={this.state.value}>
+           <RadioGroup onChange={this.onChange}   value={this.state.value}>
                  {addressRadio}
             </RadioGroup>
 
