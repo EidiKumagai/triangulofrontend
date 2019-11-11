@@ -128,9 +128,63 @@ const ecommerceActions = {
     var url = window.location.href;
     
     var aux = url.split("https://triangulo-front-end.herokuapp.com/dashboard/shop/");
+    var aux2 = url.split("https://triangulo-front-end.herokuapp.com/dashboard/shop/");
     
+    if(url == "http://triangulo-front-end.herokuapp.com/dashboard" || url == "http://triangulo-front-end.herokuapp.com/dashboard"){
+      return api
+      .get(`${orderapi}/productrule/0 `)
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
+  
+        if (!!callback) {
+          callback();
+        }
+  
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }
+    if(url == "http://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
+      return api
+      .get(`${orderapi}/productrule/0 `)
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
+  
+        if (!!callback) {
+          callback();
+        }
+  
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }
+    
+
+    
+
+
+
     if(url == "https://triangulo-front-end.herokuapp.com/dashboard" || url == "https://triangulo-front-end.herokuapp.com/dashboard"
-    && url == "http://triangulo-front-end.herokuapp.com/dashboard" || url == "http://triangulo-front-end.herokuapp.com/dashboard"
     ){
       return api
       .get(`${orderapi}/productrule/0 `)
@@ -155,7 +209,7 @@ const ecommerceActions = {
         console.log('Could not fetch products. Try again later.');
       });
     }
-    if(url == "https://triangulo-front-end.herokuapp.com/dashboard/shop" && url == "http://triangulo-front-end.herokuapp.com/dashboard/shop"  ){
+    if(url == "https://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
       
       return api
       .get(`${orderapi}/productrule/0 `)
@@ -181,7 +235,7 @@ const ecommerceActions = {
       });
     }else{
       return api
-      .get(`${orderapi}/productrule/${aux[1]}`)
+      .get( url == "https://triangulo-front-end.herokuapp.com/dashboard/shop"? `${orderapi}/productrule/${aux[1]}` : `${orderapi}/productrule/${aux2[1]}`  )
       .then(res => {
         let  rows  = res.data;
         if (!!filters && filters.length > 0) {
