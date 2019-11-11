@@ -54,6 +54,11 @@ html[dir='rtl'] .ant-popover {
   text-align: right;
 }
 
+html[dir='rtl'] .ant-popover-arrow:after {
+  left:98px;
+  text-align: left;
+}
+
 /* Ecommerce Card */
 html[dir='rtl'] .isoCardInfoForm .ant-input {
   text-align: right;

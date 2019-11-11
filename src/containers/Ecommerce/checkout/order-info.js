@@ -6,6 +6,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import Select from "react-dropdown-select";
 import history from '../../Page/history';
 import ModalStyle from './modal.style';
+import Radio, { RadioGroup } from '../../../components/uielements/radio';
 import WithDirection from '../../../config/withDirection';
 import Modals from '../../../components/feedback/modal';
 import Input from '../../../components/uielements/input';
@@ -46,8 +47,9 @@ class OrderInfo extends Component {
     super(props);
 
     this.state={
+      value:'',
       obs:'',
-      address:{address:'',city:'',country:''},
+      address:{addresname:'',addr1:'',city:'',state:''},
       info:{},
       frete:{},
       resultado:0,
@@ -59,10 +61,18 @@ class OrderInfo extends Component {
   }
 
   componentDidMount(){
+    let array = [];
+    var aux;
     this.getUserInfo();
     this.props.fetchadress();
-    this.getFreitch(); 
+    this.getFreitch();
     
+    
+    
+  }
+
+  componentWillMount(){
+    console.log(this.props);
   }
   componentWillReceiveProps(nextProps) {
     
@@ -83,8 +93,8 @@ class OrderInfo extends Component {
   submitAdd = (value) => {
     // const {adress} = this.props;
     // this.setState({address: adress});
-    this.setState({address:{addressName:value[0].label ,address: value[0].address, city:value[0].city ,country:value[0].country}});
-    
+    this.setState({address:{addresname:value.target.value.addressname,addr1:value.target.value.addr1 , city:value.target.value.city ,state:value.target.value.state}});
+    this.setState({value: value.target.value.addressname});
   }
   
 
@@ -260,8 +270,8 @@ class OrderInfo extends Component {
 
       var myjson = JSON.stringify(array);
       let title = " order" 
-      let addressfake = "ship to 1";
-
+      //let addressfake = "ship to 1";
+      var ad = this.state.value;
       console.log(products);
       console.log(array);
       // Modals.success({
@@ -281,7 +291,7 @@ class OrderInfo extends Component {
         }else{
 
         api.post(`https://api-triangulo.herokuapp.com/order`,{ 
-        address: addressfake,
+        address: ad,
         price: bool,
         itens:
           array,
@@ -331,6 +341,12 @@ class OrderInfo extends Component {
       this.setState({frete: res.data});
     });
   }
+
+  onChange = value => {
+    // this.setState({address:{addresname:value.target.value.addressname,addr1:value.target.value.addr1 , city:value.target.value.city ,state:value.target.value.state}});
+    this.setState({value: value.target.value});
+    //console.log(this.state.value);
+  };
 
   renderUsers(){
     const { info } = this.state
@@ -443,6 +459,11 @@ class OrderInfo extends Component {
 
   render() 
   {
+    const radioStyle = {
+      display: 'block',
+      height: '30px',
+      lineHeight: '30px'
+    };
     const {cartTotal, adress} =  this.props;
     const { frete } =  this.state;
 
@@ -493,13 +514,30 @@ class OrderInfo extends Component {
     const list = adress.map(end => {
       let obj = new Object();
       obj.value = end.id;
-      obj.address = end.address
+      obj.addr1 = end.addr1
+      obj.addr2 = end.addr2
+      obj.addr3 = end.addr3
+      obj.addr4 = end.addr4
       obj.city = end.city
-      obj.country = end.country
-      obj.label =  end.addressname
+      obj.state = end.state
+      obj.addressname =  end.addressname
       array.push(obj);
       
     });
+
+    if(adress === undefined){
+      this.setState({});
+    }
+
+    var addressRadio  =(
+      array.map(c => {
+        return (
+          <Radio style={radioStyle} value={c.addressname}>
+            {c.addressname}
+          </Radio>
+        )
+      })
+    );
     
    
     //console.log(token);
@@ -586,7 +624,16 @@ class OrderInfo extends Component {
         <b><span className="tableHead">Address</span></b>
         {/* <b>Address: </b>
           <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" /> */}
-          <Select  options={array}  onChange={(values) => this.submitAdd(values)} />
+          <br></br>
+
+           <RadioGroup onChange={this.onChange} value={this.state.value}>
+                 {addressRadio}
+            </RadioGroup>
+
+
+
+
+          {/* <Select  options={array}  onChange={(values) => this.submitAdd(values)} /> */}
        </div>
        <div className="isoOrderTable">
        <br></br>
@@ -597,9 +644,30 @@ class OrderInfo extends Component {
        <div className="isoOrderTableBody">
        <div className="isoSingleOrderInfo" >
       <p>
-        <span>Address: {this.state.address.address}</span> <br></br>
-    
-        
+        {/* <span>Address: {this.state.address.address}</span> <br></br> */}
+        <span>Address name: {array.map(c => {
+          if(c.addressname == this.state.value){
+            return (
+              c.addr1
+            )
+          }
+        })}</span> <br></br>
+        <span>City: {array.map(c => {
+          if(c.addressname == this.state.value){
+            return (
+              c.city
+            )
+          }
+        })}</span><br></br>
+        <span>State: {array.map(c => {
+          if(c.addressname == this.state.value){
+            return (
+              c.state
+            )
+          }
+        })}</span><br></br>
+
+
       </p>        
       </div>
        

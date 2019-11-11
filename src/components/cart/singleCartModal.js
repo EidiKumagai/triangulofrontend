@@ -140,7 +140,7 @@ class Carrinho extends Component {
      quantity = product.qtd;
 
      var sf = (product.qtd * product.valueuntiofmeasure);
-    var aux =  "/  " + sf + "  " + product.unitofmeasure;
+    var aux =  "/  " + sf.toFixed(2) + "  " + product.unitofmeasure;
       // aux = this.toFloat(product.price);
       // totalPrice += product.qtd * product.price ;
       return (
