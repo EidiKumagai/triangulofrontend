@@ -235,7 +235,7 @@ const ecommerceActions = {
       });
     }else{
       return api
-      .get( url == "https://triangulo-front-end.herokuapp.com/dashboard/shop" ? `${orderapi}/productrule/${aux2[1]}` : `${orderapi}/productrule/${aux1[1]}`  )
+      .get( url == "https://triangulo-front-end.herokuapp.com/dashboard/shop" ? `${orderapi}/productrule/${aux2[1]}` : `${orderapi}/productrule/${aux[1]}`  )
       .then(res => {
         let  rows  = res.data;
         if (!!filters && filters.length > 0) {
