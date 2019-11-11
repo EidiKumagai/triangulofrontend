@@ -127,7 +127,7 @@ class OrderInfo extends Component {
   fazerpedido(resultado) {
     
 
-    const {cartTotal, products} = this.props;
+    const {cartTotal, products, adress} = this.props;
 
     const { address, obs, frete, po } = this.state 
     
@@ -218,7 +218,18 @@ class OrderInfo extends Component {
                 </div>
                 <span>Address</span>
                 <div class="alert alert-secondary" role="alert">
-                  {this.state.value}
+                  {adress.map( adr => {
+                    if(adr.addressname == this.state.value){
+                      return(
+                        <div>
+                      <p>Adress name: {adr.addr1}</p>
+                      <p>City: {adr.city}</p>
+                      <p>State: {adr.state}</p>
+                        </div>
+                        
+                      )
+                    }
+                  })}
                 </div>
               </div>
 
@@ -476,7 +487,7 @@ class OrderInfo extends Component {
 
     
     
-    console.log(frete);
+    console.log(this.state.value);
     
     if(adress === undefined || frete[0] === undefined ){
       return(
@@ -539,9 +550,16 @@ class OrderInfo extends Component {
     var addressRadio  =(
       array.map(c => {
         return (
+          <div>
           <Radio style={radioStyle} value={c.addressname}>
-            {c.addressname}
+            {c.addr1}
+          <br></br>
           </Radio>
+        <span>City: {c.city}</span> <br></br>
+        <span>State: {c.state}</span> <br></br>
+          </div>
+          
+          
         )
       })
     );
@@ -630,8 +648,8 @@ class OrderInfo extends Component {
       
         <div className="isoOrderTable">
         <b><span className="tableHead">Address</span></b>
-        {/* <b>Address: </b>
-          <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" /> */}
+         <b>Address: </b>
+          <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" /> 
           <br></br>
 
            <RadioGroup onChange={this.onChange}   value={this.state.value}>
@@ -641,18 +659,18 @@ class OrderInfo extends Component {
 
 
 
-          {/* <Select  options={array}  onChange={(values) => this.submitAdd(values)} /> */}
+           {/* <Select  options={array}  onChange={(values) => this.submitAdd(values)} />  */}
        </div>
        <div className="isoOrderTable">
        <br></br>
 
        
-       <b><span className="tableHead">Description of Address: </span></b>
+        {/* <b><span className="tableHead">Description of Address: </span></b> 
 
        <div className="isoOrderTableBody">
        <div className="isoSingleOrderInfo" >
       <p>
-        {/* <span>Address: {this.state.address.address}</span> <br></br> */}
+         <span>Address: {this.state.address.address}</span> <br></br>
         <span>Address name: {array.map(c => {
           if(c.addressname == this.state.value){
             return (
@@ -679,7 +697,7 @@ class OrderInfo extends Component {
       </p>        
       </div>
        
-      </div>
+      </div> */}
 
          
 
