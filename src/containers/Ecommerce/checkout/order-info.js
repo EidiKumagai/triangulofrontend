@@ -555,7 +555,12 @@ class OrderInfo extends Component {
               <span className="address_header" style={{fontSize: '15px'}}>{c.addr1}</span> 
             <br></br>
             </Radio>
-            <span className="address_detail">{c.city == "" ? "X," : c.city+ ","  } {c.state == "" ? "X" : c.state   } </span> <br></br>
+            <span className="address_detail">
+            {c.addr2 == "" ? <p hidden></p> : c.addr2+ ","}
+            {c.addr3 == "" ? <p hidden></p> : c.addr3+ ","}
+            {c.addr4 == "" ? <p hidden></p> : c.addr4+ ","}
+            {c.city == "" ? <p hidden></p> : c.city+ ","}
+            {c.state == "" ? <p hidden></p>  : c.state   } </span> <br></br>
           </div>
           
           
