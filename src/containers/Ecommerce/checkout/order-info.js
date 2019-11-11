@@ -211,7 +211,7 @@ class OrderInfo extends Component {
                 </div>
                 <span>Address</span>
                 <div class="alert alert-secondary" role="alert">
-                  {nomeadd}
+                  {this.state.value}
                 </div>
               </div>
 

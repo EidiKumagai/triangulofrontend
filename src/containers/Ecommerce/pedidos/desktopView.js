@@ -227,7 +227,7 @@ var newchar = '_';
 
 string = string.split(' ').join(newchar);
 api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(response =>{
-   endereco = response.data[0].address
+   endereco = response.data[0].addr1
 
 
     const aux = (
