@@ -397,7 +397,7 @@ class OrderInfo extends Component {
 
         <div className="isoSingleOrderInfo" >
           <p>
-            <span>Price: $ {frete[0].price}</span>
+            <span>Price:${frete[0].price}</span>
           </p>
         </div>
       )
