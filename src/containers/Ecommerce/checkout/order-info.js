@@ -555,8 +555,7 @@ class OrderInfo extends Component {
               <span className="address_header" style={{fontSize: '15px'}}>{c.addr1}</span> 
             <br></br>
             </Radio>
-            <span className="address_detail">City: {c.city}</span> <br></br>
-            <span className="address_detail">State: {c.state}</span> <br></br>
+            <span className="address_detail">{c.city == "" ? "X," : c.city+ ","  } {c.state == "" ? "X" : c.state   } </span> <br></br>
           </div>
           
           
