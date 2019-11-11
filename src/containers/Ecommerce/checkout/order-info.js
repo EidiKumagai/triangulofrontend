@@ -550,13 +550,13 @@ class OrderInfo extends Component {
     var addressRadio  =(
       array.map(c => {
         return (
-          <div>
-          <Radio style={radioStyle} value={c.addressname}>
-            {c.addr1}
-          <br></br>
-          </Radio>
-        <span>City: {c.city}</span> <br></br>
-        <span>State: {c.state}</span> <br></br>
+          <div className={"divRadio " + (this.state.value == c.addressname ? "checked" : "" )}>
+            <Radio style={radioStyle} className="divRadiob" value={c.addressname} checked={this.state.value}>
+              <span className="address_header" style={{fontSize: '15px'}}>{c.addr1}</span> 
+            <br></br>
+            </Radio>
+            <span className="address_detail">City: {c.city}</span> <br></br>
+            <span className="address_detail">State: {c.state}</span> <br></br>
           </div>
           
           

@@ -9,3 +9,22 @@
     color: #979797;
     
 }
+
+
+.divRadio {
+    padding: 8px;
+    margin-bottom: 15px;
+}
+.divRadio.checked{
+    border: 1px solid #606D42;
+    /* line-height: 33px; */
+    border-radius: 5px;
+    background-color: #DEE0D5;
+}
+.divRadio > .address_header  {
+    font-size: 15px !important;
+}
+.divRadio > .address_detail  {
+    margin-left: 23px;
+    font-size: 15px;
+}
