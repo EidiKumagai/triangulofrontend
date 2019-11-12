@@ -148,7 +148,7 @@ class ListOrders extends Component {
          <tr>
           {pro.qtd === undefined || pro.unitofmeasuredefault === undefined ||  pro.measure === undefined || pro.unitofmeasure === undefined ? <th>X</th> : <th>{pro.qtd} {pro.unitofmeasuredefault} {pro.measure === "undefined" ? " " : aux } </th>}
           <th>${pro.preco} </th>
-          {pro.qtd === undefined ? <th>X</th>: <th>${result.toFixed(2)} </th> }
+          {pro.qtd === undefined ? <th>X</th>: <th><CurrencyFormat value={result.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></th> }
           {/* {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
           <th>${pro.preco}</th> */}
         </tr>
