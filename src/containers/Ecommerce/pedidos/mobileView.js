@@ -230,7 +230,7 @@ var newchar = '_';
 string = string.split(' ').join(newchar);
 api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(response =>{
    endereco = response.data[0].addr1
-
+      
     var currency = (<CurrencyFormat value={order.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />); 
     const aux = (
       
@@ -238,7 +238,7 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
           <div class="card-header">Order Details</div>
           <div class="card-body text-dark">
             <h5 class="card-title">Price Total: {currency}</h5>
-            <p class="card-text">Address: {endereco}</p>
+            <p class="card-text">Address: {endereco} <p>{response.data[0].city} {response.data[0].state}</p> </p>
             <p class="card-text">Status: {res.data.obs}</p>
           </div>
       </div>
