@@ -3,7 +3,7 @@ import Spinner from 'react-spinner-material';
 import { connect } from 'react-redux';
 import api from '../../../containers/Page/api';
 import Dropdown from 'react-bootstrap/Dropdown'
-import Select from "react-dropdown-select";
+import CurrencyFormat from "react-currency-format";
 import history from '../../Page/history';
 import ModalStyle from './modal.style';
 import Radio, { RadioGroup } from '../../../components/uielements/radio';
@@ -456,6 +456,8 @@ class OrderInfo extends Component {
       var sf = (product.qtd * product.valueuntiofmeasure);
       var aux =  "/  " + sf + "  " + product.unitofmeasure;
       var priceXqtd = product.price * product.qtd;
+      var currency = (<CurrencyFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
+      var currency2 = (<CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
       return (
         <div className="isoSingleOrderInfo">
         <p>
@@ -467,7 +469,7 @@ class OrderInfo extends Component {
           <span >Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }  </span>
         </p>
         
-        <span className="totalPrice">Unit price: ${product.price} Price total: ${priceXqtd.toFixed(2)}</span>
+      <span className="totalPrice">Unit price: {currency} Price total: {currency2}</span>
         <a className="isoItemRemove" onClick={() => removeProduct(product)}>
           <i className="ion-android-close" />
         </a>
@@ -620,7 +622,8 @@ class OrderInfo extends Component {
           <div className="isoOrderTableFooter">
             <span>Total</span>
             <span>
-              ${cartTotal.totalPrice.toFixed(2)}
+            <CurrencyFormat value={cartTotal.totalPrice.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+              {/* ${cartTotal.totalPrice.toFixed(2)} */}
             </span>
           </div>
         </div>
@@ -642,7 +645,8 @@ class OrderInfo extends Component {
           <div className="isoOrderTableFooter">
             <span>Total with Freight</span>
              <span>
-              ${bool3}
+             <CurrencyFormat value={bool3} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+              {/* ${bool3} */}
             </span> 
           </div>
         </div>

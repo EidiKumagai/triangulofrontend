@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import CurrencyFormat  from 'react-currency-format';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import IntlMessages from '../utility/intlMessages';
@@ -172,8 +172,10 @@ class TopbarAddtoCart extends Component {
           </Link>
 
           <h3>
-            <IntlMessages id="topbar.totalPrice" />:{'$ '}
-            <span>{cartTotal.totalPrice.toFixed(2)}</span>
+            <IntlMessages id="topbar.totalPrice" />:
+
+            
+            <span><CurrencyFormat value={cartTotal.totalPrice.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></span>
           </h3>
         </div>
       </TopbarDropdownWrapper>
