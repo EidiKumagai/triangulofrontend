@@ -213,7 +213,7 @@ class OrderInfo extends Component {
                 <div className="isoOrderTableFooter">
                 <span>Total</span>
                   <div class="alert alert-secondary" role="alert">
-                  ${cartTotal.totalPrice.toFixed(2)}
+                  <CurrencyFormat value={cartTotal.totalPrice.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                   </div>
                 </div>
                 <span>Address</span>
@@ -261,7 +261,7 @@ class OrderInfo extends Component {
                 <div className="isoOrderTableFooter">
                   <span>Total with Freight</span>
                   <div class="alert alert-secondary" role="alert">
-                  ${bool3}
+                  <CurrencyFormat value={bool3} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                 </div> 
                 </div>
               </div>
@@ -429,7 +429,9 @@ class OrderInfo extends Component {
       <p className="pModal">{product.name + "-" + product.description}</p>
       <p className="pModal">Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }</p>
       <p className="pModal">Unit Price: ${product.price}</p>
-      <p className="pModal">Price total: ${priceXqtd.toFixed(2)}</p>
+      <p className="pModal">Price total: 
+      <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+      </p>
 
       </div>
       

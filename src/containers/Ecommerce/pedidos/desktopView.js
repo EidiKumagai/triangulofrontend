@@ -4,6 +4,7 @@ import basicStyle from '../../../config/basicStyle';
 import Box from '../../../components/utility/box';
 import LayoutWrapper from '../../../components/utility/layoutWrapper';
 import ContentHolder from '../../../components/utility/contentHolder';
+import CurrencyFormat  from 'react-currency-format';
 //import './style1.css';
 import TopbarCartWrapper from '../../../components/cart/singleCartModal.style';
 import './instantSearch.css';
@@ -229,13 +230,13 @@ string = string.split(' ').join(newchar);
 api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(response =>{
    endereco = response.data[0].addr1
 
-
+    var currency = (<CurrencyFormat value={order.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />); 
     const aux = (
       
       <div class="card border-dark mb-3" style={{maxWidth:'18rem'}}>
           <div class="card-header">Order Details</div>
           <div class="card-body text-dark">
-            <h5 class="card-title">Price Total: $ {res.data.price}</h5>
+            <h5 class="card-title">Price Total: {currency}</h5>
             <p class="card-text">Address: {endereco}</p>
             <p class="card-text">Status: {res.data.obs}</p>
           </div>
@@ -321,9 +322,9 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
               </span>
             </p>
             <p className="isoItemPriceQuantity">
-              <span>Price Total $</span>
+              <span>Price Total: </span>
               <span>
-                {order.price}
+              <CurrencyFormat value={order.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />
               </span>
             </p>
 
