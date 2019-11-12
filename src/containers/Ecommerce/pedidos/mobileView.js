@@ -122,10 +122,11 @@ class ListOrders extends Component {
   console.log(arrayProd);
  
   produtos  = arrayProd.map(pro => {
-    var sf = (pro.qtd * pro.measure);
-    sf.toFixed(2);
+    var parse = parseFloat(pro.measure);
+    var sf = (pro.qtd * parse);
+    
   
-    var aux =  "/" + sf + "" + pro.unitofmeasure;  
+    var aux =  "/" + sf.toFixed(2) + "   " + pro.unitofmeasure;  
     console.log(pro.desc);
     var result = pro.preco * pro.qtd;
     return (
