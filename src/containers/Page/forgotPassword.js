@@ -27,15 +27,18 @@ class ForgotPassword extends React.Component {
 
   handleSubmit(){
     const {email} = this.state;
-      try {
+      
         api.post("https://api-triangulo.herokuapp.com/users/forgotPassword",{ email }).then(res =>{
           console.log(res)
           notification("success", "Check your email to change your password");
           history.replace('/');
+        })
+        .catch(function (error) {
+          // handle error
+          notification("error", "Something is wrong, talk to your supervisor");
+          console.log(error);
         });  
-      } catch (error) {
-        notification("error", "Check your email to change your password");
-      }
+      
         
 
   }
