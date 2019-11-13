@@ -565,7 +565,8 @@ class OrderInfo extends Component {
             {c.addr3 == "" ? <p hidden></p> : c.addr3+ ","}
             {c.addr4 == "" ? <p hidden></p> : c.addr4+ ","}
             {c.city == "" ? <p hidden></p> : c.city+ ","}
-            {c.state == "" ? <p hidden></p>  : c.state   } </span> <br></br>
+            {c.state == "" ? <p hidden></p>  : c.state   } 
+            {c.postalcode == "" ? <p hidden></p>  : c.postalcode   }</span> <br></br>
           </div>
           
           

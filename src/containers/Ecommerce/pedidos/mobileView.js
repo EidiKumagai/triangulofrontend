@@ -237,8 +237,11 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
       <div class="card border-dark mb-3" style={{maxWidth:'18rem'}}>
           <div class="card-header">Order Details</div>
           <div class="card-body text-dark">
-            <h5 class="card-title">Price Total: {currency}</h5>
-            <p class="card-text">Address: {endereco} <p>{response.data[0].city} {response.data[0].state}</p> </p>
+            <h5 class="card-title">Price Total: {currency}</h5> 
+            <p class="card-text">Address: {endereco} 
+<p> { response.data[0].addr2 == "" ? "" : response.data[0].addr2 + "," } { response.data[0].addr3 == "" ? "" : response.data[0].addr3 + ","  } { response.data[0].addr4 == "" ? "" : response.data[0].addr4 + "," }{response.data[0].city == "" ? "" : response.data[0].city + "," } 
+    {response.data[0].state == "" ? "" : response.data[0].state + "," } {response.data[0].postalcode == "" ? "" : response.data[0].postalcode  }</p> 
+            </p>
             <p class="card-text">Status: {res.data.obs}</p>
           </div>
       </div>
