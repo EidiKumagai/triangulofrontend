@@ -213,14 +213,17 @@ class Shelf extends Component {
       return (
         <React.Fragment>
           
-                   
-          <div class="page">
-            <label class="field a-field a-field_a1">
+          <div style={{marginTop: '9px', marginLeft: '76px', }}>
+          <label class="field a-field a-field_a1">
               <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search a product" required/>
                 <span class="a-field__label-wrap">
                 <span class="a-field__label">Search here</span>
           </span>
         </label>
+          </div>
+                   
+          <div class="page">
+            
         
         {/* <input class="Input-text" type="text" value={value} onChange={this.handleChange}
         placeholder="type name here" /> */}

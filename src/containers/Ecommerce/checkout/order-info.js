@@ -9,7 +9,7 @@ import ModalStyle from './modal.style';
 import Radio, { RadioGroup } from '../../../components/uielements/radio';
 import WithDirection from '../../../config/withDirection';
 import Modals from '../../../components/feedback/modal';
-import Input from '../../../components/uielements/input';
+//import Input from '../../../components/uielements/input';
 import Card from '../../Uielements/Card/card.style';
 import './prodModal.css';
 //import { Dropdown } from 'semantic-ui-react'
@@ -23,10 +23,12 @@ import { OrderTable } from './checkout.style';
 import ecommerceAction from '../../../redux/ecommerce/actions';
 import { error } from 'util';
 import '../cart/cartTable.style';
-// import { Form, TextArea } from 'semantic-ui-react';
+//import { Form, TextArea } from 'semantic-ui-react';
 //import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css'
 import { notification } from '../../../components';
+import { Input } from 'antd';
+const { TextArea } = Input;
 
 const isoModal = ModalStyle(Modals);
 const Modal = WithDirection(isoModal);
@@ -93,8 +95,11 @@ class OrderInfo extends Component {
   }
 
   handleChange(event){
+
     this.setState({obs: event.target.value});
+    this.setState({value: event.target.value});
     console.log(this.state.obs);
+    console.log(this.state.value);
   }
 
   submitAdd = (value) => {
@@ -684,6 +689,24 @@ class OrderInfo extends Component {
 
            <RadioGroup onChange={this.onChange}   value={this.state.value}>
                  {addressRadio}
+                 <div style={{paddingBottom: '111px',marginLeft: '8px'}}>
+                   
+                 <Radio style={radioStyle} className="divRadiob" value={this.state.obs} checked={this.state.value}>
+                 <span className="address_header" style={{fontSize: '15px'}}>Specific Address</span> 
+                 <br></br>
+                 <TextArea
+                    value={this.state.obs}
+                    onChange={this.handleChange}
+                    placeholder="Put your specific address here"
+                    autoSize={{ minRows: 3, maxRows: 5 }}
+                  />
+                </Radio>
+
+                
+                
+                 </div>
+                 
+                 
             </RadioGroup>
 
 
