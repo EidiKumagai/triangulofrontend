@@ -544,6 +544,7 @@ class OrderInfo extends Component {
       obj.city = end.city
       obj.state = end.state
       obj.addressname =  end.addressname
+      obj.postalcode = end.postalcode
       array.push(obj);
       
     });
