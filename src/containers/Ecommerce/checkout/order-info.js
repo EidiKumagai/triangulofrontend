@@ -300,6 +300,14 @@ class OrderInfo extends Component {
       //   onOk(){
       //     history.replace('/dashboard/pedidos');
       //     document.location.reload(true);
+      //   },
+      //   onCancel(){
+      //     history.replace('/dashboard/pedidos');
+      //     document.location.reload(true);
+      //   },
+      //   afterClose(){
+      //     history.replace('/dashboard/pedidos');
+      //     document.location.reload(true);
       //   }
       // });
       
@@ -328,7 +336,16 @@ class OrderInfo extends Component {
               onOk(){
                 history.replace('/dashboard/pedidos');
                 document.location.reload(true);
+              },
+              onCancel(){
+                history.replace('/dashboard/pedidos');
+                document.location.reload(true);
+              },
+              afterClose(){
+                history.replace('/dashboard/pedidos');
+                document.location.reload(true);
               }
+
             });
             // alert("Order Successfully");
             // 
