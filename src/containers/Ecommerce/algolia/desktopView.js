@@ -264,7 +264,7 @@ class Shelf extends Component {
 
                           {/* product.quantity * product.valueuntiofmeasure */}
                           <div className="shelf-item__title">
-                            <p class="shelf-item__title__text">Stock: {Math.sign(product.quantity) == -1 ? 0 : product.quantity } {product.unitofmeasuredefault}    
+                            <p class="shelf-item__title__text">Available Stock: {Math.sign(product.quantity) == -1 ? 0 : product.quantity } {product.unitofmeasuredefault}    
                           
                             { product.valueuntiofmeasure == "undefined"  ? <p></p> :  <i>/   {Math.sign(product.quantity) == -1 ? 0 : result.toFixed(2) } {product.unitofmeasure}</i>}  
                             {/* {product.unitofmeasure === undefined ? <div>vdd</div> : <div>falso</div>} */}
