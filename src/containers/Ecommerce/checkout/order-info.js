@@ -482,7 +482,7 @@ class OrderInfo extends Component {
       
 
       
-        if(po == '' || this.state.street == this.state.value && this.state.street == '' ){
+        if( products.length == 0 ||po == '' || this.state.street == this.state.value && this.state.street == '' ){
           notification('error','Something is wrong, try again');
           notification('info','Maybe you forgot to fill some fields, like Address, P.O or your cart is empty');
         }else{
