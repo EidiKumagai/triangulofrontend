@@ -217,6 +217,11 @@ class OrderInfo extends Component {
       var stringaux0 = '';
       var stringaux1 = '';
       var stringaux2 = '';
+      if(str == ''){
+        notification('error','Address is Empty, fill the blank !');
+      }else{
+
+      
       for (var i = 0; i < str.length; i++) {
         
         if(str.charAt(i) == " "){
@@ -242,15 +247,10 @@ class OrderInfo extends Component {
 
       }
       
-     
-      console.log(retorno);
-
-      console.log(stringaux);
-      console.log(stringaux0);
-      console.log(this.state.resultado2);
 
       var cortarstring =  stringaux.split(retorno.stringaux);
       var auxstring = cortarstring[0];
+    
       products.map( product => {
         return array.push(product)
       });
@@ -309,7 +309,7 @@ class OrderInfo extends Component {
         objad.postalcode = this.state.postal;
         objad.state = this.state.estado;
         listofad.push(objad);
-        
+           
       
       var ad = this.state.value;
 
@@ -339,7 +339,7 @@ class OrderInfo extends Component {
 
       var obj = listofad[0];
 
-
+      }
       const oderdetails = 
      
          (
@@ -414,10 +414,10 @@ class OrderInfo extends Component {
                       )
                     }
                   })}
-
-                  {
+                
+                  { str == '' ? "" :
                     <div>
-                      <p> Adress name: {obj.addr1 == '' ? "" : obj.addr1 } {obj.addr2 == '' ? "" : obj.addr2 } {obj.addr3 == '' ? "" : obj.addr3 } {obj.addr4 == '' ? "" : obj.addr4 }</p>
+                      <p> Adress name: {obj.addr1 == ''  ? "" : obj.addr1 } {obj.addr2 == '' ? "" : obj.addr2 } {obj.addr3 == '' ? "" : obj.addr3 } {obj.addr4 == '' ? "" : obj.addr4 }</p>
                       <p> City: {obj.city}</p>
                       <p> State: {obj.state}</p>
                       <p> Postal Code: {obj.postalcode}</p>
@@ -467,7 +467,9 @@ class OrderInfo extends Component {
     );
     
       
-        if(po == ''){
+
+      
+        if(po == '' || this.state.street == ''){
           notification('error','Something is wrong, try again');
           notification('info','Maybe you forgot to fill some fields, like Address, P.O or your cart is empty');
         }else{
