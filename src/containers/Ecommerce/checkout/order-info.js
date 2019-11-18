@@ -803,7 +803,7 @@ class OrderInfo extends Component {
                  
                  <div style={{display: 'grid'}}>
                  Street:
-                 <Input value={this.state.street} maxLength={30} disabled={this.state.value == this.state.street ? false : true} onChange={this.handleStreet} placeholder="Specific street" />
+                 <Input value={this.state.street}  disabled={this.state.value == this.state.street ? false : true} onChange={this.handleStreet} placeholder="Specific street" />
                  City:
                  <Input value={this.state.city} maxLength={15} disabled={this.state.value == this.state.street ? false : true} onChange={this.handleCity}  placeholder="Specific city" />
                  
