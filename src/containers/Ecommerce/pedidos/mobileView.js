@@ -223,13 +223,13 @@ class ListOrders extends Component {
 
 
   
-var string = resdataaddres;
-var newchar = '_';
+// var string = resdataaddres;
+// var newchar = '_';
 
 
-string = string.split(' ').join(newchar);
-api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(response =>{
-   endereco = response.data[0].addr1
+// string = string.split(' ').join(newchar);
+// api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(response =>{
+   endereco = res.data.address.addr1
       
     var currency = (<CurrencyFormat value={order.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />); 
     const aux = (
@@ -238,9 +238,13 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
           <div class="card-header">Order Details</div>
           <div class="card-body text-dark">
             <h5 class="card-title">Price Total: {currency}</h5> 
-            <p class="card-text">Address: {endereco} 
-<p> { response.data[0].addr2 == "" ? "" : response.data[0].addr2 + "," } { response.data[0].addr3 == "" ? "" : response.data[0].addr3 + ","  } { response.data[0].addr4 == "" ? "" : response.data[0].addr4 + "," }{response.data[0].city == "" ? "" : response.data[0].city + "," } 
-    {response.data[0].state == "" ? "" : response.data[0].state + "," } {response.data[0].postalcode == "" ? "" : response.data[0].postalcode  }</p> 
+            <p class="card-text">Address: {endereco}
+          <p>{res.data.address.addr2}</p> 
+          <p>{res.data.address.addr3}</p>
+          <p>{res.data.address.addr4}</p>
+          <p>{res.data.address.city}</p>
+          <p>{res.data.address.state}</p>
+          <p>{res.data.address.postalcode}</p>
             </p>
             <p class="card-text">Status: {res.data.obs}</p>
           </div>
@@ -262,7 +266,7 @@ api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(res
     });
     
     
-    });
+    
 
    
   });

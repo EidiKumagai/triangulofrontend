@@ -55,8 +55,17 @@ class OrderInfo extends Component {
       info:{},
       frete:{},
       resultado:0,
-      po:''
+      po:'',
+      street:'',
+      estado:'',
+      city:'',
+      postal:''
     }
+
+    this.handleStreet = this.handleStreet.bind(this); 
+    this.handleEstado = this.handleEstado.bind(this); 
+    this.handleCity = this.handleCity.bind(this); 
+    this.handlePostalCode = this.handlePostalCode.bind(this);
     this.handlePO = this.handlePO.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
     this.handleChange =  this.handleChange.bind(this);
@@ -124,9 +133,25 @@ class OrderInfo extends Component {
 
   handlePO(event){
     this.setState({po: event.target.value});
-    console.log(this.state.po);
+    
   }
-
+  
+  handleStreet(event){
+    this.setState({street: event.target.value});
+    this.setState({value: event.target.value});
+  }
+  
+  handleCity(event){
+    this.setState({city: event.target.value});
+  }
+  
+  handleEstado(event){
+    this.setState({estado: event.target.value});
+  }
+  
+  handlePostalCode(event){
+    this.setState({postal: event.target.value});
+  }  
  
 
   fazerpedido(resultado) {
@@ -151,17 +176,128 @@ class OrderInfo extends Component {
     
     bool1.toFixed(2);
     bool2.toFixed(2);
- 
-    var Prods = products.map(product => {
-      
-    });
-    
+
     result += bool1 + bool2;
     var bool3 = parseFloat(resultado).toFixed(2);
    
     // let nomeadd = address[0].label;
     let nomeadd = address.addressName;
-    const oderdetails = 
+    
+
+    
+   
+      var bool = parseFloat(resultado).toFixed(2);
+      let array = [];
+      let arrayad = [];
+      var str =  this.state.street;
+      var auxilio = 0;
+      var stringaux = '';
+      var stringaux0 = '';
+      for (var i = 0; i < str.length; i++) {
+        
+        if(str.charAt(i) == " "){
+          auxilio = auxilio + 1; 
+        }
+        if(auxilio >= 3){
+        stringaux = stringaux.concat(str.charAt(i));    
+        }
+        // this.fazerString(str.charAt(i));
+        stringaux0 = stringaux0.concat(str.charAt(i));    
+
+      }
+
+      console.log(stringaux);
+      console.log(stringaux0);
+      console.log(this.state.resultado2);
+      products.map( product => {
+        return array.push(product)
+      });
+       
+      adress.map(a => {
+        return arrayad.push(a);
+      });
+    
+
+
+      
+      //console.log(this.state);
+      
+      array.push(frete[0]);
+      var listofad = [];
+      var myjson = JSON.stringify(array);
+      let title = " order" 
+      //let addressfake = "ship to 1";
+      console.log(this.state.value);
+       arrayad.map( adobj => {
+          if(adobj.addressname == this.state.value){
+            listofad.push(adobj);
+
+          }
+          // }else{
+          //   arrayad.map(a => {
+          //     if(a.addressname == adobj.addressname ){
+                 
+          //     }else{
+          //       var novoobjaddr = new Object;
+          //       var jsonaddr = new Object;
+          //       novoobjaddr.addressname = this.state.value;
+          //       jsonaddr.address = novoobjaddr;
+          //       novoobjaddr.address = jsonaddr;
+          //       return novoobjaddr
+          //     }
+          //   });
+            
+          // }
+      });
+
+        var objad = {
+          addr1:'',
+          addr2:"",
+          addr3:"",
+          addr4:"",
+          city:"",
+          postalcode:"",
+          state:""
+        }
+
+        objad.addr1 = stringaux0;
+        objad.addr2 = stringaux;
+        objad.city = this.state.city;
+        objad.postalcode = this.state.postal;
+        objad.state = this.state.estado;
+        listofad.push(objad);
+        
+      
+      var ad = this.state.value;
+
+
+      console.log(listofad);
+      
+      console.log(products);
+      console.log(array);
+      // Modals.success({
+      //   title: 'Order Success',
+      //   content:oderdetails,
+      //   okText: 'OK',
+      //   cancelText: 'Cancel',
+      //   onOk(){
+      //     history.replace('/dashboard/pedidos');
+      //     document.location.reload(true);
+      //   },
+      //   onCancel(){
+      //     history.replace('/dashboard/pedidos');
+      //     document.location.reload(true);
+      //   },
+      //   afterClose(){
+      //     history.replace('/dashboard/pedidos');
+      //     document.location.reload(true);
+      //   }
+      // });
+
+      var obj = listofad[0];
+
+
+      const oderdetails = 
      
          (
           <div >
@@ -227,14 +363,24 @@ class OrderInfo extends Component {
                     if(adr.addressname == this.state.value){
                       return(
                         <div>
-                      <p>Adress name: {adr.addr1}</p>
-                      <p>City: {adr.city}</p>
-                      <p>State: {adr.state}</p>
+                    <p>Adress name: {adr.addressname} { adr.address.addr1 == '' ? "" : adr.address.addr1 }</p>
+                      <p>City: {adr.address.city == '' ? "" : adr.address.city }</p>
+                      <p>State: {adr.address.state == '' ? "":adr.address.state }</p>
                         </div>
                         
                       )
                     }
                   })}
+
+                  {
+                    <div>
+                      <p> Adress name: {obj.addr1 == '' ? "" : obj.addr1 } {obj.addr2 == '' ? "" : obj.addr2 } {obj.addr3 == '' ? "" : obj.addr3 } {obj.addr4 == '' ? "" : obj.addr4 }</p>
+                      <p> City: {obj.city}</p>
+                      <p> State: {obj.state}</p>
+                      <p> Postal Code: {obj.postalcode}</p>
+                    </div>
+                    
+                  }
                 </div>
               </div>
 
@@ -276,45 +422,6 @@ class OrderInfo extends Component {
         
       
     );
-
-    
-   
-      var bool = parseFloat(resultado).toFixed(2);
-      let array = [];
-      
-      products.map( product => {
-        return array.push(product)
-      });
-
-      
-      //console.log(this.state);
-      
-      array.push(frete[0]);
-
-      var myjson = JSON.stringify(array);
-      let title = " order" 
-      //let addressfake = "ship to 1";
-      var ad = this.state.value;
-      console.log(products);
-      console.log(array);
-      // Modals.success({
-      //   title: 'Order Success',
-      //   content:oderdetails,
-      //   okText: 'OK',
-      //   cancelText: 'Cancel',
-      //   onOk(){
-      //     history.replace('/dashboard/pedidos');
-      //     document.location.reload(true);
-      //   },
-      //   onCancel(){
-      //     history.replace('/dashboard/pedidos');
-      //     document.location.reload(true);
-      //   },
-      //   afterClose(){
-      //     history.replace('/dashboard/pedidos');
-      //     document.location.reload(true);
-      //   }
-      // });
       
         if(po == ''){
           notification('error','Something is wrong, try again');
@@ -322,7 +429,7 @@ class OrderInfo extends Component {
         }else{
 
         api.post(`https://api-triangulo.herokuapp.com/order`,{ 
-        address: ad,
+        address: obj,
         price: bool,
         itens:
           array,
@@ -558,15 +665,15 @@ class OrderInfo extends Component {
     let array = [];
     const list = adress.map(end => {
       let obj = new Object();
-      obj.value = end.id;
-      obj.addr1 = end.addr1
-      obj.addr2 = end.addr2
-      obj.addr3 = end.addr3
-      obj.addr4 = end.addr4
-      obj.city = end.city
-      obj.state = end.state
+      obj.value = end.address.id;
+      obj.addr1 = end.address.addr1
+      obj.addr2 = end.address.addr2
+      obj.addr3 = end.address.addr3
+      obj.addr4 = end.address.addr4
+      obj.city = end.address.city
+      obj.state = end.address.state
       obj.addressname =  end.addressname
-      obj.postalcode = end.postalcode
+      obj.postalcode = end.address.postalcode
       array.push(obj);
       
     });
@@ -681,7 +788,7 @@ class OrderInfo extends Component {
 
    
       
-        <div className="isoOrderTable">
+        <div style={{paddingBottom: '143px'}}className="isoOrderTable">
         {/* <b><span className="tableHead">Address</span></b> */}
          <b>Address: </b>
           <Dropdown options={array} onChange={this.submitAdd}  placeholder="Select an option" /> 
@@ -691,15 +798,22 @@ class OrderInfo extends Component {
                  {addressRadio}
                  <div style={{paddingBottom: '111px',marginLeft: '8px'}}>
                    
-                 <Radio style={radioStyle} className="divRadiob" value={this.state.obs} checked={this.state.value}>
+                 <Radio style={radioStyle} className="divRadiob" value={this.state.street} checked={this.state.value}>
                  <span className="address_header" style={{fontSize: '15px'}}>Specific Address</span> 
-                 <br></br>
-                 <TextArea
-                    value={this.state.obs}
-                    onChange={this.handleChange}
-                    placeholder="Put your specific address here"
-                    autoSize={{ minRows: 3, maxRows: 5 }}
-                  />
+                 
+                 <div style={{display: 'grid'}}>
+                 Street:
+                 <Input value={this.state.street} maxLength={30} disabled={this.state.value == this.state.street ? false : true} onChange={this.handleStreet} placeholder="Specific street" />
+                 City:
+                 <Input value={this.state.city} maxLength={15} disabled={this.state.value == this.state.street ? false : true} onChange={this.handleCity}  placeholder="Specific city" />
+                 
+                 State:
+                 <Input value={this.state.estado} maxLength={15} disabled={this.state.value == this.state.street ? false : true} onChange={this.handleEstado} placeholder="Specific State" />
+                 
+                 Postal Code:
+                 <Input value={this.state.postal}  type="number" maxLength={20} disabled={this.state.value == this.state.street ? false : true} onChange={this.handlePostalCode} placeholder="Specific postal code" />
+                 </div>
+                 
                 </Radio>
 
                 
@@ -708,7 +822,7 @@ class OrderInfo extends Component {
                  
                  
             </RadioGroup>
-
+           
 
 
 
@@ -765,9 +879,9 @@ class OrderInfo extends Component {
         
 
         <div className="isoOrderTable">
-       <Button onClick={() => this.fazerpedido(bool3)} type="primary" className="isoOrderBtn">
-            Finish Order
-          </Button>
+        <Button onClick={() => this.fazerpedido(bool3)} type="primary" className="isoOrderBtn">
+                  Finish Order
+        </Button>
        </div>
         
         
