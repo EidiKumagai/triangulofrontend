@@ -339,7 +339,7 @@ class ListOrders extends Component {
             <p className="isoItemPriceQuantity">
               <span>Created at:  </span>
               <span>
-                <Moment format="YYYY/MM/DD" >{order.created_at}</Moment>
+                <Moment format="MM/DD/YYYY" >{order.created_at}</Moment>
                 
               </span>
             </p>
