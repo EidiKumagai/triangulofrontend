@@ -319,7 +319,7 @@ class ListOrders extends Component {
               {order.po == null ? <a href="#">
                 {}
               </a>: <a href="#">
-                PO: {order.po}
+                PO: {order.po} | S.O: {order.refnumber}
               </a> }
               
             </h3>
