@@ -153,8 +153,29 @@ class OrderInfo extends Component {
     this.setState({postal: event.target.value});
   }  
  
+  exemplo(stringaux,stringaux1,auxilio2){
+    var obj = {
+      auxilio: '',
+      stringaux: ''
+    }
+    for (let index = 0; index < stringaux.length; index++) {
+      if(stringaux.charAt(index) == " "){
+        auxilio2 = auxilio2 + 1
+      }
+      if(auxilio2 >= 3){
+       stringaux1 = stringaux1.concat(stringaux.charAt(index)); 
+      }else{
 
-  fazerpedido(resultado) {
+      }
+    }
+
+    obj.auxilio = auxilio2
+    obj.stringaux = stringaux1
+    return obj
+
+  }
+
+  async fazerpedido(resultado) {
     
 
     const {cartTotal, products, adress} = this.props;
@@ -191,24 +212,45 @@ class OrderInfo extends Component {
       let arrayad = [];
       var str =  this.state.street;
       var auxilio = 0;
+      var auxilio2 = 0;
       var stringaux = '';
       var stringaux0 = '';
+      var stringaux1 = '';
+      var stringaux2 = '';
       for (var i = 0; i < str.length; i++) {
         
         if(str.charAt(i) == " "){
-          auxilio = auxilio + 1; 
+          auxilio = auxilio + 1;
+          
         }
         if(auxilio >= 3){
-        stringaux = stringaux.concat(str.charAt(i));    
+          
+          
+         
+          
+          stringaux = stringaux.concat(str.charAt(i));
+          var retorno = await this.exemplo(stringaux,stringaux1,auxilio2);
+            
+        
+
+        }else{
+          stringaux0 = stringaux0.concat(str.charAt(i));
         }
+
         // this.fazerString(str.charAt(i));
-        stringaux0 = stringaux0.concat(str.charAt(i));    
+            
 
       }
+      
+     
+      console.log(retorno);
 
       console.log(stringaux);
       console.log(stringaux0);
       console.log(this.state.resultado2);
+
+      var cortarstring =  stringaux.split(retorno.stringaux);
+      var auxstring = cortarstring[0];
       products.map( product => {
         return array.push(product)
       });
@@ -261,7 +303,8 @@ class OrderInfo extends Component {
         }
 
         objad.addr1 = stringaux0;
-        objad.addr2 = stringaux;
+        objad.addr2 = auxstring;
+        objad.addr3 = retorno.stringaux;
         objad.city = this.state.city;
         objad.postalcode = this.state.postal;
         objad.state = this.state.estado;
@@ -422,6 +465,7 @@ class OrderInfo extends Component {
         
       
     );
+    
       
         if(po == ''){
           notification('error','Something is wrong, try again');
