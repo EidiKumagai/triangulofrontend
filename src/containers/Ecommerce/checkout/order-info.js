@@ -217,9 +217,13 @@ class OrderInfo extends Component {
       var stringaux0 = '';
       var stringaux1 = '';
       var stringaux2 = '';
-      if(str == ''){
+      if(this.state.street == '' && this.state.street == this.state.value){
         notification('error','Address is Empty, fill the blank !');
       }else{
+
+      
+
+      if(this.state.street == this.state.value){
 
       
       for (var i = 0; i < str.length; i++) {
@@ -250,7 +254,8 @@ class OrderInfo extends Component {
 
       var cortarstring =  stringaux.split(retorno.stringaux);
       var auxstring = cortarstring[0];
-    
+      }
+    }
       products.map( product => {
         return array.push(product)
       });
@@ -292,6 +297,9 @@ class OrderInfo extends Component {
           // }
       });
 
+    
+
+      
         var objad = {
           addr1:'',
           addr2:"",
@@ -302,13 +310,18 @@ class OrderInfo extends Component {
           state:""
         }
 
-        objad.addr1 = stringaux0;
-        objad.addr2 = auxstring;
-        objad.addr3 = retorno.stringaux;
-        objad.city = this.state.city;
-        objad.postalcode = this.state.postal;
-        objad.state = this.state.estado;
-        listofad.push(objad);
+        if(str == ''){
+
+        }else{
+          objad.addr1 = stringaux0;
+          objad.addr2 = auxstring;
+          objad.addr3 = retorno.stringaux;
+          objad.city = this.state.city;
+          objad.postalcode = this.state.postal;
+          objad.state = this.state.estado;
+          listofad.push(objad);
+        }
+       
            
       
       var ad = this.state.value;
@@ -338,8 +351,8 @@ class OrderInfo extends Component {
       // });
 
       var obj = listofad[0];
-
-      }
+      
+      
       const oderdetails = 
      
          (
@@ -469,11 +482,11 @@ class OrderInfo extends Component {
       
 
       
-        if(po == '' || this.state.street == ''){
+        if(po == '' || this.state.street == this.state.value && this.state.street == '' ){
           notification('error','Something is wrong, try again');
           notification('info','Maybe you forgot to fill some fields, like Address, P.O or your cart is empty');
         }else{
-
+          
         api.post(`https://api-triangulo.herokuapp.com/order`,{ 
         address: obj,
         price: bool,
