@@ -2,9 +2,9 @@ export default {
   //apiUrl: 'http://joeylin.net/api/',
 };
 const siteConfig = {
-  siteName: 'Terra Verde Supply Corp.',
+  siteName: 'Triângulo Hardwood Fl.',
   siteIcon: 'ion-ios-arrow-forward',
-  footerText: 'Terra Verde Supply Corp. ®',
+  footerText: 'Triângulo Hardwood Flooring. ®',
 };
 
 const themeConfig = {

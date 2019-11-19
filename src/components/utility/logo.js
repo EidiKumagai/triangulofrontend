@@ -1,24 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config.js';
-
+import imagem from '../../containers/Sidebar/imagem.png'
+import nome from '../../containers/Sidebar/name.png';
 // export default function({ collapsed, styling }) {
 export default function({ collapsed }) {
   return (
     <div
       className="isoLogoWrapper">
+        
       {collapsed
         ? <div>
+          
             <h3>
+            
               <Link to="/dashboard">
-                <i className={siteConfig.siteIcon} />
+                <i style={{display: "grid" , marginTop: "21px"}}className={siteConfig.siteIcon} />
               </Link>
             </h3>
           </div>
         : <h3>
-            <Link to="/dashboard">
-              {siteConfig.siteName}
-            </Link>
+          <img style={{width: "89px", height: "72px"}}src={imagem} alt="logo" />
+          <br></br>
+          <img style={{width: "140px", height: "55px"}}src={nome} alt="logo" />
+          
+            {/* <Link to="/dashboard">
+              
+            </Link> */}
           </h3>}
     </div>
   );

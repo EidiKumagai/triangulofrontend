@@ -25,7 +25,7 @@ const SidebarWrapper = styled.div`
     }
 
     .isoLogoWrapper {
-      height: 70px;
+      height: 135px;
       background: #D7D9CB;
       margin: 0;
       padding: 0 10px;
@@ -37,7 +37,7 @@ const SidebarWrapper = styled.div`
         a {
           font-size: 13px;
           font-weight: 500;
-          line-height: 73px;
+          line-height: 216px;
           letter-spacing: 1px;
           font-family: 'Open Sans', sans-serif;
           text-transform: uppercase;
@@ -51,6 +51,8 @@ const SidebarWrapper = styled.div`
     &.ant-layout-sider-collapsed {
       .isoLogoWrapper {
         padding: 0;
+        margin-bottom: 63px;
+        height: 70px;
 
         h3 {
           a {
@@ -64,7 +66,7 @@ const SidebarWrapper = styled.div`
     }
 
     .isoDashboardMenu {
-      padding-top: 35px;
+      padding-top: 0px;
       padding-bottom: 35px;
       background: transparent;
 

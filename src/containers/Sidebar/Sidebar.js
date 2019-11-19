@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import clone from 'clone';
 import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
+import imagem from './footer_bg.png'
 import { Scrollbars } from 'react-custom-scrollbars';
 import Menu from '../../components/uielements/menu';
 import IntlMessages from '../../components/utility/intlMessages';
@@ -153,6 +154,7 @@ class Sidebar extends Component {
           onMouseLeave={onMouseLeave}
           style={styling}
         >
+          
           <Logo collapsed={collapsed} />
           <Scrollbars
             renderView={this.renderView}
