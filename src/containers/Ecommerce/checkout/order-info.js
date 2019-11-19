@@ -277,7 +277,7 @@ class OrderInfo extends Component {
       console.log(this.state.value);
        arrayad.map( adobj => {
           if(adobj.addressname == this.state.value){
-            listofad.push(adobj);
+            listofad.push(adobj.address);
 
           }
           // }else{
@@ -349,8 +349,11 @@ class OrderInfo extends Component {
       //     document.location.reload(true);
       //   }
       // });
-
-      var obj = listofad[0];
+        
+        
+        var obj = listofad[0];
+        
+      
       
       
       const oderdetails = 
