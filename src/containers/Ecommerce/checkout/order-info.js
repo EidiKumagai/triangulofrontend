@@ -867,13 +867,13 @@ class OrderInfo extends Component {
                  Street:
                  <Input value={this.state.street}  disabled={this.state.value == this.state.street ? false : true} onChange={this.handleStreet} placeholder="Specific street" />
                  City:
-                 <Input value={this.state.city} maxLength={15} disabled={this.state.value == this.state.street ? false : true} onChange={this.handleCity}  placeholder="Specific city" />
+                 <Input value={this.state.city}  disabled={this.state.value == this.state.street ? false : true} onChange={this.handleCity}  placeholder="Specific city" />
                  
                  State:
-                 <Input value={this.state.estado} maxLength={15} disabled={this.state.value == this.state.street ? false : true} onChange={this.handleEstado} placeholder="Specific State" />
+                 <Input value={this.state.estado}  disabled={this.state.value == this.state.street ? false : true} onChange={this.handleEstado} placeholder="Specific State" />
                  
                  Postal Code:
-                 <Input value={this.state.postal}  type="number" maxLength={20} disabled={this.state.value == this.state.street ? false : true} onChange={this.handlePostalCode} placeholder="Specific postal code" />
+                 <Input value={this.state.postal}  type="number"  disabled={this.state.value == this.state.street ? false : true} onChange={this.handlePostalCode} placeholder="Specific postal code" />
                  </div>
                  
                 </Radio>
