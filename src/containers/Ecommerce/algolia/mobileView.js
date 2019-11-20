@@ -247,7 +247,7 @@ class Shelf extends Component {
                           <div className="val">
                             <small>$</small> 
                             <b>{product.price.substr(0, product.price.length - 3)}</b>
-                            <span>{product.price.substr(product.price.length - 3, 3)}</span>
+                            <span>{product.price.substr(product.price.length - 3, 3)} / {product.unitofmeasure == "undefined" ? product.unitofmeasuredefault : product.unitofmeasure } </span>
                           </div>
                           </div>
                           <div className="shelf-item__title">       
@@ -269,7 +269,7 @@ class Shelf extends Component {
                           <div className="shelf-item__title">
                             <p class="shelf-item__title__text">Available Stock: {Math.sign(product.quantity) == -1 ? 0 : product.quantity } {product.unitofmeasuredefault}    
                           
-                            { product.valueuntiofmeasure == "undefined"  ? <p></p> :  <i>/   {Math.sign(product.quantity) == -1 ? 0 : result.toFixed(2) } {product.unitofmeasure}</i>}  
+                            { product.unitofmeasure == "undefined"  ? <p></p> :  <i>/   {Math.sign(product.quantity) == -1 ? 0 : result.toFixed(2) } {product.unitofmeasure}</i>}  
                             {/* {product.unitofmeasure === undefined ? <div>vdd</div> : <div>falso</div>} */}
                             
                             </p>
@@ -301,7 +301,7 @@ class Shelf extends Component {
 
                             </div>
 
-                            {product.valueuntiofmeasure == "undefined" ? 
+                            {product.unitofmeasure == "undefined" ? 
                             (<div className="QuantidadeSemFilho">
 
 

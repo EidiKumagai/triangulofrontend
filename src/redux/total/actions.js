@@ -18,7 +18,7 @@ export const changeProductQuantity = productQuantity => {
 export const updateCart = cartProducts => dispatch => {
   let productQuantity = cartProducts.reduce((sum, p) => {
     
-    sum += p.qtd;
+    sum += p.measure;
     return sum;
   }, 0);
 
@@ -26,7 +26,7 @@ export const updateCart = cartProducts => dispatch => {
     var conv;
     conv = util(p.price);
     conv.toFixed(2);
-    sum += conv * p.qtd;
+    sum += conv * p.measure;
     return sum;
   }, 0);
 
