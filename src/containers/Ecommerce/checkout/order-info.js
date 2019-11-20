@@ -213,6 +213,8 @@ class OrderInfo extends Component {
       var str =  this.state.street;
       var auxilio = 0;
       var auxilio2 = 0;
+      var ruacompleta = "";
+      var ruacompleta2 = "";
       var stringaux = '';
       var stringaux0 = '';
       var stringaux1 = '';
@@ -225,35 +227,98 @@ class OrderInfo extends Component {
 
       if(this.state.street == this.state.value){
 
-      
-      for (var i = 0; i < str.length; i++) {
-        
-        if(str.charAt(i) == " "){
-          auxilio = auxilio + 1;
+
+        // var spaceCount = (str.split(" ").length - 1);
+        // console.log(spaceCount);
+        for (var i = 0; i < str.length; i++) {
           
+
+          ruacompleta = ruacompleta.concat(str.charAt(i));
+          
+          
+          
+          if(str.charAt(i) == " "){
+            auxilio = auxilio + 1;
+                
+          }
+          if(auxilio >= 3){
+            break;
+          }
         }
-        if(auxilio >= 3){
+
+
+        var rua2 =  str.split(ruacompleta);
+
+        console.log(ruacompleta);
+        console.log(rua2);
+        var rua2obj = rua2[1];
+
+       var spaceCount = (rua2obj.split(" ").length - 1);
+
+        if(spaceCount >= 3){
+          for (var i = 0; i < rua2obj.length; i++) {
+            
+
+            ruacompleta2 = ruacompleta2.concat(rua2obj.charAt(i));
+            
+            
+            
+            if(rua2obj.charAt(i) == " "){
+              auxilio2 = auxilio2 + 1;
+                  
+            }
+            if(auxilio2 >= 3){
+              break;
+            }
+          }
+          
+          var rua3 = rua2obj.split(ruacompleta2);
+          var rua3obj = rua3[1];
+
+          console.log(rua3obj);
+        }
+
+        console.log(ruacompleta);
+        console.log(ruacompleta2);
+        console.log(rua2obj);
+        console.log(rua3obj);
+
+        
+
+      // for (var i = 0; i < str.length; i++) {
+        
+      //   if(str.charAt(i) == " "){
+      //     auxilio = auxilio + 1;
+          
+      //   }
+      //   if(auxilio >= 3){
           
           
          
           
-          stringaux = stringaux.concat(str.charAt(i));
-          var retorno = await this.exemplo(stringaux,stringaux1,auxilio2);
+      //     stringaux = stringaux.concat(str.charAt(i));
+      //     var retorno = await this.exemplo(stringaux,stringaux1,auxilio2);
             
         
 
-        }else{
-          stringaux0 = stringaux0.concat(str.charAt(i));
-        }
+      //   }else{
+      //     stringaux0 = stringaux0.concat(str.charAt(i));
+      //   }
 
-        // this.fazerString(str.charAt(i));
+      //   // this.fazerString(str.charAt(i));
             
 
-      }
+      // }
+      // var cortarstring;
+      // if(stringaux == ""){
+      //   cortarstring = ''
+      // }else{
+      //   cortarstring =  stringaux.split(retorno.stringaux);
+      //   var auxstring = cortarstring[0];
+      // }
+        
       
-
-      var cortarstring =  stringaux.split(retorno.stringaux);
-      var auxstring = cortarstring[0];
+      
       }
     }
       products.map( product => {
@@ -267,7 +332,7 @@ class OrderInfo extends Component {
 
 
       
-      //console.log(this.state);
+      
       
       array.push(frete[0]);
       var listofad = [];
@@ -313,14 +378,55 @@ class OrderInfo extends Component {
         if(str == ''){
 
         }else{
-          objad.addr1 = stringaux0;
-          objad.addr2 = auxstring;
-          objad.addr3 = retorno.stringaux;
-          objad.city = this.state.city;
-          objad.postalcode = this.state.postal;
-          objad.state = this.state.estado;
-          listofad.push(objad);
+          
+          objad.addr1 = ruacompleta;
+          if(spaceCount >= 3){
+            objad.addr2 = ruacompleta2;
+            objad.addr3 = rua3obj;
+
+
+            objad.city = this.state.city;
+            objad.postalcode = this.state.postal;
+            objad.state = this.state.estado;
+            listofad.push(objad);
+          }else{
+            objad.addr2 = rua2obj;
+            objad.addr3 = "";
+
+
+
+
+            objad.city = this.state.city;
+            objad.postalcode = this.state.postal;
+            objad.state = this.state.estado;
+            listofad.push(objad);
+          }
+
+
         }
+
+        // if(str == ''){
+
+        // }else{
+        //   objad.addr1 = stringaux0;
+        //   if(auxstring === undefined){
+        //     objad.addr2 = "";
+        //   }else{
+        //     objad.addr2 = auxstring;
+        //   }
+
+        //   if(retorno.stringaux === undefined){
+        //     objad.addr3 = "";
+        //   }else{
+        //     objad.addr3 = retorno.stringaux;
+        //   }
+          
+          
+        //   objad.city = this.state.city;
+        //   objad.postalcode = this.state.postal;
+        //   objad.state = this.state.estado;
+        //   listofad.push(objad);
+        // }
        
            
       
@@ -481,6 +587,15 @@ class OrderInfo extends Component {
         
       
     );
+
+    // Modals.success({
+    //   title: 'Order Success',
+    //   content:oderdetails,
+    //   okText: 'OK',
+    //   cancelText: 'Cancel'
+      
+
+    // });
     
       
 
