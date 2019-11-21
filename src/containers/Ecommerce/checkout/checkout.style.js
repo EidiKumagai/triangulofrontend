@@ -234,11 +234,11 @@ const WDOrderTable = styled.div`
         }
 
         .totalPrice {
-          font-size: 13px;
+          font-size: 14px;
           font-weight: 500;
           color: ${palette('text', 2)};
           line-height: 1.5;
-          padding: 17px;
+          padding: 6px;
         }
       }
     }

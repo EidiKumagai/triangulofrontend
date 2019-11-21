@@ -770,20 +770,29 @@ class OrderInfo extends Component {
       var sf = (product.qtd * product.valueuntiofmeasure);
       var aux =  "/  " + sf + "  " + product.unitofmeasure;
       var priceXqtd = product.price * product.qtd;
+      var priceXsf = product.price * product.measure;
       var currency = (<CurrencyFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
-      var currency2 = (<CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
+      var currency2 = (product.measure === "undefined" ? <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />  : <CurrencyFormat value={priceXsf.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
       return (
-        <div className="isoSingleOrderInfo">
-        <p>
+      
+      <div className="isoSingleOrderInfo">
+          <div>
+          <p>
           
           <span>{product.name} - {product.description}  </span>
           
            
           {/* {product.unitofmeasuredefault} {product.valueuntiofmeasure === undefined ? " ": "/" + product.quantity * product.valueuntiofmeasure +" "+ product.unitofmeasure} */}
           <span >Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }  </span>
-        </p>
+          </p>
+          
+            <span className="totalPrice">Unit price: {currency} </span>
+            <br></br>
+            <span className="totalPrice">Price total: {currency2}</span>
+          
+          </div>
         
-      <span className="totalPrice">Unit price: {currency} Price total: {currency2}</span>
+ 
         <a className="isoItemRemove" onClick={() => removeProduct(product)}>
           <i className="ion-android-close" />
         </a>
