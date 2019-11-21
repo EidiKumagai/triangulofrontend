@@ -129,6 +129,7 @@ class ListOrders extends Component {
     var aux =  "/" + sf.toFixed(2) + "   " + pro.unitofmeasure;  
     console.log(pro.desc);
     var result = pro.preco * pro.qtd;
+    var resultSf =  pro.preco * pro.measure;
     return (
       
       
@@ -147,9 +148,14 @@ class ListOrders extends Component {
         
         }
          <tr>
-          {pro.qtd === undefined || pro.unitofmeasuredefault === undefined ||  pro.measure === undefined || pro.unitofmeasure === undefined || pro.qtd == null ? <th>X</th> : <th>{pro.qtd} {pro.unitofmeasuredefault} {pro.measure === "undefined" ? " " : aux } </th>}
+          {pro.qtd === undefined || pro.unitofmeasuredefault === undefined ||  pro.measure === undefined || pro.unitofmeasure === undefined || pro.qtd == null ? <th>X</th> : <th>{pro.qtd} {pro.unitofmeasuredefault} {pro.unitofmeasure === "undefined" ? " " : aux } </th>}
           <th>${pro.preco} </th>
-          {pro.qtd === undefined || pro.qtd == null ? <th>X</th>: <th><CurrencyFormat value={result.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></th> }
+          {pro.qtd === undefined || pro.qtd == null ? <th>X</th>
+          :
+          
+          pro.unitofmeasure === "undefined" ? <th><CurrencyFormat value={result.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></th> :
+          <th><CurrencyFormat value={resultSf.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></th>
+           }
           {/* {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
           <th>${pro.preco}</th> */}
         </tr>
