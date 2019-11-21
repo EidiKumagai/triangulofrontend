@@ -99,7 +99,7 @@ class ListOrders extends Component {
        desc = mydata[index].description;
        price = mydata[index].price;
       qtd =mydata[index].qtd;
-      measure =mydata[index].valueuntiofmeasure;
+      measure =mydata[index].measure;
       unitofmeasuredefault =mydata[index].unitofmeasuredefault;
       mesure2 = mydata[index].unitofmeasure;
        
@@ -122,12 +122,9 @@ class ListOrders extends Component {
   console.log(arrayProd);
  
   produtos  = arrayProd.map(pro => {
-    var parse = parseFloat(pro.measure);
-    var sf = (pro.qtd * parse);
-    
   
-    var aux =  "/" + sf.toFixed(2) + "   " + pro.unitofmeasure;  
-    console.log(pro.desc);
+    var aux =  "/" + pro.measure + "   " + pro.unitofmeasure;  
+    console.log(pro);
     var result = pro.preco * pro.qtd;
     var resultSf =  pro.preco * pro.measure;
     return (
@@ -151,10 +148,11 @@ class ListOrders extends Component {
           {pro.qtd === undefined || pro.unitofmeasuredefault === undefined ||  pro.measure === undefined || pro.unitofmeasure === undefined || pro.qtd == null ? <th>X</th> : <th>{pro.qtd} {pro.unitofmeasuredefault} {pro.unitofmeasure === "undefined" ? " " : aux } </th>}
           <th>${pro.preco} </th>
           {pro.qtd === undefined || pro.qtd == null ? <th>X</th>
-          :
-          
-          pro.unitofmeasure === "undefined" ? <th><CurrencyFormat value={result.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></th> :
-          <th><CurrencyFormat value={resultSf.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /></th>
+          :        
+          pro.unitofmeasure === "undefined" ? <th>
+          <CurrencyFormat value={result.toFixed(2)} displayType={'text'}  thousandSeparator={true}  prefix={'$'}/>
+          </th> :
+          <th><CurrencyFormat value={resultSf.toFixed(3)} displayType={'text'} thousandSeparator={true} prefix={'$'}/></th>
            }
           {/* {pro.qtd ==  null ? <th>X</th> : <th>{pro.qtd}</th> }     
           <th>${pro.preco}</th> */}

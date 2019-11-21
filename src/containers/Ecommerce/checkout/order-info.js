@@ -720,6 +720,7 @@ class OrderInfo extends Component {
       var sf = (product.qtd * product.valueuntiofmeasure);
       var aux =  "/  " + sf + "  " + product.unitofmeasure;
       var priceXqtd = product.price * product.qtd;
+      var priceXSf =  product.price * product.measure;
   
     //  return (<tbody>
     //   <tr>
@@ -735,8 +736,13 @@ class OrderInfo extends Component {
       <p className="pModal">{product.name + "-" + product.description}</p>
       <p className="pModal">Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }</p>
       <p className="pModal">Unit Price: ${product.price}</p>
-      <p className="pModal">Price total: 
-      <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />
+      <p className="pModal">Price total:
+
+      {product.unitofmeasure === "undefined" ? <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /> 
+      : 
+      <CurrencyFormat value={priceXSf.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /> 
+      } 
+      
       </p>
 
       </div>
@@ -759,7 +765,7 @@ class OrderInfo extends Component {
   
   renderProducts() {
     const { products, removeProduct } = this.props;
-    
+    console.log(products);
     return products.map(product => {  
       var sf = (product.qtd * product.valueuntiofmeasure);
       var aux =  "/  " + sf + "  " + product.unitofmeasure;

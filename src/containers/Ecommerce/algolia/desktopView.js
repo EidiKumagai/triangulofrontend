@@ -317,7 +317,7 @@ class Shelf extends Component {
                           type="number"
                             min={1}
                             // max={1000}
-                            value={product.measure}
+                            value={this.state.measure}
                             step={1}
                             onChange={(e) => {this.changeValueMeasure(e,product)}}
                             
