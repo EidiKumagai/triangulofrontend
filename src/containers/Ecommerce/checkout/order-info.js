@@ -785,10 +785,20 @@ class OrderInfo extends Component {
           {/* {product.unitofmeasuredefault} {product.valueuntiofmeasure === undefined ? " ": "/" + product.quantity * product.valueuntiofmeasure +" "+ product.unitofmeasure} */}
           <span >Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }  </span>
           </p>
-          
-            <span className="totalPrice">Unit price: {currency} </span>
-            <br></br>
-            <span className="totalPrice">Price total: {currency2}</span>
+            <div className="SpecificDiv">
+              <span>Unity price:</span>
+              <span>
+              <span>{currency}</span>
+              </span>
+            </div>       
+            <div className="SpecificDiv">
+              <span>Total price of unity:</span>
+              <span>
+              <span>{currency2}</span>
+              </span>
+            </div>
+            
+            
           
           </div>
         
