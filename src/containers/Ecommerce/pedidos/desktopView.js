@@ -12,6 +12,7 @@ import Spinner from 'react-spinner-material';
 import Button from '../../../components/uielements/button';
 import './tabelapedidos.css';
 import './tabelapedidos2.css';
+import './modalaux.css';
 import Card from 'react-bootstrap/Card'
 // import axios from "axios";
 import api from '../../../containers/Page/api';
@@ -73,7 +74,7 @@ class ListOrders extends Component {
     let list;
     let arrayModal = [];
     let arrayProd = [];
-    let nome,price, qtd, desc, measure,unitofmeasuredefault, mesure2;
+    let nome,price, qtd, desc, measure,unitofmeasuredefault, mesure2,valueuntiofmeasure;
     
 
 
@@ -102,6 +103,7 @@ class ListOrders extends Component {
       measure =mydata[index].measure;
       unitofmeasuredefault =mydata[index].unitofmeasuredefault;
       mesure2 = mydata[index].unitofmeasure;
+      valueuntiofmeasure = mydata[index].valueuntiofmeasure;
        
 
      
@@ -113,6 +115,7 @@ class ListOrders extends Component {
         obj.measure = measure;
         obj.unitofmeasuredefault = unitofmeasuredefault;
         obj.unitofmeasure = mesure2;
+        obj.valueuntiofmeasure = valueuntiofmeasure;
         arrayProd.push(obj);
        
     
@@ -233,6 +236,53 @@ class ListOrders extends Component {
 
 // string = string.split(' ').join(newchar);
 // api.get("https://api-triangulo.herokuapp.com/address/showname/"+string).then(response =>{
+
+var OtherTab = (
+   arrayProd.map(product => {
+    var sf = (product.qtd * product.valueuntiofmeasure);
+    var aux1 =  "/  " + sf + "  " + product.unitofmeasure;
+    var priceXqtd = product.preco * product.qtd;
+    var priceXsf = product.preco * product.measure;
+    var currency = (<CurrencyFormat value={product.preco} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
+    var currency2 = (product.unitofmeasure === "undefined" ? <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />  : <CurrencyFormat value={priceXsf.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
+    return(
+        <div className="PaiDivModal">
+        <div>
+        <p>
+        
+        <span className="nomeDoProdModal">{product.nome} - {product.desc}  </span>
+        
+        
+        {/* {product.unitofmeasuredefault} {product.valueuntiofmeasure === undefined ? " ": "/" + product.quantity * product.valueuntiofmeasure +" "+ product.unitofmeasure} */}
+        
+        </p>
+        <span className="QuantityMoreCloser2">Quantity: {product.qtd === undefined ? "X" : product.qtd} {product.unitofmeasuredefault === undefined ? "X" : product.unitofmeasuredefault} { product.unitofmeasure === "undefined" || product.unitofmeasure === undefined ? "": aux1 }  </span>
+          <div className="SpecificDiv2">
+            <span>Unity price:</span>
+            <span>
+            <span>{currency}</span>
+            </span>
+          </div>       
+          <div className="SpecificDiv2">
+            <span>Total price of unity:</span>
+            <span>
+            <span>{currency2 === undefined ? "X" : currency2}</span>
+            </span>
+          </div>
+          
+          
+        
+        </div>
+    </div>)
+   })
+);
+
+
+
+
+
+
+
    endereco = res.data.address.addr1
       
     var currency = (<CurrencyFormat value={order.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />); 
@@ -256,7 +306,7 @@ class ListOrders extends Component {
 
     );
     arrayModal.push(aux);
-    arrayModal.push(tabelaProd);
+    arrayModal.push(OtherTab);
 
     //this.setState({content: arrayModal});
 

@@ -783,8 +783,9 @@ class OrderInfo extends Component {
           
            
           {/* {product.unitofmeasuredefault} {product.valueuntiofmeasure === undefined ? " ": "/" + product.quantity * product.valueuntiofmeasure +" "+ product.unitofmeasure} */}
-          <span >Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }  </span>
+          
           </p>
+          <span className="QuantityMoreCloser">Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }  </span>
             <div className="SpecificDiv">
               <span>Unity price:</span>
               <span>
