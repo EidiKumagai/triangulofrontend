@@ -287,7 +287,7 @@ var OtherTab = (
       
     var currency = (<CurrencyFormat value={order.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />); 
     const aux = (
-      
+      <div>
       <div class="card border-dark mb-3" style={{maxWidth:'18rem'}}>
           <div class="card-header">Order Details</div>
           <div class="card-body text-dark">
@@ -302,8 +302,13 @@ var OtherTab = (
             </p>
             <p class="card-text">Status: {res.data.obs}</p>
           </div>
+      
+     
       </div>
 
+      <span style={{fontSize: "14px", color: "darkgray"}}>Products:</span>
+      </div>
+      
     );
     arrayModal.push(aux);
     arrayModal.push(OtherTab);
