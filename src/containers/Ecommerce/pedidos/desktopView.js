@@ -293,12 +293,9 @@ var OtherTab = (
           <div class="card-body text-dark">
             <h5 class="card-title">Price Total: {currency}</h5> 
             <p class="card-text">Address: {endereco}
-          <p>{res.data.address.addr2}</p> 
-          <p>{res.data.address.addr3}</p>
-          <p>{res.data.address.addr4}</p>
-          <p>{res.data.address.city}</p>
-          <p>{res.data.address.state}</p>
-          <p>{res.data.address.postalcode}</p>
+          <p>{res.data.address.addr2} {res.data.address.addr3} {res.data.address.addr3}
+          {res.data.address.city} {res.data.address.state} {res.data.address.postalcode}
+          </p> 
             </p>
             <p class="card-text">Status: {res.data.obs}</p>
           </div>
