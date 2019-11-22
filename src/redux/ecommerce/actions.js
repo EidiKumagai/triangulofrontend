@@ -125,6 +125,7 @@ const ecommerceActions = {
       });
   },
   fetchProducts : (filters, sortBy, callback) => dispatch => {
+    if(url == "http://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
       return api
       .get(`${orderapi}/productrule/0 `)
       .then(res => {
@@ -147,214 +148,190 @@ const ecommerceActions = {
       .catch(err => {
         console.log('Could not fetch products. Try again later.');
       });
-
-    // if(url == "http://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
-    //   return api
-    //   .get(`${orderapi}/productrule/0 `)
-    //   .then(res => {
-    //     let  rows  = res.data;
-    //     if (!!filters && filters.length > 0) {
-    //       rows = rows.filter(p =>
-    //         filters.find(f => p.availableSizes.find(size => size === f))
-    //       );
-    //     }
-  
-    //     if (!!callback) {
-    //       callback();
-    //     }
-  
-    //     return dispatch({
-    //       type: ecommerceActions.FETCH_PRODUCTS,
-    //       rows
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Could not fetch products. Try again later.');
-    //   });
-    // }
+    }
 
     
-    // var url = window.location.href;
+    var url = window.location.href;
     
-    // var aux = url.split("https://triangulo-front-end.herokuapp.com/dashboard/shop/");
-    // var aux2 = url.split("http://triangulo-front-end.herokuapp.com/dashboard/shop/");
+    var aux = url.split("https://triangulo-front-end.herokuapp.com/dashboard/shop/");
+    var aux2 = url.split("http://triangulo-front-end.herokuapp.com/dashboard/shop/");
     
-    // if(url == "http://triangulo-front-end.herokuapp.com/dashboard" || url == "http://triangulo-front-end.herokuapp.com/dashboard"){
-    //   return api
-    //   .get(`${orderapi}/productrule/0 `)
-    //   .then(res => {
-    //     let  rows  = res.data;
-    //     if (!!filters && filters.length > 0) {
-    //       rows = rows.filter(p =>
-    //         filters.find(f => p.availableSizes.find(size => size === f))
-    //       );
-    //     }
+    if(url == "http://triangulo-front-end.herokuapp.com/dashboard" || url == "http://triangulo-front-end.herokuapp.com/dashboard"){
+      return api
+      .get(`${orderapi}/productrule/0 `)
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
   
-    //     if (!!callback) {
-    //       callback();
-    //     }
+        if (!!callback) {
+          callback();
+        }
   
-    //     return dispatch({
-    //       type: ecommerceActions.FETCH_PRODUCTS,
-    //       rows
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Could not fetch products. Try again later.');
-    //   });
-    // }
-    // if(url == "http://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
-    //   return api
-    //   .get(`${orderapi}/productrule/0 `)
-    //   .then(res => {
-    //     let  rows  = res.data;
-    //     if (!!filters && filters.length > 0) {
-    //       rows = rows.filter(p =>
-    //         filters.find(f => p.availableSizes.find(size => size === f))
-    //       );
-    //     }
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }
+    if(url == "http://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
+      return api
+      .get(`${orderapi}/productrule/0 `)
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
   
-    //     if (!!callback) {
-    //       callback();
-    //     }
+        if (!!callback) {
+          callback();
+        }
   
-    //     return dispatch({
-    //       type: ecommerceActions.FETCH_PRODUCTS,
-    //       rows
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Could not fetch products. Try again later.');
-    //   });
-    // }
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }
 
-    // if(url == "http://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
+    if(url == "http://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
       
-    //   return api
-    //   .get(`${orderapi}/productrule/0 `)
-    //   .then(res => {
-    //     let  rows  = res.data;
-    //     if (!!filters && filters.length > 0) {
-    //       rows = rows.filter(p =>
-    //         filters.find(f => p.availableSizes.find(size => size === f))
-    //       );
-    //     }
+      return api
+      .get(`${orderapi}/productrule/0 `)
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
   
-    //     if (!!callback) {
-    //       callback();
-    //     }
+        if (!!callback) {
+          callback();
+        }
   
-    //     return dispatch({
-    //       type: ecommerceActions.FETCH_PRODUCTS,
-    //       rows
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Could not fetch products. Try again later.');
-    //   });
-    // }else{
-    //    api
-    //   .get( `${orderapi}/productrule/${aux2[1]}`  )
-    //   .then(res => {
-    //     let  rows  = res.data;
-    //     if (!!filters && filters.length > 0) {
-    //       rows = rows.filter(p =>
-    //         filters.find(f => p.availableSizes.find(size => size === f))
-    //       );
-    //     }
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }else{
+       api
+      .get( `${orderapi}/productrule/${aux2[1]}`  )
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
   
-    //     if (!!callback) {
-    //       callback();
-    //     }
+        if (!!callback) {
+          callback();
+        }
   
-    //     return dispatch({
-    //       type: ecommerceActions.FETCH_PRODUCTS,
-    //       rows
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Could not fetch products. Try again later.');
-    //   });
-    // }
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }
     
 
     
 
 
 
-    // if(url == "https://triangulo-front-end.herokuapp.com/dashboard" || url == "https://triangulo-front-end.herokuapp.com/dashboard"
-    // ){
-    //   return api
-    //   .get(`${orderapi}/productrule/0 `)
-    //   .then(res => {
-    //     let  rows  = res.data;
-    //     if (!!filters && filters.length > 0) {
-    //       rows = rows.filter(p =>
-    //         filters.find(f => p.availableSizes.find(size => size === f))
-    //       );
-    //     }
+    if(url == "https://triangulo-front-end.herokuapp.com/dashboard" || url == "https://triangulo-front-end.herokuapp.com/dashboard"
+    ){
+      return api
+      .get(`${orderapi}/productrule/0 `)
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
   
-    //     if (!!callback) {
-    //       callback();
-    //     }
+        if (!!callback) {
+          callback();
+        }
   
-    //     return dispatch({
-    //       type: ecommerceActions.FETCH_PRODUCTS,
-    //       rows
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Could not fetch products. Try again later.');
-    //   });
-    // }
-    // if(url == "https://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }
+    if(url == "https://triangulo-front-end.herokuapp.com/dashboard/shop"   ){
       
-    //   return api
-    //   .get(`${orderapi}/productrule/0 `)
-    //   .then(res => {
-    //     let  rows  = res.data;
-    //     if (!!filters && filters.length > 0) {
-    //       rows = rows.filter(p =>
-    //         filters.find(f => p.availableSizes.find(size => size === f))
-    //       );
-    //     }
+      return api
+      .get(`${orderapi}/productrule/0 `)
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
   
-    //     if (!!callback) {
-    //       callback();
-    //     }
+        if (!!callback) {
+          callback();
+        }
   
-    //     return dispatch({
-    //       type: ecommerceActions.FETCH_PRODUCTS,
-    //       rows
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Could not fetch products. Try again later.');
-    //   });
-    // }else{
-    //   return api
-    //   .get( `${orderapi}/productrule/${aux[1]}`  )
-    //   .then(res => {
-    //     let  rows  = res.data;
-    //     if (!!filters && filters.length > 0) {
-    //       rows = rows.filter(p =>
-    //         filters.find(f => p.availableSizes.find(size => size === f))
-    //       );
-    //     }
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }else{
+      return api
+      .get( `${orderapi}/productrule/${aux[1]}`  )
+      .then(res => {
+        let  rows  = res.data;
+        if (!!filters && filters.length > 0) {
+          rows = rows.filter(p =>
+            filters.find(f => p.availableSizes.find(size => size === f))
+          );
+        }
   
-    //     if (!!callback) {
-    //       callback();
-    //     }
+        if (!!callback) {
+          callback();
+        }
   
-    //     return dispatch({
-    //       type: ecommerceActions.FETCH_PRODUCTS,
-    //       rows
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log('Could not fetch products. Try again later.');
-    //   });
-    // }
+        return dispatch({
+          type: ecommerceActions.FETCH_PRODUCTS,
+          rows
+        });
+      })
+      .catch(err => {
+        console.log('Could not fetch products. Try again later.');
+      });
+    }
     
   
     
