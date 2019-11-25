@@ -156,14 +156,14 @@ class Carrinho extends Component {
           <p className="isoItemPriceQuantity">
             <span>$</span>
             <span>
-              {(product.price / product.valueuntiofmeasure).toFixed(2)} / {product.unitofmeasure == "undefined" ? product.unitofmeasuredefault : product.unitofmeasure }
+              {(product.price / product.valueuntiofmeasure).toFixed(2)} {product.unitofmeasure == "undefined" ? product.unitofmeasuredefault : product.unitofmeasure } | ${product.price} 
             </span>
             <span className="itemMultiplier">X</span>
               <td className="isoItemQuantity">
                 {/* <input type="number" onChange={this.handleChange } value={this.state.valor }   ></input> */}
               </td>
               <span className="isoItemQuantity">
-              {product.unitofmeasure == "undefined" ? quantity : product.measure}
+              {product.unitofmeasure == "undefined" ? quantity : product.valueuntiofmeasure}
               </span>
           </p><p className="isoItemPriceQuantity">
             <span>Quantity:   </span>

@@ -735,7 +735,9 @@ class OrderInfo extends Component {
       <div className="prodModal" >
       <p className="pModal">{product.name + "-" + product.description}</p>
       <p className="pModal">Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }</p>
-      <p className="pModal">Unit Price: ${(product.price / product.valueuntiofmeasure).toFixed(2)}</p>
+      
+      {product.unitofmeasure === "undefined" ? <p></p> : <p className="pModal">Unit Price SF: ${(product.price / product.valueuntiofmeasure).toFixed(2)}</p> }
+      <p className="pModal">Unit Price: ${product.price}</p>
       <p className="pModal">Price total:
 
       {product.unitofmeasure === "undefined" ? <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} /> 
@@ -771,6 +773,7 @@ class OrderInfo extends Component {
       var aux =  "/  " + sf + "  " + product.unitofmeasure;
       var priceXqtd = product.price * product.qtd;
       var priceXsf = product.price * product.measure;
+      var currencyPriceSF = (<CurrencyFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} />); 
       var currency = (<CurrencyFormat value={(product.price / product.valueuntiofmeasure).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
       var currency2 = (product.measure === "undefined" ? <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />  : <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
       return (
@@ -786,12 +789,23 @@ class OrderInfo extends Component {
           
           </p>
           <span className="QuantityMoreCloser">Quantity: {product.qtd} {product.unitofmeasuredefault} { product.unitofmeasure === "undefined" ? "": aux }  </span>
+            {product.unitofmeasure === "undefined" ? 
+            <div className="SpecificDiv">
+            </div>
+            :
+            <div className="SpecificDiv">
+            <span>Unity price SF:</span>
+            <span>
+            <span>{currency}</span>
+            </span>
+            </div>
+            }
             <div className="SpecificDiv">
               <span>Unity price:</span>
               <span>
-              <span>{currency}</span>
+              <span>{currencyPriceSF}</span>
               </span>
-            </div>       
+            </div>           
             <div className="SpecificDiv">
               <span>Total price of unity:</span>
               <span>

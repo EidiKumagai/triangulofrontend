@@ -243,6 +243,7 @@ var OtherTab = (
     var aux1 =  "/  " + sf + "  " + product.unitofmeasure;
     var priceXqtd = product.preco * product.qtd;
     var priceXsf = product.preco * product.measure;
+    var currencyPriceSF = (<CurrencyFormat value={product.preco} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
     var currency = (<CurrencyFormat value={(product.preco / product.valueuntiofmeasure).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
     var currency2 = (product.unitofmeasure === "undefined" ? <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />  : <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
     return(
@@ -257,10 +258,21 @@ var OtherTab = (
         
         </p>
         <span className="QuantityMoreCloser2">Quantity: {product.qtd === undefined ? "X" : product.qtd} {product.unitofmeasuredefault === undefined ? "X" : product.unitofmeasuredefault} { product.unitofmeasure === "undefined" || product.unitofmeasure === undefined ? "": aux1 }  </span>
+        {product.unitofmeasure === "undefined" ? 
+            <div className="SpecificDiv2">
+            </div>
+            :
+            <div className="SpecificDiv2">
+            <span>Unity price SF:</span>
+            <span>
+            <span>{currency}</span>
+            </span>
+            </div>
+            }
           <div className="SpecificDiv2">
             <span>Unity price:</span>
             <span>
-            <span>{currency}</span>
+            <span>{currencyPriceSF}</span>
             </span>
           </div>       
           <div className="SpecificDiv2">
