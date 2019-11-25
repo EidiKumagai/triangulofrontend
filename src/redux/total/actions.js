@@ -18,7 +18,7 @@ export const changeProductQuantity = productQuantity => {
 export const updateCart = cartProducts => dispatch => {
   let productQuantity = cartProducts.reduce((sum, p) => {
     
-    sum += p.CampoQuantidade;
+    sum += p.price;
     return sum;
   }, 0);
 
