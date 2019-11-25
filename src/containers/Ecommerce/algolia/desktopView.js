@@ -242,9 +242,11 @@ class Shelf extends Component {
                           <Thumb class="shelf-item__thumb" alt={product.name} />
                         <div className="shelf-item__price">
                           <div className="val">
-                            <small>$</small> 
-                            <b>{product.price.substr(0, product.price.length - 3)}</b>
-                            <span>{product.price.substr(product.price.length - 3, 3)} / {product.unitofmeasure == "undefined" ? product.unitofmeasuredefault : product.unitofmeasure } </span>
+                            <small>$</small>
+                            {/* {product.price.substr(0, product.price.length - 3)}  */}
+                            <b>{(product.price / product.valueuntiofmeasure).toFixed(2)}</b>
+                            {/* {product.price.substr(product.price.length - 3, 3)} */}
+                            <span> / {product.unitofmeasure == "undefined" ? product.unitofmeasuredefault : product.unitofmeasure } </span>
                           </div>
                           </div>
                           <div className="shelf-item__title">       

@@ -243,8 +243,8 @@ var OtherTab = (
     var aux1 =  "/  " + sf + "  " + product.unitofmeasure;
     var priceXqtd = product.preco * product.qtd;
     var priceXsf = product.preco * product.measure;
-    var currency = (<CurrencyFormat value={product.preco} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
-    var currency2 = (product.unitofmeasure === "undefined" ? <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />  : <CurrencyFormat value={priceXsf.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
+    var currency = (<CurrencyFormat value={(product.preco / product.valueuntiofmeasure).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
+    var currency2 = (product.unitofmeasure === "undefined" ? <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />  : <CurrencyFormat value={priceXqtd.toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'} />);
     return(
         <div className="PaiDivModal">
         <div>

@@ -156,7 +156,7 @@ class Carrinho extends Component {
           <p className="isoItemPriceQuantity">
             <span>$</span>
             <span>
-              {product.price} / {product.unitofmeasure == "undefined" ? product.unitofmeasuredefault : product.unitofmeasure }
+              {(product.price / product.valueuntiofmeasure).toFixed(2)} / {product.unitofmeasure == "undefined" ? product.unitofmeasuredefault : product.unitofmeasure }
             </span>
             <span className="itemMultiplier">X</span>
               <td className="isoItemQuantity">
