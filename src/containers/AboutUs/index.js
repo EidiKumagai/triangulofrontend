@@ -28,7 +28,7 @@ The knowledge of the peculiarities of the wood, the most important building mate
                         <h5 class="card-title">TRIÂNGULO HARWOOD FLOORING</h5>
                         <p class="card-text">Phone : +1 (757) 420 4771
 Fax : +1 (757) 420 4772
-Email : sales@triangulo.com.br
+Email : orders@triangulo.com.br
 Office Hours: Monday – Friday
 8:00 AM – 5:00 PM (Eastern time)
 Warehouse Address
