@@ -145,7 +145,7 @@ const ecommerceActions = {
 
       for (let index = 0; index < tirarhttps[1].length; index++) {
         Testaux2 = Testaux.concat(tirarhttps[1].charAt(index));
-        if(tirarhttp[1].charAt(index) == "/"){
+        if(tirarhttps[1].charAt(index) == "/"){
           break;
         }
       }
