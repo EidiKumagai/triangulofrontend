@@ -59,10 +59,12 @@ class OrderInfo extends Component {
       street:'',
       estado:'',
       city:'',
-      postal:''
+      postal:'',
+      observation:''
     }
 
-    this.handleStreet = this.handleStreet.bind(this); 
+    this.handleStreet = this.handleStreet.bind(this);
+    this.handleObservation = this.handleObservation.bind(this);  
     this.handleEstado = this.handleEstado.bind(this); 
     this.handleCity = this.handleCity.bind(this); 
     this.handlePostalCode = this.handlePostalCode.bind(this);
@@ -139,6 +141,9 @@ class OrderInfo extends Component {
   handleStreet(event){
     this.setState({street: event.target.value});
     this.setState({value: event.target.value});
+  }
+  handleObservation(event){
+    this.setState({observation: event.target.value});
   }
   
   handleCity(event){
@@ -399,6 +404,7 @@ class OrderInfo extends Component {
             objad.city = this.state.city;
             objad.postalcode = this.state.postal;
             objad.state = this.state.estado;
+            objad.addr4 = this.state.observation;
             listofad.push(objad);
           }
 
@@ -1013,7 +1019,7 @@ class OrderInfo extends Component {
 
            <RadioGroup onChange={this.onChange}   value={this.state.value}>
                  {addressRadio}
-                 <div style={{paddingBottom: '111px',marginLeft: '8px'}}>
+                 <div style={{paddingBottom: '171px',marginLeft: '8px'}}>
                    
                  <Radio style={radioStyle} className="divRadiob" value={this.state.street} checked={this.state.value}>
                  <span className="address_header" style={{fontSize: '15px'}}>Specific Address</span> 
@@ -1030,6 +1036,8 @@ class OrderInfo extends Component {
                  Postal Code:
                  <Input value={this.state.postal}  type="number"  disabled={this.state.value == this.state.street ? false : true} onChange={this.handlePostalCode} placeholder="Specific postal code" />
                  
+                 Observation:
+                 <Input value={this.state.observation} disabled={this.state.value == this.state.street ? false : true} maxLength={40} onChange={this.handleObservation} placeholder="Observation" />
                  </div>
                  
                 </Radio>

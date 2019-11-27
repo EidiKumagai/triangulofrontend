@@ -37,9 +37,24 @@ const stripTrailingSlash = str => {
 class Sidebar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      info: {}
+    }
     this.handleClick = this.handleClick.bind(this);
     this.onOpenChange = this.onOpenChange.bind(this);
   }
+
+  componentWillMount(){
+    this.getUserInfo();
+  }
+  
+
+  getUserInfo(){
+    api.get("https://api-triangulo.herokuapp.com/users/1").then(res =>{  
+      this.setState({info: res.data});
+    }); 
+  }
+
   handleClick(e) {
     this.props.changeCurrent([e.key]);
     if (this.props.app.view === 'MobileView') {
@@ -95,7 +110,8 @@ class Sidebar extends Component {
   render() {
     // const { url, app, toggleOpenDrawer, bgcolor } = this.props;
     
-    
+    const {info} = this.state;
+  
     const { app, toggleOpenDrawer, customizedTheme, cat } = this.props;
     // console.log(this.props);
     // console.log(cat);
@@ -293,8 +309,18 @@ class Sidebar extends Component {
                 </Link>
               </Menu.Item> */}
 
-              
-              
+              {info.permission === 4 ?  
+              <Menu.Item key="orders">
+              <Link to={`${url}/pedidos`}>
+                <span className="isoMenuHolder" style={submenuColor}>
+                  <i className="ion-hammer" />
+                  <span className="nav-text">
+                    <IntlMessages id="sidebar.Access" />
+                  </span>
+                </span>
+              </Link>
+            </Menu.Item> : ""
+              }              
               <SubMenu 
                 key="map"
                 title={
