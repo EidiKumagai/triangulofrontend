@@ -1029,6 +1029,7 @@ class OrderInfo extends Component {
                  
                  Postal Code:
                  <Input value={this.state.postal}  type="number"  disabled={this.state.value == this.state.street ? false : true} onChange={this.handlePostalCode} placeholder="Specific postal code" />
+                 
                  </div>
                  
                 </Radio>

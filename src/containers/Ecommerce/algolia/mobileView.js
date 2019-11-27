@@ -217,7 +217,7 @@ class Shelf extends Component {
           <label class="field a-field a-field_a1">
               <input class="field__input a-field__input" value={value} onChange={this.handleChange} placeholder="Search a product" required/>
                 <span class="a-field__label-wrap">
-                <span class="a-field__label">Search here</span>
+                <span class="a-field__label"> <i className="ion-search" /> Search here</span>
           </span>
         </label>
           </div>
@@ -267,12 +267,12 @@ class Shelf extends Component {
 
                           {/* product.quantity * product.valueuntiofmeasure */}
                           <div className="shelf-item__title">
-                            <p class="shelf-item__title__text">Available Stock: {Math.sign(product.quantity) == -1 ? 0 : product.quantity } {product.unitofmeasuredefault}    
+                            <b><p class="shelf-item__title__text">Available Stock: {Math.sign(product.quantity) == -1 ? 0 : product.quantity } {product.unitofmeasuredefault}    
                           
                             { product.unitofmeasure == "undefined"  ? <p></p> :  <i>/   {Math.sign(product.quantity) == -1 ? 0 : result.toFixed(2) } {product.unitofmeasure}</i>}  
                             {/* {product.unitofmeasure === undefined ? <div>vdd</div> : <div>falso</div>} */}
                             
-                            </p>
+                            </p></b>
                           </div>
                           {/* {product.qtd == null ? <div onClick={() => notification('error','Input Quantity is blank, fill the input to add')} class="shelf-item__buy-btn">Adicionar</div> 
                           :  
