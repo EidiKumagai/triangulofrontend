@@ -197,7 +197,12 @@ class AppRouter extends React.Component {
           exact
           path={`${url}/contacts`}urls
           component={asyncComponent(() => import('../AboutUs/index'))}
-        /> 
+        />
+        <Route
+          exact
+          path={`${url}/Access`}urls
+          component={asyncComponent(() => import('../Access/index'))}
+        />   
         <Route
           exact
           path={`${url}/alert`}
