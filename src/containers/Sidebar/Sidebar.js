@@ -310,8 +310,8 @@ class Sidebar extends Component {
               </Menu.Item> */}
 
               {info.permission === 4 ?  
-              <Menu.Item key="orders">
-              <Link to={`${url}/pedidos`}>
+              <Menu.Item key="access">
+              <Link to={`${url}/Access`}>
                 <span className="isoMenuHolder" style={submenuColor}>
                   <i className="ion-hammer" />
                   <span className="nav-text">

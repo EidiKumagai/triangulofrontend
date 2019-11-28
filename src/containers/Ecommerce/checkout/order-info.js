@@ -377,7 +377,8 @@ class OrderInfo extends Component {
           addr4:"",
           city:"",
           postalcode:"",
-          state:""
+          state:"",
+          note:""
         }
 
         if(str == ''){
@@ -393,6 +394,7 @@ class OrderInfo extends Component {
             objad.city = this.state.city;
             objad.postalcode = this.state.postal;
             objad.state = this.state.estado;
+            objad.note = this.state.observation;
             listofad.push(objad);
           }else{
             objad.addr2 = rua2obj;
@@ -404,7 +406,7 @@ class OrderInfo extends Component {
             objad.city = this.state.city;
             objad.postalcode = this.state.postal;
             objad.state = this.state.estado;
-            objad.addr4 = this.state.observation;
+            objad.note = this.state.observation;
             listofad.push(objad);
           }
 
@@ -1036,8 +1038,8 @@ class OrderInfo extends Component {
                  Postal Code:
                  <Input value={this.state.postal}  type="number"  disabled={this.state.value == this.state.street ? false : true} onChange={this.handlePostalCode} placeholder="Specific postal code" />
                  
-                 Observation:
-                 <Input value={this.state.observation} disabled={this.state.value == this.state.street ? false : true} maxLength={40} onChange={this.handleObservation} placeholder="Observation" />
+                 Comments:
+                 <Input value={this.state.observation} disabled={this.state.value == this.state.street ? false : true} maxLength={40} onChange={this.handleObservation} placeholder="Comments" />
                  </div>
                  
                 </Radio>
