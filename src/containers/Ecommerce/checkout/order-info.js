@@ -1037,9 +1037,7 @@ class OrderInfo extends Component {
                  
                  Postal Code:
                  <Input value={this.state.postal}  type="number"  disabled={this.state.value == this.state.street ? false : true} onChange={this.handlePostalCode} placeholder="Specific postal code" />
-                 
-                 Comments:
-                 <Input value={this.state.observation} disabled={this.state.value == this.state.street ? false : true} maxLength={40} onChange={this.handleObservation} placeholder="Comments" />
+
                  </div>
                  
                 </Radio>
@@ -1059,7 +1057,8 @@ class OrderInfo extends Component {
        <div className="isoOrderTable">
        <br></br>
 
-       
+       <b>Comments:</b>
+        <Input value={this.state.observation} maxLength={40} onChange={this.handleObservation} placeholder="Comments" />
         {/* <b><span className="tableHead">Description of Address: </span></b> 
 
        <div className="isoOrderTableBody">
