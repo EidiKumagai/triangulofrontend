@@ -13,13 +13,21 @@ class AppRouter extends React.Component {
     super(props);
 
     this.state = {
-      objCat: {} 
+      objCat: {},
+      info: {} 
     };
     this.fetchCategory = this.fetchCategory.bind(this);
   }
 
   componentDidMount(){
     this.fetchCategory();
+    this.getUserInfo();
+  }
+  
+  getUserInfo(){
+    api.get("https://api-triangulo.herokuapp.com/users/1").then(resposta =>{  
+      this.setState({info: resposta.data});
+    }); 
   }
 
   fetchCategory(){
@@ -37,7 +45,7 @@ class AppRouter extends React.Component {
 
   render() {
     const { url } = this.props;
-    
+    var info = this.state.info;
     // this.fetchCategory();
 
     
@@ -198,11 +206,18 @@ class AppRouter extends React.Component {
           path={`${url}/contacts`}urls
           component={asyncComponent(() => import('../AboutUs/index'))}
         />
+        {info.permission === 4 ? 
         <Route
           exact
           path={`${url}/Access`}urls
           component={asyncComponent(() => import('../Access/index'))}
-        />   
+        /> : 
+        <Route
+          exact
+          path={`${url}/Access`}urls
+          component={asyncComponent(() => import('../Page/404'))}
+        />
+        }   
         <Route
           exact
           path={`${url}/alert`}
