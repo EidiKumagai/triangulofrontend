@@ -1021,7 +1021,7 @@ class OrderInfo extends Component {
 
            <RadioGroup onChange={this.onChange}   value={this.state.value}>
                  {addressRadio}
-                 <div style={{paddingBottom: '171px',marginLeft: '8px'}}>
+                 <div style={{paddingBottom: '117px',marginLeft: '8px'}}>
                    
                  <Radio style={radioStyle} className="divRadiob" value={this.state.street} checked={this.state.value}>
                  <span className="address_header" style={{fontSize: '15px'}}>Specific Address</span> 
@@ -1038,8 +1038,6 @@ class OrderInfo extends Component {
                  Postal Code:
                  <Input value={this.state.postal}  type="number"  disabled={this.state.value == this.state.street ? false : true} onChange={this.handlePostalCode} placeholder="Specific postal code" />
                  
-                 Comments:
-                 <Input value={this.state.observation} disabled={this.state.value == this.state.street ? false : true} maxLength={40} onChange={this.handleObservation} placeholder="Comments" />
                  </div>
                  
                 </Radio>
@@ -1051,12 +1049,15 @@ class OrderInfo extends Component {
                  
             </RadioGroup>
            
-
+          
 
 
            {/* <Select  options={array}  onChange={(values) => this.submitAdd(values)} />  */}
        </div>
        <div className="isoOrderTable">
+
+       <b>Comments:</b>
+        <Input value={this.state.observation} maxLength={40} onChange={this.handleObservation} placeholder="Comments" />
        <br></br>
 
        

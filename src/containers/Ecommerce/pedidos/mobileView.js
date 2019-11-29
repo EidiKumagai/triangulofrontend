@@ -309,6 +309,7 @@ var OtherTab = (
           {res.data.address.city} {res.data.address.state} {res.data.address.postalcode}
           </p> 
             </p>
+            {res.data.note == "" ? <p class="card-text">Comments: {res.data.note}</p> : ""}
             <p class="card-text">Status: {res.data.obs}</p>
           </div>
       
