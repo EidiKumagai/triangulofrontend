@@ -535,7 +535,7 @@ class OrderInfo extends Component {
                     if(adr.addressname == this.state.value){
                       return(
                         <div>
-                    <p>Adress name: {adr.addressname} { adr.address.addr1 == '' ? "" : adr.address.addr1 }</p>
+                    <p>Adress name: { adr.address.addr1 == '' ? "" : adr.address.addr1 }</p>
                       <p>City: {adr.address.city == '' ? "" : adr.address.city }</p>
                       <p>State: {adr.address.state == '' ? "":adr.address.state }</p>
                         </div>
