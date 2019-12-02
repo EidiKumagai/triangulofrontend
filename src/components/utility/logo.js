@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config.js';
-import imagem from '../../containers/Sidebar/imagem.png'
+import imagem from '../../containers/Sidebar/logoreal.png'
 import nome from '../../containers/Sidebar/nometriangulocomphone.png';
 // export default function({ collapsed, styling }) {
 export default function({ collapsed }) {

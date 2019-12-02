@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Popover from '../uielements/popover';
 import IntlMessages from '../utility/intlMessages';
 import userpic from '../../image/user1.png';
+import pic from '../../image/logo-512x512.png'
 //import authAction from '../../redux/auth/actions';
 import TopbarDropdownWrapper from './topbarDropdown.style';
 import { logout } from '../../containers/Page/auth';
@@ -54,7 +55,7 @@ class TopbarUser extends Component {
         placement="bottomLeft"
       >
         <div className="isoImgWrapper">
-          <img alt="user" src={userpic} />
+          <img alt="user" src={pic} />
           <span className="userActivity online" />
         </div>
       </Popover>
