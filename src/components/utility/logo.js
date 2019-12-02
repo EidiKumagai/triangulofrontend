@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config.js';
 import imagem from '../../containers/Sidebar/imagem.png'
-import nome from '../../containers/Sidebar/name.png';
+import nome from '../../containers/Sidebar/nometriangulocomphone.png';
 // export default function({ collapsed, styling }) {
 export default function({ collapsed }) {
   return (
@@ -22,8 +22,8 @@ export default function({ collapsed }) {
         : <h3>
           <img style={{width: "89px", height: "72px"}}src={imagem} alt="logo" />
           <br></br>
-          <img style={{width: "140px", height: "55px"}}src={nome} alt="logo" />
-          
+          <img style={{width: "140px", height: "53px"}}src={nome} alt="logo" />
+         
             {/* <Link to="/dashboard">
               
             </Link> */}

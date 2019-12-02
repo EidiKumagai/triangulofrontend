@@ -412,7 +412,7 @@ class OrderInfo extends Component {
 
 
         }
-
+        
         // if(str == ''){
 
         // }else{
@@ -466,8 +466,7 @@ class OrderInfo extends Component {
         
         
         var obj = listofad[0];
-        
-      
+      obj.note = this.state.observation;
       
       
       const oderdetails = 
