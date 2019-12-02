@@ -22,7 +22,7 @@ export default function({ collapsed }) {
         : <h3>
           <img style={{width: "89px", height: "72px"}}src={imagem} alt="logo" />
           <br></br>
-          <img style={{width: "140px", height: "53px"}}src={nome} alt="logo" />
+          <img style={{width: "178px", height: "61px"}}src={nome} alt="logo" />
          
             {/* <Link to="/dashboard">
               
