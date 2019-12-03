@@ -309,7 +309,7 @@ class Sidebar extends Component {
                 </Link>
               </Menu.Item> */}
 
-              {info.permission === 4 ?  
+              {info.permission === 4 || info.permission === 3  ?  
               <Menu.Item key="access">
               <Link to={`${url}/Access`}>
                 <span className="isoMenuHolder" style={submenuColor}>

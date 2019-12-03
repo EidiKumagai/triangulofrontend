@@ -78,7 +78,8 @@ class Access extends Component {
       aux: {},
       visible: false,
       username:'',
-      email:''
+      email:'',
+      specif: {}
     }
 
     this.handleUsername = this.handleUsername.bind(this);
@@ -119,7 +120,6 @@ class Access extends Component {
       
       componentWillMount(){
         this.getUsers();
-        
       }
 
       onSelectChange = selectedRowKeys => {
@@ -129,24 +129,19 @@ class Access extends Component {
 
       
       getUsers(){
-        // api.get("https://api-triangulo.herokuapp.com/users/1").then(resposta =>{  
-        //   this.setState({aux: resposta.data});
-        // }); 
-        var obj = this.state.aux;
-
-          api.get(`https://api-triangulo.herokuapp.com/sonusersbyfathers${obj.id}`).then(res =>{  
+        api.get("https://api-triangulo.herokuapp.com/sonusersbyfather").then(res =>{  
           this.setState({info: res.data});
-        });
-        
-         
+        }); 
       }
-      
       getUserInfo(){
-       
+        api.get("https://api-triangulo.herokuapp.com/users/1").then(resposta =>{  
+          this.setState({aux: resposta.data});
+        }); 
       }
 
       showModal = () => {
         this.setState({
+
           visible: true,
         });
       };
@@ -167,7 +162,6 @@ class Access extends Component {
           notification('success','User added successfully !')
           document.location.reload(true);
         });
-
       };
     
       handleCancel = e => {
@@ -204,20 +198,27 @@ class Access extends Component {
         }
         var s = !statusCerto
         console.log(s);
-        usuarios.map( u => {
-          if(u.email == key.address){
-            api.put(`https://api-triangulo.herokuapp.com/users/${u.id}`, {status: s }).then(res => {
-              console.log(res);
-              notification('success','Change status !')
-              document.location.reload(true);
-            });
-          }
+        api.put(`https://api-triangulo.herokuapp.com/users/${key.id}`, {status: s }).then(res => {
+            console.log(res);
+            notification('success','Change status !')
         });
+          
+        
 
       };
 
-      render() {
+      fetchSpecif(record){
+        
+        api.get(`https://api-triangulo.herokuapp.com/sonusersbyfathers/${record.id}`).then(res =>{  
+            console.log(res);
+            this.setState({specif: res.data})
+          });
+          
+        
+      }
 
+      render() {
+        var obj;
         var columns = [
           { title: 'Name', dataIndex: 'name', key: 'name' },
           { title: 'Email', dataIndex: 'address', key: 'address' },
@@ -237,18 +238,29 @@ class Access extends Component {
             render: (text, record) => 
             <div>
 
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record)}>
-            <a style={{color: "#606D42"}}>Delete</a>
-            </Popconfirm>
             
             <Popconfirm title="Sure to Change Status ?" onConfirm={() => this.changeStatus(record)}>
-            <a style={{color: "#606D42"}}> |  Change Status</a>
+            <a style={{color: "#606D42"}}>  Change Status</a>
             </Popconfirm>
             </div>
            
             ,
           },
         ];
+        var columns1 = [
+            { title: 'Name', dataIndex: 'name', key: 'name' },
+            { title: 'Status', dataIndex: 'age', key: 'age', 
+            render: (text,record) => 
+            <Tag color={record.age == "true" ? 'green' : 'red'}>
+              {record.age == "true" ? "Active" : "Inative"}
+            </Tag>
+             
+  
+  
+            }
+          ];
+  
+
         
         const { loading, selectedRowKeys } = this.state;
         const rowSelection = {
@@ -259,16 +271,31 @@ class Access extends Component {
         let usuarios = this.state.info;
         console.log(usuarios);
         var data1 = this.state.info;
-       
+        var speData =  this.state.specif;
+
+        var dataSpe = [];
         var data = [];
         for (let i = 0; i < data1.length; i++) {
-          var aux = data1[i].status
-          data.push({
+            var aux = data1[i].status;
+            data.push({
             key: i,
-            name: data1[i].username,
+            name: data1[i].user,
             age: aux.toString(),
             address: data1[i].email ,
+            id: data1[i].id
           });
+        }
+
+        for (let index = 0; index < speData.length; index++) {
+            var aux = speData[index].status;
+            dataSpe.push({
+                key: index,
+                name: speData[index].username,
+                age: aux.toString() ,
+                address: speData[index].email ,
+                id: speData[index].id
+            });
+            
         }
 
         const hasSelected = selectedRowKeys.length > 0;
@@ -293,15 +320,17 @@ class Access extends Component {
           // </div>
 
           <div>
-          <div style={{marginLeft:"29px", marginBottom:"21px", marginTop:"25px"}}>
-            <Button style= {{borderRadius: "20px", backgroundColor:"#606D42", borderColor:"#606D42"}}type="primary" onClick={this.showModal}>
-            Add new User
-            </Button>
-          </div>
+          
           
           <Table
-            columns={columns}
-            // expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
+            columns={columns1}
+            expandedRowRender={
+            record => 
+            // {this.fetchSpecif(record.id)}, 
+            <Table style={{ margin: 0 }} columns={columns} onExpandedRowsChange={this.fetchSpecif(record)}  dataSource={dataSpe}/>    
+        
+            
+            }
             dataSource={data}
             // onRow={(record, rowIndex) => {
             //   return {
@@ -316,23 +345,6 @@ class Access extends Component {
           />
           
 
-        <Modal
-          title="Add a new User"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <div>
-            <p style={{fontSize: "17px", height: "28px", color: "darkgrey"}}>Username: </p>
-            <Input placeholder="Username" onChange={this.handleUsername} />
-          </div>
-          <br></br>
-          <div> 
-          <p style={{fontSize: "17px", height: "28px", color: "darkgrey"}}>E-mail: </p>
-            <Input type="email" placeholder="E-mail" onChange={this.handleemail}/>
-          </div>
-
-        </Modal>
          
 
           
