@@ -301,7 +301,7 @@ var OtherTab = (
     const aux = (
       <div>
       <div class="card border-dark mb-3" style={{maxWidth:'18rem'}}>
-          <div class="card-header">Order Details</div>
+          <div class="card-header" style={{fontSize: "smaller", fontWeight: "900"}}> Order Details PO:{order.po} | SO: {order.refnumber}Order Details </div>
           <div class="card-body text-dark">
             <h5 class="card-title">Price Total: {currency}</h5> 
             <p class="card-text">{endereco}
