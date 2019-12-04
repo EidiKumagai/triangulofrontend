@@ -118,32 +118,42 @@ class Access extends Component {
       };
       
       componentWillMount(){
-        this.getUsers();
         
+        this.getUserInfo()
+        
+       
       }
+      
 
       onSelectChange = selectedRowKeys => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
       };
 
+     
       
-      getUsers(){
-        // api.get("https://api-triangulo.herokuapp.com/users/1").then(resposta =>{  
-        //   this.setState({aux: resposta.data});
-        // }); 
-        var obj = this.state.aux;
+      getUserInfo(){
+        api.get("https://api-triangulo.herokuapp.com/users/1").then(resposta =>{  
+          this.setState({aux: resposta.data});
+          });
+      }
 
-          api.get(`https://api-triangulo.herokuapp.com/sonusersbyfathers${obj.id}`).then(res =>{  
-          this.setState({info: res.data});
+       
+      async getUsers(){
+    
+        console.log(this.state.aux);
+       var obj = this.state.aux;
+        api.get(`https://api-triangulo.herokuapp.com/sonusersbyfathers/${obj.id}`).then(res =>{  
+        this.setState({info: res.data});
         });
         
          
-      }
-      
-      getUserInfo(){
+        
+  
+        
+                
        
-      }
+    }
 
       showModal = () => {
         this.setState({
@@ -165,7 +175,7 @@ class Access extends Component {
         }).then(r => {
           console.log(r);
           notification('success','User added successfully !')
-          document.location.reload(true);
+          
         });
 
       };
@@ -187,7 +197,7 @@ class Access extends Component {
             api.delete(`https://api-triangulo.herokuapp.com/sonusers/${u.id}`).then(res => {
               console.log(res);
               notification('success','User Deleted !')
-              document.location.reload(true);
+              
             });
           }
         });
@@ -209,7 +219,7 @@ class Access extends Component {
             api.put(`https://api-triangulo.herokuapp.com/users/${u.id}`, {status: s }).then(res => {
               console.log(res);
               notification('success','Change status !')
-              document.location.reload(true);
+              
             });
           }
         });
@@ -217,6 +227,14 @@ class Access extends Component {
       };
 
       render() {
+        console.log(this.state.aux);
+        var teste = this.state.aux;
+        if(teste.id === undefined){
+          
+        }else{
+          this.getUsers();
+        }
+          
 
         var columns = [
           { title: 'Name', dataIndex: 'name', key: 'name' },
