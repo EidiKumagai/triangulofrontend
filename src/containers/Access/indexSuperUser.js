@@ -6,7 +6,7 @@ import EditView from '../Tables/antTables/tableViews/editView';
 import { notification } from '../../components';
 import * as TableViews from '../Tables/antTables/tableViews';
 import api from '../../containers/Page/api';
-
+import './tabela2.css';
 import fakeData from '../Tables/fakeData';
 
 const dataList = new fakeData(10);
@@ -327,7 +327,7 @@ class Access extends Component {
             expandedRowRender={
             record => 
             // {this.fetchSpecif(record.id)}, 
-            <Table style={{ margin: 0 }} columns={columns} onExpandedRowsChange={this.fetchSpecif(record)}  dataSource={dataSpe}/>    
+            <Table class='tabelaFilho' style={{ margin: 0 }} columns={columns} onExpandedRowsChange={this.fetchSpecif(record)}  dataSource={dataSpe}/>    
         
             
             }
