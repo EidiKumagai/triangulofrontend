@@ -6,7 +6,7 @@ import EditView from '../Tables/antTables/tableViews/editView';
 import { notification } from '../../components';
 import * as TableViews from '../Tables/antTables/tableViews';
 import api from '../../containers/Page/api';
-import './tabela2.css';
+
 import fakeData from '../Tables/fakeData';
 
 const dataList = new fakeData(10);
