@@ -226,6 +226,11 @@ class AppRouter extends React.Component {
         />
         <Route
           exact
+          path={`${url}/Upload`}
+          component={asyncComponent(() => import('../Access/uploadFiles'))}
+        />        
+        <Route
+          exact
           path={`${url}/modal`}
           component={asyncComponent(() => import('../Feedback/Modal/'))}
         />
@@ -275,6 +280,11 @@ class AppRouter extends React.Component {
           exact
           path={`${url}/backToTop`}
           component={asyncComponent(() => import('../Navigation/backToTop'))}
+        />
+        <Route
+          exact
+          path={`${url}/Pricerule`}
+          component={asyncComponent(() => import('../PriceRule/index'))}
         />
         <Route
           exact

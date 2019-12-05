@@ -320,7 +320,31 @@ class Sidebar extends Component {
                 </span>
               </Link>
             </Menu.Item> : ""
-              }              
+              }
+
+            <Menu.Item key="Upload">
+              <Link to={`${url}/Upload`}>
+                <span className="isoMenuHolder" style={submenuColor}>
+                  <i className="ion-hammer" />
+                  <span className="nav-text">
+                    <IntlMessages id="sidebar.Access" />
+                  </span>
+                </span>
+              </Link>
+            </Menu.Item>
+
+            <Menu.Item key="Pricerule">
+              <Link to={`${url}/Pricerule`}>
+                <span className="isoMenuHolder" style={submenuColor}>
+                  <i className="ion-hammer" />
+                  <span className="nav-text">
+                    <IntlMessages id="sidebar.Access" />
+                  </span>
+                </span>
+              </Link>
+            </Menu.Item>
+
+
               <SubMenu 
                 key="map"
                 title={
