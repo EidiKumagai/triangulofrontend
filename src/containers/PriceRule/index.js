@@ -83,8 +83,7 @@ class PriceRule extends Component {
           info:{}
         }
     
-        this.handleUsername = this.handleUsername.bind(this);
-        this.handleemail = this.handleemail.bind(this);
+      
       }  
 
     render(){
