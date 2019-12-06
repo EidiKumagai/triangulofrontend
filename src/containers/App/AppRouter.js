@@ -288,6 +288,11 @@ class AppRouter extends React.Component {
         />
         <Route
           exact
+          path={`${url}/ProductsRule`}
+          component={asyncComponent(() => import('../ProductsRule/index'))}
+        />
+        <Route
+          exact
           path={`${url}/dropdown`}
           component={asyncComponent(() =>
             import('../Uielements/Dropdown/dropdown')

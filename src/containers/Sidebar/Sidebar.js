@@ -338,12 +338,22 @@ class Sidebar extends Component {
                 <span className="isoMenuHolder" style={submenuColor}>
                   <i className="ion-hammer" />
                   <span className="nav-text">
-                    <IntlMessages id="sidebar.Access" />
+                    <IntlMessages id="sidebar.PriceRule" />
                   </span>
                 </span>
               </Link>
             </Menu.Item>
-
+            
+            <Menu.Item key="ProductsRule">
+              <Link to={`${url}/ProductsRule`}>
+                <span className="isoMenuHolder" style={submenuColor}>
+                  <i className="ion-hammer" />
+                  <span className="nav-text">
+                    <IntlMessages id="sidebar.PriceRule" />
+                  </span>
+                </span>
+              </Link>
+            </Menu.Item>
 
               <SubMenu 
                 key="map"
