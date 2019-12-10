@@ -198,7 +198,7 @@ class Access extends Component {
             api.delete(`https://api-triangulo.herokuapp.com/sonusers/${u.id}`).then(res => {
               console.log(res);
               notification('success','User Deleted !')
-              
+              document.location.reload(true);
             });
           }
         });
@@ -220,7 +220,7 @@ class Access extends Component {
             api.put(`https://api-triangulo.herokuapp.com/users/${u.id}`, {status: s }).then(res => {
               console.log(res);
               notification('success','Change status !')
-              
+              document.location.reload(true);
             });
           }
         });

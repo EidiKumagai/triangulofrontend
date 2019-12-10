@@ -267,6 +267,7 @@ class Access extends Component {
             console.log(res);
             notification('success','Change status !')
             this.setState({ResetComponent:true});
+            document.location.reload(true);
         });
           
         

@@ -135,6 +135,7 @@ class PriceRule extends Component {
       }).then(res =>{ 
         notification("success", "Price Rule is Changed !");
         console.log(res)
+        document.location.reload(true);
       })
     }
     onSelect = (event,record) => {
@@ -143,7 +144,7 @@ class PriceRule extends Component {
       }).then(res =>{ 
         notification("success", "Price Rule is Changed !");
         console.log(res)
-
+        document.location.reload(true);
       })
     }
     

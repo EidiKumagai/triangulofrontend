@@ -240,7 +240,12 @@ class ProductsRule extends Component {
         rule: rule
        }).then(res => {
             console.log(res);
-            notification('success','Rule Created')
+            notification('success','Rule Created');
+            this.setState({
+
+              visibleNewUser: false,
+            });
+            document.location.reload(true);
         });
       }
 
@@ -253,7 +258,8 @@ class ProductsRule extends Component {
         var string = s.toString();
         api.put(`https://api-triangulo.herokuapp.com/pricerule/${this.state.idprice}`, {price: string }).then(res => {
             console.log(res);
-            notification('success','Price is Changed')
+            notification('success','Price is Changed');
+            document.location.reload(true);
         });
       };
     
