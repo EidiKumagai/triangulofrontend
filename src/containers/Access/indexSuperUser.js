@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table, Button, Modal, Input,Popconfirm, Tag   } from 'antd';
+import { Table, Button, Modal, Input,Popconfirm, Tag, Icon   } from 'antd';
+import Highlighter from 'react-highlight-words';
 import EditView from '../Tables/antTables/tableViews/editView';
 import { notification } from '../../components';
 import * as TableViews from '../Tables/antTables/tableViews';
@@ -80,7 +81,9 @@ class Access extends Component {
       username:'',
       email:'',
       specif: {},
-      ResetComponent: true
+      ResetComponent: true,
+      searchText: '',
+      searchedColumn: '',
     }
 
     this.handleUsername = this.handleUsername.bind(this);
@@ -98,6 +101,71 @@ class Access extends Component {
     console.log(this.state.email);
   }
 
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{ width: 188, marginBottom: 8, display: 'block' }}
+        />
+        <Button
+          type="primary"
+          onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+          icon="search"
+          size="small"
+          style={{ width: 90, marginRight: 8 }}
+        >
+          Search
+        </Button>
+        <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+          Reset
+        </Button>
+      </div>
+    ),
+    filterIcon: filtered => (
+      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex]
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select());
+      }
+    },
+    render: text =>
+      this.state.searchedColumn === dataIndex ? (
+        <Highlighter
+          highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+          searchWords={[this.state.searchText]}
+          autoEscape
+          textToHighlight={text.toString()}
+        />
+      ) : (
+        text
+      ),
+  });
+
+  handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    this.setState({
+      searchText: selectedKeys[0],
+      searchedColumn: dataIndex,
+    });
+  };
+
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: '' });
+  };
 
     renderTable(tableInfo) {
       let Component;
@@ -246,7 +314,7 @@ class Access extends Component {
           },
         ];
         var columns1 = [
-            { title: 'Name', dataIndex: 'name', key: 'name' },
+            { title: 'Name', dataIndex: 'name', key: 'name', ...this.getColumnSearchProps('name') },
             { title: 'Status', dataIndex: 'age', key: 'age', 
             render: (text,record) =>
              

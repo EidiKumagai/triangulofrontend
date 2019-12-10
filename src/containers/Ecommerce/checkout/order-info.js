@@ -347,6 +347,8 @@ class OrderInfo extends Component {
       }else{
         array.push(frete[0]);
       }
+
+      console.log(array);
       var listofad = [];
       var myjson = JSON.stringify(array);
       let title = " order" 

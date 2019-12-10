@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React, {Component} from 'react';
 import { notification } from '../../components';
-import { Table, Divider, Tag, Select  } from 'antd';
+import { Table, Divider, Tag, Select, Popconfirm  } from 'antd';
 import api from '../../containers/Page/api';
 const {Option} = Select;
   
@@ -62,6 +62,14 @@ class PriceRule extends Component {
       console.log(`selected ${value}`);
     }
 
+    onClear = record => {
+      api.put(`https://api-triangulo.herokuapp.com/users/${record.id}`, {
+        rule: ""
+      }).then(res =>{ 
+        notification("success", "Price Rule is Changed !");
+        console.log(res)
+      })
+    }
     onSelect = (event,record) => {
       api.put(`https://api-triangulo.herokuapp.com/users/${record.id}`, {
         rule: event
@@ -160,7 +168,10 @@ class PriceRule extends Component {
                 <span>
                   {/* <a>Invite {record.name}</a>
                   <Divider type="vertical" /> */}
-                  <a>Delete</a>
+                   <Popconfirm title="Sure to delete ?" onConfirm={()=> this.onClear(record)}>
+                    <a style={{color: "#606D42"}} >Clear</a>
+                    </Popconfirm>
+                  
                 </span>
               ),
             },

@@ -3,11 +3,12 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table, Button, Modal, Input,Popconfirm, Tag, Select, AutoComplete    } from 'antd';
+import { Table, Button, Modal, Input,Popconfirm, Tag, Select, AutoComplete, Icon   } from 'antd';
 import EditView from '../Tables/antTables/tableViews/editView';
 import { notification } from '../../components';
 import * as TableViews from '../Tables/antTables/tableViews';
 import api from '../../containers/Page/api';
+import Highlighter from 'react-highlight-words';
 
 import fakeData from '../Tables/fakeData';
 
@@ -40,7 +41,9 @@ class ProductsRule extends Component {
       valor:'',
       visibleNewUser:false,
       dataSource: [],
-      priceNewUser:''
+      priceNewUser:'',
+      searchText: '',
+      searchedColumn: ''
     }
 
 
@@ -94,7 +97,7 @@ class ProductsRule extends Component {
   }
 
   handlePriceNewUser(event){
-    this.setState({priceNewUser: event});
+    this.setState({priceNewUser: event.target.value});
   }
 
 
@@ -112,6 +115,71 @@ class ProductsRule extends Component {
       return <Component tableInfo={tableInfo} dataList={dataList} />;
     }
 
+    getColumnSearchProps = dataIndex => ({
+      filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+        <div style={{ padding: 8 }}>
+          <Input
+            ref={node => {
+              this.searchInput = node;
+            }}
+            placeholder={`Search ${dataIndex}`}
+            value={selectedKeys[0]}
+            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+            onPressEnter={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            style={{ width: 188, marginBottom: 8, display: 'block' }}
+          />
+          <Button
+            type="primary"
+            onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
+            icon="search"
+            size="small"
+            style={{ width: 90, marginRight: 8 }}
+          >
+            Search
+          </Button>
+          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+            Reset
+          </Button>
+        </div>
+      ),
+      filterIcon: filtered => (
+        <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+      ),
+      onFilter: (value, record) =>
+        record[dataIndex]
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase()),
+      onFilterDropdownVisibleChange: visible => {
+        if (visible) {
+          setTimeout(() => this.searchInput.select());
+        }
+      },
+      render: text =>
+        this.state.searchedColumn === dataIndex ? (
+          <Highlighter
+            highlightStyle={{ backgroundColor: '#ffc069', padding: 0 }}
+            searchWords={[this.state.searchText]}
+            autoEscape
+            textToHighlight={text.toString()}
+          />
+        ) : (
+          text
+        ),
+    });
+  
+    handleSearch = (selectedKeys, confirm, dataIndex) => {
+      confirm();
+      this.setState({
+        searchText: selectedKeys[0],
+        searchedColumn: dataIndex,
+      });
+    };
+  
+    handleReset = clearFilters => {
+      clearFilters();
+      this.setState({ searchText: '' });
+    };
 
     start = () => {
         this.setState({ loading: true });
@@ -161,14 +229,18 @@ class ProductsRule extends Component {
         });
       };
 
-      handleOkNewUser = e => {
-        api.post(`https://api-triangulo.herokuapp.com/pricerule/createruleapp`, {
-        name: this.state.valor,
-        price: this.state.priceNewUser,
-        rule: this.state.ruleSelected
+      handleOkNewUser = e => { 
+        var name = this.state.valor;
+        var price = this.state.priceNewUser;
+        var rule = this.state.ruleSelected;
+        console.log(name, price, rule);   
+        api.post(`https://api-triangulo.herokuapp.com/createruleapp`, {
+        name: name,
+        price: price,
+        rule: rule
        }).then(res => {
             console.log(res);
-            notification('success','Price is Changed')
+            notification('success','Rule Created')
         });
       }
 
@@ -212,17 +284,11 @@ class ProductsRule extends Component {
 
       handleDelete = key => {
         console.log(key);
-        let usuarios = this.state.info;
-        usuarios.map( u => {
-          if(u.email == key.address){
-            api.delete(`https://api-triangulo.herokuapp.com/sonusers/${u.id}`).then(res => {
+            api.delete(`https://api-triangulo.herokuapp.com/pricerule/${key.id}`).then(res => {
               console.log(res);
               notification('success','User Deleted !')
               document.location.reload(true);
-            });
-          }
-        });
-       
+            });      
       };
 
       changeStatus = key => {
@@ -284,13 +350,18 @@ class ProductsRule extends Component {
             <Popconfirm title="Sure to Change price ?" onConfirm={() => this.changeStatus(record)}>
             <a style={{color: "#606D42"}}>  Change price</a>
             </Popconfirm>
+
+            <Popconfirm title="Sure to delete ?" onConfirm={() => this.handleDelete(record)}>
+            <a style={{color: "#606D42"}}> | Delete</a>
+            </Popconfirm>
+
             </div>
            
             ,
           },
         ];
         var columns1 = [
-            { title: 'Name of Product', dataIndex: 'name', key: 'name' }
+            { title: 'Name of Product', dataIndex: 'name', key: 'name' , ...this.getColumnSearchProps('name')}
           ];
   
 
@@ -494,7 +565,7 @@ class ProductsRule extends Component {
             
             <br></br>
             <p style={{fontSize: "17px", height: "28px", color: "darkgrey"}}>Price</p>
-            <Input type="number" placeholder="Price" onChange={this.handlePrice} />
+            <Input type="number" placeholder="Price" onChange={this.handlePriceNewUser} />
           
           </div>
 
