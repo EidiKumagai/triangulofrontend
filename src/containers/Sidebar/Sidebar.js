@@ -321,7 +321,7 @@ class Sidebar extends Component {
               </Link>
             </Menu.Item> : ""
               }
-
+              {info.permission === 4 ? 
               <SubMenu 
                 key="rule"
                 title={
@@ -363,7 +363,7 @@ class Sidebar extends Component {
                     <IntlMessages id="sidebar.categ4" />
                   </Link>
               </Menu.Item> */}
-              </SubMenu>
+              </SubMenu> : "" }
 
 
             {/* <Menu.Item key="Upload">

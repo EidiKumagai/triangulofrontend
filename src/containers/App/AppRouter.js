@@ -224,11 +224,13 @@ class AppRouter extends React.Component {
           path={`${url}/alert`}
           component={asyncComponent(() => import('../Feedback/Alert'))}
         />
+        {user.permission == 4 ?  
         <Route
           exact
           path={`${url}/Upload`}
           component={asyncComponent(() => import('../Access/uploadFiles'))}
-        />        
+        />
+        : ""}        
         <Route
           exact
           path={`${url}/modal`}
@@ -281,16 +283,20 @@ class AppRouter extends React.Component {
           path={`${url}/backToTop`}
           component={asyncComponent(() => import('../Navigation/backToTop'))}
         />
+        {user.permission == 4 ? 
         <Route
           exact
           path={`${url}/Pricerule`}
           component={asyncComponent(() => import('../PriceRule/index'))}
         />
+        : ""}
+        {user.permission == 4 ? 
         <Route
           exact
           path={`${url}/ProductsRule`}
           component={asyncComponent(() => import('../ProductsRule/index'))}
         />
+        : ""}
         <Route
           exact
           path={`${url}/dropdown`}
