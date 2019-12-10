@@ -79,7 +79,8 @@ class Access extends Component {
       visible: false,
       username:'',
       email:'',
-      specif: {}
+      specif: {},
+      ResetComponent: true
     }
 
     this.handleUsername = this.handleUsername.bind(this);
@@ -119,6 +120,7 @@ class Access extends Component {
       };
       
       componentWillMount(){
+        this.setState({ResetComponent: false})
         this.getUsers();
       }
 
@@ -189,18 +191,14 @@ class Access extends Component {
       };
 
       changeStatus = key => {
-        let usuarios = this.state.info;
-        let statusCerto 
-        if(key.age  == "true"){
-          statusCerto = true;
-        }else{
-          statusCerto = false;
-        }
+        console.log(key);
+        let statusCerto = key.status;
         var s = !statusCerto
         console.log(s);
         api.put(`https://api-triangulo.herokuapp.com/users/${key.id}`, {status: s }).then(res => {
             console.log(res);
             notification('success','Change status !')
+            this.setState({ResetComponent:true});
         });
           
         
@@ -219,16 +217,16 @@ class Access extends Component {
 
       render() {
         var obj;
+        var Reset = this.state.ResetComponent;
         var columns = [
-          { title: 'Name', dataIndex: 'name', key: 'name' },
-          { title: 'Email', dataIndex: 'address', key: 'address' },
-          { title: 'Status', dataIndex: 'age', key: 'age', 
+          { title: 'Name', dataIndex: 'username', key: 'username' },
+          { title: 'Email', dataIndex: 'email', key: 'email' },
+          { title: 'Status', dataIndex: 'status', key: 'status',
           render: (text,record) => 
-          <Tag color={record.age == "true" ? 'green' : 'red'}>
-            {record.age == "true" ? "Active" : "Inative"}
+          
+          <Tag color={record.status == true ? 'green' : 'red'}>
+            {record.status == true ? "Active" : "Inative"}
           </Tag>
-           
-
 
           },
           {
@@ -250,7 +248,8 @@ class Access extends Component {
         var columns1 = [
             { title: 'Name', dataIndex: 'name', key: 'name' },
             { title: 'Status', dataIndex: 'age', key: 'age', 
-            render: (text,record) => 
+            render: (text,record) =>
+             
             <Tag color={record.age == "true" ? 'green' : 'red'}>
               {record.age == "true" ? "Active" : "Inative"}
             </Tag>
@@ -282,7 +281,8 @@ class Access extends Component {
             name: data1[i].user,
             age: aux.toString(),
             address: data1[i].email ,
-            id: data1[i].id
+            id: data1[i].id,
+            subusers: data1[i].subusers
           });
         }
 
@@ -320,14 +320,25 @@ class Access extends Component {
           // </div>
 
           <div>
-          
+        <p hidden={true}>{Reset}</p>
           
           <Table
             columns={columns1}
+            onExpand={(expanded,record) => {
+              
+              if(expanded == false){
+
+              }else{
+                  this.fetchSpecif(record);
+              }
+
+             
+              
+          }}
             expandedRowRender={
             record => 
             // {this.fetchSpecif(record.id)}, 
-            <Table class='tabelaFilho' style={{ margin: 0 }} columns={columns} onExpandedRowsChange={this.fetchSpecif(record)}  dataSource={dataSpe}/>    
+            <Table class='tabelaFilho' style={{ margin: 0 }} columns={columns}   dataSource={record.subusers}/>    
         
             
             }

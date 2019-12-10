@@ -86,12 +86,12 @@ class OrderInfo extends Component {
   }
   componentWillMount(){
     this.props.fetchadress();
-    const { adress } = this.props;
-    if(adress === undefined){
+    // const { adress } = this.props;
+    // if(adress === undefined){
 
-    }else{
-      this.setState({value:adress[0].addressname });
-    }
+    // }else{
+    //   this.setState({value:adress[0].addressname });
+    // }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -187,8 +187,10 @@ class OrderInfo extends Component {
 
     const { address, obs, frete, po } = this.state 
     
-    
-    var result;
+    if(frete[0] == undefined){
+
+    }else{
+      var result;
     // let frete1 = frete.price;
     let frete1 = frete[0].price;
     var a = Number(frete1).toFixed(2);
@@ -205,6 +207,8 @@ class OrderInfo extends Component {
 
     result += bool1 + bool2;
     var bool3 = parseFloat(resultado).toFixed(2);
+    }
+    
    
     // let nomeadd = address[0].label;
     let nomeadd = address.addressName;
@@ -338,8 +342,11 @@ class OrderInfo extends Component {
 
       
       
-      
-      array.push(frete[0]);
+      if(frete[0] === undefined){
+
+      }else{
+        array.push(frete[0]);
+      }
       var listofad = [];
       var myjson = JSON.stringify(array);
       let title = " order" 
@@ -465,7 +472,7 @@ class OrderInfo extends Component {
       // });
         
         
-        var obj = listofad[0];
+      var obj = listofad[0];
       obj.note = this.state.observation;
       
       
@@ -558,7 +565,7 @@ class OrderInfo extends Component {
 
 
 
-
+              {frete[0] === undefined ? "" : 
               <div className="isoOrderTable">
               <span className="tableHead">Freight</span>
               <table class="table">
@@ -587,7 +594,7 @@ class OrderInfo extends Component {
                   <CurrencyFormat value={bool3} displayType={'text'} thousandSeparator={true} prefix={'$'} />
                 </div> 
                 </div>
-              </div>
+              </div>}
 
 
           </div>
@@ -847,40 +854,42 @@ class OrderInfo extends Component {
     
     console.log(this.state.value);
     
-    if(adress === undefined || frete[0] === undefined ){
+    if(adress === undefined  ){
       return(
         <div>
         <Spinner size={120} spinnerColor={"#606D42"} spinnerWidth={2} visible={true} />
         </div>
       )
     }
-
     var resultado;
-    
-    let frete1 = frete[0].price;
-    var a = Number(frete1).toFixed(2);
-    //var a = parseFloat(frete1);
-    let precoComFrete = cartTotal.totalPrice;
-    //var b = parseFloat(precoComFrete);
-    var b = Number(precoComFrete).toFixed(2);
-
-    var bool1 = parseFloat(a);
-    var bool2 = parseFloat(b);
-    
-    bool1.toFixed(2);
-    bool2.toFixed(2);
- 
-    if(resultado === undefined){
-      resultado = '';
+    if(frete[0] === undefined){
+      resultado = cartTotal.totalPrice;
+    }else{
+      let frete1 = frete[0].price;
+      var a = Number(frete1).toFixed(2);
+      //var a = parseFloat(frete1);
+      let precoComFrete = cartTotal.totalPrice;
+      //var b = parseFloat(precoComFrete);
+      var b = Number(precoComFrete).toFixed(2);
+  
+      var bool1 = parseFloat(a);
+      var bool2 = parseFloat(b);
+      
+      bool1.toFixed(2);
+      bool2.toFixed(2);
+   
+      if(resultado === undefined){
+        resultado = '';
+      }
+      
+      
+      resultado += bool1 + bool2;
+      var bool3 = parseFloat(resultado).toFixed(2); 
     }
     
     
-    resultado += bool1 + bool2;
-    var bool3 = parseFloat(resultado).toFixed(2);
    
-    
-   
-    
+  
     
     
    
@@ -934,8 +943,8 @@ class OrderInfo extends Component {
     
     
    
-  const defaultOption = array[0].addressname;
-      console.log(defaultOption);
+  // const defaultOption = array[0].addressname;
+  //     console.log(defaultOption);
    
     return (
       
@@ -985,11 +994,11 @@ class OrderInfo extends Component {
           </div>
         </div>
 
-
+         {frete[0] === undefined ? "" : 
         <div className="isoOrderTable">
           <div className="isoOrderTableHead">
             <span className="tableHead">Freight</span>
-            {/* <span className="tableHead">Total</span> */}
+            <span className="tableHead">Total</span>
           </div>
 
           <div className="isoOrderTableBody">
@@ -1005,8 +1014,9 @@ class OrderInfo extends Component {
              <CurrencyFormat value={bool3} displayType={'text'} thousandSeparator={true} prefix={'$'} />
               {/* ${bool3} */}
             </span> 
-          </div>
-        </div>
+          </div> 
+          
+        </div>}
 
 
 

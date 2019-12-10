@@ -313,7 +313,7 @@ class Sidebar extends Component {
               <Menu.Item key="access">
               <Link to={`${url}/Access`}>
                 <span className="isoMenuHolder" style={submenuColor}>
-                  <i className="ion-hammer" />
+                  <i className="ion-key" />
                   <span className="nav-text">
                     <IntlMessages id="sidebar.Access" />
                   </span>
@@ -322,7 +322,51 @@ class Sidebar extends Component {
             </Menu.Item> : ""
               }
 
-            <Menu.Item key="Upload">
+              <SubMenu 
+                key="rule"
+                title={
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-hammer" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.PriceRule" />
+                    </span>
+                  </span>
+                } 
+              >
+              <Menu.Item style={submenuStyle} key="upload">
+                  <Link style={submenuColor} to={`${url}/Upload`}>
+                    <IntlMessages id="sidebar.UploadFile" />
+                  </Link>
+              </Menu.Item>
+              <Menu.Item style={submenuStyle} key="pricerule">
+                  <Link style={submenuColor} to={`${url}/Pricerule`}>
+                    <IntlMessages id="sidebar.PriceRule" />
+                  </Link> 
+              </Menu.Item>   
+              <Menu.Item style={submenuStyle} key="productsrule">
+                  <Link style={submenuColor} to={`${url}/ProductsRule`}>
+                    <IntlMessages id="sidebar.ProductsRule" />
+                  </Link> 
+              </Menu.Item>
+              {/* <Menu.Item style={submenuStyle} key="categ2">
+                  <Link style={submenuColor} to={`${url}/shop`}>
+                    <IntlMessages id="sidebar.categ2" />
+                  </Link>
+              </Menu.Item>
+              <Menu.Item style={submenuStyle} key="categ3">
+                  <Link style={submenuColor} to={`${url}/shop`}>
+                    <IntlMessages id="sidebar.categ3" />
+                  </Link>
+              </Menu.Item>
+              <Menu.Item style={submenuStyle} key="categ4">
+                  <Link style={submenuColor} to={`${url}/shop`}>
+                    <IntlMessages id="sidebar.categ4" />
+                  </Link>
+              </Menu.Item> */}
+              </SubMenu>
+
+
+            {/* <Menu.Item key="Upload">
               <Link to={`${url}/Upload`}>
                 <span className="isoMenuHolder" style={submenuColor}>
                   <i className="ion-hammer" />
@@ -353,7 +397,7 @@ class Sidebar extends Component {
                   </span>
                 </span>
               </Link>
-            </Menu.Item>
+            </Menu.Item> */}
 
               <SubMenu 
                 key="map"

@@ -43,7 +43,7 @@ class PriceRule extends Component {
 
      componentWillMount(){
       this.fetchUser();
-      this.fetchRules()
+      this.fetchRules();
      }
 
      fetchUser(){
