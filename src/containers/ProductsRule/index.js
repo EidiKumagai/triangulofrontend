@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table, Button, Modal, Input,Popconfirm, Tag, Select, AutoComplete, Icon   } from 'antd';
+import { Table, Button, Modal, Input,Popconfirm, Tag, Select, AutoComplete, Icon , Alert  } from 'antd';
 import EditView from '../Tables/antTables/tableViews/editView';
 import { notification } from '../../components';
 import * as TableViews from '../Tables/antTables/tableViews';
@@ -455,6 +455,9 @@ class ProductsRule extends Component {
           // </div>
 
           <div>
+            <div style={{marginLeft:"29px", marginBottom:"21px", marginTop:"25px"}}>
+              <Alert  style={{width: "301px"}}message="Any changes made, will not be affected in Quickbooks" type="error" />
+            </div>
           
           <div style={{marginLeft:"29px", marginBottom:"21px", marginTop:"25px"}}>
             <Button style= {{borderRadius: "20px", backgroundColor:"#606D42", borderColor:"#606D42"}}type="primary" onClick={this.showModalNewUSER}>

@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import React, {Component} from 'react';
 import { notification } from '../../components';
 import Highlighter from 'react-highlight-words';
-import { Table, Divider, Tag, Select, Popconfirm, Icon, Input, Button  } from 'antd';
+import { Table, Divider, Tag, Select, Popconfirm, Icon, Input, Button, Alert  } from 'antd';
 import api from '../../containers/Page/api';
 const {Option} = Select;
   
@@ -247,7 +247,14 @@ class PriceRule extends Component {
           ];
 
         return(
-            <Table columns={columns} dataSource={data} />
+            <div>
+            <div style={{marginLeft:"29px", marginBottom:"21px", marginTop:"25px"}}>
+              <Alert  style={{width: "301px"}}message="Any changes made, will not be affected in Quickbooks" type="error" />
+            </div>
+            <div>
+              <Table columns={columns} dataSource={data} />
+            </div>
+            </div>
         )
     }
 
