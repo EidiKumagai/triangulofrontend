@@ -188,7 +188,7 @@ class OrderInfo extends Component {
     const { address, obs, frete, po } = this.state 
     
     if(frete[0] == undefined){
-
+      resultado = cartTotal.price;
     }else{
       var result;
     // let frete1 = frete.price;
