@@ -125,7 +125,7 @@ const ecommerceActions = {
       });
   },
   fetchProducts : (filters, sortBy, callback) => dispatch => {
-    var url = "https://triangulo-front-end.herokuapp.com/dashboard";
+    var url = window.location.href;
     var helper1 =  "";
     var helper2 =  "";
     var helper1HTTPS = "";
