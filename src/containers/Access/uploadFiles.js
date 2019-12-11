@@ -230,7 +230,7 @@ class Upload extends Component {
             onCancel={this.handleCancel}
           >
             <div>
-            <p>User guide for update Price Rule list.
+            <p>
             This manual help to execut the update for tables Price Rule list into application.
             </p>
               
@@ -240,7 +240,7 @@ class Upload extends Component {
              
             <br/>  
             <p>1.	Extract reports lists of the Quickbooks.
-            In the menu opened click in open List > Price Rule List 
+            In the menu opened click in open Lists > Price Rule List 
             </p>
             <img src={img1} alt="imagem1"/>
             <br/>
@@ -256,18 +256,24 @@ class Upload extends Component {
 
             <img src={img3}  alt="img3"/>
             <br/>
-            <p>2.	This moment you already have the file in format excel, and now you need rename the files .xlsx for agrees with application.
-            Name for list of itens : Itens.xlsx
-            Name for list of costumers: Costumers.xlsx
-            Atention: Make sure that be rename the correct file. The system won´t make the update case the names haven´t been named corretly or the name file don´t agrees whit you context of the file.
-            </p>
+            <p>2.	This moment you already have the file in format excel, 
+            and now you need rename the files .xlsx for agrees with application.</p>
+            <br/>
+
+            <p>Name for list of itens : <b>Itens.xlsx</b></p>
+            <p>Name for list of costumers: <b>Costumers.xlsx</b></p>
+            <br/>
+
+            <p>Atention: Make sure that be rename the correct file. The system won´t make the update case the names haven´t been named corretly or the name file don´t agrees whit you context of the file.</p>
+            
 
             <br/>
             <p>3. Slide or find the files and put on update area and click send files.</p> 
             
             <br/>
-            <p>4. After followed all tutorial click update Price rule.
-            Observation: Also can be update only a table one at a time</p>
+            <p>4. After followed all tutorial click update Price rule.</p>
+            <br/>
+            <p>Observation: Also can be update only a table one at a time</p>
 
           </Modal>
           <button onClick={this.showModal} > Helper</button>
