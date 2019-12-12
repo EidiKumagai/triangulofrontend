@@ -246,6 +246,13 @@ class ProductsRule extends Component {
               visibleNewUser: false,
             });
             document.location.reload(true);
+        }).catch(error => {
+          console.log(error);
+          this.setState({
+
+            visibleNewUser: false,
+          });
+          notification('error','This Price rule already exists');
         });
       }
 
