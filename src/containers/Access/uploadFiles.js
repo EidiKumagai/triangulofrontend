@@ -268,10 +268,10 @@ class Upload extends Component {
             
 
             <br/>
-            <p>3. Slide or find the files and put on update area and click send files.</p> 
+            <p>3. Slide or find the files and put on upload area and click on Upload button.</p> 
             
             <br/>
-            <p>4. After followed all tutorial click update Price rule.</p>
+            <p>4. After followed all tutorial click on Commit Files button.</p>
             <br/>
             <p>Observation: Also can be update only a table one at a time</p>
 
