@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table, Button, Modal, Input,Popconfirm, Tag, Icon   } from 'antd';
+import { Table, Button, Modal, Input,Popconfirm, Tag, Icon,Select   } from 'antd';
 import Highlighter from 'react-highlight-words';
 import EditView from '../Tables/antTables/tableViews/editView';
 import { notification } from '../../components';
@@ -10,6 +10,7 @@ import api from '../../containers/Page/api';
 import './tabela2.css'
 import fakeData from '../Tables/fakeData';
 
+const {Option} = Select;
 const dataList = new fakeData(10);
 
 // const columns = [
@@ -284,9 +285,63 @@ class Access extends Component {
         
       }
 
+
+      onChange(value) {
+        console.log(`selected ${value}`);
+      }
+  
+      onClear = record => {
+        api.put(`https://api-triangulo.herokuapp.com/users/${record.id}`, {
+          rule: ""
+        }).then(res =>{ 
+          notification("success", "Price Rule is Changed !");
+          console.log(res)
+          document.location.reload(true);
+        })
+      }
+      onSelect = (event,record) => {
+        console.log(record, event);
+        api.put(`https://api-triangulo.herokuapp.com/users/${record.id}`, {
+          permission : event
+        }).then(res =>{ 
+          notification("success", "Permission changed success !");
+          console.log(res)
+          document.location.reload(true);
+        }).catch(error => {
+          notification("error", "Something is wrong, try again !");
+        })
+      }
+      
+      onBlur() {
+        console.log('blur');
+      }
+      
+      onFocus() {
+        console.log('focus');
+      }
+      
+      onSearch(val) {
+        console.log('search:', val);
+      }
+
       render() {
-        var obj;
+        var listofPermissions = [];
+        var permissionRevenda = {
+          permission: 3,
+          name: "Resale"
+          
+        };
+        listofPermissions.push(permissionRevenda);
+        var permissionAdmin = {
+          permission: 4,
+          name:"Administrator"
+        };
+        listofPermissions.push(permissionAdmin);
         var Reset = this.state.ResetComponent;
+
+        
+
+      
         var columns = [
           { title: 'Name', dataIndex: 'username', key: 'username' },
           { title: 'Email', dataIndex: 'email', key: 'email' },
@@ -325,6 +380,36 @@ class Access extends Component {
              
   
   
+            },
+            {
+              title: 'Price Rule',
+              dataIndex: 'age',
+              key: 'age',
+              render: (text,record)  =>
+              
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Select a person"
+                optionFilterProp="children"
+                onChange={this.onChange}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+                onSelect={(event) => {this.onSelect(event,record);}}
+                defaultValue={record.permission}
+                onSearch={this.onSearch}
+                filterOption={(input, option) =>
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              > 
+              {listofPermissions.map( l => {
+                return(
+              <Option value={l.permission}>{l.name}</Option>
+                )
+              })}
+                
+                
+              </Select>
             }
           ];
   
@@ -351,7 +436,8 @@ class Access extends Component {
             age: aux.toString(),
             address: data1[i].email ,
             id: data1[i].id,
-            subusers: data1[i].subusers
+            subusers: data1[i].subusers,
+            permission: data1[i].permission
           });
         }
 

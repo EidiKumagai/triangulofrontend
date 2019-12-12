@@ -226,11 +226,7 @@ class PriceRule extends Component {
                 
                 
               </Select>
-        
-              
-              
             },
-            
             {
               title: 'Action',
               key: 'action',
