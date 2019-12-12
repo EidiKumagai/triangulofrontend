@@ -9,7 +9,7 @@ import { notification } from '../../components';
 import * as TableViews from '../Tables/antTables/tableViews';
 import api from '../../containers/Page/api';
 import Highlighter from 'react-highlight-words';
-
+import './tableFilho.css'
 import fakeData from '../Tables/fakeData';
 
 const dataList = new fakeData(10);
@@ -483,7 +483,7 @@ class ProductsRule extends Component {
                 (record,index,indent,expanded) =>{
                    
                     return(
-                        <Table class='tabelaFilho' style={{ margin: 0 }} columns={columns} dataSource={record.rules}/>
+                        <Table className="beta" style={{ margin: 0 }} columns={columns} dataSource={record.rules}/>
                     )
                    
                     

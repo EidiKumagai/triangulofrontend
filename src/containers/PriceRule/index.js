@@ -4,6 +4,7 @@ import { notification } from '../../components';
 import Highlighter from 'react-highlight-words';
 import { Table, Divider, Tag, Select, Popconfirm, Icon, Input, Button, Alert  } from 'antd';
 import api from '../../containers/Page/api';
+import './tablePriceRule.css'
 const {Option} = Select;
   
   // const data = [

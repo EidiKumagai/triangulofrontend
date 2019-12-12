@@ -242,13 +242,13 @@ class Upload extends Component {
             <p>1.	Extract reports lists of the Quickbooks.
             In the menu opened click in open Lists > Price Rule List 
             </p>
-            <img src={img1} alt="imagem1"/>
+            <img src={img1} style={{width: "228px"}} alt="imagem1"/>
             <br/>
             <p>In the window Price Rule List click in reports, 
               perform this part two times one for Price Rules by Customer (Customers) report and other Item Price 
               by Price Rule (Itens) report if need.
             </p>
-            <img src={img2} alt="imagem2"/>
+            <img src={img2} style={{width: "261px"}} alt="imagem2"/>
 
             <br/>
             <p>After open a Itens report or Costumer report, send for email as excel or extract a excel file.
