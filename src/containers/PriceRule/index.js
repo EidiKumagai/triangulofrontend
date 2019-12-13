@@ -4,7 +4,7 @@ import { notification } from '../../components';
 import Highlighter from 'react-highlight-words';
 import { Table, Divider, Tag, Select, Popconfirm, Icon, Input, Button, Alert  } from 'antd';
 import api from '../../containers/Page/api';
-import './tablePriceRule.css'
+import './testetable.css'
 const {Option} = Select;
   
   // const data = [
@@ -191,10 +191,11 @@ class PriceRule extends Component {
 
           var columns = [
             {
+              ...this.getColumnSearchProps('name'),
               title: 'Name',
               dataIndex: 'name',
-              key: 'name',
-              ...this.getColumnSearchProps('name')
+              key: 'name'
+              
               
             },
             {

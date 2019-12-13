@@ -7,8 +7,12 @@ import EditView from '../Tables/antTables/tableViews/editView';
 import { notification } from '../../components';
 import * as TableViews from '../Tables/antTables/tableViews';
 import api from '../../containers/Page/api';
-import './tabela2.css'
+// import './tabela2.css'
+
+
+import '../PriceRule/testetable.css'
 import fakeData from '../Tables/fakeData';
+import { InputSearch } from '../../components/uielements/input';
 
 const {Option} = Select;
 const dataList = new fakeData(10);
@@ -130,7 +134,7 @@ class Access extends Component {
       </div>
     ),
     filterIcon: filtered => (
-      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+      <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }}  />
     ),
     onFilter: (value, record) =>
       record[dataIndex]
@@ -479,6 +483,7 @@ class Access extends Component {
           
           <Table
             columns={columns1}
+            className='hscroll'
             onExpand={(expanded,record) => {
               
               if(expanded == false){
@@ -490,6 +495,7 @@ class Access extends Component {
              
               
           }}
+            
             expandedRowRender={
             record =>
                          // {this.fetchSpecif(record.id)}, 
@@ -498,6 +504,7 @@ class Access extends Component {
             
             }
             dataSource={data}
+            
             // onRow={(record, rowIndex) => {
             //   return {
             //     onClick: event => {

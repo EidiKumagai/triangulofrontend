@@ -11,7 +11,7 @@ import api from '../../containers/Page/api';
 import Highlighter from 'react-highlight-words';
 import './tableFilho.css'
 import fakeData from '../Tables/fakeData';
-
+import '../PriceRule/testetable.css'
 const dataList = new fakeData(10);
 const {Option} = Select;
 
@@ -474,6 +474,7 @@ class ProductsRule extends Component {
           
           <Table
             columns={columns1}
+            className='hscroll'
             onExpand={(expanded,record) => {
               
                 if(expanded == false){
@@ -490,7 +491,7 @@ class ProductsRule extends Component {
                 (record,index,indent,expanded) =>{
                    
                     return(
-                        <Table className="beta" style={{ margin: 0 }} columns={columns} dataSource={record.rules}/>
+                        <Table className='hscroll' style={{ margin: 0 }} columns={columns} dataSource={record.rules}/>
                     )
                    
                     

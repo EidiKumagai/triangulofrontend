@@ -7,6 +7,7 @@ import { notification } from '../../components';
 import * as TableViews from '../Tables/antTables/tableViews';
 import api from '../../containers/Page/api';
 import './tabela.css';
+import '../PriceRule/testetable.css'
 
 import fakeData from '../Tables/fakeData';
 
@@ -319,7 +320,7 @@ class Access extends Component {
           </div>
           
           <Table
-            className="table"
+            className="hscroll"
             columns={columns}
             // expandedRowRender={record => <p style={{ margin: 0 }}>{record.description}</p>}
             dataSource={data}
