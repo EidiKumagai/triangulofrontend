@@ -1,16 +1,15 @@
 import { Component } from 'react';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Table, Button, Modal, Input,Popconfirm, Tag   } from 'antd';
+import { Table, Button, Modal, Input,Popconfirm, Tag , DatePicker   } from 'antd';
 import EditView from '../Tables/antTables/tableViews/editView';
 import { notification } from '../../components';
 import * as TableViews from '../Tables/antTables/tableViews';
 import api from '../../containers/Page/api';
 import './tabela.css';
 import '../PriceRule/testetable.css'
-
 import fakeData from '../Tables/fakeData';
-
+const { TextArea } = Input;
 const dataList = new fakeData(10);
 
 // const columns = [
@@ -79,6 +78,7 @@ class Access extends Component {
       info: {},
       aux: {},
       visible: false,
+      visibleMsg:false,
       username:'',
       email:''
     }
@@ -105,6 +105,10 @@ class Access extends Component {
       
 
       return <Component tableInfo={tableInfo} dataList={dataList} />;
+    }
+
+    onChangeDate(date, dateString) {
+      console.log(date, dateString);
     }
 
 
@@ -162,6 +166,13 @@ class Access extends Component {
           visible: true,
         });
       };
+
+      
+      showModalMsg = () => {
+        this.setState({
+          visibleMsg: true,
+        });
+      };
     
       handleOk = e => {
         console.log(e);
@@ -181,6 +192,27 @@ class Access extends Component {
         });
 
       };
+
+      handleOkMessage = e => {
+        
+        this.setState({
+          visibleMsg: false,
+        });
+
+        // var usrname = this.state.username;
+        // var em = this.state.email;    
+        // api.post(`https://api-triangulo.herokuapp.com/sonusers`,{ 
+        // username: usrname,
+        // email: em 
+
+        // }).then(r => {
+        //   console.log(r);
+        //   notification('success','User added successfully !')
+          
+        // });
+
+      };
+      
     
       handleCancel = e => {
         console.log(e);
@@ -188,7 +220,13 @@ class Access extends Component {
           visible: false,
         });
       };
-      
+
+      handleCancelMsg = e => {
+        console.log(e);
+        this.setState({
+          visibleMsg: false,
+        });
+      };
   
 
       handleDelete = key => {
@@ -263,6 +301,10 @@ class Access extends Component {
             
             <Popconfirm title="Sure to Change Status ?" onConfirm={() => this.changeStatus(record)}>
             <a style={{color: "#606D42"}}> |  Change Status</a>
+            </Popconfirm>
+
+            <Popconfirm title="Sure to Send a message ?" onConfirm={this.showModalMsg}>
+            <a style={{color: "#606D42"}}> |  Send Message</a>
             </Popconfirm>
             </div>
            
@@ -355,7 +397,25 @@ class Access extends Component {
           </div>
 
         </Modal>
-         
+        
+        <Modal
+          title="Send a Message"
+          visible={this.state.visibleMsg}
+          onOk={this.handleOkMessage}
+          onCancel={this.handleCancelMsg}
+        >
+
+        
+        <TextArea
+          // value={value}
+          // onChange={this.onChange}
+          placeholder="Controlled autosize"
+          autoSize={{ minRows: 3, maxRows: 5 }}
+        />
+        <br/>
+        <br/>
+        <DatePicker onChange={this.onChangeDate} />
+        </Modal>         
 
           
           </div>

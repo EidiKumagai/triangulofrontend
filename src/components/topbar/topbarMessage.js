@@ -27,7 +27,8 @@ const demoMassage = [
     time: '5 minutes ago',
     massage:
       'A National Book Award Finalist An Edgar Award Finalist A California Book Award Gold Medal Winner'
-  },
+  }
+  ,
   {
     id: 4,
     name: 'Dowain Doe',

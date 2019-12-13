@@ -6,6 +6,7 @@ import TopbarWrapper from './topbar.style';
 import {
   TopbarSearch,
   TopbarUser,
+  TopbarMessage,
   TopbarAddtoCart,
 } from '../../components/topbar';
 
@@ -48,7 +49,11 @@ class Topbar extends Component {
               <TopbarSearch locale={locale} />
             </li> */}
                 
-
+            <li
+              onClick={() => this.setState({ selectedItem: 'message' })}
+              className="isoMsg">
+              <TopbarMessage locale={locale} />
+            </li>
             <li
               onClick={() => this.setState({ selectedItem: 'addToCart' })}
               className="isoCart">
