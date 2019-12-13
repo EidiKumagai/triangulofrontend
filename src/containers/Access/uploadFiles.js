@@ -256,8 +256,8 @@ class Upload extends Component {
 
             <img src={img3}  alt="img3"/>
             <br/>
-            <p>2.	This moment you already have the file in format excel, 
-            and now you need rename the files .xlsx for agrees with application.</p>
+            <p>2.	In this moment you already have the file in format excel and now you need rename the files .xlsx 
+            for the application accept the new files.</p>
             <br/>
 
             <p>Name for list of itens : <b>Itens.xlsx</b></p>
@@ -273,7 +273,8 @@ class Upload extends Component {
             <br/>
             <p>4. After followed all tutorial click on Commit Files button.</p>
             <br/>
-            <p>Observation: Also can be update only a table one at a time</p>
+            <p>Observation: It’s possible to update just one table each time
+            </p>
 
           </Modal>
           <button onClick={this.showModal} > Helper</button>
