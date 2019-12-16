@@ -304,6 +304,13 @@ class AppRouter extends React.Component {
             import('../Uielements/Dropdown/dropdown')
           )}
         />
+        <Route
+          exact
+          path={`${url}/Messages`}
+          component={asyncComponent(() =>
+            import('../Messages/index')
+          )}
+        />
         {/* <Route
           exact
           path={`${url}/op_badge`}

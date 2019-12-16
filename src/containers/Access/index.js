@@ -80,17 +80,27 @@ class Access extends Component {
       visible: false,
       visibleMsg:false,
       username:'',
-      email:''
+      email:'',
+      message:'',
+      specific: {},
+      data: ''
     }
 
     this.handleUsername = this.handleUsername.bind(this);
     this.handleemail = this.handleemail.bind(this);
+    this.handleMessage =  this.handleMessage.bind(this);
+    this.onChangeDate =  this.onChangeDate.bind(this);
   }  
   
 
   handleUsername(event){
     this.setState({username: event.target.value});
     console.log(this.state.username);
+  }
+
+  handleMessage(event){
+    this.setState({message: event.target.value});
+    console.log(this.state.message);
   }
 
   handleemail(event){
@@ -108,7 +118,7 @@ class Access extends Component {
     }
 
     onChangeDate(date, dateString) {
-      console.log(date, dateString);
+      this.setState({data: dateString});
     }
 
 
@@ -124,28 +134,48 @@ class Access extends Component {
       };
       
       componentWillMount(){
-        
-        this.getUserInfo()
+        this.getMyMessages();
+        this.getUserInfo();
         
        
       }
-      
+
+      // componentDidCatch(){
+      //   this.getUsers();
+      // }
+
+      componentDidUpdate(){
+        // this.getUsers();
+        console.log("update")
+      }
+
+      // componentWillReceiveProps(){
+      //   this.getUsers();
+      // }
 
       onSelectChange = selectedRowKeys => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         this.setState({ selectedRowKeys });
       };
 
-     
+      getMyMessages(){
+        api.get(`https://api-triangulo.herokuapp.com/messageusersender`).then(res =>{  
+        console.log(res);
+        });
+      }
       
       getUserInfo(){
         api.get("https://api-triangulo.herokuapp.com/users/1").then(resposta =>{  
           this.setState({aux: resposta.data});
+          var obj = this.state.aux;
+          api.get(`https://api-triangulo.herokuapp.com/sonusersbyfathers/${obj.id}`).then(res =>{  
+          this.setState({info: res.data});
+          }); 
           });
       }
 
        
-      async getUsers(){
+      getUsers(){
     
         console.log(this.state.aux);
        var obj = this.state.aux;
@@ -168,7 +198,11 @@ class Access extends Component {
       };
 
       
-      showModalMsg = () => {
+      showModalMsg = (record) => {
+        console.log(record);
+        this.setState({
+          specific: record
+        });
         this.setState({
           visibleMsg: true,
         });
@@ -194,10 +228,23 @@ class Access extends Component {
       };
 
       handleOkMessage = e => {
-        
-        this.setState({
-          visibleMsg: false,
+        var user = this.state.specific;
+        var msg = this.state.message;
+        var date =  this.state.data;
+        api.post(`https://api-triangulo.herokuapp.com/message`,{ 
+        user_id_receiver: user.id,
+        message: msg,
+        expire: date
+
+        }).then(r => {
+          this.setState({
+            visibleMsg: false,
+          });  
+          notification('success','Message sent successfully !')
+          
         });
+
+        
 
         // var usrname = this.state.username;
         // var em = this.state.email;    
@@ -268,12 +315,12 @@ class Access extends Component {
 
       render() {
         console.log(this.state.aux);
-        var teste = this.state.aux;
-        if(teste.id === undefined){
+        // var teste = this.state.aux;
+        // if(teste.id === undefined){
           
-        }else{
-          this.getUsers();
-        }
+        // }else{
+        //   this.getUsers();
+        // }
           
 
         var columns = [
@@ -303,7 +350,7 @@ class Access extends Component {
             <a style={{color: "#606D42"}}> |  Change Status</a>
             </Popconfirm>
 
-            <Popconfirm title="Sure to Send a message ?" onConfirm={this.showModalMsg}>
+            <Popconfirm title="Sure to Send a message ?" onConfirm={() => this.showModalMsg(record)}>
             <a style={{color: "#606D42"}}> |  Send Message</a>
             </Popconfirm>
             </div>
@@ -330,6 +377,7 @@ class Access extends Component {
             name: data1[i].username,
             age: aux.toString(),
             address: data1[i].email ,
+            id: data1[i].id
           });
         }
 
@@ -405,16 +453,24 @@ class Access extends Component {
           onCancel={this.handleCancelMsg}
         >
 
+        <div>
+        <p style={{fontSize: "17px", height: "28px", color: "darkgrey"}}>Message </p>
+          <TextArea
+          
+            // value={value}
+            onChange={this.handleMessage}
+            placeholder="Controlled autosize"
+            autoSize={{ minRows: 3, maxRows: 5 }}
+          />
+        </div>
         
-        <TextArea
-          // value={value}
-          // onChange={this.onChange}
-          placeholder="Controlled autosize"
-          autoSize={{ minRows: 3, maxRows: 5 }}
-        />
         <br/>
         <br/>
+        <div>
+        <p style={{fontSize: "17px", height: "28px", color: "darkgrey"}}>Expiration Date </p>
         <DatePicker onChange={this.onChangeDate} />
+        </div>
+        
         </Modal>         
 
           
