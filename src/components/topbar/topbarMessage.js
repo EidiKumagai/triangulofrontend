@@ -165,11 +165,13 @@ class TopbarMessage extends Component {
           }
          
         </div>
-        <a  className="isoViewAllBtn">
+        {userinfo.permission === 3 ? 
+        <a  onClick={this.hide} className="isoViewAllBtn">
           <Link to={`${url}/Messages`} >
             <IntlMessages id="topbar.viewAll" />
           </Link>
         </a>
+        : "" }
       </TopbarDropdownWrapper>
     );
     return (

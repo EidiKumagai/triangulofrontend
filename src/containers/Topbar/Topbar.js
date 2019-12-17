@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import api from '../../containers/Page/api';
 import { Layout } from 'antd';
 import appActions from '../../redux/app/actions';
 import TopbarWrapper from './topbar.style';
@@ -14,8 +15,32 @@ const { Header } = Layout;
 const { toggleCollapsed } = appActions;
 
 class Topbar extends Component {
+
+  constructor(props) {
+    super(props);
+
+
+    this.state = {
+     info:{}
+    };
+
+    
+  }
+  
+  componentWillMount(){
+    this.getUserInfo();
+  }
+
+  getUserInfo(){
+    api.get("https://api-triangulo.herokuapp.com/users/1").then(res =>{  
+      this.setState({info: res.data});
+    }); 
+  }
+
+
   render() {
     let nome =  localStorage.getItem("nome");
+    var userinfo = this.state.info;
     const { toggleCollapsed, url, customizedTheme, locale } = this.props;
     const collapsed = this.props.collapsed && !this.props.openDrawer;
     const styling = {
@@ -48,12 +73,13 @@ class Topbar extends Component {
             {/* <li className="isoSearch">
               <TopbarSearch locale={locale} />
             </li> */}
-                
+            {userinfo.permission === 3 || userinfo.permission === 1 ?  
             <li
               onClick={() => this.setState({ selectedItem: 'message' })}
               className="isoMsg">
               <TopbarMessage locale={locale} />
             </li>
+            : "" }
             <li
               onClick={() => this.setState({ selectedItem: 'addToCart' })}
               className="isoCart">
