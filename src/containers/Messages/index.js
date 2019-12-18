@@ -118,6 +118,8 @@ class Messages extends Component {
       }
     render(){
         var listmessages = this.state.messages;
+        let filhos = this.state.filhos;
+        console.log(filhos); 
         var datalist = [];
 
         for (let index = 0; index < listmessages.length; index++) {
@@ -125,7 +127,8 @@ class Messages extends Component {
                 message: listmessages[index].message,
                 id: listmessages[index].id,
                 expire: listmessages[index].expire,
-                status: listmessages[index].status
+                status: listmessages[index].status,
+                name: listmessages[index].userreceiver
             });
             
         }
@@ -157,7 +160,7 @@ class Messages extends Component {
                                 <a key="list-loadmore-more">Delete</a>
                                 </Popconfirm> 
                             ]} >
-                            Message: {item.message === undefined ? "  " : item.message }
+                            Message to <b>{item.name}</b>: {item.message === undefined ? "  " : item.message }
                             <br/>
                             Date of Expire:  {item.expire === undefined ? "  " : item.expire }
                             <br/>
