@@ -112,13 +112,20 @@ class TopbarMessage extends Component {
 
 
   for (let i = 0; i < messagesNormaluser.length; i++) {
-    list2.push({
-      message: messagesNormaluser[i].message,
-      id: messagesNormaluser[i].id,
-      expire: messagesNormaluser[i].expire,
-    });
+    if(messagesNormaluser[i].status === 2){
+
+    }else{
+      list2.push({
+        message: messagesNormaluser[i].message,
+        id: messagesNormaluser[i].id,
+        expire: messagesNormaluser[i].expire,
+      });
+    }
+    
   }
 
+  
+  
     const { customizedTheme } = this.props;
     const content = (
       <TopbarDropdownWrapper className="topbarMessage withImg">

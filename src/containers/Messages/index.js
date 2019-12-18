@@ -77,7 +77,7 @@ class Messages extends Component {
 
       handleDelete = (msg) => {
         api.delete(`https://api-triangulo.herokuapp.com/message/${msg.id}`).then(res => {
-            notification("success", "Message is Changed !");
+            notification("success", "Message is Deleted !");
             document.location.reload(true);
         });
       }
@@ -99,7 +99,7 @@ class Messages extends Component {
             message: aux,
             expire: newdata
           }).then(res =>{ 
-            notification("success", "Message was Deleted !");
+            notification("success", "Message was changed !");
             this.setState({
                 visible: false,
               });
