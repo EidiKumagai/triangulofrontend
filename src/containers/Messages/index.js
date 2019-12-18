@@ -94,19 +94,21 @@ class Messages extends Component {
         var aux = this.state.speMessage;
         var newdata = this.state.data;
         console.log(aux);
-
-        api.put(`https://api-triangulo.herokuapp.com/message/${obj.id}`, {
-            message: aux,
-            expire: newdata
-          }).then(res =>{ 
-            notification("success", "Message was changed !");
-            this.setState({
-                visible: false,
-              });
-            console.log(res)
-            document.location.reload(true);
-        })
-
+        if(aux == '' || newdata == ''){
+          notification("error", "You need to fill the blanks to edit that message");
+        }else{        
+          api.put(`https://api-triangulo.herokuapp.com/message/${obj.id}`, {
+              message: aux,
+              expire: newdata
+            }).then(res =>{ 
+              notification("success", "Message was changed !");
+              this.setState({
+                  visible: false,
+                });
+              console.log(res)
+              document.location.reload(true);
+          })
+        }
           
         
 
