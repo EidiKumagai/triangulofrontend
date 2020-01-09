@@ -26,6 +26,16 @@ html .body{
   display: -webkit-box;
   height: 112px;
 }
+
+@-moz-document url-prefix() {
+  .CampoQuantidade{
+    width: 10px;
+    margin-left: 30px ;
+    display: -webkit-box;
+    height: 112px;
+  }
+}
+
   .p {
     margin-top: 0;
     margin-bottom: 0rem;
@@ -157,7 +167,7 @@ body .shelf-container {
     top: 65px;
     right: 0px;
     background-color:#D7D9CB;
-    padding: 5px 10px;
+    padding: 5px 71px;
     border-radius: 3px 0px 0px 3px;
 }
 .shelf-container .shelf-item__price .val b {
