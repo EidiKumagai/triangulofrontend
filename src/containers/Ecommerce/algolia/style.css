@@ -37,11 +37,15 @@ html .body{
 }
 
 @media not all and (min-resolution:.001dpcm) {   
-    .safari10 { 
-      color:#0000FF; 
-      background-color:#CCCCCC; 
-    }  
+  .CampoQuantidade{
+    width: 10px;
+    margin-left: 30px ;
+    display: -webkit-box;
+    height: 112px;
+  }
 }
+
+
 @supports (overflow:-webkit-marquee) and (justify-content:inherit) {
   .CampoQuantidade{
     width: 10px;
