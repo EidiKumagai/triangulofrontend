@@ -36,6 +36,23 @@ html .body{
   }
 }
 
+@media not all and (min-resolution:.001dpcm) {   
+    .safari10 { 
+      color:#0000FF; 
+      background-color:#CCCCCC; 
+    }  
+}
+@supports (overflow:-webkit-marquee) and (justify-content:inherit) {
+  .CampoQuantidade{
+    width: 10px;
+    margin-left: 30px ;
+    display: -webkit-box;
+    height: 112px;
+  }
+}
+
+
+
   .p {
     margin-top: 0;
     margin-bottom: 0rem;
